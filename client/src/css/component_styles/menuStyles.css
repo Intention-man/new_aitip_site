@@ -46,6 +46,7 @@ input {
     border: none;
     background: white;
     border-radius: 5px;
+    cursor: pointer;
 }
 .button_search:before {
     content: "Найти";

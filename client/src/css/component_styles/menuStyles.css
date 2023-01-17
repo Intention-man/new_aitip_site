@@ -34,7 +34,6 @@ input {
     border-color: #8F8F8F;
     background: white;
     border-radius: 3px;
-
     cursor: pointer;
 }
 .button-fake {
@@ -46,7 +45,6 @@ input {
     border: none;
     background: white;
     border-radius: 5px;
-    cursor: pointer;
 }
 .button_search:before {
     content: "Найти";

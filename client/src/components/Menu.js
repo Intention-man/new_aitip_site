@@ -35,7 +35,7 @@ const Menu = () => {
                 <a className="crunch" id="Kostyl">Алтайский институт труда и права</a>
                 <a>
                     <form>
-                        <button className="button-fake">
+                        <button className="button-fake" style={{cursor: "text"}}>
                             <img src={search} width="25" height="25"/>
                         </button>
                         <input type="text" placeholder="Поиск по сайту"/>

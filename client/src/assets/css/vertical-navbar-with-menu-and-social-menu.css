@@ -1,0 +1,73 @@
+.social-icons {
+  color: #313437;
+  background-color: #fff;
+  text-align: center;
+  padding: 0 0 20px;
+}
+
+.social-icons i {
+  font-size: 20px;
+  display: inline-block;
+  color: #757980;
+  margin: 0 10px;
+  width: 45px;
+  height: 45px;
+  border: 1px solid #c8ced7;
+  text-align: center;
+  border-radius: 50%;
+  line-height: 45px;
+}
+
+#header {
+  background-color: #fff;
+  min-height: 100%;
+  position: relative;
+}
+
+@media (min-width: 992px) {
+  #header {
+    background-color: #fff;
+    min-height: 100vh;
+    position: relative;
+  }
+}
+
+#m-navbar-brand .navbar-toggler {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border: none;
+}
+
+#m-navbar-brand .navbar-brand img {
+  max-width: 150px;
+  max-height: 150px;
+  border: 5px solid #584896;
+}
+
+#m-navbar-menu .navbar-nav .nav-item {
+  border-left: 5px solid transparent;
+  transition: .3s all;
+}
+
+#m-navbar-menu .navbar-nav .nav-item:hover {
+  border-color: rgba(215, 215, 215, 0.29);
+}
+
+#m-navbar-menu .navbar-nav .nav-item.active {
+  border-color: #584896;
+}
+
+#m-navbar-menu .navbar-nav .nav-item.active .nav-link {
+  color: #584896;
+}
+
+#m-navbar-menu .navbar-nav .nav-item .nav-link {
+  transition: .3s all;
+  padding-left: 40%;
+}
+
+#m-navbar-menu .navbar-nav .nav-item .nav-link:hover {
+  background-color: rgba(215, 215, 215, 0.29);
+}
+

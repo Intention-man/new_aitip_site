@@ -1,0 +1,22 @@
+* {
+    --bgcolor: #EEEEEE;
+    --aitip_grey: #999999;
+    --aitip_black: #292D32;
+    --aitip_blue: #076DB1;
+    --aitip_red: #AD4820;
+    --main_part_width: 100%;
+    --document_icon_size: 40px;
+    --font_size_const: 20px;
+    font-family: "Open Sans", sans-serif;
+}
+
+.rootContainer {
+    background-color: var(--bgcolor);
+}
+
+.small_grey_link_to_block{
+    border: none;
+    background-color: white;
+    color: var(--aitip_grey);
+    font-size: var(--font_size_const);
+}

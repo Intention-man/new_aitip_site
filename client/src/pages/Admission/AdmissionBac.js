@@ -14,15 +14,16 @@ import "../../css/main_style.css"
 
 const AdmissionBac = () => {
     const {admission_store} = useContext(Context);
-    const setContent = useContext(ContentContext);
+    const setContent = useContext(ContentContext);  // Получаем callback из ContentContext для передачи текущих активных блоков
     
+    // Текущие блоки страницы
     const [contentCards, setContentCards] = useState([
-        {name: 'Поступление в АИТИП', component: <AdmissionBacContent1 handleRef={element => setOffsetTopCallback(element, 0)}/>},
-        {name: 'Выбрать направление', component: <AdmissionBacContent2 handleRef={element => setOffsetTopCallback(element, 1)}/>},
-        {name: 'Траектория поступления', component: <AdmissionBacContent3 handleRef={element => setOffsetTopCallback(element, 2)}/>},
-        {name: 'Важные даты', component: <AdmissionBacContent4 handleRef={element => setOffsetTopCallback(element, 3)}/>},
-        {name: 'Про оплату обучения', component: <AdmissionBacContent5 handleRef={element => setOffsetTopCallback(element, 4)}/>},
-        {name: 'Важные документы', component: <AdmissionBacContent6 handleRef={element => setOffsetTopCallback(element, 5)}/>},
+        {name: 'Поступление в АИТИП', component: <AdmissionBacContent1 handleRef={element => setDomNode(element, 0)}/>},
+        {name: 'Выбрать направление', component: <AdmissionBacContent2 handleRef={element => setDomNode(element, 1)}/>},
+        {name: 'Траектория поступления', component: <AdmissionBacContent3 handleRef={element => setDomNode(element, 2)}/>},
+        {name: 'Важные даты', component: <AdmissionBacContent4 handleRef={element => setDomNode(element, 3)}/>},
+        {name: 'Про оплату обучения', component: <AdmissionBacContent5 handleRef={element => setDomNode(element, 4)}/>},
+        {name: 'Важные документы', component: <AdmissionBacContent6 handleRef={element => setDomNode(element, 5)}/>},
     ]);
 
     useEffect(() => {
@@ -31,16 +32,20 @@ const AdmissionBac = () => {
             console.log(1);
             console.log(admission_store.directions_bachelor);
         });
-        console.log('Set content event');
-        console.log(setContent);
-        setContent(contentCards);
+        setContent(contentCards); // Вызываем callback 
     }, []);
 
-    const setOffsetTopCallback = (element, index) => {
-        const updatedContentCards = [...contentCards];
-        updatedContentCards[index].domNode = findDOMNode(element);
-        updatedContentCards[index].id = index;
-        setContentCards(updatedContentCards);
+    /**
+     * Это callback для того, чтобы обработчик React ref передал от каждого компонента из contentCards свою DOM-ноду и она была записана
+     * TODO: возможно это костыль
+     * @param {React.Component} element 
+     * @param {Number} index 
+     */
+    const setDomNode = (element, index) => {
+        const updatedContentCards = [...contentCards];  // Копируем текущее значение contentCards
+        updatedContentCards[index].domNode = findDOMNode(element);  // Сохраняем DOM-ноду компонента по переданному индексу
+        updatedContentCards[index].id = index;  // Сохраняем индекс компонента (просто его порядковый номер)
+        setContentCards(updatedContentCards);  // Обновляем contentCards
     };
     
     return (

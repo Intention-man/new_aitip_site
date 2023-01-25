@@ -15,9 +15,10 @@ import ContentContext from './components/contexts/ContentContext';
 const App = observer(() => {
     const {user} = useContext(Context);
 
-    const [currentContent, setCurrentContent] = useState([]);
+    const [currentContent, setCurrentContent] = useState([]);  // Стейт с текущими блоками страницы (нужны для LinksPanel)
 
-    const updateContent = (newContent) => {
+    const updateContent = (newContent) => {  /* Это callback, который будет передан в ContentContext.Provider, 
+                                                чтобы внутренние компоненты могли передавать сюда блоки контента */
         setCurrentContent(newContent);
     };
  

@@ -78,9 +78,12 @@ class LinksPanel extends React.Component {
                     this.props.links.map(x => 
                         <a 
                             id={x.id}
-                            className={this.state.activeBlocks.includes(`${x.id}`) ? "LinksPanel-linkActive" : "LinksPanel-linkStill"} 
+                            className={`LinksPanel-link 
+                                        ${this.state.activeBlocks.includes(`${x.id}`) ? "LinksPanel-linkActive" : "LinksPanel-linkStill"}`} 
                             href=""
                             onClick={this.navigateToBlock}
+                            title={x.name}  /* Специальный аттрибут, содержащий текст. 
+                                               Нужен для костыля в CSS, исправляющего ненужное изменение размеров, когда текст в ссылке становится жирным. */
                         >
                             {x.name}
                         </a>

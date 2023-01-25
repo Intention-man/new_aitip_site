@@ -54,6 +54,17 @@
     margin-bottom: 30px;
 }
 
+/* Костыль, исправляющий момент, когда выделенная жирным ссылка двигает другой контент */
+.LinksPanel-link::after {
+    display: block;
+    content: attr(title);
+    font-weight: 700;
+    height: 1px;
+    color: transparent;
+    overflow: hidden;
+    visibility: hidden;
+}
+
 .LinksPanel-linkActive {
     font-weight: 700;
 }

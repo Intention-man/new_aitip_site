@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {findDOMNode} from 'react-dom';
+import { findDOMNode } from 'react-dom';
 import AdmissionBacContent1 from "./AdmissionBacParts/AdmissionBacContent1";
 import AdmissionBacContent2 from "./AdmissionBacParts/AdmissionBacContent2";
 import AdmissionBacContent3 from "./AdmissionBacParts/AdmissionBacContent3";
@@ -7,14 +7,14 @@ import AdmissionBacContent4 from "./AdmissionBacParts/AdmissionBacContent4";
 import AdmissionBacContent5 from "./AdmissionBacParts/AdmissionBacContent5";
 import AdmissionBacContent6 from "./AdmissionBacParts/AdmissionBacContent6";
 import CardContainer from '../../components/card/CardContainer';
-import SideBar from '../../components/SideBar';
-import LinksPanel from '../../components/LinksPanel';
-import {fetchDirectionsBachelor} from "../../http/admissionAPI";
-import {Context} from "../../index";
+import { fetchDirectionsBachelor } from "../../http/admissionAPI";
+import { Context } from "../../index";
+import ContentContext from '../../components/contexts/ContentContext';
 import "../../css/main_style.css"
 
 const AdmissionBac = () => {
     const {admission_store} = useContext(Context);
+    const setContent = useContext(ContentContext);
     
     const [contentCards, setContentCards] = useState([
         {name: 'Поступление в АИТИП', component: <AdmissionBacContent1 handleRef={element => setOffsetTopCallback(element, 0)}/>},
@@ -31,8 +31,11 @@ const AdmissionBac = () => {
             console.log(1);
             console.log(admission_store.directions_bachelor);
         });
+        console.log('Set content event');
+        console.log(setContent);
+        setContent(contentCards);
     }, []);
-    
+
     const setOffsetTopCallback = (element, index) => {
         const updatedContentCards = [...contentCards];
         updatedContentCards[index].domNode = findDOMNode(element);
@@ -41,29 +44,11 @@ const AdmissionBac = () => {
     };
     
     return (
-        <div className='rootContainer'>
-            <SideBar
-                alignment='left'
-                isSticky={true}
-            >
-                <LinksPanel
-                    links={contentCards.map(x => new Object({id: x.id, name: x.name, domNode: x.domNode}))}
-                />
-            </SideBar>
-            <CardContainer>
-                {
-                    contentCards.map(x => x.component)
-                }
-            </CardContainer>
-            <SideBar 
-                alignment='right'
-                isSticky={false}
-            >
-                <h1>Электронные ресурсы</h1>
-                <a href="">ЭБС</a>
-                <a href="">ЕОИС</a>
-            </SideBar>
-        </div>
+        <CardContainer>
+            {
+                contentCards.map(x => x.component)
+            }
+        </CardContainer>
     );
 }
 

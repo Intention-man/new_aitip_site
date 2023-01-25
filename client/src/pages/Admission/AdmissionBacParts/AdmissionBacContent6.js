@@ -2,12 +2,13 @@ import React from 'react';
 import Card from '../../../components/card/Card';
 import Content6FileIcon from '../../../local_assets/icons/document-text.svg';
 
-const AdmissionBacContent6 = () => {
+const AdmissionBacContent6 = (props) => {
     return (
         <Card
             imgPos='none'
             style={{gridColumnStart: 1, gridColumnEnd: 13}}
             width={12}
+            ref={props.handleRef}
         >
             <h1>Важные <a href='' style={{color: '#076DB1'}}>документы</a></h1>
             <a href=''>
@@ -43,8 +44,6 @@ const AdmissionBacContent6 = () => {
                         <img src={Content6FileIcon}></img>
                         <p>Очень важный документ номер 7</p>
                     </div>
-
-
                     <div className='Card-filesList-file'>
                         <img src={Content6FileIcon}></img>
                         <p>Очень важный документ номер 8</p>

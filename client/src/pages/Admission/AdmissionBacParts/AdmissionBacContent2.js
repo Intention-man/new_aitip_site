@@ -5,7 +5,7 @@ import {fetchOneDirectionBachelor} from "../../../http/admissionAPI";
 import {observer} from "mobx-react-lite";
 import {Context} from "../../../index";
 
-const AdmissionBacContent2 = observer(() => {
+const AdmissionBacContent2 = observer((props) => {
     const directions = ["Экономика", "Менеджмент", "Юриспруденция", "Государственное и муниципальное управление", "Туризм"]
 
     const specialties = ["директор и администратор предприятия",
@@ -21,7 +21,7 @@ const AdmissionBacContent2 = observer(() => {
     const costs = {"Очно-заочная": "48000", "Заочная": "47000"}
 
     const {admission_store} = useContext(Context)
-    const [chosenDirection, setChosenDirection] = useState({});
+    const [chosenDirection, setChosenDirection] = useState();
 
 
     useEffect(() => {
@@ -37,6 +37,7 @@ const AdmissionBacContent2 = observer(() => {
             width={12}
             imgPos="none"
             className="content2"
+            ref={props.handleRef}
         >
             {/*<div> {admission_store.directions_bachelor.map((item) => (*/}
             {/*    <div>*/}
@@ -45,11 +46,11 @@ const AdmissionBacContent2 = observer(() => {
             {/*))} </div>*/}
             {/*<div>{admission_store.selectedDirections_bachelor}</div>*/}
             <h1 className="local_title">
-                Выберите <span style={{color: "#076DB1"}}>направление</span>
+                Выбери <span style={{color: "#076DB1"}}>направление</span>
             </h1>
             <ul className="tracks">
                 {admission_store.directions_bachelor.map(d =>
-                    <li key={"small_div_" + d.id}>
+                    <li key={d.id}>
                         <button
                             key={d.id}
                             onClick={() => {
@@ -107,11 +108,11 @@ const AdmissionBacContent2 = observer(() => {
                         </div>
                         <div className="_2_documents">
                             <div className="_1_of_first_2_documents">
-                                <img className="document_icon" src={"../assets/document_icon.png"} alt="Чет не пошло как-то с картинкой..."/>
+                                <img className="document_icon" src={"../assets/document_icon.png"}/>
                                 <p>Правила проведения вступительных испытаний</p>
                             </div>
                             <div className="_1_of_first_2_documents">
-                                <img className="document_icon" src={"../assets/document_icon.png"} alt="Чет не пошло как-то с картинкой..."/>
+                                <img className="document_icon" src={"../assets/document_icon.png"}/>
                                 <p>Расписание вступительных испытаний 2022</p>
                             </div>
                         </div>
@@ -126,7 +127,7 @@ const AdmissionBacContent2 = observer(() => {
                         }
                     </div>
                     <div className="last_document_of_content_2">
-                        <img className="document_icon" src={"../assets/document_icon.png"} alt="Чет не пошло как-то с картинкой..."/>
+                        <img className="document_icon" src={"../assets/document_icon.png"}/>
                         <p>ПОЛОЖЕНИЕ о порядке предоставления льгот по оплате обучения в Алтайском институте труда и
                             права
                             (филиал) Образовательного учреждения профсоюзов высшего образования «Академия труда и

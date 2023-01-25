@@ -2,13 +2,14 @@ import React from 'react';
 import Card from '../../../components/card/Card';
 import Content3Img from '../../../local_assets/Content3_photo.png';
 
-const AdmissionBacContent3 = () => {
+const AdmissionBacContent3 = (props) => {
     return (
         <Card
             title="Траектория поступления"
             imgSrc={Content3Img}
             imgPos='left'
             width={8}
+            ref={props.handleRef}
         >
             <ul className='Card-megaList'>
                 <li>Выбери <a href='' style={{color: '#076DB1'}}>образовательную программу</a></li>

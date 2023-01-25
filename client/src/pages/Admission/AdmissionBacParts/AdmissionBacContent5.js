@@ -2,13 +2,14 @@ import React from 'react';
 import Card from '../../../components/card/Card';
 import Content5Img from '../../../local_assets/Content5_photo.png';
 
-const AdmissionBacContent5 = () => {
+const AdmissionBacContent5 = (props) => {
     return (
         <Card
             title="Про оплату обучения"
             imgSrc={Content5Img}
             imgPos='left'
             width={12}
+            ref={props.handleRef}
         >
             <h2>В Алтайском институте труда и права существует <a href='' style={{color: '#076DB1'}}>гибкая система оплаты</a> за обучение.</h2>
             <h3>Вы можете оплачивать свою учебу:</h3>

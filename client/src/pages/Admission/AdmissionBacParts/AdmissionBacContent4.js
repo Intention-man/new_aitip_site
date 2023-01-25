@@ -2,14 +2,13 @@ import React from 'react';
 import Card from '../../../components/card/Card';
 import Content4Img from '../../../local_assets/Content4_photo.png';
 
-const AdmissionBacContent4 = () => {
-    
+const AdmissionBacContent4 = (props) => {
     return (
         <Card
             imgSrc={Content4Img}
             imgPos='bottom'
             width={4}
-            // style={{minHeight: '460px', height: '26vmax'}}
+            ref={props.handleRef}
         >
             <h1>Важные <a href='' style={{color: '#AD4820'}}>даты</a></h1>
             <p>

@@ -12,6 +12,18 @@
 
 .rootContainer {
     background-color: var(--bgcolor);
+    display: flex;
+    flex-direction: row;
+}
+
+.sideBar {
+    width: 20%;
+    padding: 30px 0 5px 0;
+}
+
+.content {
+    width: calc(100% - 20%*2);
+    padding: 30px 0; 
 }
 
 .small_grey_link_to_block{
@@ -19,4 +31,36 @@
     background-color: white;
     color: var(--aitip_grey);
     font-size: var(--font_size_const);
+}
+
+@media (max-width: 1600px) {
+    .sideBar {
+        width: 15%;
+    }
+    
+    .content {
+        width: calc(100% - 15%*2);
+    }
+}
+
+@media (max-width: 1200px) {
+    .sideBar {
+        display: none;
+    }
+    
+    .content {
+        width: 100%;
+        padding: 30px 5%;
+    }
+}   
+
+@media (max-width: 900px) {
+    .sideBar {
+        display: none;
+    }
+    
+    .content {
+        width: 100%;
+        padding: 30px 2%;
+    }
 }

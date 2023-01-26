@@ -1,0 +1,92 @@
+* {
+    --aitip_grey: #999999;
+    --font_size_const: 20px;
+    font-family: "Open Sans", sans-serif;
+}
+
+.SideBar-content {
+    width: fit-content;
+    margin: 0 auto;
+}   
+
+.SideBar-content-static {
+    position: static;
+}
+
+.SideBar-content-sticky {
+    position: sticky;
+    top: 30px;
+}
+
+.SideBar-content-left {
+    padding: 0 25px 0 0;
+}
+
+.SideBar-content-right {
+    padding: 0 0 0 25px;
+}
+
+.SideBar-content a {
+    display: block;
+    text-decoration: none;
+}
+
+.SideBar-content a:hover {
+    color: var(--aitip_grey);
+}
+
+.SideBar-content h1 {
+    font-weight: 700;
+}
+
+.SideBar-content h1, .SideBar-content a {
+    color: var(--aitip_grey);
+    font-size: var(--font_size_const);
+    text-align: right;
+}
+
+.SideBar-content-right h1, .SideBar-content-right a {
+    text-align: right;
+}
+
+.SideBar-content-right h1, .SideBar-content-right a {
+    text-align: left;
+}
+
+.LinksPanel-linksContainer {
+    border-right: 2px solid var(--aitip_grey);
+    padding: 0 25px 0;
+}
+
+.LinksPanel-linksContainer a:not(:last-child) {
+    margin-bottom: 30px;
+}
+
+/* Костыль, исправляющий момент, когда выделенная жирным ссылка двигает другой контент */
+.LinksPanel-link::after {
+    display: block;
+    content: attr(title);
+    font-weight: 700;
+    height: 1px;
+    color: transparent;
+    overflow: hidden;
+    visibility: hidden;
+}
+
+.LinksPanel-linkActive {
+    font-weight: 700;
+}
+
+.LinksPanel-goTopBtn {
+    margin-top: 12px;
+}
+
+.LinksPanel-goTopBtn-text {
+    margin-right: 9px;
+}
+
+@media (max-width: 1630px) {
+    .LinksPanel-linksContainer {
+        padding: 0 20px 0;
+    }
+}

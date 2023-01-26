@@ -44,7 +44,7 @@ class Card extends React.Component {
     }
     
     render() {
-
+        
         // Для каждого расположения (top, right, bottom, left, none) определены особые стили в CSS-классах, оканчивающиеся на эти расположения
         return (
             <div 

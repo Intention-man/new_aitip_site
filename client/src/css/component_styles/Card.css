@@ -249,27 +249,18 @@ p, li, h1, h2, h3, a {
 
 .CardContainer {
     display: grid;
-    padding: 30px 20%; 
     grid-template-columns: repeat(12, 1fr);
     gap: 60px 20px;
 }
 
-@media (max-width: 1600px) {
-    .CardContainer {
-        padding: 30px 15%;
-    }
-}
-
 @media (max-width: 1200px) {
     .CardContainer {
-        padding: 30px 5%;
         gap: 40px 20px;
     }
 }   
 
 @media (max-width: 900px) {
     .CardContainer {
-        padding: 30px 2%;
         gap: 20px 20px;
     }
 }

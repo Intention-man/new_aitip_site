@@ -10,7 +10,7 @@ import CardContainer from '../../components/card/CardContainer';
 import { fetchDirectionsBachelor } from "../../http/admissionAPI";
 import { Context } from "../../index";
 import ContentContext from '../../components/contexts/ContentContext';
-import "../../css/main_style.css"
+import "../../css/main.css"
 
 const AdmissionBac = () => {
     const {admission_store} = useContext(Context);
@@ -33,9 +33,9 @@ const AdmissionBac = () => {
 
     useEffect(() => {
         fetchDirectionsBachelor(1, 10).then(data => {
-            admission_store.setDirections_bachelor(data.rows);
+            admission_store.setDirectionsBachelor(data.rows);
             console.log(1);
-            console.log(admission_store.directions_bachelor);
+            console.log(admission_store.directionsBachelor);
         });
         setContent(contentBlocksData); // Вызываем callback 
     }, []);

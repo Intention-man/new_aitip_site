@@ -4,7 +4,9 @@ const sequelize = require("./db")
 const admission_models = require("./models/admissionModels")
 const moving_bar_models = require("./models/movingBarModels")
 const user_models = require("./models/userModels")
-const main_models = require("./models/staffModels")
+const staffer_models = require("./models/staffModel")
+const elections_and_contests_model = require("./models/electionsAndContestsModel")
+const partners_model = require("./models/partnersModel")
 const PORT = process.env.PORT || 7000
 const cors = require("cors")
 const fileUpload = require("express-fileupload")
@@ -23,7 +25,7 @@ app.use(errorHandler)
 const start = async () => {
     try {
         await sequelize.authenticate()
-        await sequelize.sync({alter: true})
+        await sequelize.sync()
         app.listen(PORT, () => console.log(`Server started on port ${PORT}`))
     } catch (e) {
         console.log(e)

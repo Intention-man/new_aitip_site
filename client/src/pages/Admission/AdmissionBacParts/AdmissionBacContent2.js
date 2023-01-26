@@ -1,11 +1,11 @@
-import React, {useContext, useEffect, useMemo, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import Card from '../../../components/card/Card';
-import "../../../css/page_styles/AdmissionBac.css"
+import "../../../css/page_styles/AdmissionBac2.css"
 import {fetchOneDirectionBachelor} from "../../../http/admissionAPI";
 import {observer} from "mobx-react-lite";
 import {Context} from "../../../index";
 
-const AdmissionBacContent2 = observer((props) => {
+const AdmissionBacContent2 = observer(() => {
     const directions = ["Экономика", "Менеджмент", "Юриспруденция", "Государственное и муниципальное управление", "Туризм"]
 
     const specialties = ["директор и администратор предприятия",
@@ -13,48 +13,41 @@ const AdmissionBacContent2 = observer((props) => {
         "менеджер по развитию", "бренд-менеджер", "инновационный менеджер",
         "менеджер интернет-проекта", "менеджер по качеству и персоналу"].sort((a, b) => a.length - b.length)
 
-    const passing_points = [
-        "Математика (27 баллов)",
-        "Русский язык (36 баллов)",
-        "Предмет по выбору поступающего: Обществознание (42 балла), Информатика и ИКТ (40 баллов), География (37 баллов), Иностранный язык (22 балла), История (32 балла)"]
+    // const passing_points = [
+    //     "Математика (27 баллов)",
+    //     "Русский язык (36 баллов)",
+    //     "Предмет по выбору поступающего: Обществознание (42 балла), Информатика и ИКТ (40 баллов), География (37 баллов), Иностранный язык (22 балла), История (32 балла)"]
 
-    const costs = {"Очно-заочная": "48000", "Заочная": "47000"}
 
     const {admission_store} = useContext(Context)
-    const [chosenDirection, setChosenDirection] = useState();
+    const [chosenDirection, setChosenDirection] = useState({});
 
 
     useEffect(() => {
-        fetchOneDirectionBachelor(admission_store.selectedDirections_bachelor).then(data => {
-            setChosenDirection(data)
-            console.log(typeof data, Object.keys(chosenDirection))
-        })
-    }, [admission_store.selectedDirections_bachelor])
+        if (admission_store.selectedDirectionBachelor) {
+            fetchOneDirectionBachelor(admission_store.selectedDirectionBachelor).then(data => {
+                console.log(data)
+                setChosenDirection(data)
+            })}
+    }, [admission_store.selectedDirectionBachelor])
 
 
     return (
         <Card
             width={12}
             imgPos="none"
-            className="content2"
-            ref={props.handleRef}
+            className="admission-bac-content2"
         >
-            {/*<div> {admission_store.directions_bachelor.map((item) => (*/}
-            {/*    <div>*/}
-            {/*        {item.specialities}*/}
-            {/*    </div>*/}
-            {/*))} </div>*/}
-            {/*<div>{admission_store.selectedDirections_bachelor}</div>*/}
             <h1 className="local_title">
-                Выбери <span style={{color: "#076DB1"}}>направление</span>
+                Выберите <span style={{color: "#076DB1"}}>направление</span>
             </h1>
             <ul className="tracks">
-                {admission_store.directions_bachelor.map(d =>
-                    <li key={d.id}>
+                {admission_store.directionsBachelor.map(d =>
+                    <li key={"small_div_" + d.id}>
                         <button
                             key={d.id}
                             onClick={() => {
-                                admission_store.setSelectedDirections_bachelor(d.id)
+                                admission_store.setSelectedDirectionBachelor(d.id)
                                 console.log(d.id)
                             }}
                         >
@@ -63,7 +56,7 @@ const AdmissionBacContent2 = observer((props) => {
                     </li>
                 )}
             </ul>
-            {chosenDirection ?
+            {chosenDirection.hasOwnProperty("name") &&
                 <Card
                     width={12}
                     imgSrc={process.env.REACT_APP_API_URL + chosenDirection.img}
@@ -73,61 +66,64 @@ const AdmissionBacContent2 = observer((props) => {
                     <h1>{chosenDirection.code} {chosenDirection.name}</h1>
                     <h3>Профиль: {chosenDirection.profile}</h3>
                     <p>{chosenDirection.profession_advantages}</p>
-                </Card>
-                :
-                <div>Направление то выбрали?</div>
-            }
+                </Card>}
 
-            {chosenDirection ?
+            {chosenDirection.hasOwnProperty("name") &&
                 <div className="direction_block">
                     <p className="extended_description">{chosenDirection.profession_description}</p>
                     <p className="title_who_can_you_become">Кем ты можешь стать:</p>
                     <ul className="specialties">
-                        {Object.values(chosenDirection.specialities).map(el =>
+                        {Object.values(chosenDirection.specialities).sort((a, b) => b.length - a.length).map(el =>
                             <li className="specialty" key={el}>{el}</li>
                         )}
                     </ul>
                     <div className="points_and_2_documents">
                         <div className="passing_points" style={{borderColor: "#AD4820"}}>
                             <p className="local_title">
-                                <span style={{color: "#AD4820"}}>Проходные баллы </span> 2021 года
+                                        <span style={{color: "#AD4820"}}>Минимальные проходные баллы
+</span> для поступающих по результатам ЕГЭ
                             </p>
                             <ol>
-                                {passing_points.map(subject =>
-                                    <li key={subject}>{subject} </li>)}
+                                {chosenDirection.tests.filter(test => test.admissionByEGE === true).map(test =>
+                                    <li key={test.subject}>{test.subject} {test.min_points}</li>)}
                             </ol>
                         </div>
                         <div className="passing_points" style={{borderColor: "#076DB1"}}>
                             <p className="local_title">
-                                <span style={{color: "#076DB1"}}>Проходные баллы </span> 2021 года
+                                <span style={{color: "#076DB1"}}>Минимальные проходные баллы </span> для поступающих на
+                                базе профессионального образования
                             </p>
                             <ol>
-                                {passing_points.map(subject =>
-                                    <li key={subject}>{subject} </li>)}
+                                {chosenDirection.tests.filter(test => test.admissionByEGE === false).map(test =>
+                                    <li key={test.subject}>{test.subject} {test.min_points}</li>)}
                             </ol>
                         </div>
                         <div className="_2_documents">
                             <div className="_1_of_first_2_documents">
-                                <img className="document_icon" src={"../assets/document_icon.png"}/>
+                                <img className="document_icon" src={"../assets/document_icon.png"}
+                                     alt="Чет не пошло как-то с картинкой..."/>
                                 <p>Правила проведения вступительных испытаний</p>
                             </div>
                             <div className="_1_of_first_2_documents">
-                                <img className="document_icon" src={"../assets/document_icon.png"}/>
+                                <img className="document_icon" src={"../assets/document_icon.png"}
+                                     alt="Чет не пошло как-то с картинкой..."/>
                                 <p>Расписание вступительных испытаний 2022</p>
                             </div>
                         </div>
                     </div>
                     <div className="cost_zone">
-                        {
-                            Object.keys(costs).map(form =>
-                                <div className="cost" key={form}>
-                                    <p className="cost_price">{costs[form]}</p>
-                                    <p className="cost_form">{form}</p>
-                                </div>)
-                        }
+                        <div className="cost">
+                            <p className="cost_price">{chosenDirection.full_and_part_time_form_price}</p>
+                            <p className="cost_form">Очно-заочная</p>
+                        </div>
+                        <div className="cost">
+                            <p className="cost_price">{chosenDirection.extramural_form_price}</p>
+                            <p className="cost_form">Заочная</p>
+                        </div>
                     </div>
                     <div className="last_document_of_content_2">
-                        <img className="document_icon" src={"../assets/document_icon.png"}/>
+                        <img className="document_icon" src={"../assets/document_icon.png"}
+                             alt="Чет не пошло как-то с картинкой..."/>
                         <p>ПОЛОЖЕНИЕ о порядке предоставления льгот по оплате обучения в Алтайском институте труда и
                             права
                             (филиал) Образовательного учреждения профсоюзов высшего образования «Академия труда и
@@ -136,13 +132,9 @@ const AdmissionBacContent2 = observer((props) => {
                     </div>
                     <button className="small_grey_link_to_block" style={{float: "right"}}>Перейти к разделу "Документы"
                     </button>
-                </div>
-                :
-                <p>Направление выберите!)</p>
-            }
-
-
+                </div>}
         </Card>
+
     );
 });
 

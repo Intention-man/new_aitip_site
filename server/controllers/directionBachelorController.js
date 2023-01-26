@@ -10,25 +10,19 @@ const {DirectionBachelor, EntranceTest} = require("../models/admissionModels");
 
 class DirectionBachelorController {
     async create(req, res, next) {
-        console.log("Я в create")
         try{
             let {name, code, profile, profession_advantages, profession_description,
                 specialities, extramural_form_price, full_and_part_time_form_price, tests} = req.body
-            console.log("Получил данные из запроса")
             const {img} = req.files
             let fileName = uuid.v4() + ".jpg"
             await img.mv(path.resolve(__dirname, "..", "static", fileName))
-            console.log("Обработал в удобный мне формат")
-            console.log(name, code, profile, profession_advantages, profession_description, specialities, extramural_form_price, full_and_part_time_form_price, fileName)
-            console.log(typeof JSON.parse(specialities), JSON.parse(specialities))
+
             const splitedSpecialities = JSON.parse(specialities)
             
             let values = {name, code, profile, profession_advantages, profession_description, specialities: splitedSpecialities, extramural_form_price, full_and_part_time_form_price, img: fileName
             }
-            console.log(typeof values, typeof specialities)
 
             const directionBachelor = await DirectionBachelor.create(values)
-            console.log("Создал новое направление")
 
             if (tests) {
                 tests = JSON.parse(tests)
@@ -37,12 +31,11 @@ class DirectionBachelorController {
                         subject: test.subject,
                         min_points: test.minPoints,
                         isNecessary: test.isNecessary,
+                        admissionByEGE: test.admissionByEGE,
                         directionBachelorId: directionBachelor.id
                     })
                 )
             }
-
-            console.log("Обработал тесты")
 
             return res.json(directionBachelor)
         } catch (e) {

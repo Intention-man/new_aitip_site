@@ -3,7 +3,7 @@
 
 const uuid = require("uuid")
 const path = require("path")
-const {Staffer} = require("../models/staffModels")
+const {Staffer} = require("../models/staffModel")
 const ApiError = require("../error/ApiError")
 const { Op } = require('sequelize')
 

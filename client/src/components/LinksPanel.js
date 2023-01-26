@@ -96,6 +96,7 @@ class LinksPanel extends React.Component {
                     this.props.links.map(x => 
                         <a 
                             id={x.id}
+                            key={x.id}
                             className={`LinksPanel-link 
                                         ${this.state.activeBlocks.includes(`${x.id}`) ? "LinksPanel-linkActive" : "LinksPanel-linkStill"}`} 
                             href=""

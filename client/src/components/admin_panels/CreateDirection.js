@@ -9,7 +9,6 @@ import {Button, Col, Dropdown, FormControl, Modal, Row} from "react-bootstrap";
 
 
 const CreateDirection = observer(({show, onHide}) => {
-    const {admission_store} = useContext(Context)
 
     const [name, setName] = useState("")
     const [code, setCode] = useState("")
@@ -23,7 +22,7 @@ const CreateDirection = observer(({show, onHide}) => {
     const [tests, setTests] = useState([])
 
     const addTest = () => {
-        setTests([...tests, {subject: "", minPoints: "", isNecessary: false, number: Date.now()}])
+        setTests([...tests, {subject: "", minPoints: "", isNecessary: false, admissionByEGE: false, number: Date.now()}])
         console.log(tests)
     }
 
@@ -47,9 +46,6 @@ const CreateDirection = observer(({show, onHide}) => {
         formData.append("profession_advantages", profession_advantages)
         formData.append("profession_description", profession_description)
         formData.append("specialities", JSON.stringify(specialities))
-        // for (let i = 0; i < specialities.length; i++) {
-        //     formData.append('specialities[]', specialities[i]);
-        // }
         formData.append("extramural_form_price", `${extramuralFormPrice}`)
         formData.append("full_and_part_time_form_price", `${fullAndPartTimeFormPrice}`)
         formData.append("img", file)
@@ -88,7 +84,7 @@ const CreateDirection = observer(({show, onHide}) => {
                     <div>
                         <label htmlFor="specialities">Специальности</label>
                         <textarea style={{width: 400, height: 100}} id="specialities"
-                                  onChange={e => setSpecialities(e.target.value.split(", "))}/>
+                                  onChange={e => setSpecialities(e.target.value.split("; "))}/>
                     </div>
                     <div>
                         <label htmlFor="full_and_part_time_form_price">Стоимость очно-заочной формы обучения (руб / в
@@ -113,12 +109,12 @@ const CreateDirection = observer(({show, onHide}) => {
                         Добавить новое вступительное испытание
                     </Button>
                     {tests.map(i =>
-                        <Row key={i.number} style={{margin: 30}} className="mt-3">
-                            <Col md={3}>
+                        <Row key={i.number} style={{margin: 0}}>
+                            <Col md={2}>
                                 <FormControl placeholder="Предмет" value={i.subject}
                                              onChange={e => changeTest("subject", e.target.value, i.number)}/>
                             </Col>
-                            <Col md={3}>
+                            <Col md={2}>
                                 <FormControl placeholder="Минимальный балл" value={i.minPoints}
                                              onChange={e => changeTest("minPoints", Number(e.target.value), i.number)}/>
                             </Col>
@@ -127,7 +123,6 @@ const CreateDirection = observer(({show, onHide}) => {
                                     <Dropdown.Toggle variant="success" id="dropdown-basic">
                                         {i.isNecessary}
                                     </Dropdown.Toggle>
-
                                     <Dropdown.Menu>
                                         <Dropdown.Item
                                             onClick={() => changeTest("isNecessary", true, i.number)}>Да</Dropdown.Item>
@@ -137,6 +132,20 @@ const CreateDirection = observer(({show, onHide}) => {
                                 </Dropdown>
                             </Col>
                             <Col md={3}>
+                                <Dropdown>
+                                    <Dropdown.Toggle variant="success" id="dropdown-basic">
+                                        {i.admissionByEGE}
+                                    </Dropdown.Toggle>
+
+                                    <Dropdown.Menu>
+                                        <Dropdown.Item
+                                            onClick={() => changeTest("admissionByEGE", true, i.number)}>По ЕГЭ</Dropdown.Item>
+                                        <Dropdown.Item
+                                            onClick={() => changeTest("admissionByEGE", false, i.number)}>На базе профессионального образования</Dropdown.Item>
+                                    </Dropdown.Menu>
+                                </Dropdown>
+                            </Col>
+                            <Col md={2}>
                                 <Button variant="outline-danger" onClick={() => removeTest(i.number)}>Удалить</Button>
                             </Col>
                         </Row>

@@ -1,3 +1,5 @@
+// Модели таблицы пользователей (админов). Поля, их типы данных и свойства
+
 const sequelize = require("../db")
 const {DataTypes} = require("sequelize")
 

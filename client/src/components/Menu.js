@@ -1,5 +1,5 @@
 import React from 'react';
-import "../css/component_styles/menuStyles.css"
+import "../css/component_styles/Menu.css"
 import "../assets/fonts/font-awesome.min.css"
 import logotip from "../local_assets/Logo (1).png"
 import search from "../local_assets/search.png"

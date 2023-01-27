@@ -35,26 +35,15 @@
 
 @media (max-width: 1600px) {
     .sideBar {
-        width: 15%;
+        width: 18%;
     }
     
     .content {
-        width: calc(100% - 15%*2);
+        width: calc(100% - 18%*2);
     }
 }
 
-@media (max-width: 1240px) {
-    .sideBar {
-        display: none;
-    }
-    
-    .content {
-        width: 100%;
-        padding: 30px 5%;
-    }
-}   
-
-@media (max-width: 900px) {
+@media (max-width: 1156px) {
     .sideBar {
         display: none;
     }

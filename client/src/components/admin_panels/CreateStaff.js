@@ -26,25 +26,21 @@ const CreateStaff = observer(({show, onHide}) => {
     const [file, setFile] = useState(null)
 
     const addDirection = (directionName) => {
-        console.log(directionName)
         setDirectionsBac([...directionsBac, directionName])
         console.log(directionsBac)
     }
 
     const removeDirection = (directionName) => {
-        console.log(directionName)
         setDirectionsBac(directionsBac.filter(i => i !== directionName))
         console.log(directionsBac)
     }
 
     const addProgram = (programName) => {
-        console.log(programName)
         setProgramsAdd([...programsAdd, programName])
         console.log(programsAdd)
     }
 
     const removeProgram = (programName) => {
-        console.log(programName)
         setProgramsAdd(programsAdd.filter(i => i !== programName))
         console.log(programsAdd)
     }
@@ -110,10 +106,9 @@ const CreateStaff = observer(({show, onHide}) => {
                     {/*</div>*/}
                     <label htmlFor="directions_bachelor">Направления бакалавриата, на которых преподает сотрудник</label>
                     <div id="directions_bachelor">
-                        {admission_store.directions_bachelor.map(d =>
+                        {admission_store.directionsBachelor.map(d =>
                             <div key={d.name}>
                                 <input id={d.name} type="checkbox" value="0" name={d.name} onChange={() => {
-                                    console.log(document.getElementById(d.name).checked)
                                     document.getElementById(d.name).checked === true && addDirection(d.name)
                                     document.getElementById(d.name).checked === false && removeDirection(d.name)
                                 }}/>
@@ -123,10 +118,9 @@ const CreateStaff = observer(({show, onHide}) => {
                     </div>
                     <label htmlFor="programs_additional">Направления бакалавриата, на которых преподает сотрудник</label>
                     <div id="programs_additional">
-                        {admission_store.programs_additional.map(d =>
+                        {admission_store.additionalPrograms.map(d =>
                             <div key={d.name}>
                                 <input id={d.name} type="checkbox" value="0" name={d.name} onChange={() => {
-                                    console.log(document.getElementById(d.name).checked)
                                     document.getElementById(d.name).checked && addProgram(d.name)
                                     !(document.getElementById(d.name).checked) && removeProgram(d.name)
                                 }}/>

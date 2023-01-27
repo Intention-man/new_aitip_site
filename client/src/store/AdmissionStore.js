@@ -3,59 +3,68 @@ import {makeAutoObservable} from "mobx";
 export default class AdmissionStore {
     constructor() {
 
-        this._directions_bachelor = []
-        this._selectedDirections_bachelor = []
-        this._programs_additional = [
-            {
-                id: 1,
-                name: "Оценка стоимости предприятия (бизнеса)",
-                price: 50000,
-                supervisor: "Самсонов Р.А."
-            },
-            {
-                id: 2,
-                name: "Менеджмент в кадровой сфере",
-                price: 45000,
-                supervisor: "Петров А.И."
-            }
+        this._directionsBachelor = []
+        this._selectedDirectionBachelor = 0
+        this._additionalPrograms = [
+            // {
+            //     id: 1,
+            //     name: "Оценка стоимости предприятия (бизнеса)",
+            //     price: 50000,
+            //     supervisor: "Самсонов Р.А."
+            // },
+            // {
+            //     id: 2,
+            //     name: "Менеджмент в кадровой сфере",
+            //     price: 45000,
+            //     supervisor: "Петров А.И."
+            // }
         ]
-        this._selectedPrograms_additional = []
+        this._selectedRetrainingProgram = 0
+        this._selectedDevelopmentProgram = 0
 
         makeAutoObservable(this)
     }
 
 
-    setDirections_bachelor(directions_bachelor) {
-        this._directions_bachelor = directions_bachelor
+    setDirectionsBachelor(directionsBachelor) {
+        this._directionsBachelor = directionsBachelor
     }
 
-    setSelectedDirections_bachelor(selectedDirections_bachelor) {
-        this._selectedDirections_bachelor = selectedDirections_bachelor
+    setSelectedDirectionBachelor(selectedDirectionBachelor) {
+        this._selectedDirectionBachelor = selectedDirectionBachelor
     }
 
-    setPrograms_additional(programs_additional) {
-        this._programs_additional = programs_additional
+    setAdditionalPrograms(additionalPrograms) {
+        this._additionalPrograms = additionalPrograms
     }
 
-    setSelectedPrograms_additional(selectedPrograms_additional) {
-        this._selectedPrograms_additional = selectedPrograms_additional
+    setSelectedRetrainingProgram(selectedRetrainingProgram) {
+        this._selectedRetrainingProgram = selectedRetrainingProgram
+    }
+
+    setSelectedDevelopmentProgram(_selectedDevelopmentProgram) {
+        this._selectedDevelopmentProgram = _selectedDevelopmentProgram
     }
 
 
-    get directions_bachelor() {
-        return this._directions_bachelor
+    get directionsBachelor() {
+        return this._directionsBachelor
     }
 
-    get selectedDirections_bachelor() {
-        return this._selectedDirections_bachelor
+    get selectedDirectionBachelor() {
+        return this._selectedDirectionBachelor
     }
 
-    get programs_additional() {
-        return this._programs_additional
+    get additionalPrograms() {
+        return this._additionalPrograms
     }
 
-    get selectedPrograms_additional() {
-        return this._selectedPrograms_additional
+    get selectedRetrainingProgram() {
+        return this._selectedRetrainingProgram
+    }
+
+    get selectedDevelopmentProgram() {
+        return this._selectedDevelopmentProgram
     }
 
 }

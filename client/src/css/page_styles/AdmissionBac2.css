@@ -1,25 +1,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
 
 
-.content2 .Card-body, .content2 .Card-body-none{
+.admission-bac-content2 .Card-body, .admission-bac-content2 .Card-body-none{
     --content2_padding: 5%;
     padding: 2% var(--content2_padding);
 }
 
-.content2 .Card-body p, .content2 .Card-body li{
+.admission-bac-content2 .Card-body p, .admission-bac-content2 .Card-body li{
     font-size: var(--font_size_const);
 }
 
-.content2 .Card-body h1.local_title{
+.admission-bac-content2 .Card-body h1.local_title{
     margin: 0;
     text-align: center;
     background: #FFFFFF;
 }
 
-.content2 .Card-body p.local_title{
+.admission-bac-content2 .Card-body p.local_title{
     padding: 3px;
     font-weight: 600;
     text-align: center;
+    max-width: 430px;
     background: #FFFFFF;
 }
 
@@ -67,7 +68,7 @@
     font-weight: 500;
 }
 
-.content2 .Card-image{
+.admission-bac-content2 .Card-image{
     height: auto;
 }
 
@@ -82,7 +83,7 @@
     padding: 0;
 }
 
-.content2 .Card-body .direction_inner_card :is(h1, h3) {
+.admission-bac-content2 .Card-body .direction_inner_card :is(h1, h3) {
     margin: 20px 0;
 }
 
@@ -108,7 +109,7 @@
     font-size: var(--font_size_const);
 }
 
-.content2 .Card-body .title_who_can_you_become{
+.admission-bac-content2 .Card-body .title_who_can_you_become{
     display: flex;
     margin: 5px ;
     justify-content: left;
@@ -133,7 +134,7 @@
     height: auto;
     justify-content: left;
     align-content: flex-start;
-    font-size: calc(var(--font_size_const) * 1.5);
+    font-size: var(--font_size_const);
 }
 
 
@@ -143,13 +144,14 @@
     flex-wrap: wrap;
     margin: 0;
     padding: 5px;
+    justify-content: center;
 }
 
 .passing_points {
     border: 3px solid;
     border-radius: 10px;
     width: 35%;
-    min-width: 300px;
+    min-width: 200px;
     max-width: 450px;
     margin: 10px 2% 10px 0;
     padding: 5px 10px;
@@ -164,7 +166,7 @@
     flex-direction: column;
     flex-wrap: wrap;
     width: 25%;
-    min-width: 200px;
+    justify-content: center;
 }
 
 ._1_of_first_2_documents{
@@ -188,19 +190,19 @@
     align-items: center;
 }
 
-.content2 .Card-body .cost{
+.admission-bac-content2 .Card-body .cost{
     width: auto;
     max-width: 250px;
     margin: 0 auto 5px;
     text-align: center;
 }
 
-.content2 .Card-body .cost p{
+.admission-bac-content2 .Card-body .cost p{
     margin: 5px 0;
 }
 
-.content2 .Card-body .cost .cost_price{
-     font-size: calc(var(--font_size_const) * 1.5);
+.admission-bac-content2 .Card-body .cost .cost_price{
+     font-size: var(--font_size_const);
 }
 
 .direction_block .last_document_of_content_2{
@@ -220,9 +222,15 @@
 /* MEDIA */
 
 
-/* При исчезновении боковых зон */
-@media (max-width: 800px){
+/* Когда 2 документа, находящиеся рядом с проходными баллами, падают вниз */
+@media (max-width: 830px){
+    ._2_documents {
+        width: 100%;
+    }
 
+    .passing_points {
+        width: 48%;
+    }
 }
 
 /* Количество и размер столбцов блока "Кем ты можешь стать" */
@@ -240,38 +248,9 @@
     }
 }
 
-/* Когда 2 документа, находящиеся рядом с проходными баллами, падают вниз */
-@media (max-width: 1758px) {
-    .passing_points{
-        width: 45%;
-        margin: 10px 2%;
-    }
-    ._2_documents{
-        display: flex;
-        flex-direction: row;
+/* Когда два блока с проходными баллами не помощаются на одной строке */
+@media (max-width: 615px) {
+    .passing_points {
         width: 100%;
-    }
-    ._1_of_first_2_documents{
-        width: 40%;
-        margin: 15px 5%;
-    }
-}
-
-/* Когда 2 блока проходных баллов становятся не на 1 строке */
-@media (max-width: 1437px) {
-    .passing_points{
-        width: 100%;
-        margin: 10px 0;
-        max-width: 700px;
-    }
-}
-
-/* Когда 2 документа не помещаются на 1 строке */
-@media (max-width: 1030px) {
-    ._2_documents{
-        flex-direction: column;
-    }
-    ._1_of_first_2_documents{
-        width: 95%;
     }
 }

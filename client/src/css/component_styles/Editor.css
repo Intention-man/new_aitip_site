@@ -1,0 +1,8 @@
+.im  {
+    border-style: none;
+    width: 200px;
+    height: 200px;
+    max-width: 100%;
+    box-sizing: content-box;
+    background-color: var(--color-canvas-default);
+}

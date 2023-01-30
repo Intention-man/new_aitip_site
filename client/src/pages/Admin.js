@@ -8,6 +8,8 @@ import {Context} from "../index";
 import CreateProgram from "../components/admin_panels/CreateProgram";
 import CreateElectionOrContest from "../components/admin_panels/CreateElectionOrContest";
 import CreatePartner from "../components/admin_panels/CreatePartner";
+import CreateNews from "../components/admin_panels/CreateNews";
+import CreateCard from "../components/admin_panels/CreateCard";
 
 
 
@@ -25,6 +27,8 @@ const Admin = () => {
     const [programVisible, setProgramVisible] = useState(false)
     const [electionsAndContestsVisible, setElectionsAndContestsVisible] = useState(false)
     const [partnersVisible, setPartnersVisible] = useState(false);
+    const [newsVisible, setNewsVisible] = useState(false);
+    const [cardVisible, setCardVisible] = useState(false);
 
 
     return (
@@ -44,11 +48,22 @@ const Admin = () => {
             <Button variant={"outline-info"} className="mt-2 p-2" onClick={() => setPartnersVisible(true)}>
                 Добавить партнера
             </Button>
+            <Button variant={"outline-info"} className="mt-2 p-2" onClick={() => setNewsVisible(true)}>
+                Добавить новость
+            </Button>
+            <Button variant={"outline-info"} className="mt-2 p-2" onClick={() => setCardVisible(true)}>
+                Добавить карточку
+            </Button>
+
+
             <CreateStaff show={staffVisible} onHide={() => setStaffVisible(false)}/>
             <CreateDirection show={directionVisible} onHide={() => setDirectionVisible(false)}/>
             <CreateProgram show={programVisible} onHide={() => setProgramVisible(false)}/>
             <CreateElectionOrContest show={electionsAndContestsVisible} onHide={() => setElectionsAndContestsVisible(false)}/>
             <CreatePartner show={partnersVisible} onHide={() => setPartnersVisible(false)}/>
+            {newsVisible && <CreateNews newsVisible={newsVisible} setNewsVisible={setNewsVisible}/>}
+            <CreateCard show={cardVisible} onHide={() => setCardVisible(false)}/>
+
         </Container>
     );
 };

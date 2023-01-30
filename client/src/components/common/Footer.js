@@ -1,9 +1,10 @@
 import React from 'react';
-import "../assets/bootstrap/css/bootstrap.min.css"
-import "../assets/fonts/font-awesome.min.css"
-import "../assets/fonts/simple-line-icons.min.css"
-import "../assets/css/Animated-Menu-Icon.css"
-import "../assets/css/Pretty-Footer-.css"
+
+import "../../assets/bootstrap/css/bootstrap.min.css"
+import "../../assets/fonts/font-awesome.min.css"
+import "../../assets/fonts/simple-line-icons.min.css"
+import "../../assets/css/Animated-Menu-Icon.css"
+import "../../assets/css/Pretty-Footer-.css"
 
 
 

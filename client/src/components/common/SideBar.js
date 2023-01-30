@@ -1,5 +1,5 @@
 import React from 'react';
-import '../css/component_styles/SideBar.css';
+import '../../css/component_styles/SideBar.css';
 
 /** 
  * Компонент боковой колонки.

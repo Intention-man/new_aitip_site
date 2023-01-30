@@ -1,11 +1,11 @@
 import React from 'react';
 
-const StudentsBac = () => {
+const ButtonList = () => {
     return (
         <div>
-            Students_BAC
+
         </div>
     );
 };
 
-export default StudentsBac;
+export default ButtonList;

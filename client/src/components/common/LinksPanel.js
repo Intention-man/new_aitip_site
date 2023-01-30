@@ -1,6 +1,6 @@
 import React from "react";
-import './../css/component_styles/SideBar.css';
-import ArrowUpIcon from '../local_assets/icons/arrow-up.svg';
+import './../../css/component_styles/SideBar.css';
+import ArrowUpIcon from '../../local_assets/icons/arrow-up.svg';
 
 /** 
  * Компонент списка ссылок на блоки текущей страницы.

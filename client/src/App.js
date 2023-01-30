@@ -4,10 +4,10 @@ import { useContext, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { BrowserRouter } from "react-router-dom";
 import AppRouter from "./components/AppRouter";
-import Menu from "./components/Menu";
-import Footer from "./components/Footer";
-import SideBar from './components/SideBar';
-import LinksPanel from './components/LinksPanel';
+import Menu from "./components/common/Menu";
+import Footer from "./components/common/Footer";
+import SideBar from './components/common/SideBar';
+import LinksPanel from './components/common/LinksPanel';
 import { Context } from "./index";
 import ContentContext from './components/contexts/ContentContext';
 

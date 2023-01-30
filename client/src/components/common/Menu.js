@@ -1,8 +1,8 @@
 import React from 'react';
-import "../css/component_styles/Menu.css"
-import "../assets/fonts/font-awesome.min.css"
-import logotip from "../local_assets/Logo (1).png"
-import search from "../local_assets/search.png"
+import "../../css/component_styles/Menu.css"
+import "../../assets/fonts/font-awesome.min.css"
+import logotip from "../../local_assets/Logo (1).png"
+import search from "../../local_assets/search.png"
 
 function myFunction() {
     const x = document.getElementById("myTopnav");

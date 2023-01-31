@@ -247,6 +247,11 @@ p, li, h1, h2, h3, a {
     mask-image: linear-gradient(to left, rgba(0,0,0,0), rgba(0,0,0,1) 60%);
 }
 
+.RoundedImg {
+    border-radius: 100%;
+    background-size: cover;
+}
+
 .CardContainer {
     display: grid;
     grid-template-columns: repeat(12, 1fr);

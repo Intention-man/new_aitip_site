@@ -9,7 +9,7 @@ import CreateProgram from "../components/admin_panels/CreateProgram";
 import CreateElectionOrContest from "../components/admin_panels/CreateElectionOrContest";
 import CreatePartner from "../components/admin_panels/CreatePartner";
 import CreateNews from "../components/admin_panels/CreateNews";
-import CreateCard from "../components/admin_panels/CreateCard";
+import CreateCard from "../pages/CreateCard"
 
 
 

@@ -6,3 +6,35 @@
     box-sizing: content-box;
     background-color: var(--color-canvas-default);
 }
+
+.own_black {
+    color: var(--aitip_black);
+}
+
+.own_grey {
+    color: var(--aitip_grey);
+}
+
+.own_blue {
+    color: var(--aitip_blue);
+}
+
+.own_red {
+    color: var(--aitip_red);
+}
+
+.font_small {
+    font-size: calc(var(--font_size_const) * 0.7);
+}
+
+.font_usual {
+    font-size: var(--font_size_const);
+}
+
+.font_upper {
+    font-size: calc(var(--font_size_const) * 1.25);
+}
+
+.font_big {
+    font-size: calc(var(--font_size_const) * 1.5);
+}

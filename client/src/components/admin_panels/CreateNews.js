@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import MDEditor, { commands, EditorContext } from "@uiw/react-md-editor";
 import "../../css/component_styles/Editor.css"
 import {observer} from "mobx-react-lite";
-import {convertImages, createNews} from "../../http/newsAPI";
+import {convertImages, createCard} from "../../http/cardAPI";
 import {Button} from "react-bootstrap";
 
 
@@ -71,14 +71,14 @@ const CreateNews = observer(({newsVisible, setNewsVisible}) => {
         const formData = new FormData()
         formData.append("name", header)
         formData.append("content", value)
-        createNews(formData).then(data => console.log(data))
+        createCard(formData).then(data => console.log(data))
     }
 
 
     // main return
 
     return (
-        <div style={{background: "white", marginTop: 30, borderRadius: 10}}>
+        <div style={{backgroundColor: "#EEEEEE", marginTop: 30, borderRadius: 10}}>
             <div>
                 <h3>Название/заголовок новости</h3>
                 <input type="name" id="name" style={{borderColor: "black", margin: 10, width: "90%"}} onChange={e => setHeader(e.target.value)}/>
@@ -89,7 +89,11 @@ const CreateNews = observer(({newsVisible, setNewsVisible}) => {
                 extraCommands={[insertImage, commands.fullscreen]}
                 onChange={(val) => setValue(val)}
             />
-            <MDEditor.Markdown source={value} style={{ whiteSpace: 'pre-wrap' }} />
+            <div style={{display:"flex", marginTop: 30}}>
+                <MDEditor.Markdown source={value} style={{ whiteSpace: 'pre-wrap', width: 400}} />
+                <img style={{width: 100}} src="../../../server/static/4cd920e5-7d0b-4ff2-b8be-4356623a705d.jpg"/>
+            </div>
+
 
 
             <footer style={{margin: "0 0 50px"}}>

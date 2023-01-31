@@ -1,7 +1,7 @@
 const ApiError = require("../error/ApiError")
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
-const {User} = require("../models/userModels");
+const {User} = require("../models/defaultModels/userModels");
 
 
 const generateJwt = (id, email, role) => {

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {fetchNews} from "../http/newsAPI";
+import {fetchCards} from "../http/cardAPI";
 import MDEditor from "@uiw/react-md-editor";
 
 
@@ -7,7 +7,7 @@ const Main = () => {
     const [news, setNews] = useState([]);
 
     useEffect(() => {
-        fetchNews().then(data => {
+        fetchCards().then(data => {
             setNews(data.rows)
             console.log(data)
         })

@@ -4,7 +4,7 @@
 const uuid = require("uuid")
 const path = require("path")
 const ApiError = require("../error/ApiError")
-const {Partners} = require("../models/partnersModel");
+const {Partners} = require("../models/defaultModels/partnersModel");
 
 
 

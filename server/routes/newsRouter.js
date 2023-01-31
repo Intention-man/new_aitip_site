@@ -2,7 +2,7 @@
 
 const Router = require("express")
 const router = new Router()
-const newsController = require("../controllers/newsController")
+const newsController = require("../controllers/cardController")
 const checkRole = require("../middleware/checkRoleMiddleware")
 
 router.post("/", newsController.create)

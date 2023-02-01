@@ -1,5 +1,6 @@
 import React from "react";
 import FadingImg from "./FadingImg";
+import RoundedImg from './RoundedImg';
 import "../../css/component_styles/Card.css";
 
 /** 
@@ -36,6 +37,7 @@ class Card extends React.Component {
     static defaultProps = {
         className: '',
         imgPos: 'left',
+        imgType: 'normal',
         width: 12,
     }
 
@@ -54,11 +56,10 @@ class Card extends React.Component {
                 {
                     this.props.imgPos !== 'none' &&
                     
-                    <div className={`Card-image Card-image-${this.props.imgPos}`}> 
-                    <FadingImg
-                        imgPos={this.props.imgPos}
-                        imgSrc={this.props.imgSrc}
-                    /> 
+                    <div className={`Card-image Card-imagePos-${this.props.imgPos} Card-imageType-${this.props.imgType}`}> 
+                        <img
+                            src={this.props.imgSrc}
+                        />
                     </div>
                 }
                 <div className={`Card-body Card-body-${this.props.imgPos}`}>

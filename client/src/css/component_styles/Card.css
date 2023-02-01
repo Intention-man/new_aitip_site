@@ -43,7 +43,7 @@ p, li, h1, h2, h3, a {
     flex-direction: row;
 }
 
-.Card-image img {
+.Card-imageType-normal img {
     width: 100%;
     height: 100%;
     align-self: flex-end;
@@ -51,12 +51,28 @@ p, li, h1, h2, h3, a {
     object-fit: cover;
 }
 
-.Card-image-top, .Card-image-bottom {
+.Card-imageType-fading img {
+    width: 100%;
+    height: 100%;
+    align-self: flex-end;
+    border-radius: var(--card-border-radius);
+    object-fit: cover;
+}
+
+.Card-imageType-rounded img {
+    width: 100%;
+    height: 100%;
+    align-self: flex-end;
+    border-radius: var(--card-border-radius);
+    object-fit: cover;
+}
+
+.Card-imagePos-top, .Card-imagePos-bottom {
     width: 100%;
     height: 50%;
 }
 
-.Card-image-right, .Card-image-left {
+.Card-imagePos-right, .Card-imagePos-left {
     width: 50%; 
     height: 100%;
 }
@@ -227,24 +243,29 @@ p, li, h1, h2, h3, a {
     grid-column: span 12 / span 12;
 }
 
-.FadingImg-top {
+.Card-imgType-fading .Card-imgPos-top img {
     -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,0), rgba(0,0,0,1) 60%);
     mask-image: linear-gradient(to top, rgba(0,0,0,0), rgba(0,0,0,1) 60%);
 }
 
-.FadingImg-right {
+.Card-imgType-fading .Card-imgPos-right img {
     -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,1) 60%);
     mask-image: linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,1) 60%);
 }
 
-.FadingImg-bottom {
+.Card-imgType-fading .Card-imgPos-bottom img {
     -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,1) 60%);
     mask-image: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,1) 60%);
 }
 
-.FadingImg-left {
+.Card-imgType-fading .Card-imgPos-left img {
     -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,0), rgba(0,0,0,1) 60%);
     mask-image: linear-gradient(to left, rgba(0,0,0,0), rgba(0,0,0,1) 60%);
+}
+
+.RoundedImg {
+    border-radius: 100%;
+    background-size: cover;
 }
 
 .CardContainer {

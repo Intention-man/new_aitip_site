@@ -14,6 +14,54 @@ const CreateNews = observer(({newsVisible, setNewsVisible}) => {
 
     // InsertGallery
 
+    // const InsertImage = ({ doAfter }) => {
+    //     const addImage = (imageList) => {
+    //         const formData = new FormData();
+    //         imageList.forEach(el => formData.append("imageList", el));
+    //         convertImages(formData).then(list => {
+    //             imageNamesList = list;
+    //             doAfter();
+    //         });
+    //     }
+
+    //     return (
+    //         <div>
+    //             <input
+    //                 type="file"
+    //                 accept="image"
+    //                 multiple
+    //                 onChange={
+    //                     (e) => addImage(Array.from(e.target.files))
+    //                 }
+    //             />
+    //         </div>
+    //     );
+    // };
+
+    // const insertImage = {
+    //     name: "InsertImage",
+    //     keyCommand: "InsertImage",
+    //     render: (command, disabled, executeCommand) => {
+    //         // executeCommand(command, command.groupName);
+    //         return (
+    //             <InsertImage
+    //                 doAfter={() => executeCommand(command, command.groupName)}
+    //             />
+    //         );
+    //     },
+
+    //     execute: (state, api) => {
+    //         const index = state.selection.end;
+    //         let currentText = state.text;
+    //         let additioanalPart = "";
+    //         imageNamesList.map(name => { 
+    //             additioanalPart += `<img src="${process.env.REACT_APP_API_URL}${name}" class="im"/>` 
+    //         });
+    //         currentText = currentText.slice(0, index) + additioanalPart + currentText.slice(index);
+    //         setContent(currentText);
+    //     }
+    // };
+
     const InsertImage = ({doAfter}) => {
         const addImage = (imageList) => {
             console.log(imageList)

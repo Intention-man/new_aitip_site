@@ -5,12 +5,13 @@ import photo2 from "../../../local_assets/Content.png"
 import photo3 from "../../../local_assets/Content_2.png"
 import photo4 from "../../../local_assets/Content_5.png"
 import photo5 from "../../../local_assets/Content_6.png"
+import photo6 from "../../../local_assets/Content_7.png"
 import vector from "../../../local_assets/Vector.png"
 import vector1 from "../../../local_assets/Vector1.png"
-import photo6 from "../../../local_assets/Content_7.png"
 
 
-const Carusel = () => {
+
+const AdmissionBacContent7 = () => {
     const [currentSlideNumber, setCurrentSlideNumber] = useState(0)
     let photos = [photo1, photo2, photo3, photo4, photo5, photo6]
 
@@ -44,4 +45,4 @@ const Carusel = () => {
 };
 
 
-export default Carusel;
+export default AdmissionBacContent7;

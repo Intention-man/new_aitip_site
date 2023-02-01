@@ -3,10 +3,7 @@
 
 import React, {useState} from 'react';
 import {observer} from "mobx-react-lite";
-import {Button} from "react-bootstrap";
-import CreateLine from "../components/admin_panels/CreateLine";
-import MDEditor, {commands} from "@uiw/react-md-editor";
-import {createCard} from "../http/cardAPI";
+import CreateLine from "./CreateLine";
 
 
 const CreateCard = observer(() => {
@@ -27,16 +24,16 @@ const CreateCard = observer(() => {
     return (
         <div>
             <CreateLine/>
-            <div style={{backgroundColor: "#EEEEEE", marginTop: 30, borderRadius: 10}}>
-                <div>
-                    <h3>Название/заголовок новости</h3>
-                    <input type="name" id="name" style={{borderColor: "black", margin: 10, width: "90%"}} onChange={e => setHeader(e.target.value)}/>
-                </div>
+            {/*<div style={{backgroundColor: "#EEEEEE", margin: "30px 0", borderRadius: 10}}>*/}
+            {/*    <div>*/}
+            {/*        <h3>Название/заголовок новости</h3>*/}
+            {/*        <input type="name" id="name" style={{borderColor: "black", margin: 10, width: "90%"}} onChange={e => setHeader(e.target.value)}/>*/}
+            {/*    </div>*/}
 
-                <div style={{display:"flex", marginTop: 30}}>
-                {/*    <MDEditor.Markdown source={value} style={{ whiteSpace: 'pre-wrap', width: 400}} />*/}
-                </div>
-            </div>
+            {/*    <div style={{display:"flex", marginTop: 30}}>*/}
+            {/*    /!*    <MDEditor.Markdown source={value} style={{ whiteSpace: 'pre-wrap', width: 400}} />*!/*/}
+            {/*    </div>*/}
+            {/*</div>*/}
         </div>
     );
 });

@@ -1,8 +1,8 @@
 import {$authHost, $host} from "./index";
 
 
-export const createCard = async (news) => {
-    const {data} = await $host.post("api/card/", news)
+export const createCard = async (cardData) => {
+    const {data} = await $host.post("api/card/", cardData)
     console.log(data)
     return data
 }

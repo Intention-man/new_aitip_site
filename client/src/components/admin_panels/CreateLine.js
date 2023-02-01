@@ -1,149 +1,164 @@
 // Frontend модального окна для добавления направления и функции, изменяющие состояния(установлено в модальном окне определенное значение или нет). Возможно, не будет использоваться.
 
 
-import React, { useState } from 'react';
-import { observer } from "mobx-react-lite";
-import { Button } from "react-bootstrap";
-import MDEditor, { commands } from "@uiw/react-md-editor";
-import { convertImages } from "../../http/cardAPI";
+import React, {useState} from 'react';
+import {observer} from "mobx-react-lite";
+import {Button} from "react-bootstrap";
+import MDEditor, {commands} from "@uiw/react-md-editor";
+import Card from "../card/Card"
+import {convertImages} from "../../http/cardAPI";
+import Carusel from "../Carusel";
 
 
 const CreateLine = observer(() => {
-    const [kind, setKind] = useState("Текст/список/подзаголовок");
+    const [kind, setKind] = useState(0);
     const [content, setContent] = useState("");
     const [cardIndex, setCardIndex] = useState(-1);
-
-
+    const [filesNames, setFilesNames] = useState()
+    const [adressFileType, setAdressFileType] = useState("local");
     const [param, setParam] = useState("");
-    // // 0 - выбор вида линии, 1 - выбор параметров, 2 - выбор файлов и/или написание текста
-    // const [stage, setStage] = useState(0);
-    let imageNamesList = []
 
 
-    const InsertImage = ({ doAfter }) => {
-        const addImage = (imageList) => {
-            const formData = new FormData();
-            imageList.forEach(el => formData.append("imageList", el));
-            convertImages(formData).then(list => {
-                imageNamesList = list;
-                doAfter();
-            });
-        }
+    const kinds = {
+        1: "Текст/список/подзаголовок",
+        2: "Большая картинка",
+        3: "Картинка + текст - в 2 столбика",
+        4: "Карусель",
+        5: "Видео",
+        6: "Документ"
+    }
 
-        return (
-            <div>
-                <input
-                    type="file"
-                    accept="image"
-                    multiple
-                    onChange={
-                        (e) => addImage(Array.from(e.target.files))
-                    }
-                />
-            </div>
-        );
-    };
 
-    const insertImage = {
-        name: "InsertImage",
-        keyCommand: "InsertImage",
-        render: (command, disabled, executeCommand) => {
-            // executeCommand(command, command.groupName);
-            return (
-                <InsertImage
-                    doAfter={() => executeCommand(command, command.groupName)}
-                />
-            );
-        },
-
-        execute: (state, api) => {
-            const index = state.selection.end;
-            let currentText = state.text;
-            let additioanalPart = "";
-            imageNamesList.map(name => { 
-                additioanalPart += `<img src="${process.env.REACT_APP_API_URL}${name}" class="im"/>` 
-            });
-            currentText = currentText.slice(0, index) + additioanalPart + currentText.slice(index);
-            setContent(currentText);
-        }
-    };
-
+    const addImage = (imageList) => {
+        const formData = new FormData();
+        imageList.forEach(el => formData.append("imageList", el));
+        console.log(imageList)
+        convertImages(formData).then(list => {
+            setFilesNames(list);
+        });
+    }
 
 
     const addLine = () => {
         const formData = new FormData()
         formData.append("kind", kind)
-        // createDirectionBachelor(formData).then(() => onHide())
+        // createCard(formData).then(() => onHide())
     };
 
     return (
-        <div style={{ margin: "30px 0" }}>
-            <div style={{ display: "flex" }}>
+        <div style={{margin: "30px 0"}}>
+            <div style={{display: "flex", flexWrap: "wrap"}}>
+
                 <p>Выберите тип элемента</p>
                 <div>
-
-                    {/*<option id="Маленький текст">Маленький текст</option>*/}
-                    {/*<option id="Обычный текст">Обычный текст</option>*/}
-                    {/*<option id="Увеличенный текст">Увеличенный текст</option>*/}
-                    {/*<option id="Большой текст">Большой текст</option>*/}
-
-                    <select id="kind" value={kind} onChange={e => {
-                        setKind(e.target.value)
+                    <select id="kind" onChange={e => {
+                        console.log(e.target.value)
+                        setKind(Number(e.target.value))
+                        console.log(e.target.value)
                     }}>
-                        <option id="Текст/список/подзаголовок">Текст/список/подзаголовок</option>
-                        <option id="Картинка + текст - в 2 столбика">Картинка + текст - в 2 столбика</option>
-                        <option id="Одна картинка">Одна картинка</option>
-                        <option id="Карусель">Карусель</option>
-                        <option id="Видео">Видео</option>
-                        <option id="Документ">Документ</option>
+                        <option value="0">Выберите тип элемента</option>
+                        <option value="1">Текст/список/подзаголовок</option>
+                        <option value="2">Большая картинка</option>
+                        <option value="3">Картинка + текст - в 2 столбика</option>
+                        <option value="4">Карусель</option>
+                        <option value="5">Видео</option>
+                        <option value="6">Документ</option>
                     </select>
                 </div>
 
 
-                <p>Выберите параметры</p>
-                <div>
-                    {kind === "Картинка + текст - в 2 столбика" &&
+                {(kind === 2 || kind === 3) && <p>Выберите параметры {kind}</p>}
+                <div style={{margin: "30px 0"}}>
+                    {kind === 3 &&
 
                         <select id="kind" value={param} onChange={e => {
-                            setParam(e.target.value)
+                            setParam(e.target.value.split(" "))
                         }}>
-                            <option id="С градиентом">С градиентом</option>
-                            <option id="Без градиента">Без градиента</option>
-                            <option id="Круглая">Круглая</option>
+                            <option value="none">Выберите тип картинки</option>
+                            <option value="fading left">С градиентом слева</option>
+                            <option value="fading right">С градиентом справа</option>
+                            <option value="default left">Без градиента слева</option>
+                            <option value="default right">Без градиента справа</option>
+                            <option value="round left">Круглая слева</option>
+                            <option value="round right">Круглая справа</option>
                         </select>
                     }
 
-                    {kind === "Одна картинка" &&
+                    {kind === 2 &&
 
-                        <select id="kind" value={param} onChange={e => {
+                        <select id="param" value={param} onChange={e => {
                             setParam(e.target.value)
                         }}>
-                            <option id="С градиентом">С градиентом</option>
-                            <option id="Без градиента">Без градиента</option>
+                            <option id="fading">С градиентом</option>
+                            <option id="default">Без градиента</option>
                         </select>
                     }
+                </div>
 
+
+                {kind > 1 && <p>Выберите файл(-ы)</p>}
+
+                <div style={{margin: "30px 0"}}>
+                    {(kind === 3 || kind === 2) &&
+                        <div>
+                            <input type="file" accept="image/*" onChange={(e) => {
+                                setAdressFileType("local")
+                                addImage(Array.from(e.target.files))
+                            }}/>
+                            <input type="text" onChange={(e) => {
+                                setAdressFileType("global")
+                                setFilesNames(e.target.value)
+                            }}/>
+                        </div>
+                    }
+                    {kind === 4 &&
+                        <div>
+                            <input type="file" multiple accept="image/*" onChange={(e) => {
+                                setAdressFileType("local")
+                                addImage(Array.from(e.target.files))
+                            }}/>
+                            <input type="text" onChange={(e) => {
+                                setAdressFileType("global")
+                                setFilesNames(e.target.value.split("; "))
+                            }}/>
+                        </div>
+                    }
+                    {kind === 5 &&
+                        <input type="text" onChange={(e) => setFilesNames(e.target.value)}/>
+                    }
+                    {kind === 6 &&
+                        <div>
+                            <input type="file" accept="image" onChange={(e) => {
+                                setAdressFileType("local")
+                                addImage(e.target.files)
+                            }}/>
+                            <input type="text" onChange={(e) => {
+                                setAdressFileType("global")
+                                setFilesNames(e.target.value.split("; "))
+                            }}/>
+                        </div>
+                    }
                 </div>
             </div>
 
 
-            {/*2 - выбор файлов и/или написание текста*/}
-            <div>
-                {kind === "Текст/список/подзаголовок" &&
+            {/* Появление зоны редактирования текста*/}
+            <div style={{margin: "30px 0"}}>
+                {kind === 1 &&
                     <MDEditor
                         value={content}
                         preview="edit"
-                        extraCommands={[insertImage, commands.fullscreen]}
+                        extraCommands={[commands.fullscreen]}
                         onChange={(val) => setContent(val)}
                     />
                 }
 
-                {kind === "Картинка + текст - в 2 столбика" &&
+                {kind === 3 &&
                     <MDEditor
-                        style={{ width: "50%" }}
+                        style={{width: "100%"}}
                         value={content}
                         preview="edit"
-                        extraCommands={[insertImage, commands.fullscreen]}
+                        extraCommands={[commands.fullscreen]}
                         onChange={(val) => setContent(val)}
                     />
                 }
@@ -151,22 +166,51 @@ const CreateLine = observer(() => {
 
             {/*Отрисовка линии*/}
 
-            {(kind === "Текст/список/подзаголовок" || kind === "Картинка + текст - в 2 столбика") &&
-                <MDEditor.Markdown source={content} style={{ whiteSpace: 'pre-wrap', width: (kind === "Текст/список/подзаголовок" ? "100%" : "50%") }} />
+            <h2>Как пользователь видит линию</h2>
+
+            {kind === 1 &&
+                <MDEditor.Markdown source={content} style={{whiteSpace: 'pre-wrap', width: "100%"}}/>
             }
+
+            {(kind === 2 && (typeof filesNames !== "undefined")) && (filesNames.includes("://") ?
+                    <img src={filesNames}/> : <img src={process.env.REACT_APP_API_URL + filesNames}/>
+            )
+            }
+
+            {(kind === 3 && (typeof filesNames !== "undefined")) &&
+                    <Card
+                        // imgType={param[0]}
+                        imgSrc={filesNames.includes("://") ? filesNames : process.env.REACT_APP_API_URL + filesNames}
+                        imgPos={param[1]}>
+                        <MDEditor.Markdown source={content} style={{whiteSpace: 'pre-wrap'}}/>
+                    </Card>
+
+            }
+
+            {(kind === 4 && (typeof filesNames !== "undefined")) &&
+                <Card
+                    // imgType={param[0]}
+                    imgSrc={filesNames.includes("://") ? filesNames : process.env.REACT_APP_API_URL + filesNames}
+                    imgPos={param[1]}>
+                    <MDEditor.Markdown source={content} style={{whiteSpace: 'pre-wrap'}}/>
+                </Card>
+            }
+
+            {(kind === 4 && (typeof filesNames !== "undefined")) &&
+                <Carusel photos={filesNames} adressFileType={adressFileType}></Carusel>}
 
 
             {/*Кнопки добавления и удаления*/}
 
-            <footer style={{ margin: "0 0 50px" }}>
-                <Button variant="outline-success" onClick={() => addLine()}>
-                    Добавить направление
-                </Button>
-                <Button variant="outline-danger">
-                    Удалить
-                </Button>
+            {/*<footer style={{margin: "30px 0"}}>*/}
+            {/*    <Button variant="outline-success" onClick={() => addLine()}>*/}
+            {/*        Добавить направление*/}
+            {/*    </Button>*/}
+            {/*    <Button variant="outline-danger">*/}
+            {/*        Удалить*/}
+            {/*    </Button>*/}
 
-            </footer>
+            {/*</footer>*/}
             <p>*Костыль ради отступа*</p>
         </div>
     );

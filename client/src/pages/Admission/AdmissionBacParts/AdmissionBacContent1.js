@@ -11,6 +11,7 @@ const AdmissionBacContent1 = (props) => {
         <Card
             // Здесь нет пропа title, так как заголовок у данной карточки содержит ссылку. Пришлось вручную прописать h1 с ссылкой в её теле ниже.
             imgSrc={Content1Img}
+            imgType='rounded'
             imgPos='left'
             width={12}
             ref={props.handleRef}

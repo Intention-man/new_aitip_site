@@ -11,6 +11,7 @@ import { fetchDirectionsBachelor } from "../../http/admissionAPI";
 import { Context } from "../../index";
 import ContentContext from '../../components/contexts/ContentContext';
 import "../../css/main.css"
+import AdmissionBacContent7 from "./AdmissionBacParts/AdmissionBacContent7";
 
 const AdmissionBac = () => {
     const {admission_store} = useContext(Context);
@@ -64,6 +65,7 @@ const AdmissionBac = () => {
             <AdmissionBacContent4 handleRef={element => setDomNode(element, 3)}/>
             <AdmissionBacContent5 handleRef={element => setDomNode(element, 4)}/>
             <AdmissionBacContent6 handleRef={element => setDomNode(element, 5)}/>
+            <AdmissionBacContent7/>
         </CardContainer>
     );
 }

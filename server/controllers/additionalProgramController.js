@@ -4,7 +4,7 @@
 const uuid = require("uuid")
 const path = require("path")
 const ApiError = require("../error/ApiError")
-const {AdditionalProgram} = require("../models/admissionModels");
+const {AdditionalProgram} = require("../models/defaultModels/admissionModels");
 
 
 

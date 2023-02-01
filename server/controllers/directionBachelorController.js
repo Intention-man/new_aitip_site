@@ -4,7 +4,7 @@
 const uuid = require("uuid")
 const path = require("path")
 const ApiError = require("../error/ApiError")
-const {DirectionBachelor, EntranceTest} = require("../models/admissionModels");
+const {DirectionBachelor, EntranceTest} = require("../models/defaultModels/admissionModels");
 
 
 

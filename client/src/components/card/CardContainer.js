@@ -8,7 +8,7 @@ class CardContainer extends React.Component {
 
     render() {
         return (
-            <div className="CardContainer content">
+            <div className="CardContainer">
                 {this.props.children}
             </div>
         );

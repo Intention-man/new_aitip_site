@@ -6,7 +6,7 @@ import {
     HISTORY, INDUSTRIAL_P, INFO_EDU_ORG, INTERNATIONAL_ACT,
     LEGAL_CLINIC,
     MAIN_ROUTE, PERSONALITIES_PAGE, SCIENCE, SCIENCE_P, STAFF,
-    STRUCTURE, STUDENTS_APE, STUDENTS_BAC
+    STRUCTURE, STUDENTS
 } from "./consts/pageConsts";
 import Main from "./pages/Main";
 import Contacts from "./pages/Institute/Contacts";
@@ -26,8 +26,7 @@ import AdmissionAdd from "./pages/Admission/AdmissionAdd";
 import Documents from "./pages/Institute/Documents";
 import Science from "./pages/Science/Science";
 import Employees from "./pages/Employees/Employees";
-import StudentsBac from "./pages/Students/StudentsBac";
-import StudentsAdd from "./pages/Students/StudentsAdd";
+import Students from "./pages/Students/Students";
 import SciencePartners from "./pages/Partners/SciencePartners";
 import Auth from "./pages/Auth";
 
@@ -35,87 +34,103 @@ import Auth from "./pages/Auth";
 export const publicRoutes = [
     {
         path: MAIN_ROUTE,
-        Component: <Main/>
+        Component: <Main/>,
+        name: "Главная"
     },
     {
         path: CONTACTS,
-        Component: <Contacts/>
+        Component: <Contacts/>,
+        name: "Контакты"
     },
     {
         path: INDUSTRIAL_P,
-        Component: <IndustrialPartners/>
+        Component: <IndustrialPartners/>,
+        name: "Индустриальные партнёры"
     },
     {
         path: EDUCATIONAL_P ,
-        Component: <EducationalPartners/>
+        Component: <EducationalPartners/>,
+        name: "Индустриальные партнёры"
     },
     {
         path: EMPLOYERS_P,
-        Component: <EmployersPartners/>
+        Component: <EmployersPartners/>,
+        name: "Партнёры-работодатели"
     },
     {
         path: SCIENCE_P,
-        Component: <SciencePartners/>
+        Component: <SciencePartners/>,
+        name: "Научные партнёры"
     },
     {
         path: HISTORY,
-        Component: <History/>
+        Component: <History/>,
+        name: "История"
     },
     {
         path: PERSONALITIES_PAGE,
-        Component: <PersonalitiesPage/>
+        Component: <PersonalitiesPage/>,
+        name: "Персоналии"
     },
     {
         path: STRUCTURE,
-        Component: <Structure/>
+        Component: <Structure/>,
+        name: "Структура"
     },
     {
         path: INFO_EDU_ORG,
-        Component: <InfoAboutEducationalOrganization/>
+        Component: <InfoAboutEducationalOrganization/>,
+        name: "Сведения об образовательной организации"
     },
     {
         path: INTERNATIONAL_ACT ,
-        Component: <InternationalCooperation/>
+        Component: <InternationalCooperation/>,
+        name: "Международное сотрудничество"
     },
     {
         path: COUNTERING,
-        Component: <Countering/>
+        Component: <Countering/>,
+        name: "Противодействие угрозам"
     },
     {
         path: LEGAL_CLINIC,
-        Component: <LegalClinic/>
+        Component: <LegalClinic/>,
+        name: "Юридическая клиника"
     },
     {
         path: ADMISSION_BAC,
-        Component: <AdmissionBac/>
+        Component: <AdmissionBac/>,
+        name: "Поступление - Бакалавриат"
     },
     {
         path: ADMISSION_APE,
-        Component: <AdmissionAdd/>
+        Component: <AdmissionAdd/>,
+        name: "Поступление - ДПО"
     },
     {
         path: DOCUMENTS,
-        Component: <Documents/>
+        Component: <Documents/>,
+        name: "Документы"
     },
     {
         path: SCIENCE,
-        Component: <Science/>
+        Component: <Science/>,
+        name: "Наука"
     },
     {
         path: STAFF,
-        Component: <Employees/>
+        Component: <Employees/>,
+        name: "Сотрудникам"
     },
     {
-        path: STUDENTS_BAC,
-        Component: <StudentsBac/>
-    },
-    {
-        path: STUDENTS_APE,
-        Component: <StudentsAdd/>
+        path: STUDENTS,
+        Component: <Students/>,
+        name: "Студентам"
     },
     {
         path: AUTH,
-        Component: <Auth/>
+        Component: <Auth/>, 
+        name: "Авторизация"
     },
 ]
 

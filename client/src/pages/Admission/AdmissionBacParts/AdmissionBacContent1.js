@@ -4,15 +4,12 @@ import Card from '../../../components/card/Card';
 import Content1Img from '../../../local_assets/Content1_photo.png'; // TODO: загрузка изображений с сервера
 
 const AdmissionBacContent1 = (props) => {
-
-    console.log(31293);
-
     return (    
         <Card
             // Здесь нет пропа title, так как заголовок у данной карточки содержит ссылку. Пришлось вручную прописать h1 с ссылкой в её теле ниже.
             imgSrc={Content1Img}
-            imgPos='left'
             imgType='rounded'
+            imgPos='left'
             width={12}
             ref={props.handleRef}
         >

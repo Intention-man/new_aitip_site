@@ -1,29 +1,28 @@
-import React from 'react';
-
-import {observer} from "mobx-react-lite";
-import {createReactEditorJS} from 'react-editor-js'
-import {EDITOR_JS_TOOLS} from '../components/tools'
+import React, {useEffect, useState} from 'react';
+import {fetchCards} from "../http/cardAPI";
+import MDEditor from "@uiw/react-md-editor";
 
 
-const ReactEditorJS = createReactEditorJS()
+const Main = () => {
+    const [news, setNews] = useState([]);
 
-
-const Main = observer(() => {
-
-    const toSave = (data) => {
-        console.log('Данные статьи: ', data)
-    }
-
+    useEffect(() => {
+        fetchCards().then(data => {
+            setNews(data.rows)
+            console.log(data)
+        })
+    }, [])
 
     return (
-        <>
-            <ReactEditorJS holder="custom" tools={EDITOR_JS_TOOLS}>
-                <div id="custom"/>
-                <button onClick={(data) => toSave(data)}>Сохранить данные</button>
-            </ReactEditorJS>
-
-        </>
+        <div key={news.name}>
+            {news.length > 0 && news.map(n =>
+                <div>
+                    <h1>{n.name}</h1>
+                    <MDEditor.Markdown source={n.content} style={{ whiteSpace: 'pre-wrap' }} />
+                </div>
+            )}
+        </div>
     );
-});
+};
 
 export default Main;

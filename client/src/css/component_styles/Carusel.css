@@ -1,41 +1,26 @@
-* {box-sizing: border-box}
-body {font-family: Verdana, sans-serif; margin:0}
-@media screen and (min-width: 1085px){
-    .mySlides{
-        height: 220px;
-        width: 800px;
-        position: center;
-    }
+/** {box-sizing: border-box}*/
+/*body {font-family: Verdana, sans-serif; margin:0}*/
 
-    .dot{
-        margin: 15px 0 0 7px;
-    }
-}
-@media screen and (max-width: 1084px){
-    .mySlides{
-        position: center;
-        height: 100px;
-        width: 500px;
-    }
-
-    .dot{
-        margin: 40px 0 0 7px;
-    }
-
-}
 img {vertical-align: middle;}
+
+.carusel{
+    box-sizing: border-box;
+    font-family: Verdana,
+    sans-serif; margin:0
+}
+
 
 /* Slideshow container */
 .slideshow-container {
     max-width: 1000px;
-    position: relative;
+    /*position: relative;*/
     margin: auto;
 }
 
 /* Next & previous buttons */
 .prev, .next {
     cursor: pointer;
-    position: absolute;
+    /*position: absolute;*/
     top: 50%;
     width: auto;
     padding: 16px;
@@ -77,6 +62,31 @@ img {vertical-align: middle;}
     -webkit-animation-duration: 1.5s;
     animation-name: fade;
     animation-duration: 1.5s;
+}
+
+@media screen and (min-width: 1085px){
+    .mySlides{
+        height: 220px;
+        width: 800px;
+        /*position: center;*/
+    }
+
+    .dot{
+        margin: 15px 0 0 7px;
+    }
+}
+
+@media screen and (max-width: 1084px){
+    .mySlides{
+        position: center;
+        height: 100px;
+        width: 500px;
+    }
+
+    .dot{
+        margin: 40px 0 0 7px;
+    }
+
 }
 
 @-webkit-keyframes fade {

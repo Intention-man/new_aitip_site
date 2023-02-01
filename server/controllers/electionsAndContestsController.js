@@ -4,7 +4,7 @@
 const uuid = require("uuid")
 const path = require("path")
 const ApiError = require("../error/ApiError")
-const {ElectionsAndContests} = require("../models/electionsAndContestsModel");
+const {ElectionsAndContests} = require("../models/defaultModels/electionsAndContestsModel");
 
 
 

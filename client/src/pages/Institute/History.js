@@ -1,5 +1,9 @@
 import React from 'react';
+<<<<<<< HEAD
 import "../../css/page_styles/HistoryStyle.css"
+=======
+import "../../css/page_styles/History.css"
+>>>>>>> bd89853 (added History, created select panels for users in creating new Line and created render of new Line)
 import unik from "../../local_assets/Rectangle 24.png"
 import head1 from "../../local_assets/kto-to raz.png"
 import head2 from "../../local_assets/kto-to dva.png"

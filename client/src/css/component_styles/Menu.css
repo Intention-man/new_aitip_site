@@ -1,7 +1,8 @@
-* {box-sizing: border-box;}
+
 form {
     position: relative;
     margin: 0 auto;
+
 }
 
 @media screen and (max-width: 1156px){
@@ -61,7 +62,7 @@ body {
 
 .topnav {
     overflow: hidden;
-    background-color: #076DB1;
+    background: #076DB1;
     margin-top: 3%;
 }
 
@@ -81,6 +82,7 @@ body {
 }
 .bottom_menu {
     overflow: hidden;
+
 }
 .crunch {
     font-weight: bold;
@@ -151,6 +153,7 @@ body {
     text-decoration: none;
     font-size: 13px;
     font-family: "Open Sans",sans-serif;
+
 }
 
 .bottom_menu a:hover {

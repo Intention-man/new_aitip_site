@@ -1,0 +1,75 @@
+.h3{
+    color: var(--aitip_blue);
+    font-size: calc(var(--font_size_const)*1.5);
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+p{
+    font-size: calc(var(--font_size_const) * 0.8);
+}
+
+.universal{
+    text-align: center;
+    background: #FFFFFF;
+    border-radius: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-size: calc(var(--font_size_const) * 0.8);
+}
+
+.block-text{
+    max-width: 80%;
+    margin-left: 10%;
+}
+
+.block-text-left{
+    text-align: left;
+    max-width: 80%;
+    margin-left: 10%;
+}
+.space{
+    background: var(--bgcolor);
+    height: 20px;
+}
+
+.heads-pictures img{
+    width: 250px;
+    height: 330px;
+    padding: 15px;
+}
+
+
+.curr-head{
+    border-radius: 10px;
+    width: 80%;
+    height: 500px;
+    padding-bottom: 20px;
+}
+
+.add-text{
+    background: var(--bgcolor);
+    max-width: 80%;
+    margin-left: 10%;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: calc(var(--font_size_const) * 0.75);
+}
+
+.mid-heading{
+    font-weight: bold;
+}
+
+.li_font{
+    margin-left: 20px;
+    font-size: calc(var(--font_size_const)*0.8);
+}
+
+
+.leftcol {
+    width: 70%;
+    text-align: left;
+}
+
+.photocol {
+    width: 110px;
+}

@@ -19,8 +19,8 @@ const Footer = () => {
                             <p style={{paddingLeft: "0px", marginLeft: "4px", marginTop: "15px"}}/>город
                             Барнаул, улица Сизова, дом 28а<br/>
                         </div>
-                        <div><i className="icon-globe footer-contacts-icon"/>
-                            <p style={{fontSize: "12.5px", marginLeft: "8px"}}>aitip.ru - старая версия сайта</p>
+                        <div><i className="icon-globe footer-contacts-icon" style={{verticalAlign: "top"}}/>
+                            <p style={{fontSize: "12.5px", marginLeft: "8px"}}><a href={"http://www.aitip.ru/"} style={{color: "white"}}>aitip.ru</a> - старая версия сайта</p>
                         </div>
                     </div>
                     <div className="col-sm-6 col-md-4 footer-contacts">

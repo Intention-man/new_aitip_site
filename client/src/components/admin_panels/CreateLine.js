@@ -2,13 +2,14 @@
 
 
 import React, {useState} from 'react';
+import "../../css/component_styles/CreateLine.css"
 import {observer} from "mobx-react-lite";
 import {Button} from "react-bootstrap";
 import MDEditor, {commands} from "@uiw/react-md-editor";
 import Card from "../card/Card"
 import {convertImages} from "../../http/cardAPI";
 import Carusel from "../Carusel";
-
+import DocumentList from "../DocumentList";
 
 const CreateLine = observer(() => {
     const [kind, setKind] = useState(0);
@@ -17,6 +18,11 @@ const CreateLine = observer(() => {
     const [filesNames, setFilesNames] = useState()
     const [adressFileType, setAdressFileType] = useState("local");
     const [param, setParam] = useState("");
+    const [size, setSize] = useState(0);
+    const [dotColor, setDotColor] = useState("black");
+    const [docNames, setDocNames] = useState();
+
+
 
 
     const kinds = {
@@ -37,6 +43,10 @@ const CreateLine = observer(() => {
             setFilesNames(list);
         });
     }
+
+
+
+    let docArray = [];
 
 
     const addLine = () => {
@@ -113,14 +123,29 @@ const CreateLine = observer(() => {
                     }
                     {kind === 4 &&
                         <div>
-                            <input type="file" multiple accept="image/*" onChange={(e) => {
+                            <input className="pretty_inputs" type="file" multiple accept="image/*" onChange={(e) => {
                                 setAdressFileType("local")
                                 addImage(Array.from(e.target.files))
                             }}/>
-                            <input type="text" onChange={(e) => {
+                            <label htmlFor="links">Введите ссылки на картинки: </label>
+                            <input className="pretty_inputs" style={{marginBottom: "20px"}} type="text" id="links" onChange={(e) => {
                                 setAdressFileType("global")
                                 setFilesNames(e.target.value.split("; "))
                             }}/>
+
+                            {/*Set the size of an image by inputting a number in the field below*/}
+                            <label htmlFor="name">Введите соотношение сторон фото:</label>
+                            <input className="pretty_inputs" type="number" id="name" value={size} onChange={(e) => {
+                                setSize(e.target.value)
+                            }
+                            }/>
+
+                            {/*Set the color of the dots by choosing one of the options below*/}
+                            <label htmlFor="name">Выберите цвет точек:</label>
+                            <input className="pretty_inputs" style={{height: "25px"}} type="color" id="name" value={dotColor} onChange={(e) => {
+                                setDotColor(e.target.value)
+                            }}/>
+
                         </div>
                     }
                     {kind === 5 &&
@@ -128,14 +153,21 @@ const CreateLine = observer(() => {
                     }
                     {kind === 6 &&
                         <div>
-                            <input type="file" accept="image" onChange={(e) => {
+                            <input className="pretty_inputs" id="myFile" type="file" value={docNames} multiple accept="image" onChange={(e) => {
                                 setAdressFileType("local")
-                                addImage(e.target.files)
+                                for (let i=0; i<e.target.files.length; i++) {
+                                    let file = document.getElementById("myFile").files[i];
+                                    if ('name' in file) {
+                                        docArray.push(file.name)
+                                    }
+                                }
+                                document.getElementById("demo").innerText = String(docArray);
                             }}/>
                             <input type="text" onChange={(e) => {
                                 setAdressFileType("global")
                                 setFilesNames(e.target.value.split("; "))
                             }}/>
+                            <p id="demo"></p>
                         </div>
                     }
                 </div>
@@ -178,26 +210,20 @@ const CreateLine = observer(() => {
             }
 
             {(kind === 3 && (typeof filesNames !== "undefined")) &&
-                    <Card
-                        // imgType={param[0]}
-                        imgSrc={filesNames.includes("://") ? filesNames : process.env.REACT_APP_API_URL + filesNames}
-                        imgPos={param[1]}>
-                        <MDEditor.Markdown source={content} style={{whiteSpace: 'pre-wrap'}}/>
-                    </Card>
-
-            }
-
-            {(kind === 4 && (typeof filesNames !== "undefined")) &&
                 <Card
                     // imgType={param[0]}
                     imgSrc={filesNames.includes("://") ? filesNames : process.env.REACT_APP_API_URL + filesNames}
                     imgPos={param[1]}>
                     <MDEditor.Markdown source={content} style={{whiteSpace: 'pre-wrap'}}/>
                 </Card>
+
             }
 
             {(kind === 4 && (typeof filesNames !== "undefined")) &&
-                <Carusel photos={filesNames} adressFileType={adressFileType}></Carusel>}
+                <Carusel size={size} dotColor={dotColor} photos={filesNames} adressFileType={adressFileType}></Carusel>}
+
+            {/*{(kind === 6 && (typeof docNames !== "undefined")) &&*/}
+            {/*    <DocumentList docNames={docNames} adressFileType={adressFileType}></DocumentList>}*/}
 
 
             {/*Кнопки добавления и удаления*/}

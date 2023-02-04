@@ -97,6 +97,7 @@ export const publicRoutes = [
         path: DOCUMENTS,
         Component: <Documents/>
     },
+
     {
         path: SCIENCE,
         Component: <Science/>

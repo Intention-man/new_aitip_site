@@ -41,7 +41,6 @@ class DirectionBachelorController {
         } catch (e) {
             next(ApiError.badRequest(e.message))
         }
-        console.log("Функция закончила свою работу")
 
     }
 

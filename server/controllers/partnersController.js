@@ -7,11 +7,10 @@ const ApiError = require("../error/ApiError")
 const {Partners} = require("../models/partnersModel");
 
 
-
 class PartnersController {
     async create(req, res, next) {
         try{
-            let {name, kind, description, jointProjectsDescriprion} = req.body
+            let {name, kind, description, jointProjectsDescription} = req.body
             const {logo, jointProjectsPhotoes} = req.files
             let fileList = []
             jointProjectsPhotoes.map(photo => {
@@ -23,7 +22,7 @@ class PartnersController {
             let fileNameImg = uuid.v4() + ".jpg"
             await logo.mv(path.resolve(__dirname, "..", "static", fileNameImg))
 
-            let values = {name, kind, description, logo: fileNameImg,jointProjectsDescriprion, jointProjectsPhotoes: fileList}
+            let values = {name, kind, description, logo: fileNameImg,jointProjectsDescription, jointProjectsPhotoes: fileList}
             const partners = await Partners.create(values)
 
             return res.json(partners)

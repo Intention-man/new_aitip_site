@@ -2,11 +2,11 @@
 
 const Router = require("express")
 const router = new Router()
-const newsController = require("../controllers/cardController")
+const newsController = require("../controllers/blockController")
 const checkRole = require("../middleware/checkRoleMiddleware")
 
 router.post("/", newsController.create)
-router.post("/convert_images", newsController.convertImages)
+router.post("/convert_images", newsController.convertFiles)
 router.get("/", newsController.getAll)
 // router.get("/:id", newsController.getOne)
 

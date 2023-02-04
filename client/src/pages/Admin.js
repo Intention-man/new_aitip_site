@@ -9,7 +9,7 @@ import CreateProgram from "../components/admin_panels/CreateProgram";
 import CreateElectionOrContest from "../components/admin_panels/CreateElectionOrContest";
 import CreatePartner from "../components/admin_panels/CreatePartner";
 import CreateNews from "../components/admin_panels/CreateNews";
-import CreateCard from "../components/admin_panels/CreateCard"
+import CreateBlock from "../components/admin_panels/CreateBlock"
 
 
 
@@ -28,7 +28,7 @@ const Admin = () => {
     const [electionsAndContestsVisible, setElectionsAndContestsVisible] = useState(false)
     const [partnersVisible, setPartnersVisible] = useState(false);
     const [newsVisible, setNewsVisible] = useState(false);
-    const [cardVisible, setCardVisible] = useState(false);
+    const [blockVisible, setBlockVisible] = useState(false);
 
 
     return (
@@ -51,7 +51,7 @@ const Admin = () => {
             <Button variant={"outline-info"} className="mt-2 p-2" onClick={() => setNewsVisible(true)}>
                 Добавить новость
             </Button>
-            <Button variant={"outline-info"} className="mt-2 p-2" onClick={() => setCardVisible(true)}>
+            <Button variant={"outline-info"} className="mt-2 p-2" onClick={() => setBlockVisible(true)}>
                 Добавить карточку
             </Button>
 
@@ -62,7 +62,7 @@ const Admin = () => {
             <CreateElectionOrContest show={electionsAndContestsVisible} onHide={() => setElectionsAndContestsVisible(false)}/>
             <CreatePartner show={partnersVisible} onHide={() => setPartnersVisible(false)}/>
             {newsVisible && <CreateNews newsVisible={newsVisible} setNewsVisible={setNewsVisible}/>}
-            <CreateCard show={cardVisible} onHide={() => setCardVisible(false)}/>
+            <CreateBlock show={blockVisible} onHide={() => setBlockVisible(false)}/>
 
         </Container>
     );

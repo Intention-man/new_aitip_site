@@ -50,7 +50,7 @@ export const publicRoutes = [
     {
         path: EDUCATIONAL_P ,
         Component: <EducationalPartners/>,
-        name: "Индустриальные партнёры"
+        name: "Образовательные партнёры"
     },
     {
         path: EMPLOYERS_P,

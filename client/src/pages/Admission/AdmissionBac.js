@@ -12,6 +12,7 @@ import { Context } from "../../index";
 import ContentContext from '../../components/contexts/ContentContext';
 import "../../css/main.css"
 import AdmissionBacContent7 from "./AdmissionBacParts/AdmissionBacContent7";
+import {useParams} from "react-router";
 
 const AdmissionBac = () => {
     const {admission_store} = useContext(Context);
@@ -57,7 +58,7 @@ const AdmissionBac = () => {
     };
     
     return (
-        <CardContainer>
+        <div>
             {/* Проп handeRef передаётся, чтобы обработчик React ref вызвал callback setDomNode и был записана DOM-нода каждого компонента */}
             <AdmissionBacContent1 handleRef={element => setDomNode(element, 0)}/> 
             <AdmissionBacContent2 handleRef={element => setDomNode(element, 1)}/>
@@ -66,7 +67,7 @@ const AdmissionBac = () => {
             <AdmissionBacContent5 handleRef={element => setDomNode(element, 4)}/>
             <AdmissionBacContent6 handleRef={element => setDomNode(element, 5)}/>
             <AdmissionBacContent7/>
-        </CardContainer>
+        </div>
     );
 }
 

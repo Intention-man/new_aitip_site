@@ -1,5 +1,5 @@
 import React from 'react';
-import "../../css/page_styles/HistoryStyle.css"
+import "../../css/page_styles/History.css"
 import unik from "../../local_assets/Rectangle 24.png"
 import head1 from "../../local_assets/kto-to raz.png"
 import head2 from "../../local_assets/kto-to dva.png"

@@ -2,28 +2,30 @@ const sequelize = require("../db")
 const {DataTypes} = require("sequelize")
 
 
-const CustomCard = sequelize.define("card", {
+const CustomBlock = sequelize.define("block", {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     isNews: {type: DataTypes.BOOLEAN, allowNull: false},
-    cardName: {type: DataTypes.STRING, allowNull: false},
-    pageName: {type: DataTypes.STRING, allowNull: false},
-    pageIndex: {type: DataTypes.INTEGER, allowNull: false},
     header: {type: DataTypes.STRING, allowNull: false},
+    pageLink: {type: DataTypes.STRING, allowNull: false},
+    ordinal: {type: DataTypes.INTEGER, allowNull: false},
+
 })
 
 
 const Line = sequelize.define("line", {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     kind: {type: DataTypes.STRING, allowNull: false},
-    content: {type: DataTypes.TEXT, allowNull: false},
-    cardId: {type: DataTypes.INTEGER, allowNull: false},
-    cardIndex: {type: DataTypes.INTEGER, allowNull: false},
+    params: {type: DataTypes.ARRAY(DataTypes.STRING)},
+    text: {type: DataTypes.TEXT},
+    filesNames: {type: DataTypes.ARRAY(DataTypes.TEXT)},
+    lineOrdinal: {type: DataTypes.INTEGER, allowNull: false},
+    blockId: {type: DataTypes.INTEGER, allowNull: false},
 })
 
 
 //RELATION
 
-CustomCard.hasMany(Line,{as: "lines"})
-Line.belongsTo(CustomCard)
+CustomBlock.hasMany(Line,{as: "lines"})
+Line.belongsTo(CustomBlock)
 
-module.exports = {CustomCard, Line}
+module.exports = {CustomBlock, Line}

@@ -53,26 +53,22 @@ class Card extends React.Component {
                 className={`Card Card-${this.props.imgPos} ${this.props.className}`} 
                 style={{...this.props.style}}
             >
+                <div className={`Card-image Card-image-${this.props.imgPos}`}> 
                 {
-                    this.props.imgPos !== 'none' &&
-                    
-                    <div className={`Card-image Card-image-${this.props.imgPos}`}> 
                     {
-                        {
-                            'fading':   <FadingImg
-                                            imgPos={this.props.imgPos}
-                                            imgSrc={this.props.imgSrc}
-                                        />,
-                            'rounded':  <RoundedImg   
-                                            imgSrc={this.props.imgSrc}
-                                        />,
-                            'normal':   <img
-                                            src={this.props.imgSrc}
-                                        />,
-                        }[this.props.imgType]
-                    }
-                    </div>
+                        'fading':   <FadingImg
+                                        imgPos={this.props.imgPos}
+                                        imgSrc={this.props.imgSrc}
+                                    />,
+                        'rounded':  <RoundedImg   
+                                        imgSrc={this.props.imgSrc}
+                                    />,
+                        'normal':   <img
+                                        src={this.props.imgSrc}
+                                    />,
+                    }[this.props.imgType]
                 }
+                </div>
                 <div className={`Card-body Card-body-${this.props.imgPos}`}>
                     {
                         this.props.title && 

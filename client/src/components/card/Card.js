@@ -1,7 +1,8 @@
 import React from "react";
 import FadingImg from "./FadingImg";
 import RoundedImg from "./RoundedImg";
-import "../../css/component_styles/Card.css";
+import "../../css/component_styles/Block.css";
+import StyledText from "./StyledText";
 
 /** 
  * Компонент карточки с закруглёнными углами и местом для изображения (опционально).
@@ -38,7 +39,6 @@ class Card extends React.Component {
         className: '',
         imgPos: 'left',
         imgType: 'fading',
-        width: 12,
     }
 
     constructor(props) {
@@ -50,7 +50,7 @@ class Card extends React.Component {
         // Для каждого расположения (top, right, bottom, left, none) определены особые стили в CSS-классах, оканчивающиеся на эти расположения
         return (
             <div 
-                className={`Card Card-${this.props.imgPos} Card-width_${this.props.width} ${this.props.className}`} 
+                className={`Card Card-${this.props.imgPos} ${this.props.className}`} 
                 style={{...this.props.style}}
             >
                 {

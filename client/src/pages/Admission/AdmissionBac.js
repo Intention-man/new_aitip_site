@@ -1,17 +1,14 @@
 import React, {useContext, useEffect, useState} from 'react';
 import { findDOMNode } from 'react-dom';
-import AdmissionBacContent1 from "./AdmissionBacParts/AdmissionBacContent1";
-import AdmissionBacContent2 from "./AdmissionBacParts/AdmissionBacContent2";
-import AdmissionBacContent3 from "./AdmissionBacParts/AdmissionBacContent3";
-import AdmissionBacContent4 from "./AdmissionBacParts/AdmissionBacContent4";
-import AdmissionBacContent5 from "./AdmissionBacParts/AdmissionBacContent5";
-import AdmissionBacContent6 from "./AdmissionBacParts/AdmissionBacContent6";
-import CardContainer from '../../components/card/CardContainer';
+import Card from '../../components/card/Card';
+import Block from '../../components/Block';
+import BlockContainer from '../../components/BlockContainer';
+import StyledText from '../../components/card/StyledText';
+import Content5Img from '../../local_assets/Content2_photo.png';
 import { fetchDirectionsBachelor } from "../../http/admissionAPI";
 import { Context } from "../../index";
 import ContentContext from '../../components/contexts/ContentContext';
-import "../../css/main.css"
-import AdmissionBacContent7 from "./AdmissionBacParts/AdmissionBacContent7";
+import "../../css/main.css";
 
 const AdmissionBac = () => {
     const {admission_store} = useContext(Context);
@@ -43,6 +40,7 @@ const AdmissionBac = () => {
 
     /**
      * Это callback для того, чтобы обработчик React ref передал от каждого компонента из contentBlocksData свою DOM-ноду и она была записана
+     * 
      * TODO: возможно это костыль
      * @param {React.Component} element 
      * @param {Number} index 
@@ -57,16 +55,42 @@ const AdmissionBac = () => {
     };
     
     return (
-        <CardContainer>
-            {/* Проп handeRef передаётся, чтобы обработчик React ref вызвал callback setDomNode и был записана DOM-нода каждого компонента */}
-            <AdmissionBacContent1 handleRef={element => setDomNode(element, 0)}/> 
-            <AdmissionBacContent2 handleRef={element => setDomNode(element, 1)}/>
-            <AdmissionBacContent3 handleRef={element => setDomNode(element, 2)}/>
-            <AdmissionBacContent4 handleRef={element => setDomNode(element, 3)}/>
-            <AdmissionBacContent5 handleRef={element => setDomNode(element, 4)}/>
-            <AdmissionBacContent6 handleRef={element => setDomNode(element, 5)}/>
-            <AdmissionBacContent7/>
-        </CardContainer>
+        // <CardContainer>
+        //     {/* Проп handeRef передаётся, чтобы обработчик React ref вызвал callback setDomNode и был записана DOM-нода каждого компонента */}
+        //     <AdmissionBacContent1 handleRef={element => setDomNode(element, 0)}/> 
+        //     <AdmissionBacContent2 handleRef={element => setDomNode(element, 1)}/>
+        //     <AdmissionBacContent3 handleRef={element => setDomNode(element, 2)}/>
+        //     <AdmissionBacContent4 handleRef={element => setDomNode(element, 3)}/>
+        //     <AdmissionBacContent5 handleRef={element => setDomNode(element, 4)}/>
+        //     <AdmissionBacContent6 handleRef={element => setDomNode(element, 5)}/>
+        //     <AdmissionBacContent7/>
+        // </CardContainer>
+        <BlockContainer>
+            <Block>
+                <StyledText><p>Id ut amet quis irure aliquip quis eiusmod culpa proident irure consequat sint elit. Proident et ullamco esse culpa nulla. Do id nisi duis exercitation eu. Occaecat voluptate amet laborum cupidatat incididunt magna consequat ex excepteur minim veniam nostrud. Do non dolor mollit qui. Exercitation nulla culpa eu sunt irure do nisi in fugiat in sint consequat et ullamco. Consectetur laborum elit ad consequat dolor nisi ex aute adipisicing consectetur.</p></StyledText>
+                <StyledText><p>Laborum et veniam proident ad. Qui excepteur fugiat laborum non cillum. Anim aute in aute elit pariatur Lorem culpa dolor ea deserunt pariatur in adipisicing in. Commodo amet cupidatat nulla incididunt. Sit non dolor labore quis non cupidatat consequat amet mollit laborum occaecat velit.</p></StyledText>
+                <Card 
+                    imgPos='top'
+                    imgType='fading'
+                    imgSrc={Content5Img}
+                >
+                    <StyledText><p>Aute dolor aute ullamco dolore. Pariatur eu eu cupidatat consectetur excepteur irure nisi exercitation cupidatat exercitation. Fugiat minim magna ex incididunt enim fugiat magna laborum veniam esse ullamco cillum. Quis mollit sit magna duis consectetur sunt ullamco mollit et elit minim cillum. Amet elit magna culpa proident eiusmod reprehenderit quis. Excepteur aliquip laborum quis pariatur ea ad. Voluptate dolore sit occaecat anim.</p></StyledText>    
+                    <StyledText><p>Aute dolor aute ullamco dolore. Pariatur eu eu cupidatat consectetur excepteur irure nisi exercitation cupidatat exercitation. Fugiat minim magna ex incididunt enim fugiat magna laborum veniam esse ullamco cillum. Quis mollit sit magna duis consectetur sunt ullamco mollit et elit minim cillum. Amet elit magna culpa proident eiusmod reprehenderit quis. Excepteur aliquip laborum quis pariatur ea ad. Voluptate dolore sit occaecat anim.</p></StyledText>
+                </Card>
+                <StyledText><p>Laborum et veniam proident ad. Qui excepteur fugiat laborum non cillum. Anim aute in aute elit pariatur Lorem culpa dolor ea deserunt pariatur in adipisicing in. Commodo amet cupidatat nulla incididunt. Sit non dolor labore quis non cupidatat consequat amet mollit laborum occaecat velit.</p></StyledText>
+            </Block>
+            <Block>
+                <Card 
+                    imgPos='left'
+                    imgType='rounded'
+                    imgSrc={Content5Img}
+                >
+                    <StyledText><p>Aute dolor aute ullamco dolore. Pariatur eu eu cupidatat consectetur excepteur irure nisi exercitation cupidatat exercitation. Fugiat minim magna ex incididunt enim fugiat magna laborum veniam esse ullamco cillum. Quis mollit sit magna duis consectetur sunt ullamco mollit et elit minim cillum. Amet elit magna culpa proident eiusmod reprehenderit quis. Excepteur aliquip laborum quis pariatur ea ad. Voluptate dolore sit occaecat anim.</p></StyledText>    
+                    <StyledText><p>Aute dolor aute ullamco dolore. Pariatur eu eu cupidatat consectetur excepteur irure nisi exercitation cupidatat exercitation. Fugiat minim magna ex incididunt enim fugiat magna laborum veniam esse ullamco cillum. Quis mollit sit magna duis consectetur sunt ullamco mollit et elit minim cillum. Amet elit magna culpa proident eiusmod reprehenderit quis. Excepteur aliquip laborum quis pariatur ea ad. Voluptate dolore sit occaecat anim.</p></StyledText>
+                </Card>
+                <StyledText><p>Laborum et veniam proident ad. Qui excepteur fugiat laborum non cillum. Anim aute in aute elit pariatur Lorem culpa dolor ea deserunt pariatur in adipisicing in. Commodo amet cupidatat nulla incididunt. Sit non dolor labore quis non cupidatat consequat amet mollit laborum occaecat velit.</p></StyledText>
+            </Block>
+        </BlockContainer>
     );
 }
 

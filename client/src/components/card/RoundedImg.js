@@ -1,4 +1,4 @@
-import '../../css/component_styles/Card.css'
+import '../../css/component_styles/Block.css'
 
 /** 
  * Компонент круглой картинки.
@@ -15,15 +15,13 @@ import '../../css/component_styles/Card.css'
  * Props:
  * @param {Object | string} imgSrc - изображение (либо импортированное, либо путь к нему).
 */
-const RoundedImg = ({imgSrc, size}) => {
+const RoundedImg = ({ imgSrc }) => {
     return (
-        <div style={{padding: '50px'}}>
-            <div 
+        <div className='RoundedImg'>
+            <div
+                className='RoundedImg-img'
                 style={{
                     backgroundImage: `url(${imgSrc})`,
-                    backgroundSize: 'cover',
-                    borderRadius: '100%',
-                    aspectRatio: '1 / 1',
                 }}
             />
         </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import "../../css/component_styles/Card.css";
+import "../../css/component_styles/Block.css";
 
 /** 
  * Компонент исчезающей картинки.

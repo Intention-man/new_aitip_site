@@ -1,0 +1,129 @@
+:root {
+    --font-family: 'Open Sans', sans-serif;
+    --normal-font-weight: 400;
+    --normal-font-size: 20px;
+    --h1-font-weight: 700;
+    --h1-font-size: 30px;
+    --h2-font-weight: 700;
+    --h2-font-size: 24px;
+    --h3-font-weight: 700;
+    --h3-font-size: 20px;
+    --card-bg-color: #ffffff;
+    --card-border-radius: 10px;
+    --text-color: #292d32;
+    --cornerLink-color: #777777;
+}
+
+.Block {
+    background-color: var(--card-bg-color);
+    border-radius: var(--card-border-radius);
+    box-sizing: border-box;
+}
+
+.Block:not(:last-child) {
+    margin: 0 0 30px 0;
+}
+
+.BlockContainer {
+    padding: 30px 20px 30px 20px;
+}
+
+/* Lines styles */
+
+.StyledText {
+    padding: 20px 20px 10px 20px;
+}
+
+.StyledText p, .StyledText li, .StyledText h1, .StyledText h2, .StyledText h3, .StyledText a {
+    color: var(--text-color);
+    font-family: var(--font-family);
+}
+
+.StyledText p, .StyledText li, .StyledText a {
+    font-size: var(--normal-font-size);
+    font-weight: var(--normal-font-weight);
+}
+
+.StyledText h1 {
+    font-size: var(--h1-font-size);
+    font-weight: var(--h1-font-weight);
+}
+
+.StyledText h2 {
+    font-size: var(--h2-font-size);
+    font-weight: var(--h2-font-weight);
+}
+
+.StyledText h3 {
+    font-size: var(--h3-font-size);
+    font-weight: var(--h3-font-weight);
+}
+
+.Card {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--card-bg-color);
+    border-radius: var(--card-border-radius);
+}
+
+.Card-left {
+    flex-direction: row;
+}
+
+.Card-right {
+    flex-direction: row-reverse;
+}
+
+.Card-image img {
+    width: 100%;
+    height: 100%;
+    align-self: flex-end;
+    border-radius: var(--card-border-radius);
+    object-fit: cover;
+}
+
+.Card-image-left, .Card-image-right {
+    width: 50%; 
+    height: 100%;
+}
+
+.Card-body {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+.Card-body-left {
+    height: 100%;
+    width: 50%;
+}
+
+.Card-body-right {
+    height: 100%;
+    width: 50%;
+}
+
+.FadingImg-top-and-bottom {
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%), linear-gradient(to top, rgba(0,0,0,1) 100%, rgba(0,0,0,0) 50%);
+    mask-image: linear-gradient(to top, rgba(0,0,0,0), rgba(0,0,0,1) 60%), linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,1) 60%);
+}
+
+.FadingImg-right {
+    -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,1) 60%);
+    mask-image: linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,1) 60%);
+}
+
+.FadingImg-left {
+    -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,0), rgba(0,0,0,1) 60%);
+    mask-image: linear-gradient(to left, rgba(0,0,0,0), rgba(0,0,0,1) 60%);
+}
+
+.RoundedImg {
+    padding: 20px;
+}
+
+.RoundedImg-img {
+    background-size: cover;
+    border-radius: 100%;
+    aspect-ratio: 1 / 1;
+}

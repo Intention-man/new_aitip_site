@@ -92,9 +92,11 @@ const AdmissionBac = () => {
                 <StyledText><p>Laborum et veniam proident ad. Qui excepteur fugiat laborum non cillum. Anim aute in aute elit pariatur Lorem culpa dolor ea deserunt pariatur in adipisicing in. Commodo amet cupidatat nulla incididunt. Sit non dolor labore quis non cupidatat consequat amet mollit laborum occaecat velit.</p></StyledText>
             </Block>
             <Block>
+                <StyledText><p>Aute dolor aute ullamco dolore. Pariatur eu eu cupidatat consectetur excepteur irure nisi exercitation cupidatat exercitation. Fugiat minim magna ex incididunt enim fugiat magna laborum veniam esse ullamco cillum. Quis mollit sit magna duis consectetur sunt ullamco mollit et elit minim cillum. Amet elit magna culpa proident eiusmod reprehenderit quis. Excepteur aliquip laborum quis pariatur ea ad. Voluptate dolore sit occaecat anim.</p></StyledText>
                 <BigImg
                     imgSrc={Content5Img}
                 />  
+                <StyledText><p>Aute dolor aute ullamco dolore. Pariatur eu eu cupidatat consectetur excepteur irure nisi exercitation cupidatat exercitation. Fugiat minim magna ex incididunt enim fugiat magna laborum veniam esse ullamco cillum. Quis mollit sit magna duis consectetur sunt ullamco mollit et elit minim cillum. Amet elit magna culpa proident eiusmod reprehenderit quis. Excepteur aliquip laborum quis pariatur ea ad. Voluptate dolore sit occaecat anim.</p></StyledText>
             </Block>
         </BlockContainer>
     );

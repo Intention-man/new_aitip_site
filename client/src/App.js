@@ -19,7 +19,17 @@ const App = observer(() => {
 
     const updateContent = (newContent) => {  /* Это callback, который будет передан в ContentContext.Provider, 
                                                 чтобы внутренние компоненты могли передавать сюда блоки контента */
-        setCurrentContent(newContent);
+        // Изменяем currentContent только тогда, когда newContent отличается от него. Это нужно, чтобы избежать бесконечного ререндера.
+        if (newContent.length != currentContent.length) {
+            setCurrentContent(newContent);
+        } else {
+            for (const i in newContent) {
+                if (newContent[i].name != currentContent[i].name) {
+                    setCurrentContent(newContent);
+                    break;
+                }
+            }
+        }
     };
  
     return (

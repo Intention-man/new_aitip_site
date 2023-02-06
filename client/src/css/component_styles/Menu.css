@@ -89,6 +89,10 @@ body {
     font-family: "Open Sans", sans-serif;
 }
 
+.heading_color{
+    color: white;
+}
+
 .blindversion{
     color: #f2f2f2;
     text-align: center;

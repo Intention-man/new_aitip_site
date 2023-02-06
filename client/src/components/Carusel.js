@@ -5,7 +5,7 @@ import vector1 from "../local_assets/Vector1.png"
 
 
 
-const Carusel = ({photos, adressFileType, size, dotColor}) => {
+const Carusel = ({photos, addressFileType, size, dotColor}) => {
     const [currentSlideNumber, setCurrentSlideNumber] = useState(0)
     // setInterval(() => {
     //     if (currentSlideNumber < photos.length-1) {
@@ -31,7 +31,7 @@ const Carusel = ({photos, adressFileType, size, dotColor}) => {
             <div className="slideshow-container">
                 <a className="prev" onClick={() => setCurrentSlideNumber(prev => (prev > 0 ? prev-1 : photos.length-1))}><img src={vector} style={{margin: "0"}} width="7" height="12"/></a>
                 <div className="mySlides">
-                    <img src={adressFileType === "global" ? photos[currentSlideNumber] : process.env.REACT_APP_API_URL + photos[currentSlideNumber]} width={window.innerWidth*0.5} height={size*window.innerWidth*0.5}/>
+                    <img src={addressFileType === "global" ? photos[currentSlideNumber] : process.env.REACT_APP_API_URL + photos[currentSlideNumber]} width={window.innerWidth*0.5} height={size*window.innerWidth*0.5}/>
                 </div>
                 <a className="next" onClick={() => setCurrentSlideNumber(prev => (prev < photos.length-1 ? prev+1 : 0))}><img src={vector1} width="7" height="12"/></a>
             </div>

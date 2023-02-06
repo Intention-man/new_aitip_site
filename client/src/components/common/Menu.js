@@ -3,6 +3,7 @@ import "../../css/component_styles/Menu.css"
 import "../../assets/fonts/font-awesome.min.css"
 import logotip from "../../local_assets/Logo (1).png"
 import search from "../../local_assets/search.png"
+import eye from "../../local_assets/eye.png"
 
 function myFunction() {
     const x = document.getElementById("myTopnav");
@@ -32,7 +33,7 @@ const Menu = () => {
         <div>
             <img className="logo" id="Logo" src={logotip}/>
             <div className="topnav" id="myTopnav">
-                <a className="crunch" id="Kostyl">Алтайский институт труда и права</a>
+                <a className="crunch" id="Kostyl"><p className="heading_color">Алтайский институт труда и права</p></a>
                 <a>
                     <form>
                         <button className="button-fake">
@@ -42,10 +43,10 @@ const Menu = () => {
                         <button className="button_search" type="submit"></button>
                     </form>
                 </a>
-                <a>
+                <a style={{display: "flex", flexWrap: "nowrap"}}>
                     <button className="blindversion">
                         Версия для слабовидящих
-                        <i className="fa fa-eye" style={{color: "white", paddingLeft: "10px"}}/>
+                        <img src={eye} style={{color: "white", paddingLeft: "10px", paddingTop: "7px"}}/>
                     </button>
                 </a>
                 <a className="icon" onClick={() => myFunction()}>

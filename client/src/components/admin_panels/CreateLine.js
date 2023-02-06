@@ -141,6 +141,17 @@ const CreateLine = observer(({index, changeLine, line}) => {
                                     changeLine("addressFileType", "local", index)
                                     addFiles(Array.from(e.target.files))
                                 }}/>
+                                <label htmlFor="name">Введите соотношение сторон фото:</label>
+                                <input className="pretty_inputs" type="number" id="name" value={size} onChange={(e) => {
+                                    setSize(Number(e.target.value))
+                                }
+                                }/>
+
+                                {/*Set the color of the dots by choosing one of the options below*/}
+                                <label htmlFor="name">Выберите цвет точек:</label>
+                                <input className="pretty_inputs" style={{height: "25px"}} type="color" id="name" value={dotColor} onChange={(e) => {
+                                    setDotColor(e.target.value)
+                                }}/>
                                 <label htmlFor="links">Введите ссылки на картинки: </label>
                                 <input className="pretty_inputs" style={{marginBottom: "20px"}} type="text" id="links" onChange={(e) => {
                                     setAddressFileType("global")
@@ -235,7 +246,7 @@ const CreateLine = observer(({index, changeLine, line}) => {
             }
 
             {(kind === 4 && (filesNames.length > 0)) &&
-                <Carusel photos={filesNames} adressFileType={addressFileType}></Carusel>
+                <Carusel photos={filesNames} size={size} dotColor={dotColor} adressFileType={addressFileType}></Carusel>
             }
 
             {(kind === 5 && (filesNames.length > 0)) &&

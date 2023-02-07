@@ -5,35 +5,31 @@ import "../../css/component_styles/Block.css";
 import StyledText from "./StyledText";
 
 /** 
- * Компонент карточки с закруглёнными углами и местом для изображения (опционально).
+ * Компонент линии вида "Карточка". Она содержит изображение (слева или справа) и часть с основным контентом.
  * 
  * Пример использования:
  * ```
-     <Card
-        className="FeedbackPage-bigCard"
-        title="Card title"
+    <Card 
+        imgPos='left'
+        imgType='fading'
         imgSrc={ImportedImage}
-        imgPos="left"
-        width={3}
     >
-        <p>Card text</p>
+        <StyledText>
+            <h1>Title</h1>
+            <p>Some content...</p>
+        </StyledText>
     </Card>
  * ```
- * Данный код задаёт карточку с заголовком "Card title", изображением ImportedImage, расположенным слева ("left"). 
- * Причём эта карточка при помещении её в CardContainer будет иметь ширину, равную 3-ём столбцам грида,
- * и у неё будет дополнительный CSS-класс `.FeedbackPage-bigCard`.
+ * Данный код задаёт карточку с изображением ImportedImage, расположенным слева ("left"). 
+ * У изображения будет установлен эффект исчезновения ("fading").
+ * Контент передаётся как дочерние элементы.
  * 
  * Props:
- * @param {string} className - CSS-класс для корневого div карточки.  
- * @param {string} title - заголовок карточки (помещается в стилизованный <h1>).
  * @param {File | string} imgSrc - изображение, которое помещается в отведённое для него место (либо импортированное, либо путь к нему). Можно не указывать, если imgPos="none".
- * @param {"left" | "right" | "top" | "bottom" | "none"} imgPos - позиция изображения в карточке (top, right, bottom, left, none). imgPos="none" указывает на отсутствие изображения.
- * @param {int} width - сколько столбцов грида должна занимать карточка (число от 1 до 12).
- * @param {Object} style - дополнительные стили
+ * @param {"left" | "right"} imgPos - позиция изображения в карточке (top, right, bottom, left, none). imgPos="none" указывает на отсутствие изображения.
+ * @param {"fading" | "rounded" | "normal"} imgType - тип изображения: fading - исчезающее, rounded - круглое, normal - без эффектов.
 */
 class Card extends React.Component {
-    // TODO: сделать компонент ColoredText, который будет брать цвет для текста из пропа primaryColor своей карточки
-
     // Значени пропов по умолчанию (если они не были переданы)
     static defaultProps = {
         className: '',
@@ -46,8 +42,6 @@ class Card extends React.Component {
     }
     
     render() {
-        
-        // Для каждого расположения (top, right, bottom, left, none) определены особые стили в CSS-классах, оканчивающиеся на эти расположения
         return (
             <div 
                 className={`Card Card-${this.props.imgPos} ${this.props.className}`} 

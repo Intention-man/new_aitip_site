@@ -15,7 +15,7 @@ import "../../css/component_styles/Block.css";
  * 
  * Props:
  * @param {Object | string} imgSrc - изображение (либо импортированное, либо путь к нему).
- * @param {"left" | "right" | "top" | "bottom"} imgPos - в какой части картинки будет эффект исчезновения (top, right, bottom, left).
+ * @param {"left" | "right"} imgPos - в какой части картинки будет эффект исчезновения (left, right).
 */
 class FadingImg extends React.Component {
     constructor(props) {

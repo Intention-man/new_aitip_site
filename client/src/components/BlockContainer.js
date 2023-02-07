@@ -3,10 +3,14 @@ import ContentContext from './contexts/ContentContext';
 import { useContext } from 'react';
 import { findDOMNode } from 'react-dom';
 
+/**
+ * Контейнер для всех блоков текущей страницы. Все блоки должны помещаться в этот контейнер. 
+ * Помимо того, что этот контейнер определяет позиционирование блоков, он также служит интерфейсом между блоками страницы и боковой панелью с ссылками.
+ */
 const BlockContainer = ({ children }) => {    
-    const setContent = useContext(ContentContext);  // Получаем callback из ContentContext для передачи текущих активных блоков
+    const updateLinksPanel = useContext(ContentContext);  // Получаем callback из ContentContext для передачи текущих активных блоков
 
-    const test = (element) => {
+    const setBlocksLinks = (element) => {
         const domNode = findDOMNode(element);
         if (domNode && domNode.children) {
             const newContent = [];
@@ -19,12 +23,12 @@ const BlockContainer = ({ children }) => {
                     id: newContent.length
                 });
             }
-            setContent(newContent);
+            updateLinksPanel(newContent);
         }
     };
     
     return (
-        <div className="BlockContainer" ref={test}>
+        <div className="BlockContainer content" ref={setBlocksLinks}>
             { children }
         </div>
     );

@@ -1,5 +1,5 @@
 import React from 'react';
-import Card from '../../../components/card/Card';
+import Card from '../../../components/lines/Card';
 import Content5Img from '../../../local_assets/Content5_photo.png';
 
 const AdmissionBacContent5 = (props) => {

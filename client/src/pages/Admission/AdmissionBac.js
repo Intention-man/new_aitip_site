@@ -1,14 +1,14 @@
 import React, {useContext, useEffect, useState} from 'react';
 import { findDOMNode } from 'react-dom';
-import Card from '../../components/card/Card';
+import Card from '../../components/lines/Card';
 import Block from '../../components/Block';
 import BlockContainer from '../../components/BlockContainer';
-import StyledText from '../../components/card/StyledText';
+import StyledText from '../../components/lines/StyledText';
 import Content5Img from '../../local_assets/Content2_photo.png';
 import { fetchDirectionsBachelor } from "../../http/admissionAPI";
 import { Context } from "../../index";
 import "../../css/main.css";
-import BigImg from '../../components/card/BigImg';
+import BigImg from '../../components/lines/BigImg';
 
 const AdmissionBac = () => {
     const {admission_store} = useContext(Context);

@@ -1,6 +1,6 @@
 import React, {useEffect, useRef} from 'react';
 import { findDOMNode } from 'react-dom';
-import Card from '../../../components/card/Card';
+import Card from '../../../components/lines/Card';
 import Content1Img from '../../../local_assets/Content1_photo.png'; // TODO: загрузка изображений с сервера
 
 const AdmissionBacContent1 = (props) => {

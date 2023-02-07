@@ -5,7 +5,7 @@ import React, {useState} from 'react';
 import {observer} from "mobx-react-lite";
 import {Button} from "react-bootstrap";
 import MDEditor, {commands} from "@uiw/react-md-editor";
-import Card from "../card/Card"
+import Card from "../lines/Card"
 import {convertImages} from "../../http/cardAPI";
 import Carusel from "../Carusel";
 

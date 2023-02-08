@@ -1,0 +1,34 @@
+<p>An example demonstrating the use of the <code>&lt;input type="color"&gt;</code>
+    control.</p>
+
+<label for="colorWell">Color:</label>
+<input type="color" id="colorWell">
+
+<p>Watch the paragraph colors change when you adjust the color picker.
+    As you make changes in the color picker, the first paragraph's
+    color changes, as a preview (this uses the <code>input</code>
+    event). When you close the color picker, the <code>change</code>
+    event fires, and we detect that to change every paragraph to
+    the selected color.</p>
+
+<script>
+    let colorWell;
+    const defaultColor = "#0000ff";
+
+    window.addEventListener("load", startup, false);
+
+    function startup() {
+        colorWell = document.querySelector("#colorWell");
+        colorWell.value = defaultColor;
+        colorWell.addEventListener("input", updateAll, false);
+        colorWell.select();
+    }
+
+
+    function updateAll(event) {
+        document.querySelectorAll("p").forEach(function(p) {
+            p.style.color = event.target.value;
+        });
+    }
+
+</script>

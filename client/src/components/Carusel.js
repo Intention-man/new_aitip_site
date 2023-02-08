@@ -4,17 +4,12 @@ import vector from "../local_assets/Vector.png"
 import vector1 from "../local_assets/Vector1.png"
 
 
-
-const Carusel = ({photos, adressFileType, size, dotColor}) => {
+const Carusel = ({photos, addressFileType, params}) => {
     const [currentSlideNumber, setCurrentSlideNumber] = useState(0)
-    // setInterval(() => {
-    //     if (currentSlideNumber < photos.length-1) {
-    //         setCurrentSlideNumber(prev => prev+1)
-    //     }
-    //     else {
-    //         setCurrentSlideNumber(0)
-    //     }
-    // }, 7000)
+    console.log(params)
+    const [size, setSize] = useState(params[0]);
+    const [dotColor, setDotColor] = useState(params[1]);
+
 
     useEffect(() => {
         document.addEventListener('DOMContentLoaded', function(e){
@@ -31,7 +26,7 @@ const Carusel = ({photos, adressFileType, size, dotColor}) => {
             <div className="slideshow-container">
                 <a className="prev" onClick={() => setCurrentSlideNumber(prev => (prev > 0 ? prev-1 : photos.length-1))}><img src={vector} style={{margin: "0"}} width="7" height="12"/></a>
                 <div className="mySlides">
-                    <img src={adressFileType === "global" ? photos[currentSlideNumber] : process.env.REACT_APP_API_URL + photos[currentSlideNumber]} width={window.innerWidth*0.5} height={size*window.innerWidth*0.5}/>
+                    <img src={addressFileType === "global" ? photos[currentSlideNumber] : process.env.REACT_APP_API_URL + photos[currentSlideNumber]} width={window.innerWidth*0.5} height={size*window.innerWidth*0.5}/>
                 </div>
                 <a className="next" onClick={() => setCurrentSlideNumber(prev => (prev < photos.length-1 ? prev+1 : 0))}><img src={vector1} width="7" height="12"/></a>
             </div>

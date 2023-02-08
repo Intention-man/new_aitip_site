@@ -1,5 +1,3 @@
-// Пока несделанная панель с фильтрами для страницы Персоналии
-
 import React, {useContext, useEffect, useState} from 'react';
 import {observer} from "mobx-react-lite";
 import {Context} from "../../../index";

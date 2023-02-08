@@ -4,14 +4,15 @@ import "../../../css/page_styles/AdmissionBac2.css"
 import {fetchOneDirectionBachelor} from "../../../http/admissionAPI";
 import {observer} from "mobx-react-lite";
 import {Context} from "../../../index";
+import ButtonList from "../../../components/ButtonList";
 
 const AdmissionBacContent2 = observer(() => {
-    const directions = ["Экономика", "Менеджмент", "Юриспруденция", "Государственное и муниципальное управление", "Туризм"]
-
-    const specialties = ["директор и администратор предприятия",
-        "консультант по управлению", "помощник руководителя", "менеджер по проекту",
-        "менеджер по развитию", "бренд-менеджер", "инновационный менеджер",
-        "менеджер интернет-проекта", "менеджер по качеству и персоналу"].sort((a, b) => a.length - b.length)
+    // const directions = ["Экономика", "Менеджмент", "Юриспруденция", "Государственное и муниципальное управление", "Туризм"]
+    //
+    // const specialties = ["директор и администратор предприятия",
+    //     "консультант по управлению", "помощник руководителя", "менеджер по проекту",
+    //     "менеджер по развитию", "бренд-менеджер", "инновационный менеджер",
+    //     "менеджер интернет-проекта", "менеджер по качеству и персоналу"].sort((a, b) => a.length - b.length)
 
     // const passing_points = [
     //     "Математика (27 баллов)",
@@ -21,6 +22,7 @@ const AdmissionBacContent2 = observer(() => {
 
     const {admission_store} = useContext(Context)
     const [chosenDirection, setChosenDirection] = useState({});
+    const [buttonList, setButtonList] = useState([]);
 
 
     useEffect(() => {
@@ -28,8 +30,14 @@ const AdmissionBacContent2 = observer(() => {
             fetchOneDirectionBachelor(admission_store.selectedDirectionBachelor).then(data => {
                 console.log(data)
                 setChosenDirection(data)
-            })}
+            })
+        }
     }, [admission_store.selectedDirectionBachelor])
+
+
+    useEffect(() => {
+        admission_store.directionsBachelor.forEach(direction => setButtonList([...buttonList, {name: direction.name, value: direction.id}]))
+    }, [admission_store.directionsBachelor]);
 
 
     return (
@@ -41,21 +49,22 @@ const AdmissionBacContent2 = observer(() => {
             <h1 className="local_title">
                 Выберите <span style={{color: "#076DB1"}}>направление</span>
             </h1>
-            <ul className="tracks">
-                {admission_store.directionsBachelor.map(d =>
-                    <li key={"small_div_" + d.id}>
-                        <button
-                            key={d.id}
-                            onClick={() => {
-                                admission_store.setSelectedDirectionBachelor(d.id)
-                                console.log(d.id)
-                            }}
-                        >
-                            {d.name}
-                        </button>
-                    </li>
-                )}
-            </ul>
+            {/*<ul className="tracks">*/}
+            {/*    {admission_store.directionsBachelor.map(d =>*/}
+            {/*        <li key={"small_div_" + d.id}>*/}
+            {/*            <button*/}
+            {/*                key={d.id}*/}
+            {/*                onClick={() => {*/}
+            {/*                    admission_store.setSelectedDirectionBachelor(d.id)*/}
+            {/*                    console.log(d.id)*/}
+            {/*                }}*/}
+            {/*            >*/}
+            {/*                {d.name}*/}
+            {/*            </button>*/}
+            {/*        </li>*/}
+            {/*    )}*/}
+            {/*</ul>*/}
+            {buttonList.length > 0 && <ButtonList buttonList={buttonList}></ButtonList>}
             {chosenDirection.hasOwnProperty("name") &&
                 <Card
                     width={12}

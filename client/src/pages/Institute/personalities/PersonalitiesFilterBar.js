@@ -33,7 +33,7 @@ const PersonalitiesFilterBar = observer(({filteredDirections, setFilteredDirecti
                 {/*        <label htmlFor="squaredOne"></label>*/}
                 {/*    </div>*/}
                 <div className="squaredOne">
-                    <input type="checkbox" id="squaredOne" style={{zIndex: "1000"}}/>
+                    <input type="checkbox" id="squaredOne" className="small_box"/>
                     <label htmlFor="squaredOne"></label>
 
                     {/*<label><input type="checkbox"/>Менеджмент</label><br/>*/}

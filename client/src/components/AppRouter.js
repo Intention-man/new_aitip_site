@@ -7,9 +7,10 @@ import {Routes} from "react-router";
 import {Context} from "../index";
 import Main from "../pages/Main";
 import {fetchBlocks, fetchLines} from "../http/blockAPI";
+import {observer} from "mobx-react-lite";
 
 
-const AppRouter = () => {
+const AppRouter = observer(() => {
     const {block_store} = useContext(Context);
 
     useEffect(() => {
@@ -40,6 +41,6 @@ const AppRouter = () => {
             <Route path="*" element={<Main/>}/>
         </Routes>
     );
-}
+})
 
 export default AppRouter;

@@ -1,8 +1,7 @@
 // Frontend модального окна для добавления направления и функции, изменяющие состояния(установлено в модальном окне определенное значение или нет). Возможно, не будет использоваться.
 
 
-import React, {useContext, useState} from 'react';
-import {Context} from "../../index";
+import React, {useState} from 'react';
 import {observer} from "mobx-react-lite";
 import {createDirectionBachelor} from "../../http/admissionAPI";
 import {Button, Col, Dropdown, FormControl, Modal, Row} from "react-bootstrap";

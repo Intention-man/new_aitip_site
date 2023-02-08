@@ -4,17 +4,12 @@ import vector from "../local_assets/Vector.png"
 import vector1 from "../local_assets/Vector1.png"
 
 
-
-const Carusel = ({photos, addressFileType, size, dotColor}) => {
+const Carusel = ({photos, addressFileType, params}) => {
     const [currentSlideNumber, setCurrentSlideNumber] = useState(0)
-    // setInterval(() => {
-    //     if (currentSlideNumber < photos.length-1) {
-    //         setCurrentSlideNumber(prev => prev+1)
-    //     }
-    //     else {
-    //         setCurrentSlideNumber(0)
-    //     }
-    // }, 7000)
+    console.log(params)
+    const [size, setSize] = useState(params[0]);
+    const [dotColor, setDotColor] = useState(params[1]);
+
 
     useEffect(() => {
         document.addEventListener('DOMContentLoaded', function(e){

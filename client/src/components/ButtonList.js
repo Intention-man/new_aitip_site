@@ -1,10 +1,10 @@
 import React from 'react';
 // принимает словарь со значением
-const ButtonList = () => {
+const ButtonList = ({buttonList}) => {
     return (
-        <div>
-
-        </div>
+        <ul>
+            {buttonList}
+        </ul>
     );
 };
 

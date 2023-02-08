@@ -1,5 +1,5 @@
-import '../css/component_styles/Block.css';
-import ContentContext from './contexts/ContentContext';
+import '../../css/component_styles/Block.css';
+import ContentContext from '../contexts/ContentContext';
 import { useContext } from 'react';
 import { findDOMNode } from 'react-dom';
 

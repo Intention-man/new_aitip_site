@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
-import "../css/component_styles/Carusel.css"
-import vector from "../local_assets/Vector.png"
-import vector1 from "../local_assets/Vector1.png"
+import "../../css/component_styles/Carusel.css"
+import vector from "../../local_assets/Vector.png"
+import vector1 from "../../local_assets/Vector1.png"
 
 
 const Carusel = ({photos, addressFileType, params}) => {

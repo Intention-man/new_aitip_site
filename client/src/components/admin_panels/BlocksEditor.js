@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import {useContext} from "react";
-import {Context} from "../index";
-import {publicRoutes} from "../routes";
+import {Context} from "../../index";
+import {publicRoutes} from "../../routes";
 import {observer} from "mobx-react-lite";
-import {fetchOneBlock} from "../http/blockAPI";
-import CreateOrEditBlock from "./admin_panels/CreateOrEditBlock";
+import {fetchOneBlock} from "../../http/blockAPI";
+import CreateOrEditBlock from "./../admin_panels/CreateOrEditBlock";
 
 
 const BlockEditor = observer(() => {

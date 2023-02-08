@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {fetchElectionsAndContests} from "../../http/electionsAndContestsAPI";
-import CardContainer from "../../components/card/CardContainer";
+import CardContainer from "../../components/lines/CardContainer";
 import ElectionsBlock from "./EmployeesParts/ElectionsBlock";
 import ContestsBlock from "./EmployeesParts/ContestsBlock";
 

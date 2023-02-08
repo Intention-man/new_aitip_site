@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
-import Card from '../../../components/card/Card';
+import Card from '../../../components/lines/Card';
 import "../../../css/page_styles/AdmissionBac2.css"
 import {fetchOneDirectionBachelor} from "../../../http/admissionAPI";
 import {observer} from "mobx-react-lite";

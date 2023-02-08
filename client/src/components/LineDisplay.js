@@ -1,8 +1,9 @@
 import React from 'react';
 import {observer} from "mobx-react-lite";
 import MDEditor from "@uiw/react-md-editor";
-import Card from "./card/Card";
+import Card from "./lines/Card";
 import Carusel from "./Carusel";
+import BigImg from "./lines/BigImg";
 
 
 const LineDisplay = observer(({line}) => {
@@ -14,8 +15,8 @@ const LineDisplay = observer(({line}) => {
                 }
 
                 {(line.kind === 2 && (line.filesNames.length > 0)) && (line.addressFileType === "global" ?
-                        <img style={{width: "60%"}} src={line.filesNames[0]}/> :
-                        <img style={{width: "60%"}} src={process.env.REACT_APP_API_URL + line.filesNames[0]}/>
+                        <BigImg imgSrc={line.filesNames[0]}/> :
+                        <BigImg imgSrc={process.env.REACT_APP_API_URL + line.filesNames[0]}/>
                 )
                 }
 

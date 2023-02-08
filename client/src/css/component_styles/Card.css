@@ -1,5 +1,5 @@
-/* TODO: изменить подключение шрифтов */
-
+/*TODO: изменить подключение шрифтов*/
+/*
 :root {
     --font-family: 'Open Sans', sans-serif;
     --normal-font-weight: 400;
@@ -43,7 +43,7 @@ p, li, h1, h2, h3, a {
     flex-direction: row;
 }
 
-.Card-imageType-normal img {
+.Card-image img {
     width: 100%;
     height: 100%;
     align-self: flex-end;
@@ -51,28 +51,12 @@ p, li, h1, h2, h3, a {
     object-fit: cover;
 }
 
-.Card-imageType-fading img {
-    width: 100%;
-    height: 100%;
-    align-self: flex-end;
-    border-radius: var(--card-border-radius);
-    object-fit: cover;
-}
-
-.Card-imageType-rounded img {
-    width: 100%;
-    height: 100%;
-    align-self: flex-end;
-    border-radius: var(--card-border-radius);
-    object-fit: cover;
-}
-
-.Card-imagePos-top, .Card-imagePos-bottom {
+.Card-image-top, .Card-image-bottom {
     width: 100%;
     height: 50%;
 }
 
-.Card-imagePos-right, .Card-imagePos-left {
+.Card-image-right, .Card-image-left {
     width: 50%; 
     height: 100%;
 }
@@ -243,22 +227,22 @@ p, li, h1, h2, h3, a {
     grid-column: span 12 / span 12;
 }
 
-.Card-imgType-fading .Card-imgPos-top img {
+.FadingImg-top {
     -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,0), rgba(0,0,0,1) 60%);
     mask-image: linear-gradient(to top, rgba(0,0,0,0), rgba(0,0,0,1) 60%);
 }
 
-.Card-imgType-fading .Card-imgPos-right img {
+.FadingImg-right {
     -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,1) 60%);
     mask-image: linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,1) 60%);
 }
 
-.Card-imgType-fading .Card-imgPos-bottom img {
+.FadingImg-bottom {
     -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,1) 60%);
     mask-image: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,1) 60%);
 }
 
-.Card-imgType-fading .Card-imgPos-left img {
+.FadingImg-left {
     -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,0), rgba(0,0,0,1) 60%);
     mask-image: linear-gradient(to left, rgba(0,0,0,0), rgba(0,0,0,1) 60%);
 }
@@ -335,4 +319,4 @@ p, li, h1, h2, h3, a {
     .Card-filesList-file {
         margin: auto;
     }
-}
+} */

@@ -3,7 +3,7 @@
 import React, {useState, useEffect} from 'react';
 import {observer} from "mobx-react-lite";
 import MDEditor, {commands} from "@uiw/react-md-editor";
-import Card from "../card/Card"
+import Card from "../lines/Card"
 import {convertFiles} from "../../http/blockAPI";
 import Carusel from "../Carusel";
 import "../../css/component_styles/Editor.css"

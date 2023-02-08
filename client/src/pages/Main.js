@@ -5,6 +5,7 @@ import Block from "../components/Block";
 import {observer} from "mobx-react-lite";
 import ExtendedTextEditor from "../components/ExtendedTextEditor";
 import MDEditor from "@uiw/react-md-editor";
+import BlockContainer from '../components/BlockContainer';
 
 
 const Main = observer(() => {
@@ -29,9 +30,13 @@ const Main = observer(() => {
         <div>
             {/*<ExtendedTextEditor text={text} setText={setText}/>*/}
             {/*<MDEditor.Markdown source={text} style={{whiteSpace: 'pre-wrap'}}/>*/}
-            {myBlocks.map(block =>
-                <Block key={block.id} block={block}/>
-            )}
+            <BlockContainer>
+                {
+                    myBlocks.map(block =>
+                        <Block key={block.id} block={block}/>
+                    )
+                }
+            </BlockContainer>
         </div>
     );
 });

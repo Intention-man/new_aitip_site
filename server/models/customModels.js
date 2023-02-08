@@ -14,10 +14,11 @@ const CustomBlock = sequelize.define("block", {
 
 const Line = sequelize.define("line", {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    kind: {type: DataTypes.STRING, allowNull: false},
+    kind: {type: DataTypes.INTEGER, allowNull: false},
     params: {type: DataTypes.ARRAY(DataTypes.STRING)},
     text: {type: DataTypes.TEXT},
     filesNames: {type: DataTypes.ARRAY(DataTypes.TEXT)},
+    addressFileType: {type: DataTypes.STRING},
     lineOrdinal: {type: DataTypes.INTEGER, allowNull: false},
     blockId: {type: DataTypes.INTEGER, allowNull: false},
 })

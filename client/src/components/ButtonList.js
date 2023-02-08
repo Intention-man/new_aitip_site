@@ -1,10 +1,11 @@
 import React from 'react';
 
-const ButtonList = () => {
-    return (
-        <div>
 
-        </div>
+const ButtonList = (buttonList) => {
+    return (
+        <ul>
+            {buttonList}
+        </ul>
     );
 };
 

@@ -1,4 +1,4 @@
-// Линия - составной элемент карточки
+// Линия - составной элемент блока
 
 import React, {useState, useEffect} from 'react';
 import {observer} from "mobx-react-lite";
@@ -8,9 +8,12 @@ import {convertFiles} from "../../http/blockAPI";
 import Carusel from "../Carusel";
 import "../../css/component_styles/Editor.css"
 import "../../css/component_styles/CreateLine.css"
+import LineDisplay from "../LineDisplay";
+import ExtendedTextEditor from "../ExtendedTextEditor";
 
 
-const CreateLine = observer(({index, changeLine, line}) => {
+const CreateOrEditLine = observer(({index, changeLine, line}) => {
+    console.log(line)
 
     const kinds = {
         1: "Текст/список/подзаголовок",
@@ -21,18 +24,35 @@ const CreateLine = observer(({index, changeLine, line}) => {
         6: "Документ"
     }
 
-    const [kind, setKind] = useState(line.kind);
-    const [params, setParams] = useState(line.params);
-    const [text, setText] = useState(line.text);
-    const [filesNames, setFilesNames] = useState(line.filesNames)
-    const [addressFileType, setAddressFileType] = useState(line.addressFileType);
+    const [kind, setKind] = useState(0);
+    const [params, setParams] = useState([]);
+    const [text, setText] = useState("");
+    const [filesNames, setFilesNames] = useState([])
+    const [addressFileType, setAddressFileType] = useState("");
     const [size, setSize] = useState(1);
-    const [dotColor, setDotColor] = useState("black");
+    const [dotColor, setDotColor] = useState("#000000");
     const [docNames, setDocNames] = useState("");
+    console.log(kind)
     
     useEffect(() => {
-        kind === 4 && setParams([size, dotColor])
-    }, [size, dotColor])
+        if (kind === 4) {
+            setParams([size, dotColor, docNames])
+            changeLine("params", [size, dotColor, docNames], index)
+            console.log([size, dotColor, docNames])
+        }
+    }, [size, dotColor, docNames])
+
+    useEffect(() => {
+        console.log("useeffect", line)
+        setKind(line.kind);
+        setParams(line.params);
+        setText(line.text)
+        setFilesNames(line.filesNames)
+        setAddressFileType(line.addressFileType)
+        setSize(line.kind === 4 ? line.params[0] : 1)
+        setDotColor(line.kind === 4 ? line.params[1] : "#000000")
+        setDocNames("")
+    }, [line]);
 
     const addFiles = (files) => {
         const formData = new FormData();
@@ -50,7 +70,7 @@ const CreateLine = observer(({index, changeLine, line}) => {
                 <div>
                     {kind > 0 ? <p>Выбранный тип: {kinds[kind]}</p> : <p>Выберите тип элемента</p>}
 
-                    <select id="kind" onChange={e => {
+                    <select id="kind" value={kind} onChange={e => {
                         console.log(e.target.value)
                         setKind(Number(e.target.value))
                         changeLine("kind", Number(e.target.value), index)
@@ -66,12 +86,28 @@ const CreateLine = observer(({index, changeLine, line}) => {
                 </div>
 
 
-                {(kind === 2 || kind === 3) &&
+                {(kind >= 2 && kind <= 4) &&
                     <div style={{margin: "30px 0"}}>
-                        {params.length > 0 ? <p>Выбранный(-е) параметр(-ы): {params}</p> : <p>Выберите параметры</p>}
+                        {params.length > 0 ? <p>Выбранный(-е) параметр(-ы): {params.length > 0 && params.map((param) => (
+                            <p>
+                                {param}
+                            </p>
+                        ))}
+                        ))}</p> : <p>Выберите параметры</p>}
 
+                        {kind === 2 &&
+                            <select id="params" value={params[0]} onChange={e => {
+                                setParams(Array.from(e.target.value))
+                                changeLine("param", [e.target.value], index)
+                            }}>
+                                <option value="none">Выберите тип картинки</option>
+                                <option value="fading">С градиентом</option>
+                                <option value="normal">Без градиента</option>
+                            </select>
+                        }
+                        
                         {kind === 3 &&
-                            <select id="kind" value={params} onChange={e => {
+                            <select id="params" value={params[0]} onChange={e => {
                                 setParams(e.target.value.split(" "))
                                 changeLine("param", e.target.value.split(" "), index)
                             }}>
@@ -82,15 +118,6 @@ const CreateLine = observer(({index, changeLine, line}) => {
                                 <option value="normal right">Без градиента справа</option>
                                 <option value="rounded left">Круглая слева</option>
                                 <option value="rounded right">Круглая справа</option>
-                            </select>
-                        }
-                        {kind === 2 &&
-                            <select id="param" value={params} onChange={e => {
-                                setParams(e.target.value)
-                                changeLine("param", [e.target.value], index)
-                            }}>
-                                <option value="fading">С градиентом</option>
-                                <option value="normal">Без градиента</option>
                             </select>
                         }
 
@@ -116,7 +143,11 @@ const CreateLine = observer(({index, changeLine, line}) => {
 
                 {kind > 1 &&
                     <div style={{margin: "30px 0"}}>
-                        {filesNames.length > 0 ? <p>Выбранный(-е) файл(-ы): {filesNames}</p> :
+                        {filesNames.length > 0 ? <p>Выбранный(-е) файл(-ы): {filesNames.map((filesName) => (
+                                <p>
+                                    {filesName}
+                                </p>
+                            ))}</p> :
                             <p>Выберите файл(-ы)</p>}
                         {(kind === 3 || kind === 2) &&
                             <div>
@@ -148,7 +179,6 @@ const CreateLine = observer(({index, changeLine, line}) => {
                                     setFilesNames(e.target.value.split("; "))
                                     changeLine("filesNames", e.target.value.split("; "), index)
                                 }}/>
-
                             </div>
                         }
                         {kind === 5 &&
@@ -174,105 +204,22 @@ const CreateLine = observer(({index, changeLine, line}) => {
                                     changeLine("addressFileType", "global", index)
                                     setFilesNames([e.target.value])
                                 }}/>
+
+                                <label>Введите название документа (которое будут видеть пользователи на сайте)</label>
+                                <input type="text" onChange={(e) => {
+                                    setDocNames(e.target.value)
+                                }}/>
                             </div>
                         }
                     </div>}
-
             </div>
-
 
             {/* Появление зоны редактирования текста*/}
-            <div style={{margin: "30px 0"}}>
-                {kind === 1 &&
-                    <MDEditor
-                        value={text}
-                        preview="edit"
-                        extraCommands={[commands.fullscreen]}
-                        onChange={(val) => {
-                            setText(val)
-                            changeLine("text", val, index)
-                        }}
-                    />
+                {(kind === 1 || kind === 3) &&
+                    <ExtendedTextEditor text={text} setText={setText} changeLine={changeLine} index={index}/>
                 }
-
-                {kind === 3 &&
-                    <MDEditor
-                        value={text}
-                        preview="edit"
-                        extraCommands={[commands.fullscreen]}
-                        onChange={(val) => {
-                            setText(val)
-                            changeLine("text", val, index)
-                        }}
-                    />
-                }
-
-            </div>
-
-            {/*Отрисовка линии*/}
-
-            <h2>Как пользователь видит линию</h2>
-
-
-            {(kind === 1 && text.length > 0) &&
-                <MDEditor.Markdown source={text} style={{whiteSpace: 'pre-wrap'}}/>
-            }
-
-            {(kind === 2 && (filesNames.length > 0)) && (addressFileType === "global" ?
-                    <img style={{width: "60%"}} src={filesNames[0]}/> :
-                    <img style={{width: "60%"}} src={process.env.REACT_APP_API_URL + filesNames[0]}/>
-            )
-            }
-
-            {(kind === 3 && (filesNames.length > 0) && (addressFileType.length > 0)) &&
-                <Card
-                    imgType={params[0]}
-                    imgSrc={addressFileType === "global" ? filesNames[0] : process.env.REACT_APP_API_URL + filesNames[0]}
-                    imgPos={params[1]}>
-                    <MDEditor.Markdown source={text} style={{whiteSpace: 'pre-wrap'}}/>
-                </Card>
-
-            }
-
-            {(kind === 4 && (filesNames.length > 0)) &&
-                <Carusel photos={filesNames} adressFileType={addressFileType}></Carusel>
-            }
-
-            {(kind === 5 && (filesNames.length > 0)) &&
-                <iframe width="560" height="315" src={`https://www.youtube.com/embed/${filesNames[0].split("/")[3]}`}
-                        title="YouTube video player" frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowFullScreen></iframe>
-            }
-
-            {(kind === 6 && (filesNames.length > 0)) &&
-                <div>
-                    <a href={addressFileType === "global" ? filesNames[0] : process.env.REACT_APP_API_URL + filesNames[0]}
-                       download target="_blank">Скачать документ</a>
-                </div>
-            }
-
-
-            {/*Кнопки добавления и удаления*/}
-
-            {/*<footer style={{margin: "30px 0"}}>*/}
-            {/*    /!*<Button variant="outline-success" onClick={() => {*!/*/}
-            {/*    /!*    // setLines(lines.map(i => i.))*!/*/}
-            {/*    /!*    // setTests(tests.map(i => i.number === number ? {...i, [key]: value} : i))*!/*/}
-            {/*    /!*    addLine()*!/*/}
-            {/*    /!*}}>*!/*/}
-            {/*    /!*    Добавить линию*!/*/}
-            {/*    /!*</Button>*!/*/}
-            {/*    <Button variant="outline-danger">*/}
-            {/*        Удалить*/}
-            {/*    </Button>*/}
-
-            {/*</footer>*/}
-            {/*<p>*Костыль ради отступа*</p>*/}
-
-
         </div>
     );
 });
 
-export default CreateLine;
+export default CreateOrEditLine;

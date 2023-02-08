@@ -9,7 +9,7 @@ import CreateProgram from "../components/admin_panels/CreateProgram";
 import CreateElectionOrContest from "../components/admin_panels/CreateElectionOrContest";
 import CreatePartner from "../components/admin_panels/CreatePartner";
 import CreateOrEditBlock from "../components/admin_panels/CreateOrEditBlock"
-import BlocksEditor from "../components/BlocksEditor";
+import BlocksEditor from "../components/admin_panels/BlocksEditor";
 
 
 const Admin = () => {

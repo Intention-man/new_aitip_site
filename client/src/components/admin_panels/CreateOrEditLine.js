@@ -2,14 +2,10 @@
 
 import React, {useState, useEffect} from 'react';
 import {observer} from "mobx-react-lite";
-import MDEditor, {commands} from "@uiw/react-md-editor";
-import Card from "../lines/Card"
 import {convertFiles} from "../../http/blockAPI";
-import Carusel from "../Carusel";
 import "../../css/component_styles/Editor.css"
 import "../../css/component_styles/CreateLine.css"
-import LineDisplay from "../LineDisplay";
-import ExtendedTextEditor from "../ExtendedTextEditor";
+import ExtendedTextEditor from "../lines/ExtendedTextEditor";
 
 
 const CreateOrEditLine = observer(({index, changeLine, line}) => {

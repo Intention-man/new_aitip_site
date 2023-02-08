@@ -4,7 +4,7 @@ import CreateOrEditLine from "./CreateOrEditLine";
 import {createBlock, updateBlock} from "../../http/blockAPI";
 import {publicRoutes} from "../../routes";
 import "../../css/component_styles/Editor.css"
-import LineDisplay from "../LineDisplay";
+import LineDisplay from "../common/LineDisplay";
 
 
 const CreateOrEditBlock = observer(({block, mod}) => {

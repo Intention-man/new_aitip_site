@@ -1,11 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import {useContext} from "react";
 import {Context} from "../index";
-import Block from "../components/Block";
 import {observer} from "mobx-react-lite";
-import ExtendedTextEditor from "../components/ExtendedTextEditor";
-import MDEditor from "@uiw/react-md-editor";
-import BlockContainer from '../components/BlockContainer';
+import BlockContainer from "../components/common/BlockContainer";
+import Block from "../components/common/Block";
+
 
 
 const Main = observer(() => {
@@ -27,17 +26,13 @@ const Main = observer(() => {
     // };
 
     return (
-        <div>
-            {/*<ExtendedTextEditor text={text} setText={setText}/>*/}
-            {/*<MDEditor.Markdown source={text} style={{whiteSpace: 'pre-wrap'}}/>*/}
-            <BlockContainer>
-                {
-                    myBlocks.map(block =>
-                        <Block key={block.id} block={block}/>
-                    )
-                }
-            </BlockContainer>
-        </div>
+        <BlockContainer>
+            {
+                myBlocks.map(block =>
+                    <Block key={block.id} block={block}/>
+                )
+            }
+        </BlockContainer>
     );
 });
 

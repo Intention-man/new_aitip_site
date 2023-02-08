@@ -1,8 +1,8 @@
 import { observer } from 'mobx-react-lite';
 import { useContext, useState, useEffect } from 'react';
-import { Context } from '../index';
+import { Context } from '../../index';
 import LineDisplay from './LineDisplay';
-import '../css/component_styles/Block.css';
+import '../../css/component_styles/Block.css';
 
 /**
  * Компонент блока контента. 
@@ -29,7 +29,7 @@ const Block = observer(({ block }) => {
                     {
                         console.log(line.lineOrdinal)
                         return (
-                            <LineDisplay line={line}/>
+                            <LineDisplay key={line.id} line={line}/>
                         )
                     }
                 )

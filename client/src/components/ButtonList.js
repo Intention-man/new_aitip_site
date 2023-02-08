@@ -1,7 +1,6 @@
 import React from 'react';
-
-
-const ButtonList = (buttonList) => {
+// принимает словарь со значением
+const ButtonList = ({buttonList}) => {
     return (
         <ul>
             {buttonList}

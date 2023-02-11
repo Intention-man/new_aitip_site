@@ -8,9 +8,8 @@ import {Context} from "../index";
 import CreateProgram from "../components/admin_panels/CreateProgram";
 import CreateElectionOrContest from "../components/admin_panels/CreateElectionOrContest";
 import CreatePartner from "../components/admin_panels/CreatePartner";
-import CreateNews from "../components/admin_panels/CreateNews";
-import CreateCard from "../components/admin_panels/CreateCard"
-
+import CreateOrEditBlock from "../components/admin_panels/CreateOrEditBlock"
+import BlocksEditor from "../components/admin_panels/BlocksEditor";
 
 
 const Admin = () => {
@@ -27,8 +26,8 @@ const Admin = () => {
     const [programVisible, setProgramVisible] = useState(false)
     const [electionsAndContestsVisible, setElectionsAndContestsVisible] = useState(false)
     const [partnersVisible, setPartnersVisible] = useState(false);
-    const [newsVisible, setNewsVisible] = useState(false);
-    const [cardVisible, setCardVisible] = useState(false);
+    const [createBlockVisible, setCreateBlockVisible] = useState(false);
+    const [editBlockVisible, setEditBlockVisible] = useState(false);
 
 
     return (
@@ -48,22 +47,20 @@ const Admin = () => {
             <Button variant={"outline-info"} className="mt-2 p-2" onClick={() => setPartnersVisible(true)}>
                 Добавить партнера
             </Button>
-            <Button variant={"outline-info"} className="mt-2 p-2" onClick={() => setNewsVisible(true)}>
-                Добавить новость
+            <Button variant={"outline-info"} className="mt-2 p-2" onClick={() => setCreateBlockVisible(prev => !prev)}>
+                Добавить блок
             </Button>
-            <Button variant={"outline-info"} className="mt-2 p-2" onClick={() => setCardVisible(true)}>
-                Добавить карточку
+            <Button variant={"outline-info"} className="mt-2 p-2" onClick={() => setEditBlockVisible(prev => !prev)}>
+                Редактировать блок
             </Button>
-
 
             <CreateStaff show={staffVisible} onHide={() => setStaffVisible(false)}/>
             <CreateDirection show={directionVisible} onHide={() => setDirectionVisible(false)}/>
             <CreateProgram show={programVisible} onHide={() => setProgramVisible(false)}/>
             <CreateElectionOrContest show={electionsAndContestsVisible} onHide={() => setElectionsAndContestsVisible(false)}/>
             <CreatePartner show={partnersVisible} onHide={() => setPartnersVisible(false)}/>
-            {newsVisible && <CreateNews newsVisible={newsVisible} setNewsVisible={setNewsVisible}/>}
-            <CreateCard show={cardVisible} onHide={() => setCardVisible(false)}/>
-
+            {createBlockVisible && <CreateOrEditBlock block={{fakeParam: undefined}}/>}
+            {editBlockVisible && <BlocksEditor show={editBlockVisible} onHide={() => setEditBlockVisible(false)}/>}
         </Container>
     );
 };

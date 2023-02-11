@@ -7,6 +7,7 @@ import {createContext} from "react";
 import StaffStore from "./store/StaffStore";
 import AdmissionStore from "./store/AdmissionStore";
 import UserStore from "./store/UserStore";
+import BlockStore from "./store/BlockStore";
 
 
 export const Context = createContext(null)
@@ -16,7 +17,8 @@ ReactDOM.render(
     <Context.Provider value={{
         staff_store: new StaffStore(),
         admission_store: new AdmissionStore(),
-        user_store: new UserStore()
+        user_store: new UserStore(),
+        block_store: new BlockStore()
     }}>
         <App />
     </Context.Provider>,

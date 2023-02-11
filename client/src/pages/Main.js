@@ -1,28 +1,39 @@
 import React, {useEffect, useState} from 'react';
-import {fetchCards} from "../http/cardAPI";
-import MDEditor from "@uiw/react-md-editor";
+import {useContext} from "react";
+import {Context} from "../index";
+import {observer} from "mobx-react-lite";
+import BlockContainer from "../components/common/BlockContainer";
+import Block from "../components/common/Block";
 
 
-const Main = () => {
-    const [news, setNews] = useState([]);
+
+const Main = observer(() => {
+    const {block_store} = useContext(Context);
+
+    const [text, setText] = useState("");
+    const [myBlocks, setMyBlocks] = useState([]);
+    let myAddress = ""
 
     useEffect(() => {
-        fetchCards().then(data => {
-            setNews(data.rows)
-            console.log(data)
-        })
-    }, [])
+        myAddress = "/" + window.location.href.split("/")[3]
+        setMyBlocks(Array.from(block_store.blocks.filter(block => block.pageLink === myAddress)))
+    }, [block_store.blocks]);
+
+
+    // document.onselectionchange = function() {
+    //     let {anchorNode, anchorOffset, focusNode, focusOffset} = document.getSelection();
+    //     console.log(anchorNode, anchorOffset, focusNode, focusOffset)
+    // };
 
     return (
-        <div key={news.name}>
-            {news.length > 0 && news.map(n =>
-                <div>
-                    <h1>{n.name}</h1>
-                    <MDEditor.Markdown source={n.content} style={{ whiteSpace: 'pre-wrap' }} />
-                </div>
-            )}
-        </div>
+        <BlockContainer>
+            {
+                myBlocks.map(block =>
+                    <Block key={block.id} block={block}/>
+                )
+            }
+        </BlockContainer>
     );
-};
+});
 
 export default Main;

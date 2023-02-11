@@ -4,16 +4,6 @@ import React, {useState} from 'react';
 import {observer} from "mobx-react-lite";
 
 
-/*function viewDiv(elementId) {
-    let div = document.getElementById(elementId);
-    if (getComputedStyle(div).display === "none") {
-        div.style.display = "flex"
-    }
-    if (getComputedStyle(div).display === "flex") {
-        div.style.display = "none"
-    }
-}*/
-
 const StafferItem = observer(({staffer}) => {
 
     const textsNames = {

@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {Context} from "../../../index";
 import {fetchOneAdditionalProgram, } from "../../../http/admissionAPI";
-import Card from "../../../components/card/Card"
+import Card from "../../../components/lines/Card"
 import {observer} from "mobx-react-lite";
 
 

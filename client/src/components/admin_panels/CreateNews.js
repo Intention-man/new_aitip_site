@@ -2,9 +2,8 @@ import React, {useState} from "react";
 import MDEditor, { commands, EditorContext } from "@uiw/react-md-editor";
 import "../../css/component_styles/Editor.css"
 import {observer} from "mobx-react-lite";
-import {convertImages, createCard} from "../../http/cardAPI";
+import {createBlock} from "../../http/blockAPI";
 import {Button} from "react-bootstrap";
-
 
 
 const CreateNews = observer(({newsVisible, setNewsVisible}) => {
@@ -12,80 +11,28 @@ const CreateNews = observer(({newsVisible, setNewsVisible}) => {
     const [header, setHeader] = useState("")
     let imageNamesList = [];
 
-    // InsertGallery
 
-    // const InsertImage = ({ doAfter }) => {
-    //     const addImage = (imageList) => {
-    //         const formData = new FormData();
-    //         imageList.forEach(el => formData.append("imageList", el));
-    //         convertImages(formData).then(list => {
-    //             imageNamesList = list;
-    //             doAfter();
-    //         });
-    //     }
-
-    //     return (
-    //         <div>
-    //             <input
-    //                 type="file"
-    //                 accept="image"
-    //                 multiple
-    //                 onChange={
-    //                     (e) => addImage(Array.from(e.target.files))
-    //                 }
-    //             />
-    //         </div>
-    //     );
-    // };
-
-    // const insertImage = {
-    //     name: "InsertImage",
-    //     keyCommand: "InsertImage",
-    //     render: (command, disabled, executeCommand) => {
-    //         // executeCommand(command, command.groupName);
-    //         return (
-    //             <InsertImage
-    //                 doAfter={() => executeCommand(command, command.groupName)}
-    //             />
-    //         );
-    //     },
-
-    //     execute: (state, api) => {
-    //         const index = state.selection.end;
-    //         let currentText = state.text;
-    //         let additioanalPart = "";
-    //         imageNamesList.map(name => { 
-    //             additioanalPart += `<img src="${process.env.REACT_APP_API_URL}${name}" class="im"/>` 
-    //         });
-    //         currentText = currentText.slice(0, index) + additioanalPart + currentText.slice(index);
-    //         setContent(currentText);
-    //     }
-    // };
-
-    const InsertImage = ({doAfter}) => {
+    const InsertImage = ({ doAfter }) => {
         const addImage = (imageList) => {
-            console.log(imageList)
-            const formData = new FormData()
-            for (let i = 0; i < imageList.length; i++) {
-                formData.append("imageList", imageList[i])
-            }
-            console.log(formData);
+            const formData = new FormData();
+            imageList.forEach(el => formData.append("imageList", el));
             convertImages(formData).then(list => {
                 imageNamesList = list;
-                console.log(imageNamesList);
                 doAfter();
             });
         }
 
         return (
-            <input
-                type="file" multiple="multiple" accept="image"
-                onChange={(e) => {
-                    const fileList = Array.from(e.target.files)
-                    console.log(fileList)
-                    addImage(fileList);
-                }}
-            />
+            <div>
+                <input
+                    type="file"
+                    accept="image"
+                    multiple
+                    onChange={
+                        (e) => addImage(Array.from(e.target.files))
+                    }
+                />
+            </div>
         );
     };
 
@@ -104,11 +51,12 @@ const CreateNews = observer(({newsVisible, setNewsVisible}) => {
         execute: (state, api) => {
             const index = state.selection.end;
             let currentText = state.text;
-            // currentText = currentText.slice(0, index) + `\n![](${process.env.REACT_APP_API_URL}${imageName})\n` + currentText.slice(index);
-            let additioanalPart = ""
-            imageNamesList.map(name => {additioanalPart += `<img src="${process.env.REACT_APP_API_URL}${name}" class="im"/>`})
+            let additioanalPart = "";
+            imageNamesList.map(name => {
+                additioanalPart += `<img src="${process.env.REACT_APP_API_URL}${name}" class="im"/>`
+            });
             currentText = currentText.slice(0, index) + additioanalPart + currentText.slice(index);
-            setValue(currentText);
+            setContent(currentText);
         }
     };
 
@@ -119,7 +67,7 @@ const CreateNews = observer(({newsVisible, setNewsVisible}) => {
         const formData = new FormData()
         formData.append("name", header)
         formData.append("content", value)
-        createCard(formData).then(data => console.log(data))
+        createBlock(formData).then(data => console.log(data))
     }
 
 

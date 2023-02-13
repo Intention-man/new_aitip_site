@@ -4,6 +4,7 @@ import {makeAutoObservable} from "mobx";
 export default class BlockStore {
     constructor() {
         this._blocks = []
+        this._selectedBlocks = []
         this._lines = []
 
         makeAutoObservable(this)
@@ -14,6 +15,10 @@ export default class BlockStore {
         this._blocks = blocks
     }
 
+    setSelectedBlocks(selectedBlocks) {
+        this._selectedBlocks = selectedBlocks
+    }
+
     setLines(lines) {
         this._lines = lines
     }
@@ -21,6 +26,10 @@ export default class BlockStore {
 
     get blocks() {
         return this._blocks
+    }
+
+    get selectedBlocks() {
+        return this._selectedBlocks
     }
 
     get lines() {

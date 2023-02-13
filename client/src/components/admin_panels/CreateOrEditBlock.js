@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {observer} from "mobx-react-lite";
 import CreateOrEditLine from "./CreateOrEditLine";
-import {createBlock, updateBlock} from "../../http/blockAPI";
+import {createBlock, removeBlock, updateBlock} from "../../http/blockAPI";
 import {publicRoutes} from "../../routes";
 import "../../css/component_styles/Editor.css"
 import LineDisplay from "../common/LineDisplay";
@@ -60,7 +60,7 @@ const CreateOrEditBlock = observer(({block, mod}) => {
         setLines(lines.filter(line => lines.indexOf(line) !== number).map(line => ({...line, ["lineOrdinal"]: lines.indexOf(line)})))
     }
 
-    const addBlock = () => {
+    const saveBlock = () => {
         const formData = new FormData()
         console.log(block.id)
         block.id && formData.append("id", block.id)
@@ -71,8 +71,8 @@ const CreateOrEditBlock = observer(({block, mod}) => {
         formData.append("lines", JSON.stringify(lines))
         formData.append("prevLinesIdList", JSON.stringify(prevLinesIdList))
         mod === "edit" ? updateBlock(formData).then(data => console.log(data)) : createBlock(formData).then(data => console.log(data))
-
     };
+
 
     return (
         <div>
@@ -123,7 +123,8 @@ const CreateOrEditBlock = observer(({block, mod}) => {
                     )
                 })
             }
-            <button onClick={addBlock}>Сохранить блок в БД</button>
+            <button onClick={saveBlock}>Сохранить блок</button>
+            <button onClick={() => removeBlock(block.id)}>Удалить блок</button>
         </div>
     )
 });

@@ -55,11 +55,6 @@ class BlockController {
                     for (let line of lines) {
                         if (line.id === prevId) {
                             isInsideAlready = true
-                            // const id = line.id
-                            // const lineRecord = await Line.findOne({
-                            //     where: {id},
-                            // })
-                            // console.log(lineRecord)
                             Line.update({
                                     kind: line.kind,
                                     params: line.params,
@@ -105,31 +100,30 @@ class BlockController {
         }
     }
 
-    async getAllBlocks(req, res) {
-        let {limit, page} = req.query
-        page = page || 1
-        limit = limit || 10000
-        let offset = limit * (page - 1)
-        let blocks = await CustomBlock.findAndCountAll({limit, offset})
-        return res.json(blocks)
+    async moveBlocks(req, res, next) {
+        try {
+            let {blocks} = req.body
+            blocks = JSON.parse(blocks)
+
+            for (let block of blocks) {
+                CustomBlock.update(
+                    {ordinal: block.ordinal},
+                    {where: {id: block.id}})
+            }
+            return res.json(blocks)
+        } catch (e) {
+            next(ApiError.badRequest(e.message))
+        }
     }
 
-    async getAllLines(req, res) {
-        let {limit, page} = req.query
-        page = page || 1
-        limit = limit || 10000
-        let offset = limit * (page - 1)
-        let lines = await Line.findAndCountAll({limit, offset})
-        return res.json(lines)
-    }
-
-    async getOneBlock(req, res) {
-        const {id} = req.params
-        const block = await CustomBlock.findOne({
-            where: {id},
-            include: [{model: Line, as: "lines"}]
+    async removeBlock(req, res) {
+        console.log(req.params)
+        let {id} = req.params
+        console.log(id)
+        await CustomBlock.destroy({
+            where: {id}
         })
-        return res.json(block)
+        return res.json(id)
     }
 
     async convertFiles(req, res, next) {
@@ -155,6 +149,33 @@ class BlockController {
         } catch (e) {
             next(ApiError.badRequest(e.message))
         }
+    }
+
+    async getAllBlocks(req, res) {
+        let {limit, page} = req.query
+        page = page || 1
+        limit = limit || 10000
+        let offset = limit * (page - 1)
+        let blocks = await CustomBlock.findAndCountAll({limit, offset})
+        return res.json(blocks)
+    }
+
+    async getAllLines(req, res) {
+        let {limit, page} = req.query
+        page = page || 1
+        limit = limit || 10000
+        let offset = limit * (page - 1)
+        let lines = await Line.findAndCountAll({limit, offset})
+        return res.json(lines)
+    }
+
+    async getOneBlock(req, res) {
+        const {id} = req.params
+        const block = await CustomBlock.findOne({
+            where: {id},
+            include: [{model: Line, as: "lines"}]
+        })
+        return res.json(block)
     }
 }
 

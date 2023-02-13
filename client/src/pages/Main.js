@@ -10,20 +10,14 @@ import Block from "../components/common/Block";
 const Main = observer(() => {
     const {block_store} = useContext(Context);
 
-    const [text, setText] = useState("");
     const [myBlocks, setMyBlocks] = useState([]);
     let myAddress = ""
 
     useEffect(() => {
         myAddress = "/" + window.location.href.split("/")[3]
-        setMyBlocks(Array.from(block_store.blocks.filter(block => block.pageLink === myAddress)))
-    }, [block_store.blocks]);
+        setMyBlocks(Array.from(block_store.blocks.filter(block => block.pageLink === myAddress).sort((block1, block2) => block1.ordinal - block2.ordinal)))
+    }, [block_store.blocks, block_store.lines]);
 
-
-    // document.onselectionchange = function() {
-    //     let {anchorNode, anchorOffset, focusNode, focusOffset} = document.getSelection();
-    //     console.log(anchorNode, anchorOffset, focusNode, focusOffset)
-    // };
 
     return (
         <BlockContainer>

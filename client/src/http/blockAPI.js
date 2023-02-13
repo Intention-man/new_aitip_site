@@ -13,12 +13,23 @@ export const updateBlock = async (blockData) => {
     return data
 }
 
+export const moveBlocks = async (blocks) => {
+    const {data} = await $host.post("api/block/move", blocks)
+    console.log(data)
+    return data
+}
+
+export const removeBlock = async (id) => {
+    const {data} = await $host.post("api/block/remove/" + id)
+    console.log(typeof id)
+    return data
+}
+
 export const convertFiles = async (files) => {
     const {data} = await $host.post("api/block/convert_files", files)
     console.log(data)
     return data
 }
-
 
 
 export const fetchBlocks = async () => {

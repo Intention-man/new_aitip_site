@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {Button, Container} from "react-bootstrap";
 import CreateDirection from "../components/admin_panels/CreateDirection";
 import CreateStaff from "../components/admin_panels/CreateStaff";
-import {fetchDirectionsBachelor} from "../http/admissionAPI";
+import {fetchAdditionalPrograms, fetchDirectionsBachelor} from "../http/admissionAPI";
 import {Context} from "../index";
 import CreateProgram from "../components/admin_panels/CreateProgram";
 import CreateElectionOrContest from "../components/admin_panels/CreateElectionOrContest";
@@ -16,16 +16,6 @@ import "../css/page_styles/AdminPanel.css"
 
 const Admin = () => {
     const {admission_store} = useContext(Context)
-    const {block_store} = useContext(Context);
-
-    const [staffVisible, setStaffVisible] = useState(false)
-    const [directionVisible, setDirectionVisible] = useState(false)
-    const [programVisible, setProgramVisible] = useState(false)
-    const [electionsAndContestsVisible, setElectionsAndContestsVisible] = useState(false)
-    const [partnersVisible, setPartnersVisible] = useState(false);
-    const [createBlockVisible, setCreateBlockVisible] = useState(false);
-    const [editBlockVisible, setEditBlockVisible] = useState(false);
-    const [swapBlockVisible, setSwapBlockVisible] = useState(false);
 
     const [windowVisible, setWindowVisible] = useState("")
     const forms = {
@@ -43,6 +33,9 @@ const Admin = () => {
     useEffect(() => {
         fetchDirectionsBachelor().then(data =>
             admission_store.setDirectionsBachelor(data.rows)
+        )
+        fetchAdditionalPrograms().then(data =>
+            admission_store.setAdditionalPrograms(data.rows)
         )
     }, [])
 

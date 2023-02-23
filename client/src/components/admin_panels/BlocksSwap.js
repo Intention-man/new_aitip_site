@@ -4,14 +4,21 @@ import {useState} from "react";
 import {useContext} from "react";
 import {Context} from "../../index";
 import {moveBlocks, updateBlock} from "../../http/blockAPI";
+import {publicRoutes} from "../../routes";
 
 
 const BlocksSwap = () => {
     const {block_store} = useContext(Context);
 
+    const [chosenPageLink, setChosenPageLink] = useState("");
     const [updatedBlocks, setUpdatedBlocks] = useState([]);
 
-    useEffect(() => setUpdatedBlocks(block_store.selectedBlocks.sort((block1, block2) => block1.ordinal - block2.ordinal)), []);
+    useEffect(() => {
+        block_store.setSelectedBlocks(Array.from(block_store.blocks.filter(block => block.pageLink === chosenPageLink).sort((block1, block2) => block1.ordinal - block2.ordinal)))
+    }, [block_store.blocks, chosenPageLink]);
+
+    useEffect(() => setUpdatedBlocks(block_store.selectedBlocks.sort((block1, block2) => block1.ordinal - block2.ordinal)), [block_store.selectedBlocks, chosenPageLink]);
+
 
     const swapBlocks = (index1, index2) => {
         let newBlockList = []
@@ -39,6 +46,17 @@ const BlocksSwap = () => {
 
     return (
         <div>
+            Выбор страницы
+            <select value={chosenPageLink} onChange={e => {
+                setChosenPageLink(e.target.value)
+                console.log(e.target.value)
+            }}>
+                <option value="">Выберите страницу, на которой находится блок, который вы хотите изменить</option>
+                {publicRoutes.map((publicRoute) => (
+                    <option key={publicRoute.name} value={publicRoute.path}>{publicRoute.name}</option>
+                ))}
+            </select>
+
             {updatedBlocks.map(block =>
                 <div style={{border: 'solid grey 5px', margin: "20px" }}>
                     <Block block={block}/>

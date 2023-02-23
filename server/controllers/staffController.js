@@ -6,6 +6,7 @@ const path = require("path")
 const {Staffer} = require("../models/defaultModels/staffModel")
 const ApiError = require("../error/ApiError")
 const { Op } = require('sequelize')
+const {CustomBlock, Line} = require("../models/customModels");
 
 
 class StaffController {
@@ -28,6 +29,81 @@ class StaffController {
             next(ApiError.badRequest(e.message))
         }
     }
+
+    async updateStaffer(req, res, next) {
+        try {
+            let {id, isNews, header, pageLink, ordinal, lines, prevLinesIdList} = req.body
+            const block = await CustomBlock.findOne({
+                where: {id},
+            })
+            block.update({isNews: isNews, header: header, pageLink: pageLink, ordinal: ordinal}, {where: {id}})
+
+            if (lines) {
+                console.log(lines)
+                lines = JSON.parse(lines)
+                prevLinesIdList = JSON.parse(prevLinesIdList)
+                for (let prevId of prevLinesIdList) {
+                    let isInsideAlready = false
+                    for (let line of lines) {
+                        if (line.id === prevId) {
+                            isInsideAlready = true
+                            Line.update({
+                                    kind: line.kind,
+                                    params: line.params,
+                                    text: line.text,
+                                    filesNames: line.filesNames !== undefined ? line.filesNames : [],
+                                    addressFileType: line.addressFileType,
+                                    lineOrdinal: line.lineOrdinal,
+                                    blockId: block.id
+                                },
+                                {where: {id: line.id}})
+                        }
+                    }
+                    if (isInsideAlready === false)  {
+                        await Line.destroy({
+                            where: {
+                                id: prevId
+                            }
+                        })
+                        prevLinesIdList.filter(id => id !== prevId)
+                    }
+                }
+                for (const line of lines) {
+                    let isAppearedJustNow = true
+                    for (const prevId of prevLinesIdList) {
+                        if (line.id === prevId) {
+                            isAppearedJustNow = false
+                        }
+                    }
+                    isAppearedJustNow && await Line.create({
+                        kind: line.kind,
+                        params: line.params,
+                        text: line.text,
+                        filesNames: line.filesNames !== undefined ? line.filesNames : [],
+                        addressFileType: line.addressFileType,
+                        lineOrdinal: line.lineOrdinal,
+                        blockId: block.id
+                    })
+                }
+            }
+            return res.json(block)
+        } catch (e) {
+            next(ApiError.badRequest(e.message))
+        }
+    }
+
+    async removeStaffer(req, res) {
+        console.log(req.params)
+        let {id} = req.params
+        console.log(id)
+        await Staffer.destroy({
+            where: {id}
+        })
+        return res.json(id)
+    }
+
+    // getters
+
     async getAll(req, res) {
         let {directions_bac, program_add, limit, page} = req.query
         page = page || 1

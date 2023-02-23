@@ -55,54 +55,52 @@ const CreateDirection = observer(({show, onHide}) => {
     }
 
     return (
-        <Modal show={show} onHide={onHide}>
-            <form>
-                <fieldset>
+        <div>
                     <div>
-                        <label htmlFor="name">Название</label>
+                        <label htmlFor="name" className="mini-info">Название</label>
                         <input type="name" id="name" onChange={e => setName(e.target.value)}/>
                     </div>
                     <div>
-                        <label htmlFor="code">Код</label>
+                        <label htmlFor="code" className="mini-info">Код</label>
                         <input type="text" id="code" onChange={e => setCode(e.target.value)}/>
                     </div>
                     <div>
-                        <label htmlFor="profile">Профиль</label>
+                        <label htmlFor="profile" className="mini-info">Профиль</label>
                         <input type="text" id="profile" onChange={e => setProfile(e.target.value)}/>
                     </div>
                     <div>
-                        <label htmlFor="profession_advantages">Преимущества профессии</label>
-                        <textarea style={{width: 400, height: 100}} id="profession_advantages"
+                        <label className="mini-info" htmlFor="profession_advantages">Преимущества профессии</label>
+                        <textarea className="big-info" id="profession_advantages"
                                   onChange={e => setProfession_advantages(e.target.value)}/>
                     </div>
                     <div>
-                        <label htmlFor="profession_description">Описание профессии</label>
-                        <textarea style={{width: 400, height: 100}} id="profession_description"
+                        <label className="mini-info" htmlFor="profession_description">Описание профессии</label>
+                        <textarea className="big-info" id="profession_description"
                                   onChange={e => setProfession_description(e.target.value)}/>
                     </div>
                     <div>
-                        <label htmlFor="specialities">Специальности</label>
-                        <textarea style={{width: 400, height: 100}} id="specialities"
+                        <label className="mini-info" htmlFor="specialities">Специальности</label>
+                        <textarea className="big-info" id="specialities"
                                   onChange={e => setSpecialities(e.target.value.split("; "))}/>
                     </div>
                     <div>
-                        <label htmlFor="full_and_part_time_form_price">Стоимость очно-заочной формы обучения (руб / в
+                        <label className="mini-info" htmlFor="full_and_part_time_form_price">Стоимость очно-заочной формы обучения (руб / в
                             год)</label>
                         <input type="number" id="full_and_part_time_form_price"
                                onChange={e => setFullAndPartTimeFormPrice(Number(e.target.value))}/>
                     </div>
                     <div>
-                        <label htmlFor="extramural_form_price">Стоимость заочной формы обучения (руб / в год)</label>
+                        <label className="mini-info" htmlFor="extramural_form_price">Стоимость заочной формы обучения (руб / в год)</label>
                         <input type="number" id="extramural_form_price"
                                onChange={e => setExtramuralFormPrice(Number(e.target.value))}/>
                     </div>
-                    <div>
-                        <label htmlFor="img">Картинка</label>
-                        <input type="file" id="img" onChange={e => selectFile(e)}/>
+                    <div style={{marginBottom: "2%"}}>
+                        <label className="mini-info" htmlFor="img">Картинка</label>
+                        <input className="picture-getter" type="file" id="img" onChange={e => selectFile(e)}/>
                     </div>
 
 
-                    <Button variant="outline-info" style={{margin: 30}} onClick={() => {
+                    <Button className="button-admin" onClick={() => {
                         addTest()
                     }}>
                         Добавить новое вступительное испытание
@@ -149,21 +147,19 @@ const CreateDirection = observer(({show, onHide}) => {
                             </Col>
                         </Row>
                     )}
-                    <footer style={{margin: "0 0 50px"}}>
-                        <Button variant="outline-danger" onClick={onHide}>
+
+                        <Button className="buttom-close" variant="outline-danger" onClick={onHide}>
                             Закрыть
                         </Button>
-                        <Button variant="outline-success" onClick={() => {
+                        <Button className="buttom-add" variant="outline-success" onClick={() => {
                             // console.log(name, code, profile, profession_advantages, profession_description, specialities, fullAndPartTimeFormPrice, extramuralFormPrice)
                             addDirection()
                         }}>
                             Добавить направление
                         </Button>
-                    </footer>
-                    <p>*Костыль ради отступа*</p>
-                </fieldset>
-            </form>
-        </Modal>
+
+
+        </div>
 
 
         // <Modal show={show} onHide={onHide}>

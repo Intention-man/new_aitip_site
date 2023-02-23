@@ -50,16 +50,14 @@ const CreateProgram = observer(({show, onHide}) => {
     }
 
     return (
-        <Modal show={show} onHide={onHide}>
-            <form>
-                <fieldset>
+                <div>
                     <div>
-                        <label htmlFor="name">Название</label>
-                        <input type="name" id="name" onChange={e => setName(e.target.value)}/>
+                        <label htmlFor="name" className="mini-info">Название</label>
+                        <input  type="name" id="name" onChange={e => setName(e.target.value)}/>
                     </div>
 
                     <div>
-                        <label htmlFor="kind">Тип программы</label>
+                        <label htmlFor="kind" className="mini-info">Тип программы</label>
                         <select id="kind" size="1" value={kind} onChange={e => setKind(e.target.value)}>
                             <option id="Программа профессиональной переподготовки">Программа профессиональной переподготовки</option>
                             <option id="Программа повышения квалификации">Программа повышения квалификации</option>
@@ -67,24 +65,24 @@ const CreateProgram = observer(({show, onHide}) => {
                     </div>
 
                     <div>
-                        <label htmlFor="description">Описание программы</label>
-                        <textarea style={{width: 400, height: 100}} id="description"
+                        <label htmlFor="description" className="mini-info">Описание программы</label>
+                        <textarea className="big-info" id="description"
                                   onChange={e => setDescription(e.target.value)}/>
                     </div>
 
                     <div>
-                        <label htmlFor="moduls">Модули программы</label>
-                        <textarea style={{width: 400, height: 100}} id="moduls"
+                        <label htmlFor="moduls" className="mini-info">Модули программы</label>
+                        <textarea className="big-info" id="moduls"
                                   onChange={e => setModuls(e.target.value.split("; "))}/>
                     </div>
 
                     <div>
-                        <label htmlFor="hours">Длительность (в часах)</label>
+                        <label htmlFor="hours" className="mini-info">Длительность (в часах)</label>
                         <input type="number" id="hours" onChange={e => setHours(Number(e.target.value))}/>
                     </div>
 
                     <div>
-                        <label htmlFor="form">Тип программы</label>
+                        <label htmlFor="form" className="mini-info">Тип программы</label>
                         <select id="form" size="1" value={form} onChange={e => setForm(e.target.value)}>
                             <option id="Очная">Очная</option>
                             <option id="Очно-заочная">Очно-заочная</option>
@@ -93,59 +91,46 @@ const CreateProgram = observer(({show, onHide}) => {
                     </div>
 
                     <div>
-                        <label htmlFor="cost">Стоимость</label>
+                        <label htmlFor="cost" className="mini-info">Стоимость</label>
                         <input type="text" id="cost" onChange={e => setCost(Number(e.target.value))}/>
                     </div>
 
                     <div>
-                        <label htmlFor="programImg">Обложка программы</label>
-                        <input type="file" id="programImg" onChange={e => {
+                        <label htmlFor="programImg" className="mini-info">Обложка программы</label>
+                        <input className="picture-getter" type="file" id="programImg" onChange={e => {
                             console.log(e)
                             selectProgramImg(e)}}/>
                     </div>
 
                     <div>
-                        <label htmlFor="supervisorName">ФИО руководителя программы</label>
+                        <label htmlFor="supervisorName" className="mini-info">ФИО руководителя программы</label>
                         <input type="name" id="supervisorName" onChange={e => setSupervisorName(e.target.value)}/>
                     </div>
-
-
-                    {/*<div>*/}
-                    {/*    <label htmlFor="description">Описание программы</label>*/}
-                    {/*    <textarea style={{width: 400, height: 100}} id="description"*/}
-                    {/*              onChange={e => setDescription(e.target.value)}/>*/}
-                    {/*</div>*/}
                     <div>
-                        <label htmlFor="supervisorDescription">Описание руководителя программы</label>
-                        <textarea style={{width: 400, height: 100}} id="supervisorDescription"
+                        <label htmlFor="supervisorDescription" className="mini-info">Описание руководителя программы</label>
+                        <textarea className="big-info" id="supervisorDescription"
                                   onChange={e => {
                                       console.log(e.target.value)
                                       setSupervisorDescription(e.target.value)}}/>
                     </div>
-
                     <div>
-                        <label htmlFor="supervizorImg">Фото руководителя программы</label>
-                        <input type="file" id="supervizorImg" onChange={e => {
+                        <label htmlFor="supervizorImg" className="mini-info">Фото руководителя программы</label>
+                        <input className="picture-getter" type="file" id="supervizorImg" onChange={e => {
                             console.log(e)
                             selectSupervizorImg(e)}}/>
                     </div>
 
 
-                    <footer style={{margin: "0 0 50px"}}>
-                        <Button variant="outline-success" onClick={() => {
+
+                        <Button className="buttom-add" variant="outline-success" onClick={() => {
                             addProgram()
                         }}>
                             Добавить программу
                         </Button>
-                        <Button variant="outline-danger" onClick={onHide}>
+                        <Button className="buttom-close" variant="outline-danger" onClick={onHide}>
                             Закрыть
                         </Button>
-
-                    </footer>
-                    <p>*Костыль ради отступа*</p>
-                </fieldset>
-            </form>
-        </Modal>
+                </div>
     );
 });
 

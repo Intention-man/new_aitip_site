@@ -32,17 +32,16 @@ const CreateElectionOrContest = observer(({show, onHide}) => {
     }
 
     return (
-        <Modal show={show} onHide={onHide}>
-            <form>
-                <fieldset>
+
+                <div>
                     <div>
-                        <label htmlFor="name">Название/описание</label>
-                        <textarea style={{width: 400, height: 100}} id="name"
+                        <label htmlFor="name" className="mini-info">Название/описание</label>
+                        <textarea className="big-info" id="name"
                                   onChange={e => setName(e.target.value)}/>
                     </div>
 
                     <div>
-                        <label htmlFor="kind">Тип</label>
+                        <label className="mini-info" htmlFor="kind">Тип</label>
                         <select id="kind" size="1" value={kind} onChange={e => setKind(e.target.value)}>
                             <option id="Выборы">Выборы</option>
                             <option id="Конкурс">Конкурс</option>
@@ -50,50 +49,45 @@ const CreateElectionOrContest = observer(({show, onHide}) => {
                     </div>
 
                     <div>
-                        <label htmlFor="applicationsAcceptanceDateStart">Дата начала приема завлений</label>
+                        <label className="mini-info" htmlFor="applicationsAcceptanceDateStart">Дата начала приема завлений</label>
                         <input type="date" id="applicationsAcceptanceDateStart" onChange={e => setApplicationsAcceptanceDateStart(e.target.value)}/>
                     </div>
 
                     <div>
-                        <label htmlFor="applicationsAcceptanceDateEnd">Дата окончания приема завлений</label>
+                        <label className="mini-info" htmlFor="applicationsAcceptanceDateEnd">Дата окончания приема завлений</label>
                         <input type="date" id="applicationsAcceptanceDateEnd" onChange={e => setApplicationsAcceptanceDateEnd(e.target.value)}/>
                     </div>
 
                     <div>
-                        <label htmlFor="applicationsAcceptancePlace">Место приема заялвний</label>
+                        <label className="mini-info" htmlFor="applicationsAcceptancePlace">Место приема заялвний</label>
                         <input type="text" id="applicationsAcceptancePlace" onChange={e => setApplicationsAcceptancePlace(e.target.value)}/>
                     </div>
 
                     <div>
-                        <label htmlFor="eventDate">Дата проведения выборов/конкурса</label>
-                        <input type="date" id="eventDate" onChange={e => setEventDate(e.target.value)}/>
+                        <label className="mini-info" htmlFor="eventDate">Дата проведения выборов/конкурса</label>
+                        <input className="mini-info" type="date" id="eventDate" onChange={e => setEventDate(e.target.value)}/>
                     </div>
 
                     <div>
-                        <label htmlFor="eventTime">Время проведения выборов/конкурса</label>
-                        <input type="time" id="eventTime" onChange={e => setEventTime(e.target.value)}/>
+                        <label className="mini-info" htmlFor="eventTime">Время проведения выборов/конкурса</label>
+                        <input className="mini-info" type="time" id="eventTime" onChange={e => setEventTime(e.target.value)}/>
                     </div>
 
                     <div>
-                        <label htmlFor="eventPlace">Место проведения выборов/конкурса</label>
+                        <label className="mini-info" htmlFor="eventPlace">Место проведения выборов/конкурса</label>
                         <input type="text" id="eventPlace" onChange={e => setEventPlace(e.target.value)}/>
                     </div>
 
-                    <footer style={{margin: "0 0 50px"}}>
-                        <Button variant="outline-success" onClick={() => {
+                        <Button className="buttom-add" variant="outline-success" onClick={() => {
                             addElectionOrContest()
                         }}>
                             Добавить выборы/конкурс
                         </Button>
-                        <Button variant="outline-danger" onClick={onHide}>
+                        <Button className="buttom-close" variant="outline-danger" onClick={onHide}>
                             Закрыть
                         </Button>
 
-                    </footer>
-                    <p>*Костыль ради отступа*</p>
-                </fieldset>
-            </form>
-        </Modal>
+                </div>
     );
 });
 

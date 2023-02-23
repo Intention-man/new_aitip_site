@@ -39,17 +39,15 @@ const CreatePartner = observer(({show, onHide}) => {
     }
 
     return (
-        <Modal show={show} onHide={onHide}>
-            <form>
-                <fieldset>
+                <div>
                     <div>
-                        <label htmlFor="name">Название партнера</label>
-                        <textarea style={{width: 400, height: 100}} id="name"
+                        <label className="mini-info" htmlFor="name">Название партнера</label>
+                        <textarea className="big-info" id="name"
                                   onChange={e => setName(e.target.value)}/>
                     </div>
 
                     <div>
-                        <label htmlFor="kind">Тип</label>
+                        <label className="mini-info" htmlFor="kind">Тип</label>
                         <select id="kind" size="1" value={kind} onChange={e => setKind(e.target.value)}>
                             <option id="Индустриальный">Индустриальный</option>
                             <option id="Образовательный">Образовательный</option>
@@ -59,25 +57,25 @@ const CreatePartner = observer(({show, onHide}) => {
                     </div>
 
                     <div>
-                        <label htmlFor="description">Описание</label>
-                        <textarea style={{width: 400, height: 100}} id="description"
+                        <label className="mini-info" htmlFor="description">Описание</label>
+                        <textarea className="big-info" id="description"
                                   onChange={e => setDescription(e.target.value)}/>
                     </div>
 
                     <div>
-                        <label htmlFor="logo">Логотип/фото</label>
-                        <input type="file" id="logo" accept="image" required="required" title="Необходимо выбрать минимум один файл" onChange={e => setLogo(e.target.files[0])}/>
+                        <label className="mini-info" htmlFor="logo">Логотип/фото</label>
+                        <input className="picture-getter"  type="file" id="logo" accept="image" required="required" title="Необходимо выбрать минимум один файл" onChange={e => setLogo(e.target.files[0])}/>
                     </div>
 
                     <div>
-                        <label htmlFor="jointProjectsDescriprion">Описание</label>
-                        <textarea style={{width: 400, height: 100}} id="jointProjectsDescriprion"
+                        <label className="mini-info" htmlFor="jointProjectsDescriprion">Описание</label>
+                        <textarea className="big-info" id="jointProjectsDescriprion"
                                   onChange={e => setJointProjectsDescriprion(e.target.value)}/>
                     </div>
 
                     <div>
-                        <label htmlFor="jointProjectsPhotoes">Логотип/фото</label>
-                        <input type="file" multiple="multiple" id="jointProjectsPhotoes" accept="image" onChange={e => {
+                        <label className="mini-info" htmlFor="jointProjectsPhotoes">Логотип/фото</label>
+                        <input className="picture-getter" type="file" multiple="multiple" id="jointProjectsPhotoes" accept="image" onChange={e => {
                             // let fileList = []
                             // for (let i = 0; i < e.target.files.length; i++) {
                             //     console.log(0)
@@ -93,21 +91,16 @@ const CreatePartner = observer(({show, onHide}) => {
                     </div>
 
 
-                    <footer style={{margin: "0 0 50px"}}>
-                        <Button variant="outline-success" onClick={() => {
+                        <Button className="buttom-add" variant="outline-success" onClick={() => {
                             addPartner()
                         }}>
                             Добавить партнера
                         </Button>
-                        <Button variant="outline-danger" onClick={onHide}>
+                        <Button className="buttom-close" variant="outline-danger" onClick={onHide}>
                             Закрыть
                         </Button>
 
-                    </footer>
-                    <p>*Костыль ради отступа*</p>
-                </fieldset>
-            </form>
-        </Modal>
+                </div>
     );
 });
 

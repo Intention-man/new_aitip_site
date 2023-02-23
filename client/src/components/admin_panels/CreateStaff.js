@@ -6,6 +6,7 @@ import {Button, Modal} from "react-bootstrap";
 import {Context} from "../../index";
 import {observer} from "mobx-react-lite";
 import {createStaffer} from "../../http/staffAPI";
+import  "../../css/page_styles/AdminPanel.css";
 
 const CreateStaff = observer(({show, onHide}) => {
     const {admission_store} = useContext(Context)
@@ -74,113 +75,77 @@ const CreateStaff = observer(({show, onHide}) => {
     }
 
     return (
-        <Modal show={show} onHide={onHide}>
-            <form>
-                <fieldset>
+        <div>
                     <div>
-                        <label htmlFor="name">Имя</label>
+                        <label htmlFor="name" className="mini-info">Имя</label>
                         <input type="name" id="name" onChange={e => setName(e.target.value)}/>
                     </div>
                     <div>
-                        <label htmlFor="post">Должность</label>
+                        <label htmlFor="post" className="mini-info">Должность</label>
                         <input type="text" id="post" onChange={e => setPost(e.target.value)}/>
                     </div>
                     <div>
-                        <label htmlFor="academic_degree">Ученая степень</label>
+                        <label htmlFor="academic_degree" className="mini-info">Ученая степень</label>
                         <input type="text" id="academic_degree" onChange={e => setAcademicDegree(e.target.value)}/>
                     </div>
                     <div>
-                        <label htmlFor="academic_title">Ученое звание</label>
+                        <label htmlFor="academic_title" className="mini-info">Ученое звание</label>
                         <input type="text" id="academic_title" onChange={e => setAcademicTitle(e.target.value)}/>
                     </div>
-
-                    {/*<div>*/}
-                    {/*    <label htmlFor="subjects_bac">Направления бакалавариата, на которых преподает сотрудник</label>*/}
-                    {/*    <textarea style={{width: 400, height: 100}} id="subjects_bac"*/}
-                    {/*              onChange={e => setDirectionsBac(e.target.value.split(", "))}/>*/}
-                    {/*</div>*/}
-                    {/*<div>*/}
-                    {/*    <label htmlFor="subjects_add">Программы ДПО, на которых преподает сотрудник</label>*/}
-                    {/*    <textarea style={{width: 400, height: 100}} id="subjects_add"*/}
-                    {/*              onChange={e => setProgramsAdd(e.target.value.split(", "))}/>*/}
-                    {/*</div>*/}
-                    <label htmlFor="directions_bachelor">Направления бакалавриата, на которых преподает сотрудник</label>
-                    <div id="directions_bachelor">
-                        {admission_store.directionsBachelor.map(d =>
-                            <div key={d.name}>
-                                <input id={d.name} type="checkbox" value="0" name={d.name} onChange={() => {
-                                    document.getElementById(d.name).checked === true && addDirection(d.name)
-                                    document.getElementById(d.name).checked === false && removeDirection(d.name)
-                                }}/>
-                                <label htmlFor={d.name}>{d.name}</label>
-                            </div>
-                        )}
-                    </div>
-                    <label htmlFor="programs_additional">Направления бакалавриата, на которых преподает сотрудник</label>
-                    <div id="programs_additional">
-                        {admission_store.additionalPrograms.map(d =>
-                            <div key={d.name}>
-                                <input id={d.name} type="checkbox" value="0" name={d.name} onChange={() => {
-                                    document.getElementById(d.name).checked && addProgram(d.name)
-                                    !(document.getElementById(d.name).checked) && removeProgram(d.name)
-                                }}/>
-                                <label htmlFor={d.name}>{d.name}</label>
-                            </div>
-                        )}
-                    </div>
                     <div>
-                        <label htmlFor="bio_text">Биография (текст)</label>
-                        <textarea style={{width: 400, height: 100}} id="bio_text"
+                        <label htmlFor="directions_bachelor" className="mini-info">Направления бакалавриата, на которых преподает сотрудник</label>
+                        <textarea className="big-info" id="subjects_bac"
                                   onChange={e => setBio(e.target.value)}/>
                     </div>
                     <div>
-                        <label htmlFor="disciplines_and_courses_text">Дисциплины и курсы (текст)</label>
-                        <textarea style={{width: 400, height: 100}} id="disciplines_and_courses_text"
+                        <label htmlFor="bio_text" className="mini-info">Биография (текст)</label>
+                        <textarea className="big-info" id="bio_text"
+                                  onChange={e => setBio(e.target.value)}/>
+                    </div>
+                    <div>
+                        <label htmlFor="disciplines_and_courses_text" className="mini-info">Дисциплины и курсы (текст)</label>
+                        <textarea className="big-info" id="disciplines_and_courses_text"
                                   onChange={e => setDisciplinesAndCourses(e.target.value)}/>
                     </div>
                     <div>
-                        <label htmlFor="publications_text">Публикации (текст)</label>
-                        <textarea style={{width: 400, height: 100}} id="publications_text"
+                        <label htmlFor="publications_text" className="mini-info">Публикации (текст)</label>
+                        <textarea className="big-info" id="publications_text"
                                   onChange={e => setPublications(e.target.value)}/>
                     </div>
 
                     <div>
-                        <label htmlFor="projects_text">Проекты (текст)</label>
-                        <textarea style={{width: 400, height: 100}} id="projects_text"
+                        <label htmlFor="projects_text" className="mini-info">Проекты (текст)</label>
+                        <textarea className="big-info" id="projects_text"
                                   onChange={e => setProjects(e.target.value)}/>
                     </div>
                     <div>
-                        <label htmlFor="email">Почта</label>
+                        <label htmlFor="email" className="mini-info">Почта</label>
                         <input type="text" id="email" onChange={e => setEmail(e.target.value)}/>
                     </div>
                     <div>
-                        <label htmlFor="phone_number">Номер телефона</label>
+                        <label htmlFor="phone_number" className="mini-info">Номер телефона</label>
                         <input type="text" id="phone_number" onChange={e => setPhoneNumber(e.target.value)}/>
                     </div>
                     <div>
-                        <label htmlFor="adress">Адрес</label>
+                        <label htmlFor="adress" className="mini-info">Адрес</label>
                         <input type="text" id="adress" onChange={e => setAdress(e.target.value)}/>
                     </div>
-
                     <div>
-                        <label htmlFor="img">Картинка</label>
-                        <input type="file" id="img" onChange={e => selectFile(e)}/>
+                        <label htmlFor="img" className="mini-info">Картинка</label>
+                        <input className="picture-getter" type="file" id="img" onChange={e => selectFile(e)}/>
                     </div>
 
-                    <footer style={{margin: "0 0 50px"}}>
-                        <Button variant="outline-danger" onClick={onHide}>
+
+                        <Button style={{marginTop:"5%", marginRight:"2%",marginBottom:"5%"}} variant="outline-danger" onClick={onHide}>
                             Закрыть
                         </Button>
-                        <Button variant="outline-success" onClick={() => {
+                        <Button style={{marginTop:"5%",marginBottom:"5%"}} variant="outline-success" onClick={() => {
                             addStaffer()
                         }}>
                             Добавить сотрудника
                         </Button>
-                    </footer>
-                    <p>*Костыль ради отступа*</p>
-                </fieldset>
-            </form>
-        </Modal>
+
+        </div>
     );
 });
 

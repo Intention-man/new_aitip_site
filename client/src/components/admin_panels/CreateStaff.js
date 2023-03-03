@@ -1,32 +1,58 @@
 // Frontend модального окна для добавления сотрудника и функции, изменяющие состояния(установлено в модальном окне определенное значение или нет). Возможно, не будет использоваться.
 
 
-import React, {useContext, useState} from 'react';
-import {Button, Modal} from "react-bootstrap";
+import React, {useContext, useEffect, useState} from 'react';
+import {Button} from "react-bootstrap";
 import {Context} from "../../index";
 import {observer} from "mobx-react-lite";
-import {createStaffer} from "../../http/staffAPI";
+import {createStaffer, removeStaffer, updateStaffer} from "../../http/staffAPI";
 import "../../css/page_styles/AdminPanel.css";
 import "../../css/component_styles/PersonalitiesFilter.css";
+import {convertFiles, fetchAllFiles} from "../../http/commonAPI";
 
 
-const CreateStaff = observer(({show, onHide}) => {
+const CreateStaff = observer(({staffer, mod}) => {
     const {admission_store} = useContext(Context)
+    const {block_store} = useContext(Context)
 
-    const [name, setName] = useState("")
-    const [post, setPost] = useState("")
-    const [academicDegree, setAcademicDegree] = useState("")
-    const [academicTitle, setAcademicTitle] = useState("");
-    const [directionsBac, setDirectionsBac] = useState([]);
-    const [programsAdd, setProgramsAdd] = useState([]);
-    const [bio, setBio] = useState("");
-    const [disciplinesAndCourses, setDisciplinesAndCourses] = useState("");
-    const [publications, setPublications] = useState("");
-    const [projects, setProjects] = useState("");
-    const [email, setEmail] = useState("");
-    const [phoneNumber, setPhoneNumber] = useState("");
-    const [adress, setAdress] = useState("");
-    const [file, setFile] = useState(null)
+    const isEmpty = staffer.hasOwnProperty("fakeParam");
+    // console.log(staffer, isEmpty)
+
+    const [name, setName] = useState(isEmpty ? "" : staffer.name)
+    const [post, setPost] = useState(isEmpty ? "" : staffer.post)
+    const [academicDegree, setAcademicDegree] = useState(isEmpty ? "" : staffer.academic_degree)
+    const [academicTitle, setAcademicTitle] = useState(isEmpty ? "" : staffer.academic_title);
+    const [directionsBac, setDirectionsBac] = useState(isEmpty ? [] : staffer.directions_bac);
+    const [programsAdd, setProgramsAdd] = useState(isEmpty ? [] : staffer.programs_add);
+    const [bio, setBio] = useState(isEmpty ? "" : staffer.bio_text);
+    const [disciplinesAndCourses, setDisciplinesAndCourses] = useState(isEmpty ? "" : staffer.disciplines_and_courses_text);
+    const [publications, setPublications] = useState(isEmpty ? "" : staffer.publications_text);
+    const [projects, setProjects] = useState(isEmpty ? "" : staffer.projects_text);
+    const [email, setEmail] = useState(isEmpty ? "" : staffer.email);
+    const [phoneNumber, setPhoneNumber] = useState(isEmpty ? "" : staffer.phone_number);
+    const [adress, setAdress] = useState(isEmpty ? "" : staffer.adress);
+    const [file, setFile] = useState(isEmpty ? null : staffer.img)
+
+    useEffect(() => {
+        if (mod === "edit") {
+            document.getElementById('name').value = name
+            document.getElementById('post').value = post
+            document.getElementById('academic_degree').value = academicDegree
+            document.getElementById('academic_title').value = academicTitle
+            document.getElementById('bio_text').value = bio
+            document.getElementById('disciplines_and_courses_text').value = disciplinesAndCourses
+            document.getElementById('publications_text').value = publications
+            document.getElementById('projects_text').value = projects
+            document.getElementById('email').value = email
+            document.getElementById('phone_number').value = phoneNumber
+            document.getElementById('adress').value = adress
+        }
+    }, [])
+
+    useEffect(() => {
+        console.log(directionsBac)
+        console.log(programsAdd)
+    }, [directionsBac, programsAdd]);
 
     const addDirection = (directionName) => {
         setDirectionsBac([...directionsBac, directionName])
@@ -48,14 +74,21 @@ const CreateStaff = observer(({show, onHide}) => {
         console.log(programsAdd)
     }
 
-    const selectFile = e => {
-        setFile(e.target.files[0])
+    const selectFile = (e) => {
+        const fileObject = e.target.files[0]
+        const formData = new FormData();
+        formData.append("files", fileObject)
+        console.log(file)
+        convertFiles(formData).then(fileLink => {
+            setFile(fileLink);
+        });
     }
 
-    const addStaffer = () => {
+    const saveStaffer = () => {
         const formData = new FormData()
         console.log(bio, publications, disciplinesAndCourses, projects)
         Object.keys(formData).forEach(k => console.log(formData.getAll(k)))
+        staffer.id && formData.append("id", staffer.id)
         formData.append("name", name)
         formData.append("post", post)
         formData.append("academic_degree", academicDegree)
@@ -73,8 +106,9 @@ const CreateStaff = observer(({show, onHide}) => {
         for (let [key, val] of formData.entries()) {
             console.log(key, val);
         }
-        createStaffer(formData).then(() => onHide())
+        (mod === "edit") ? updateStaffer(formData).then(data => console.log(data)) : createStaffer(formData).then(data => console.log(data))
     }
+
 
     return (
         <div>
@@ -94,6 +128,7 @@ const CreateStaff = observer(({show, onHide}) => {
                 <label htmlFor="academic_title" className="mini-info">Ученое звание</label>
                 <input type="text" id="academic_title" onChange={e => setAcademicTitle(e.target.value)}/>
             </div>
+
             <div>
                 <label className="mini-info">Направления бакалавриата, на которых преподает сотрудник</label>
                 {admission_store.directionsBachelor && admission_store.directionsBachelor.map(direction =>
@@ -106,7 +141,6 @@ const CreateStaff = observer(({show, onHide}) => {
                     </div>
                 )}
             </div>
-
             <div>
                 <label className="mini-info">Программы ДПО, на которых преподает сотрудник</label>
                 {admission_store.additionalPrograms && admission_store.additionalPrograms.map(program =>
@@ -120,15 +154,9 @@ const CreateStaff = observer(({show, onHide}) => {
                 )}
             </div>
 
-            {/*<div>*/}
-            {/*    <label htmlFor="directions_bachelor" className="mini-info">Направления бакалавриата, на которых преподает сотрудник</label>*/}
-            {/*    <textarea className="big-info" id="subjects_bac"*/}
-            {/*              onChange={e => setBio(e.target.value)}/>*/}
-            {/*</div>*/}
             <div>
                 <label htmlFor="bio_text" className="mini-info">Биография (текст)</label>
-                <textarea className="big-info" id="bio_text"
-                          onChange={e => setBio(e.target.value)}/>
+                <textarea className="big-info" id="bio_text" onChange={e => setBio(e.target.value)}/>
             </div>
             <div>
                 <label htmlFor="disciplines_and_courses_text" className="mini-info">Дисциплины и курсы (текст)</label>
@@ -140,12 +168,12 @@ const CreateStaff = observer(({show, onHide}) => {
                 <textarea className="big-info" id="publications_text"
                           onChange={e => setPublications(e.target.value)}/>
             </div>
-
             <div>
                 <label htmlFor="projects_text" className="mini-info">Проекты (текст)</label>
                 <textarea className="big-info" id="projects_text"
                           onChange={e => setProjects(e.target.value)}/>
             </div>
+
             <div>
                 <label htmlFor="email" className="mini-info">Почта</label>
                 <input type="text" id="email" onChange={e => setEmail(e.target.value)}/>
@@ -161,18 +189,37 @@ const CreateStaff = observer(({show, onHide}) => {
             <div>
                 <label htmlFor="img" className="mini-info">Картинка</label>
                 <input className="picture-getter" type="file" id="img" onChange={e => selectFile(e)}/>
+                <select size="7" onChange={e => {
+                    setFile(e.target.value)
+                    console.log(e.target.value)
+                }}>
+                    {block_store.allFiles.map(file =>
+                        <option value={file.link}>
+                            <div>
+                                <p>{file.name}</p>
+                                <img src={process.env.REACT_APP_API_URL + file.link} width="100px" height="100px"/>
+                            </div>
+                        </option>
+                    )}
+                </select>
+                {(typeof file === "string") ? <img src={process.env.REACT_APP_API_URL + file}/> : <p>{typeof file}</p>}
             </div>
 
 
-            <Button style={{marginTop: "5%", marginRight: "2%", marginBottom: "5%"}} variant="outline-danger"
-                    onClick={onHide}>
+            <Button style={{marginTop: "5%", marginRight: "2%", marginBottom: "5%"}} variant="outline-danger">
                 Закрыть
             </Button>
             <Button style={{marginTop: "5%", marginBottom: "5%"}} variant="outline-success" onClick={() => {
-                addStaffer()
+                saveStaffer()
             }}>
-                Добавить сотрудника
+                Сохранить сотрудника
             </Button>
+            {mod === "edit" &&
+                <Button style={{marginTop: "5%", marginBottom: "5%"}} variant="outline-success" onClick={() => {
+                    removeStaffer(staffer.id).then(() => alert("Сотрудник успешно удален"))
+                }}>
+                    Удалить сотрудника
+                </Button>}
         </div>
     );
 });

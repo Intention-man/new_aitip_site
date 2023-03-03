@@ -12,14 +12,19 @@ import CreateOrEditBlock from "../components/admin_panels/CreateOrEditBlock"
 import BlocksEditor from "../components/admin_panels/BlocksEditor";
 import BlocksSwap from "../components/admin_panels/BlocksSwap";
 import "../css/page_styles/AdminPanel.css"
+import StaffEditor from "../components/admin_panels/StaffEditor";
+import ButtonList from "../components/ButtonList";
+import {fetchAllFiles} from "../http/commonAPI";
 
 
 const Admin = () => {
     const {admission_store} = useContext(Context)
+    const {block_store} = useContext(Context)
 
     const [windowVisible, setWindowVisible] = useState("")
     const forms = {
-        "Добавить сотрудника": <CreateStaff />,
+        "Добавить сотрудника": <CreateStaff staffer={{fakeParam: undefined}}/>,
+        "Редактировать сотрудника": <StaffEditor/>,
         "Добавить направление бакалавриата": <CreateDirection />,
         "Добавить программу ДПО": <CreateProgram />,
         "Добавить выборы или конкурс": <CreateElectionOrContest />,
@@ -37,16 +42,20 @@ const Admin = () => {
         fetchAdditionalPrograms().then(data =>
             admission_store.setAdditionalPrograms(data.rows)
         )
+        fetchAllFiles().then(data =>
+            block_store.setAllFiles(data.rows)
+        )
     }, [])
 
 
     return (
         <Container className="d-flex flex-column">
-            {Object.keys(forms).map(key =>
-                <Button className="button-admin" onClick={() => setWindowVisible(key)}>
-                    {key}
-                </Button>
-            )}
+            {/*{Object.keys(forms).map(key =>*/}
+            {/*    <Button className="button-admin" onClick={() => setWindowVisible(key)}>*/}
+            {/*        {key}*/}
+            {/*    </Button>*/}
+            {/*)}*/}
+            <ButtonList buttonList={forms} setChosenValue={setWindowVisible}/>
             {windowVisible && forms[windowVisible]}
         </Container>
     );

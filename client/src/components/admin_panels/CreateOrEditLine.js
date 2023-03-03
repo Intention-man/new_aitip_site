@@ -2,7 +2,7 @@
 
 import React, {useState, useEffect} from 'react';
 import {observer} from "mobx-react-lite";
-import {convertFiles} from "../../http/blockAPI";
+import {convertFiles} from "../../http/commonAPI";
 import "../../css/component_styles/Editor.css"
 import "../../css/component_styles/CreateLine.css"
 import ExtendedTextEditor from "../lines/ExtendedTextEditor";
@@ -167,6 +167,7 @@ const CreateOrEditLine = observer(({index, changeLine, line}) => {
                                     setAddressFileType("local")
                                     changeLine("addressFileType", "local", index)
                                     addFiles(Array.from(e.target.files))
+                                    console.log(Array.from(e.target.files))
                                 }}/>
                                 <label htmlFor="links">Введите ссылки на картинки: </label>
                                 <input className="pretty_inputs" style={{marginBottom: "20px"}} type="text" id="links" onChange={(e) => {

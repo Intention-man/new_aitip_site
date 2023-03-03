@@ -6,6 +6,8 @@ const additionalProgramController = require("../controllers/additionalProgramCon
 const checkRole = require("../middleware/checkRoleMiddleware")
 
 router.post("/", additionalProgramController.create)
+router.post("/update", additionalProgramController.updateProgram)
+router.post("/remove/:id", additionalProgramController.removeProgram)
 router.get("/", additionalProgramController.getAll)
 router.get("/:id", additionalProgramController.getOne)
 

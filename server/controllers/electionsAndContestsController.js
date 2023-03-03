@@ -5,6 +5,7 @@ const uuid = require("uuid")
 const path = require("path")
 const ApiError = require("../error/ApiError")
 const {ElectionsAndContests} = require("../models/defaultModels/electionsAndContestsModel");
+const {AdditionalProgram} = require("../models/defaultModels/admissionModels");
 
 
 
@@ -21,7 +22,33 @@ class ElectionsAndContestsController {
         } catch (e) {
             next(ApiError.badRequest(e.message))
         }
+    }
 
+    async updateEAC(req, res, next) {
+        try {
+            let {id, name, kind, applicationsAcceptanceDateStart, applicationsAcceptanceDateEnd, applicationsAcceptancePlace, eventDate, eventTime, eventPlace} = req.body
+
+            const eAC = await ElectionsAndContests.findOne({
+                where: {id},
+            })
+
+            let values = {name, kind, applicationsAcceptanceDateStart, applicationsAcceptanceDateEnd, applicationsAcceptancePlace, eventDate, eventTime, eventPlace}
+
+            eAC.update(values, {where: {id}})
+            return res.json(eAC)
+        } catch (e) {
+            next(ApiError.badRequest(e.message))
+        }
+    }
+
+    async removeEAC(req, res) {
+        console.log(req.params)
+        let {id} = req.params
+        console.log(id)
+        await ElectionsAndContests.destroy({
+            where: {id}
+        })
+        return res.json(id)
     }
 
     async getAll(req, res) {

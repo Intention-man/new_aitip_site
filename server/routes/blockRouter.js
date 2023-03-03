@@ -9,7 +9,6 @@ router.post("/", blockController.create)
 router.post("/update", blockController.updateBlock)
 router.post("/move", blockController.moveBlocks)
 router.post("/remove/:id", blockController.removeBlock)
-router.post("/convert_files", blockController.convertFiles)
 
 router.get("/", blockController.getAllBlocks)
 router.get("/lines", blockController.getAllLines)

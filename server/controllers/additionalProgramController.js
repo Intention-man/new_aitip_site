@@ -5,6 +5,7 @@ const uuid = require("uuid")
 const path = require("path")
 const ApiError = require("../error/ApiError")
 const {AdditionalProgram} = require("../models/defaultModels/admissionModels");
+const {Staffer} = require("../models/defaultModels/staffModel");
 
 
 
@@ -31,7 +32,39 @@ class AdditionalProgramController {
         } catch (e) {
             next(ApiError.badRequest(e.message))
         }
+    }
 
+    async updateProgram(req, res, next) {
+        try {
+            let {id, name, kind, description, moduls, hours, form, cost, supervisorName, supervisorDescription} = req.body
+            const {programImg, supervizorImg} = req.files
+            const program = await AdditionalProgram.findOne({
+                where: {id},
+            })
+            console.log(programImg, supervizorImg)
+            let fileNameProgramImg = uuid.v4() + ".jpg"
+            await programImg.mv(path.resolve(__dirname, "..", "static", fileNameProgramImg))
+            let fileNameSupervizorImg = uuid.v4() + ".jpg"
+            await supervizorImg.mv(path.resolve(__dirname, "..", "static", fileNameSupervizorImg))
+            console.log(fileNameProgramImg, fileNameSupervizorImg)
+            const splitedModuls = JSON.parse(moduls)
+            let values = {name, kind, description, moduls: splitedModuls, hours, form, cost, programImg: fileNameProgramImg, supervisorName, supervisorDescription, supervizorImg: fileNameSupervizorImg}
+
+            program.update(values, {where: {id}})
+            return res.json(program)
+        } catch (e) {
+            next(ApiError.badRequest(e.message))
+        }
+    }
+
+    async removeProgram(req, res) {
+        console.log(req.params)
+        let {id} = req.params
+        console.log(id)
+        await AdditionalProgram.destroy({
+            where: {id}
+        })
+        return res.json(id)
     }
 
     async getAll(req, res) {

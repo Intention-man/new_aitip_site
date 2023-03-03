@@ -11,7 +11,8 @@ import {Row} from "react-bootstrap";
 
 const PersonalitiesList = observer(params => {
     const {staff_store} = useContext(Context)
-    const {admission_store} = useContext(Context)
+    const windowWidth = window.innerWidth
+    const columnCount = (windowWidth < 600 ? 1 : (windowWidth < 1500 ? 2 : 3))
 
 
     function changeChosenStaffer(clickedId) {
@@ -27,13 +28,14 @@ const PersonalitiesList = observer(params => {
             {(staff_store.staff.length !== 0) ?
                 (() => {
                     let rows = []
-                    const lenGroup = 2
-                    const count = Math.ceil(params.filteredStaff.length / 2) * 2
+                    const groupSize = columnCount
+                    const linesCount = Math.ceil(params.filteredStaff.length / 2) * 2
                     // console.log(staff_store.staff[0])
                     // console.log(staff_store.staff[1])
                     // console.log(staff_store.staff[2])
-                    for (let i = 0; i < count; i += lenGroup) {
-                        let lastThreeStaffId = []
+
+                    for (let i = 0; i < linesCount; i += groupSize) {
+                        let lastSeveralStaffId = []
                         const staffer1 = (params.filteredStaff.length > i ? staff_store.staff[i] : undefined)
                         const staffer2 = (params.filteredStaff.length > (i + 1) ? staff_store.staff[i + 1] : undefined)
                         // const staffer3 = (params.filteredStaff.length > (i + 2) ? staff_store.staff[i + 2] : undefined)

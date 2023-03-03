@@ -8,6 +8,8 @@ const checkRole = require("../middleware/checkRoleMiddleware")
 
 
 router.post("/", staffController.create)
+router.post("/update", staffController.updateStaffer)
+router.post("/remove/:id", staffController.removeStaffer)
 router.get("/", staffController.getAll)
 router.get("/:id", staffController.getOne)
 

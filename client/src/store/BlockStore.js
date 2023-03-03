@@ -6,6 +6,7 @@ export default class BlockStore {
         this._blocks = []
         this._selectedBlocks = []
         this._lines = []
+        this._allFiles = []
 
         makeAutoObservable(this)
     }
@@ -23,6 +24,10 @@ export default class BlockStore {
         this._lines = lines
     }
 
+    setAllFiles(allFiles) {
+        this._allFiles = allFiles
+    }
+
 
     get blocks() {
         return this._blocks
@@ -36,4 +41,7 @@ export default class BlockStore {
         return this._lines
     }
 
+    get allFiles() {
+        return this._allFiles
+    }
 }

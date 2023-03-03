@@ -9,7 +9,7 @@ export default class StaffStore {
             // {id: 5, name: "Ковалева", post: "Главный бухгалтер", img: "aitip_logo.png"},
             // {id: 6, name: "Самсонов", post: "Директор", img: "aitip_logo.png"},
             // {id: 7, name: "Ковалева", post: "Главный бухгалтер", img: "aitip_logo.png"}
-        this._selectedStaffer = ""
+        this._selectedStaffer = -1
 
         this._page = 1
         this._totalCount = 0

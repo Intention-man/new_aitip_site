@@ -126,30 +126,6 @@ class BlockController {
         return res.json(id)
     }
 
-    async convertFiles(req, res, next) {
-        try {
-            let {files} = req.files;
-            console.log(files)
-            if (!Array.isArray(files))
-                files = [files];
-            let filesNamesList = []
-            files.map(file => {
-                let fileName;
-                if (file.mimetype.split("/")[0] === "image") {
-                    fileName = uuid.v4() + ".jpg"
-                } else {
-                    fileName = uuid.v4() + "." + file.name.split(".")[1]
-                }
-
-                file.mv(path.resolve(__dirname, "..", "static", fileName))
-                filesNamesList.push(fileName)
-            })
-            console.log(filesNamesList)
-            return res.json(filesNamesList)
-        } catch (e) {
-            next(ApiError.badRequest(e.message))
-        }
-    }
 
     async getAllBlocks(req, res) {
         let {limit, page} = req.query

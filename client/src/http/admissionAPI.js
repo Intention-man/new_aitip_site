@@ -7,6 +7,16 @@ export const createDirectionBachelor = async (direction) => {
     return data
 }
 
+export const updateDirectionBachelor = async (direction) => {
+    const {data} = await $authHost.post("api/direction_bachelor/update", direction)
+    return data
+}
+
+export const removeDirectionBachelor = async (id) => {
+    const {data} = await $authHost.post("api/direction_bachelor/remove/" + id)
+    return data
+}
+
 export const fetchDirectionsBachelor = async () => {
     const {data} = await $host.get("api/direction_bachelor/")
     return data
@@ -20,6 +30,16 @@ export const fetchOneDirectionBachelor = async (id) => {
 export const createAdditionalProgram = async (program) => {
     const {data} = await $host.post("api/additional_program/", program)
     console.log(data)
+    return data
+}
+
+export const updateAdditionalProgram = async (program) => {
+    const {data} = await $authHost.post("api/additional_program/update", program)
+    return data
+}
+
+export const removeAdditionalProgram = async (id) => {
+    const {data} = await $authHost.post("api/additional_program/remove/" + id)
     return data
 }
 

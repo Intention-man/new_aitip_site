@@ -4,9 +4,14 @@
     padding: 1%;
     margin: 1%;
     color: var(--aitip_blue);
-    background-color: white;
+    background-color: #EEEEEE;
     border-color: var(--aitip_blue);
 }
+
+/*.button-admin:active {*/
+/*    background-color: white;*/
+/*}*/
+
 .mini-info{
     color: #076DB1;
     font-family: 'Open Sans';

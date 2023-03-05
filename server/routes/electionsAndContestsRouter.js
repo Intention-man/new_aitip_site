@@ -6,6 +6,8 @@ const electionsAndContestsController = require("../controllers/electionsAndConte
 const checkRole = require("../middleware/checkRoleMiddleware")
 
 router.post("/", electionsAndContestsController.create)
+router.post("/update", electionsAndContestsController.updateEAC)
+router.post("/remove/:id", electionsAndContestsController.removeEAC)
 router.get("/", electionsAndContestsController.getAll)
 
 

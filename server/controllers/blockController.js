@@ -55,11 +55,6 @@ class BlockController {
                     for (let line of lines) {
                         if (line.id === prevId) {
                             isInsideAlready = true
-                            // const id = line.id
-                            // const lineRecord = await Line.findOne({
-                            //     where: {id},
-                            // })
-                            // console.log(lineRecord)
                             Line.update({
                                     kind: line.kind,
                                     params: line.params,
@@ -105,6 +100,33 @@ class BlockController {
         }
     }
 
+    async moveBlocks(req, res, next) {
+        try {
+            let {blocks} = req.body
+            blocks = JSON.parse(blocks)
+
+            for (let block of blocks) {
+                CustomBlock.update(
+                    {ordinal: block.ordinal},
+                    {where: {id: block.id}})
+            }
+            return res.json(blocks)
+        } catch (e) {
+            next(ApiError.badRequest(e.message))
+        }
+    }
+
+    async removeBlock(req, res) {
+        console.log(req.params)
+        let {id} = req.params
+        console.log(id)
+        await CustomBlock.destroy({
+            where: {id}
+        })
+        return res.json(id)
+    }
+
+
     async getAllBlocks(req, res) {
         let {limit, page} = req.query
         page = page || 1
@@ -130,31 +152,6 @@ class BlockController {
             include: [{model: Line, as: "lines"}]
         })
         return res.json(block)
-    }
-
-    async convertFiles(req, res, next) {
-        try {
-            let {files} = req.files;
-            console.log(files)
-            if (!Array.isArray(files))
-                files = [files];
-            let filesNamesList = []
-            files.map(file => {
-                let fileName;
-                if (file.mimetype.split("/")[0] === "image") {
-                    fileName = uuid.v4() + ".jpg"
-                } else {
-                    fileName = uuid.v4() + "." + file.name.split(".")[1]
-                }
-
-                file.mv(path.resolve(__dirname, "..", "static", fileName))
-                filesNamesList.push(fileName)
-            })
-            console.log(filesNamesList)
-            return res.json(filesNamesList)
-        } catch (e) {
-            next(ApiError.badRequest(e.message))
-        }
     }
 }
 

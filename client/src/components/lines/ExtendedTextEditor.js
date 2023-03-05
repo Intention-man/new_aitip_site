@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import MDEditor, {commands} from "@uiw/react-md-editor";
-import "../css/component_styles/Editor.css"
-import {blackText, blueText, greyText, redText} from "./textColoringCommands";
+import "../../css/component_styles/Editor.css"
+import {blackText, blueText, greyText, redText} from "../textColoringCommands";
 
 const ExtendedTextEditor = ({text, setText, changeLine, index}) => {
 

@@ -19,36 +19,36 @@
 //                         <img src={location} width="20px" height="20px" style={{paddingRight: "2px"}}/>
 //                         проспект Ленина, дом 23, каб. 219.
 //                     </div>
-
+//
 //                     <div className="main_text">
 //                         <img src={internet} width="20px" height="18px" style={{paddingRight: "2px"}}/>
 //                         <a href={"http://www.aitip.ru/"} style={{color: "white", textDecoration: "none"}}>aitip.ru</a> - старая версия сайта
 //                     </div>
-
+//
 //                 </div>
 //                 <div className="headings">Остались вопросы?
 //                     <div className="main_text">
 //                         <img src={phone} width="30px" height="20px" style={{paddingRight: "2px"}}/>
 //                         8 (3852) 35-93-55
 //                     </div>
-
+//
 //                     <div className="main_text">
 //                         <img src={phone} width="30px" height="20px" style={{paddingRight: "2px"}}/>
 //                         8 (3852) 22-80-04
 //                     </div>
-
+//
 //                     <div className="main_text">
 //                         <img src={mail} width="30px" height="25px" style={{paddingRight: "2px"}}/>
 //                         aitip@mail.ru
 //                     </div>
-
+//
 //                 </div>
-
-
+//
+//
 //             </div>
 //             <div className="footer"></div>
 //         </div>
 //     );
 // };
-
+//
 // export default ProFooter;

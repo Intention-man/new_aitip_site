@@ -7,7 +7,8 @@ const checkRole = require("../middleware/checkRoleMiddleware")
 
 router.post("/", blockController.create)
 router.post("/update", blockController.updateBlock)
-router.post("/convert_files", blockController.convertFiles)
+router.post("/move", blockController.moveBlocks)
+router.post("/remove/:id", blockController.removeBlock)
 
 router.get("/", blockController.getAllBlocks)
 router.get("/lines", blockController.getAllLines)

@@ -28,6 +28,42 @@ class StaffController {
             next(ApiError.badRequest(e.message))
         }
     }
+
+    async updateStaffer(req, res, next) {
+        try {
+            let {id, name, post, academic_degree, academic_title, directions_bac, programs_add, bio_text, disciplines_and_courses_text, publications_text, projects_text, email, phone_number, adress, file} = req.body
+            // let {img} = req.files
+
+            const staffer = await Staffer.findOne({
+                where: {id},
+            })
+            const splitedDirectionsBac = JSON.parse(directions_bac)
+            const splitedProgramsAdd= JSON.parse(programs_add)
+            console.log(splitedDirectionsBac, splitedProgramsAdd)
+
+            // let fileName = uuid.v4() + ".jpg"
+            // await img.mv(path.resolve(__dirname, "..", "static", fileName))
+
+            staffer.update({name, post, academic_degree, academic_title, directions_bac: splitedDirectionsBac, programs_add: splitedProgramsAdd, bio_text, disciplines_and_courses_text, publications_text, projects_text, email, phone_number, adress, img: file}, {where: {id}})
+
+            return res.json(staffer)
+        } catch (e) {
+            next(ApiError.badRequest(e.message))
+        }
+    }
+
+    async removeStaffer(req, res) {
+        console.log(req.params)
+        let {id} = req.params
+        console.log(id)
+        await Staffer.destroy({
+            where: {id}
+        })
+        return res.json(id)
+    }
+
+    // getters
+
     async getAll(req, res) {
         let {directions_bac, program_add, limit, page} = req.query
         page = page || 1

@@ -1,29 +1,58 @@
 // Frontend модального окна для добавления сотрудника и функции, изменяющие состояния(установлено в модальном окне определенное значение или нет). Возможно, не будет использоваться.
 
 
-import React, {useContext, useState} from 'react';
-import {Button, Modal} from "react-bootstrap";
+import React, {useContext, useEffect, useState} from 'react';
+import {Button} from "react-bootstrap";
 import {Context} from "../../index";
 import {observer} from "mobx-react-lite";
-import {createStaffer} from "../../http/staffAPI";
+import {createStaffer, removeStaffer, updateStaffer} from "../../http/staffAPI";
+import "../../css/page_styles/AdminPanel.css";
+import "../../css/component_styles/PersonalitiesFilter.css";
+import {convertFiles, fetchAllFiles} from "../../http/commonAPI";
 
-const CreateStaff = observer(({show, onHide}) => {
+
+const CreateStaff = observer(({staffer, mod}) => {
     const {admission_store} = useContext(Context)
+    const {block_store} = useContext(Context)
 
-    const [name, setName] = useState("")
-    const [post, setPost] = useState("")
-    const [academicDegree, setAcademicDegree] = useState("")
-    const [academicTitle, setAcademicTitle] = useState("");
-    const [directionsBac, setDirectionsBac] = useState([]);
-    const [programsAdd, setProgramsAdd] = useState([]);
-    const [bio, setBio] = useState("");
-    const [disciplinesAndCourses, setDisciplinesAndCourses] = useState("");
-    const [publications, setPublications] = useState("");
-    const [projects, setProjects] = useState("");
-    const [email, setEmail] = useState("");
-    const [phoneNumber, setPhoneNumber] = useState("");
-    const [adress, setAdress] = useState("");
-    const [file, setFile] = useState(null)
+    const isEmpty = staffer.hasOwnProperty("fakeParam");
+    // console.log(staffer, isEmpty)
+
+    const [name, setName] = useState(isEmpty ? "" : staffer.name)
+    const [post, setPost] = useState(isEmpty ? "" : staffer.post)
+    const [academicDegree, setAcademicDegree] = useState(isEmpty ? "" : staffer.academic_degree)
+    const [academicTitle, setAcademicTitle] = useState(isEmpty ? "" : staffer.academic_title);
+    const [directionsBac, setDirectionsBac] = useState(isEmpty ? [] : staffer.directions_bac);
+    const [programsAdd, setProgramsAdd] = useState(isEmpty ? [] : staffer.programs_add);
+    const [bio, setBio] = useState(isEmpty ? "" : staffer.bio_text);
+    const [disciplinesAndCourses, setDisciplinesAndCourses] = useState(isEmpty ? "" : staffer.disciplines_and_courses_text);
+    const [publications, setPublications] = useState(isEmpty ? "" : staffer.publications_text);
+    const [projects, setProjects] = useState(isEmpty ? "" : staffer.projects_text);
+    const [email, setEmail] = useState(isEmpty ? "" : staffer.email);
+    const [phoneNumber, setPhoneNumber] = useState(isEmpty ? "" : staffer.phone_number);
+    const [adress, setAdress] = useState(isEmpty ? "" : staffer.adress);
+    const [file, setFile] = useState(isEmpty ? null : staffer.img)
+
+    useEffect(() => {
+        if (mod === "edit") {
+            document.getElementById('name').value = name
+            document.getElementById('post').value = post
+            document.getElementById('academic_degree').value = academicDegree
+            document.getElementById('academic_title').value = academicTitle
+            document.getElementById('bio_text').value = bio
+            document.getElementById('disciplines_and_courses_text').value = disciplinesAndCourses
+            document.getElementById('publications_text').value = publications
+            document.getElementById('projects_text').value = projects
+            document.getElementById('email').value = email
+            document.getElementById('phone_number').value = phoneNumber
+            document.getElementById('adress').value = adress
+        }
+    }, [])
+
+    useEffect(() => {
+        console.log(directionsBac)
+        console.log(programsAdd)
+    }, [directionsBac, programsAdd]);
 
     const addDirection = (directionName) => {
         setDirectionsBac([...directionsBac, directionName])
@@ -45,14 +74,21 @@ const CreateStaff = observer(({show, onHide}) => {
         console.log(programsAdd)
     }
 
-    const selectFile = e => {
-        setFile(e.target.files[0])
+    const selectFile = (e) => {
+        const fileObject = e.target.files[0]
+        const formData = new FormData();
+        formData.append("files", fileObject)
+        console.log(file)
+        convertFiles(formData).then(fileLink => {
+            setFile(fileLink);
+        });
     }
 
-    const addStaffer = () => {
+    const saveStaffer = () => {
         const formData = new FormData()
         console.log(bio, publications, disciplinesAndCourses, projects)
         Object.keys(formData).forEach(k => console.log(formData.getAll(k)))
+        staffer.id && formData.append("id", staffer.id)
         formData.append("name", name)
         formData.append("post", post)
         formData.append("academic_degree", academicDegree)
@@ -70,117 +106,121 @@ const CreateStaff = observer(({show, onHide}) => {
         for (let [key, val] of formData.entries()) {
             console.log(key, val);
         }
-        createStaffer(formData).then(() => onHide())
+        (mod === "edit") ? updateStaffer(formData).then(data => console.log(data)) : createStaffer(formData).then(data => console.log(data))
     }
 
+
     return (
-        <Modal show={show} onHide={onHide}>
-            <form>
-                <fieldset>
-                    <div>
-                        <label htmlFor="name">Имя</label>
-                        <input type="name" id="name" onChange={e => setName(e.target.value)}/>
-                    </div>
-                    <div>
-                        <label htmlFor="post">Должность</label>
-                        <input type="text" id="post" onChange={e => setPost(e.target.value)}/>
-                    </div>
-                    <div>
-                        <label htmlFor="academic_degree">Ученая степень</label>
-                        <input type="text" id="academic_degree" onChange={e => setAcademicDegree(e.target.value)}/>
-                    </div>
-                    <div>
-                        <label htmlFor="academic_title">Ученое звание</label>
-                        <input type="text" id="academic_title" onChange={e => setAcademicTitle(e.target.value)}/>
-                    </div>
+        <div>
+            <div>
+                <label htmlFor="name" className="mini-info">Имя</label>
+                <input type="name" id="name" onChange={e => setName(e.target.value)}/>
+            </div>
+            <div>
+                <label htmlFor="post" className="mini-info">Должность</label>
+                <input type="text" id="post" onChange={e => setPost(e.target.value)}/>
+            </div>
+            <div>
+                <label htmlFor="academic_degree" className="mini-info">Ученая степень</label>
+                <input type="text" id="academic_degree" onChange={e => setAcademicDegree(e.target.value)}/>
+            </div>
+            <div>
+                <label htmlFor="academic_title" className="mini-info">Ученое звание</label>
+                <input type="text" id="academic_title" onChange={e => setAcademicTitle(e.target.value)}/>
+            </div>
 
-                    {/*<div>*/}
-                    {/*    <label htmlFor="subjects_bac">Направления бакалавариата, на которых преподает сотрудник</label>*/}
-                    {/*    <textarea style={{width: 400, height: 100}} id="subjects_bac"*/}
-                    {/*              onChange={e => setDirectionsBac(e.target.value.split(", "))}/>*/}
-                    {/*</div>*/}
-                    {/*<div>*/}
-                    {/*    <label htmlFor="subjects_add">Программы ДПО, на которых преподает сотрудник</label>*/}
-                    {/*    <textarea style={{width: 400, height: 100}} id="subjects_add"*/}
-                    {/*              onChange={e => setProgramsAdd(e.target.value.split(", "))}/>*/}
-                    {/*</div>*/}
-                    <label htmlFor="directions_bachelor">Направления бакалавриата, на которых преподает сотрудник</label>
-                    <div id="directions_bachelor">
-                        {admission_store.directionsBachelor.map(d =>
-                            <div key={d.name}>
-                                <input id={d.name} type="checkbox" value="0" name={d.name} onChange={() => {
-                                    document.getElementById(d.name).checked === true && addDirection(d.name)
-                                    document.getElementById(d.name).checked === false && removeDirection(d.name)
-                                }}/>
-                                <label htmlFor={d.name}>{d.name}</label>
+            <div>
+                <label className="mini-info">Направления бакалавриата, на которых преподает сотрудник</label>
+                {admission_store.directionsBachelor && admission_store.directionsBachelor.map(direction =>
+                    <div className="squaredOne" key={direction.id + "d_point"}>
+                        <input type="checkbox" id={direction.id + "d"} className="small_box" onChange={() => {
+                            directionsBac.includes(direction.name) ? removeDirection(direction.name) : addDirection(direction.name)
+                        }}/>
+                        <label htmlFor={direction.id + "d"}/>
+                        <p className="filter_text">{direction.name}</p>
+                    </div>
+                )}
+            </div>
+            <div>
+                <label className="mini-info">Программы ДПО, на которых преподает сотрудник</label>
+                {admission_store.additionalPrograms && admission_store.additionalPrograms.map(program =>
+                    <div className="squaredOne down">
+                        <input type="checkbox" id={program.id + "p"} className="small_box" onChange={() => {
+                            programsAdd.includes(program.name) ? removeProgram(program.name) : addProgram(program.name)
+                        }}/>
+                        <label htmlFor={program.id + "p"}/>
+                        <p className="filter_text">{program.name}</p>
+                    </div>
+                )}
+            </div>
+
+            <div>
+                <label htmlFor="bio_text" className="mini-info">Биография (текст)</label>
+                <textarea className="big-info" id="bio_text" onChange={e => setBio(e.target.value)}/>
+            </div>
+            <div>
+                <label htmlFor="disciplines_and_courses_text" className="mini-info">Дисциплины и курсы (текст)</label>
+                <textarea className="big-info" id="disciplines_and_courses_text"
+                          onChange={e => setDisciplinesAndCourses(e.target.value)}/>
+            </div>
+            <div>
+                <label htmlFor="publications_text" className="mini-info">Публикации (текст)</label>
+                <textarea className="big-info" id="publications_text"
+                          onChange={e => setPublications(e.target.value)}/>
+            </div>
+            <div>
+                <label htmlFor="projects_text" className="mini-info">Проекты (текст)</label>
+                <textarea className="big-info" id="projects_text"
+                          onChange={e => setProjects(e.target.value)}/>
+            </div>
+
+            <div>
+                <label htmlFor="email" className="mini-info">Почта</label>
+                <input type="text" id="email" onChange={e => setEmail(e.target.value)}/>
+            </div>
+            <div>
+                <label htmlFor="phone_number" className="mini-info">Номер телефона</label>
+                <input type="text" id="phone_number" onChange={e => setPhoneNumber(e.target.value)}/>
+            </div>
+            <div>
+                <label htmlFor="adress" className="mini-info">Адрес</label>
+                <input type="text" id="adress" onChange={e => setAdress(e.target.value)}/>
+            </div>
+            <div>
+                <label htmlFor="img" className="mini-info">Картинка</label>
+                <input className="picture-getter" type="file" id="img" onChange={e => selectFile(e)}/>
+                <select size="7" onChange={e => {
+                    setFile(e.target.value)
+                    console.log(e.target.value)
+                }}>
+                    {block_store.allFiles.map(file =>
+                        <option value={file.link}>
+                            <div>
+                                <p>{file.name}</p>
+                                <img src={process.env.REACT_APP_API_URL + file.link} width="100px" height="100px"/>
                             </div>
-                        )}
-                    </div>
-                    <label htmlFor="programs_additional">Направления бакалавриата, на которых преподает сотрудник</label>
-                    <div id="programs_additional">
-                        {admission_store.additionalPrograms.map(d =>
-                            <div key={d.name}>
-                                <input id={d.name} type="checkbox" value="0" name={d.name} onChange={() => {
-                                    document.getElementById(d.name).checked && addProgram(d.name)
-                                    !(document.getElementById(d.name).checked) && removeProgram(d.name)
-                                }}/>
-                                <label htmlFor={d.name}>{d.name}</label>
-                            </div>
-                        )}
-                    </div>
-                    <div>
-                        <label htmlFor="bio_text">Биография (текст)</label>
-                        <textarea style={{width: 400, height: 100}} id="bio_text"
-                                  onChange={e => setBio(e.target.value)}/>
-                    </div>
-                    <div>
-                        <label htmlFor="disciplines_and_courses_text">Дисциплины и курсы (текст)</label>
-                        <textarea style={{width: 400, height: 100}} id="disciplines_and_courses_text"
-                                  onChange={e => setDisciplinesAndCourses(e.target.value)}/>
-                    </div>
-                    <div>
-                        <label htmlFor="publications_text">Публикации (текст)</label>
-                        <textarea style={{width: 400, height: 100}} id="publications_text"
-                                  onChange={e => setPublications(e.target.value)}/>
-                    </div>
+                        </option>
+                    )}
+                </select>
+                {(typeof file === "string") ? <img src={process.env.REACT_APP_API_URL + file}/> : <p>{typeof file}</p>}
+            </div>
 
-                    <div>
-                        <label htmlFor="projects_text">Проекты (текст)</label>
-                        <textarea style={{width: 400, height: 100}} id="projects_text"
-                                  onChange={e => setProjects(e.target.value)}/>
-                    </div>
-                    <div>
-                        <label htmlFor="email">Почта</label>
-                        <input type="text" id="email" onChange={e => setEmail(e.target.value)}/>
-                    </div>
-                    <div>
-                        <label htmlFor="phone_number">Номер телефона</label>
-                        <input type="text" id="phone_number" onChange={e => setPhoneNumber(e.target.value)}/>
-                    </div>
-                    <div>
-                        <label htmlFor="adress">Адрес</label>
-                        <input type="text" id="adress" onChange={e => setAdress(e.target.value)}/>
-                    </div>
 
-                    <div>
-                        <label htmlFor="img">Картинка</label>
-                        <input type="file" id="img" onChange={e => selectFile(e)}/>
-                    </div>
-
-                    <footer style={{margin: "0 0 50px"}}>
-                        <Button variant="outline-danger" onClick={onHide}>
-                            Закрыть
-                        </Button>
-                        <Button variant="outline-success" onClick={() => {
-                            addStaffer()
-                        }}>
-                            Добавить сотрудника
-                        </Button>
-                    </footer>
-                    <p>*Костыль ради отступа*</p>
-                </fieldset>
-            </form>
-        </Modal>
+            <Button style={{marginTop: "5%", marginRight: "2%", marginBottom: "5%"}} variant="outline-danger">
+                Закрыть
+            </Button>
+            <Button style={{marginTop: "5%", marginBottom: "5%"}} variant="outline-success" onClick={() => {
+                saveStaffer()
+            }}>
+                Сохранить сотрудника
+            </Button>
+            {mod === "edit" &&
+                <Button style={{marginTop: "5%", marginBottom: "5%"}} variant="outline-success" onClick={() => {
+                    removeStaffer(staffer.id).then(() => alert("Сотрудник успешно удален"))
+                }}>
+                    Удалить сотрудника
+                </Button>}
+        </div>
     );
 });
 

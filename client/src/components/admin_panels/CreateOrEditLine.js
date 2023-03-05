@@ -93,7 +93,7 @@ const CreateOrEditLine = observer(({index, changeLine, line}) => {
                                 {param}
                             </p>
                         ))}
-                        ))}</p> : <p>Выберите параметры</p>}
+                        </p> : <p>Выберите параметры</p>}
 
                         {kind === 2 &&
                             <select id="params" value={params[0]} onChange={e => {

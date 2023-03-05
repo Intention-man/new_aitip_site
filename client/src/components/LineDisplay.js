@@ -11,7 +11,7 @@ const LineDisplay = observer(({line}) => {
         <div>
             <div key={line.lineOrdinal}>
                 {(line.kind === 1 && line.text.length > 0) &&
-                    <MDEditor.Markdown source={line.text} style={{whiteSpace: 'pre-wrap'}}/>
+                    <MDEditor.Markdown source={line.text} style={{textAlign: 'right', whiteSpace: 'pre-wrap'}}/>
                 }
 
                 {(line.kind === 2 && (line.filesNames.length > 0)) && (line.addressFileType === "global" ?
@@ -25,7 +25,7 @@ const LineDisplay = observer(({line}) => {
                         imgType={line.params[0]}
                         imgSrc={line.addressFileType === "global" ? line.filesNames[0] : process.env.REACT_APP_API_URL + line.filesNames[0]}
                         imgPos={line.params[1]}>
-                        <MDEditor.Markdown source={line.text} style={{whiteSpace: 'pre-wrap'}}/>
+                        <MDEditor.Markdown source={line.text} style={{textAlign: 'right', whiteSpace: 'pre-wrap'}}/>
                     </Card>
                 }
 

@@ -46,6 +46,16 @@
     font-size: calc(var(--font_size_const) * 1.5);
 }
 
+alignRight {
+    display: block;
+    text-align: right;
+}
+
+alignCenter {
+    display: block;
+    text-align: center;
+}
+
 .TwoColumnTextEditor-columnsContainer {
     padding: 30px 0;
     display: grid;

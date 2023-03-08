@@ -1,7 +1,9 @@
 import React, {useState} from 'react';
 import MDEditor, {commands} from "@uiw/react-md-editor";
+import {blackText, blueText, greyText, redText} from "../additional_commands/textColoringCommands";
+import { alignTextCenter, alignTextRight, alignTextLeft } from '../additional_commands/textAlignCommands';
+import AlignLeftIcon from "../../local_assets/icons/align-left.svg";
 import "../../css/component_styles/Editor.css"
-import {blackText, blueText, greyText, redText} from "../textColoringCommands";
 
 const ExtendedTextEditor = ({text, setText, changeLine, index}) => {
 
@@ -17,17 +19,40 @@ const ExtendedTextEditor = ({text, setText, changeLine, index}) => {
         <MDEditor
             value={text}
             preview="edit"
-            commands={[commands.bold, commands.italic, commands.link, commands.quote, commands.orderedListCommand, commands.unorderedListCommand, commands.checkedListCommand, commands.hr,
+            commands={[
+                commands.bold, 
+                commands.italic, 
                 commands.group([blueText, redText, blackText, greyText],
                     {
                         name: 'Изменить цвет выделенного текста',
                         groupName: 'Изменить цвет выделенного текста',
                         buttonProps: {'aria-label': 'Изменить цвет выделенного текста'}
                     }
-                )
-            ]
-            }
-            extraCommands={[commands.fullscreen]}
+                ),
+                commands.group([alignTextLeft, alignTextCenter, alignTextRight], 
+                    {
+                        name: "Изменить выравнивание выделенного текста",
+                        groupName: "Изменить выравнивание выделенного текста",    
+                        buttonProps: {
+                            'aria-label': "Изменить выравнивание выделенного текста",
+                            'title': "Изменить выравнивание выделенного текста"
+                        },
+                        icon: (
+                            <img style={{width: '12px', height: '12px'}} src={AlignLeftIcon} />
+                        )
+                    }
+                ),
+                commands.divider,
+                commands.link, 
+                commands.quote, 
+                commands.orderedListCommand, 
+                commands.unorderedListCommand, 
+                commands.checkedListCommand, 
+                commands.hr,
+            ]}
+            extraCommands={[
+                commands.fullscreen
+            ]}
             onChange={(val) => {
                 setText(val)
                 changeLine("text", val, index)

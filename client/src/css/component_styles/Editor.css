@@ -45,3 +45,10 @@
 .font_big {
     font-size: calc(var(--font_size_const) * 1.5);
 }
+
+.TwoColumnTextEditor-columnsContainer {
+    padding: 30px 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 20px;
+}

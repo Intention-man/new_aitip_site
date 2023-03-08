@@ -3,9 +3,10 @@
 import React, {useState, useEffect} from 'react';
 import {observer} from "mobx-react-lite";
 import {convertFiles} from "../../http/commonAPI";
+import ExtendedTextEditor from "../lines/ExtendedTextEditor";
+import TwoColumnTextEditor from './LineEditors/TwoColumnTextEditor';
 import "../../css/component_styles/Editor.css"
 import "../../css/component_styles/CreateLine.css"
-import ExtendedTextEditor from "../lines/ExtendedTextEditor";
 
 
 const CreateOrEditLine = observer(({index, changeLine, line}) => {
@@ -17,8 +18,9 @@ const CreateOrEditLine = observer(({index, changeLine, line}) => {
         3: "Картинка + текст - в 2 столбика",
         4: "Карусель",
         5: "Видео",
-        6: "Документ"
-    }
+        6: "Документ",
+        7: "Текст в 2 колонки"
+    };
 
     const [kind, setKind] = useState(0);
     const [params, setParams] = useState([]);
@@ -60,7 +62,13 @@ const CreateOrEditLine = observer(({index, changeLine, line}) => {
         });
     }
 
+    useEffect(() => {
+        var t = text;
+    }, [text]);
+
     return (
+        // TODO: желательно отрефакторить этот код, разнести каждый элемент управления по отдельным компонетам
+
         <div style={{margin: "30px 10px", borderColor: "blue", borderWidth: "3px"}}>
             <div>
                 <div>
@@ -72,12 +80,11 @@ const CreateOrEditLine = observer(({index, changeLine, line}) => {
                         changeLine("kind", Number(e.target.value), index)
                     }}>
                         <option value="0">Выберите тип элемента</option>
-                        <option value="1">Текст/список/подзаголовок</option>
-                        <option value="2">Большая картинка</option>
-                        <option value="3">Картинка + текст - в 2 столбика</option>
-                        <option value="4">Карусель</option>
-                        <option value="5">Видео</option>
-                        <option value="6">Документ</option>
+                        {
+                            Object.entries(kinds).map(entry => 
+                                <option key={parseInt(entry[0])} value={entry[0]}>{entry[1]}</option>
+                            )
+                        }
                     </select>
                 </div>
 
@@ -137,7 +144,7 @@ const CreateOrEditLine = observer(({index, changeLine, line}) => {
                 }
 
 
-                {kind > 1 &&
+                {kind > 1 && kind !== 7 &&
                     <div style={{margin: "30px 0"}}>
                         {filesNames.length > 0 ? <p>Выбранный(-е) файл(-ы): {filesNames.map((filesName) => (
                                 <p>
@@ -215,6 +222,15 @@ const CreateOrEditLine = observer(({index, changeLine, line}) => {
                 {(kind === 1 || kind === 3) &&
                     <ExtendedTextEditor text={text} setText={setText} changeLine={changeLine} index={index}/>
                 }
+
+            {kind === 7 &&
+                <TwoColumnTextEditor 
+                    setExternalText={setText} 
+                    line={line}
+                    changeLine={changeLine} 
+                    index={index}
+                />
+            }
         </div>
     );
 });

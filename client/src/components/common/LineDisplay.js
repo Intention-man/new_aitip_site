@@ -4,10 +4,13 @@ import MDEditor from "@uiw/react-md-editor";
 import Card from "../lines/Card";
 import Carusel from "../lines/Carusel";
 import BigImg from "../lines/BigImg";
+import TwoColumnText from '../lines/TwoColumnText';
 
 
 const LineDisplay = observer(({line}) => {
     return (
+        // TODO: желательно отрефакторить этот код, разнести этот контент в компоненты в самих линий
+
         <>
             {(line.kind === 1 && line.text.length > 0) &&
                 <MDEditor.Markdown source={line.text} style={{whiteSpace: 'pre-wrap'}}/>
@@ -45,6 +48,12 @@ const LineDisplay = observer(({line}) => {
                     <a href={line.addressFileType === "global" ? line.filesNames[0] : process.env.REACT_APP_API_URL + line.filesNames[0]}
                        download target="_blank">Скачать документ</a>
                 </div>
+            }
+            {(line.kind === 7 && line.text.length > 0) &&
+                <TwoColumnText
+                    leftColumnText={line.params[0]}
+                    rightColumnText={line.params[1]}
+                />
             }
         </>
     );

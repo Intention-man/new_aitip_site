@@ -3,6 +3,7 @@ import MDEditor, {commands} from "@uiw/react-md-editor";
 import {blackText, blueText, greyText, redText} from "../additional_commands/textColoringCommands";
 import { alignTextCenter, alignTextRight, alignTextLeft } from '../additional_commands/textAlignCommands';
 import AlignLeftIcon from "../../local_assets/icons/align-left.svg";
+import ColorChangeIcon from '../../local_assets/icons/color-fill.svg';
 import "../../css/component_styles/Editor.css"
 
 const ExtendedTextEditor = ({text, setText, changeLine, index}) => {
@@ -26,7 +27,13 @@ const ExtendedTextEditor = ({text, setText, changeLine, index}) => {
                     {
                         name: 'Изменить цвет выделенного текста',
                         groupName: 'Изменить цвет выделенного текста',
-                        buttonProps: {'aria-label': 'Изменить цвет выделенного текста'}
+                        buttonProps: {
+                            'aria-label': 'Изменить цвет выделенного текста',
+                            'title': 'Изменить цвет выделенного текста'
+                        },
+                        icon: (
+                            <img style={{width: '12px', height: '12px'}} src={ColorChangeIcon} />
+                        )
                     }
                 ),
                 commands.group([alignTextLeft, alignTextCenter, alignTextRight], 

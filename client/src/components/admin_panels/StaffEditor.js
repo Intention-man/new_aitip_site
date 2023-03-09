@@ -11,7 +11,7 @@ const StaffEditor = observer(() => {
     const [chosenStaffer, setChosenStaffer] = useState({});
 
     useEffect(() => {
-        fetchStaff(1, 10).then(data => {
+        fetchStaff().then(data => {
                 staff_store.setStaff(data.rows)
                 staff_store.setTotalCount(data.count)
             })
@@ -41,7 +41,7 @@ const StaffEditor = observer(() => {
             </select>
 
             {chosenStaffer &&
-                <CreateStaff staffer={chosenStaffer} mod="edit"/>
+                <CreateStaff staffer={chosenStaffer} mode="edit"/>
             }
         </div>
     );

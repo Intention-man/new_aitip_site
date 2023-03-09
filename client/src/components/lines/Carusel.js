@@ -5,10 +5,12 @@ import vector1 from "../../local_assets/Vector1.png"
 
 
 const Carusel = ({photos, addressFileType, params}) => {
+    if (photos && typeof photos === "string") {photos = [photos]}
+    console.log(typeof photos);
     const [currentSlideNumber, setCurrentSlideNumber] = useState(0)
     console.log(params)
-    const [size, setSize] = useState(params[0]);
-    const [dotColor, setDotColor] = useState(params[1]);
+    const [size, setSize] = useState(params ? params[0]: 1);
+    const [dotColor, setDotColor] = useState(params ? params[1] : "blue");
 
 
     useEffect(() => {
@@ -32,11 +34,11 @@ const Carusel = ({photos, addressFileType, params}) => {
             </div>
             <br/>
 
-            <div id="123" style={{textAlign: "center"}}>
-                {photos.map(photo =>
-                    <span key={photos.indexOf(photo)} className="dot" style={{backgroundColor: (photos.indexOf(photo) === currentSlideNumber ? dotColor : "grey")}} onClick={() => setCurrentSlideNumber(photos.indexOf(photo))}/>
-                )}
-            </div>
+            {photos.length > 0 &&
+                <div id="123" style={{textAlign: "center"}}>
+                    {photos.map(photo =>
+                    <span key={photos.indexOf(photo)} className="dot" style={{backgroundColor: (photos.indexOf(photo) === currentSlideNumber ? dotColor : "grey")}} onClick={() => setCurrentSlideNumber(photos.indexOf(photo))}/>)}
+            </div>}
         </div>
     );
 };

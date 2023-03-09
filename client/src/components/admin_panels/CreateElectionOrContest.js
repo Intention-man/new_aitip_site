@@ -3,24 +3,48 @@
 import React, {useState} from 'react';
 import {observer} from "mobx-react-lite";
 import {Button, Modal} from "react-bootstrap";
-import {createElectionsAndContests} from "../../http/electionsAndContestsAPI";
+import {
+    createElectionsAndContests,
+    removeElectionsAndContests,
+    updateElectionsAndContests
+} from "../../http/electionsAndContestsAPI";
 import "../../css/page_styles/AdminPanel.css"
+import {useEffect} from "react";
+import {updateFileUsages} from "../commonPanelsFunctions";
+import {removePartner} from "../../http/partnersAPI";
 
 
-const CreateElectionOrContest = observer(({show, onHide}) => {
+const CreateElectionOrContest = observer(({eAC, mode}) => {
+    const isEmpty = eAC.hasOwnProperty("fakeParam");
 
-    const [name, setName] = useState( "")
-    const [kind, setKind] = useState("Выборы");
-    const [applicationsAcceptanceDateStart, setApplicationsAcceptanceDateStart] = useState("");
-    const [applicationsAcceptanceDateEnd, setApplicationsAcceptanceDateEnd] = useState("");
-    const [applicationsAcceptancePlace, setApplicationsAcceptancePlace] = useState("");
-    const [eventDate, setEventDate] = useState("");
-    const [eventTime, setEventTime] = useState("");
-    const [eventPlace, setEventPlace] = useState("");
+    const [name, setName] = useState( isEmpty ? "" : eAC.name)
+    const [kind, setKind] = useState(isEmpty ? "" : eAC.kind);
+    const [applicationsAcceptanceDateStart, setApplicationsAcceptanceDateStart] = useState(isEmpty ? "" : eAC.applicationsAcceptanceDateStart);
+    const [applicationsAcceptanceDateEnd, setApplicationsAcceptanceDateEnd] = useState(isEmpty ? "" : eAC.applicationsAcceptanceDateEnd);
+    const [applicationsAcceptancePlace, setApplicationsAcceptancePlace] = useState(isEmpty ? "" : eAC.applicationsAcceptancePlace);
+    const [eventDate, setEventDate] = useState(isEmpty ? "" : eAC.eventDate);
+    const [eventTime, setEventTime] = useState(isEmpty ? "" : eAC.eventTime);
+    const [eventPlace, setEventPlace] = useState(isEmpty ? "" : eAC.eventPlace);
 
 
-    const addElectionOrContest = () => {
+    useEffect(() => {
+        if (mode === "edit") {
+            document.getElementById('name').value = name
+            document.getElementById('kind').value = kind
+            document.getElementById('applicationsAcceptanceDateStart').value = applicationsAcceptanceDateStart.substring(0, 10)
+            document.getElementById('applicationsAcceptanceDateEnd').value = applicationsAcceptanceDateEnd.substring(0, 10)
+            document.getElementById('applicationsAcceptancePlace').value = applicationsAcceptancePlace
+            document.getElementById('eventDate').value = eventDate.substring(0, 10)
+            document.getElementById('eventTime').value = eventTime
+            document.getElementById('eventPlace').value = eventPlace
+        }
+    }, [])
+
+
+    const saveElectionOrContest = () => {
+        console.log(typeof applicationsAcceptanceDateStart)
         const formData = new FormData()
+        eAC.id && formData.append("id", eAC.id)
         formData.append("name", name)
         formData.append("kind", kind)
         formData.append("applicationsAcceptanceDateStart", applicationsAcceptanceDateStart)
@@ -28,8 +52,8 @@ const CreateElectionOrContest = observer(({show, onHide}) => {
         formData.append("applicationsAcceptancePlace", applicationsAcceptancePlace)
         formData.append("eventDate", eventDate)
         formData.append("eventTime", eventTime)
-        formData.append("eventPlace", eventPlace)
-        createElectionsAndContests(formData).then(() => onHide())
+        formData.append("eventPlace", eventPlace);
+        mode === "edit" ? updateElectionsAndContests(formData).then(() => alert("Успешно обновлено")) : createElectionsAndContests(formData).then(() => alert("Успешно добавлено"))
     }
 
     return (
@@ -60,7 +84,7 @@ const CreateElectionOrContest = observer(({show, onHide}) => {
                     </div>
 
                     <div>
-                        <label className="mini-info" htmlFor="applicationsAcceptancePlace">Место приема заялвний</label>
+                        <label className="mini-info" htmlFor="applicationsAcceptancePlace">Место приема заявлений</label>
                         <input type="text" id="applicationsAcceptancePlace" onChange={e => setApplicationsAcceptancePlace(e.target.value)}/>
                     </div>
 
@@ -80,13 +104,23 @@ const CreateElectionOrContest = observer(({show, onHide}) => {
                     </div>
 
                         <Button className="buttom-add" variant="outline-success" onClick={() => {
-                            addElectionOrContest()
+                            saveElectionOrContest()
                         }}>
-                            Добавить выборы/конкурс
+                            Сохранить выборы/конкурс
                         </Button>
-                        <Button className="buttom-close" variant="outline-danger" onClick={onHide}>
-                            Закрыть
+                    <Button className="buttom-close" variant="outline-warning" onClick={() => window.location.reload()}>
+                        Выйти без сохранения
+                    </Button>
+                    {mode === "edit" &&
+                        <Button className="buttom-close" variant="outline-danger"
+                                onClick={() => {
+
+                                    removeElectionsAndContests(eAC.id).then(() => alert("Успешно удалено"))
+                                }}>
+                            Удалить выборы или конкурс
                         </Button>
+                    }
+
 
                 </div>
     );

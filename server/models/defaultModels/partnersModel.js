@@ -10,8 +10,8 @@ const Partners = sequelize.define("partner", {
     kind: {type: DataTypes.STRING, allowNull: false},
     description: {type: DataTypes.TEXT, allowNull: false},
     logo: {type: DataTypes.STRING, allowNull: false},
-    jointProjectsDescriprion: {type: DataTypes.TEXT},
-    jointProjectsPhotoes: {type: DataTypes.ARRAY(DataTypes.TEXT)}
+    jointProjectsDescription: {type: DataTypes.TEXT},
+    jointProjectsPhotos: {type: DataTypes.ARRAY(DataTypes.TEXT)}
 })
 
 

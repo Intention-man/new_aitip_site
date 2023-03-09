@@ -1,8 +1,7 @@
 /* Функции создания и получения данных между сервером и БД. Ссылки, по которым они работают написаны в staffRouter
 */
 
-const uuid = require("uuid")
-const path = require("path")
+
 const {Staffer} = require("../models/defaultModels/staffModel")
 const ApiError = require("../error/ApiError")
 const { Op } = require('sequelize')
@@ -12,17 +11,17 @@ class StaffController {
     async create(req, res, next) {
         console.log()
         try{
-            let {name, post, academic_degree, academic_title, directions_bac, programs_add, bio_text, disciplines_and_courses_text, publications_text, projects_text, email, phone_number, adress} = req.body
+            let {name, post, academic_degree, academic_title, directions_bac, programs_add, bio_text, disciplines_and_courses_text, publications_text, projects_text, email, phone_number, adress, file} = req.body
 
             const splitedDirectionsBac = JSON.parse(directions_bac)
             const splitedProgramsAdd= JSON.parse(programs_add)
             console.log(splitedDirectionsBac, splitedProgramsAdd)
 
-            const {img} = req.files
-            let fileName = uuid.v4() + ".jpg"
-            await img.mv(path.resolve(__dirname, "..", "static", fileName))
+            // const {img} = req.files
+            // let fileName = uuid.v4() + ".jpg"
+            // await img.mv(path.resolve(__dirname, "..", "static", fileName))
 
-            const staff = await Staffer.create({name, post, academic_degree, academic_title, directions_bac: splitedDirectionsBac, programs_add: splitedProgramsAdd, bio_text, disciplines_and_courses_text, publications_text, projects_text, email, phone_number, adress, img: fileName})
+            const staff = await Staffer.create({name, post, academic_degree, academic_title, directions_bac: splitedDirectionsBac, programs_add: splitedProgramsAdd, bio_text, disciplines_and_courses_text, publications_text, projects_text, email, phone_number, adress, img: file})
             return res.json(staff)
         } catch (e) {
             next(ApiError.badRequest(e.message))
@@ -37,6 +36,7 @@ class StaffController {
             const staffer = await Staffer.findOne({
                 where: {id},
             })
+            console.log(file, staffer)
             const splitedDirectionsBac = JSON.parse(directions_bac)
             const splitedProgramsAdd= JSON.parse(programs_add)
             console.log(splitedDirectionsBac, splitedProgramsAdd)

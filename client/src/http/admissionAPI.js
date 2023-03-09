@@ -1,5 +1,6 @@
 import {$authHost, $host} from "./index";
 
+// Bachelor
 
 export const createDirectionBachelor = async (direction) => {
     const {data} = await $host.post("api/direction_bachelor/", direction)
@@ -17,6 +18,11 @@ export const removeDirectionBachelor = async (id) => {
     return data
 }
 
+export const removeEntranceTest = async (id) => {
+    const {data} = await $authHost.post("api/direction_bachelor/remove_test/" + id)
+    return data
+}
+
 export const fetchDirectionsBachelor = async () => {
     const {data} = await $host.get("api/direction_bachelor/")
     return data
@@ -26,6 +32,8 @@ export const fetchOneDirectionBachelor = async (id) => {
     const {data} = await $host.get("api/direction_bachelor/" + id)
     return data
 }
+
+// AddProfEdu
 
 export const createAdditionalProgram = async (program) => {
     const {data} = await $host.post("api/additional_program/", program)

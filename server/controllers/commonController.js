@@ -4,6 +4,7 @@ const uuid = require("uuid");
 const path = require("path");
 const ApiError = require("../error/ApiError");
 const {FileWrapper} = require("../models/fileWrapperModel");
+const {Staffer} = require("../models/defaultModels/staffModel");
 
 
 class CommonController {
@@ -13,7 +14,7 @@ class CommonController {
             console.log(files)
             if (!Array.isArray(files))
                 files = [files];
-            let filesNamesList = []
+            let filesLinksList = []
             files.map(async file => {
                 let fileLink;
                 let fileLabel = file.name
@@ -23,18 +24,34 @@ class CommonController {
                     fileLink = uuid.v4() + "." + file.name.split(".")[1]
                 }
                 await file.mv(path.resolve(__dirname, "..", "static", fileLink))
-                filesNamesList.push(fileLink)
+                filesLinksList.push(fileLink)
 
                 const fileWrapper = await FileWrapper.create({
                     name: fileLabel,
                     link: fileLink
                 })
             })
-            console.log(filesNamesList)
-            return res.json(filesNamesList)
+            console.log(filesLinksList)
+            return res.json(filesLinksList)
         } catch (e) {
             next(ApiError.badRequest(e.message))
         }
+    }
+
+    async updateFileUsages(req, res) {
+        let {fileLink, delta} = req.body
+        console.log(fileLink, delta)
+        const file = await FileWrapper.findOne({
+            where: {link: fileLink},
+        })
+        let newCountUsages = -1
+        if (file) {
+            console.log(Object.values(file))
+            newCountUsages = Number(file.countUsages) + Number(delta)
+            console.log(newCountUsages)
+            file.update({id: file.id, name: file.name, link: file.link, countUsages: newCountUsages}, {where: {id: file.id}})
+        }
+        return res.json(newCountUsages)
     }
 
     async removeFile(req, res) {

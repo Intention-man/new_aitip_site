@@ -7,6 +7,7 @@ const checkRole = require("../middleware/checkRoleMiddleware")
 
 
 router.post("/convert_files", commonController.convertFiles)
+router.post("/update_file_usages", commonController.updateFileUsages)
 router.get("/", commonController.getAllFiles)
 
 

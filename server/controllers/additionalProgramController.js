@@ -5,29 +5,25 @@ const uuid = require("uuid")
 const path = require("path")
 const ApiError = require("../error/ApiError")
 const {AdditionalProgram} = require("../models/defaultModels/admissionModels");
-const {Staffer} = require("../models/defaultModels/staffModel");
-
 
 
 class AdditionalProgramController {
     async create(req, res, next) {
         try{
-            let {name, kind, description, moduls, hours, form, cost, supervisorName, supervisorDescription} = req.body
-            // console.log(name, kind, description, moduls, hours, form, cost, supervisorName, supervisorDescription)
-            const {programImg, supervizorImg} = req.files
-            console.log(programImg, supervizorImg)
-            let fileNameProgramImg = uuid.v4() + ".jpg"
-            await programImg.mv(path.resolve(__dirname, "..", "static", fileNameProgramImg))
-            let fileNameSupervizorImg = uuid.v4() + ".jpg"
-            await supervizorImg.mv(path.resolve(__dirname, "..", "static", fileNameSupervizorImg))
-            console.log(fileNameProgramImg, fileNameSupervizorImg)
+            let {name, kind, description, modules, hours, form, cost, supervisorName, supervisorDescription, programImg, supervisorImg} = req.body
+            // console.log(name, kind, description, modules, hours, form, cost, supervisorName, supervisorDescription)
+            // const {programImg, supervisorImg} = req.files
+            // console.log(programImg, supervisorImg)
+            // let fileNameProgramImg = uuid.v4() + ".jpg"
+            // await programImg.mv(path.resolve(__dirname, "..", "static", fileNameProgramImg))
+            // let fileNameSupervisorImg = uuid.v4() + ".jpg"
+            // await supervisorImg.mv(path.resolve(__dirname, "..", "static", fileNameSupervisorImg))
+            // console.log(fileNameProgramImg, fileNameSupervisorImg)
 
-            const splitedModuls = JSON.parse(moduls)
-
-            let values = {name, kind, description, moduls: splitedModuls, hours, form, cost, programImg: fileNameProgramImg, supervisorName, supervisorDescription, supervizorImg: fileNameSupervizorImg}
+            const splitedModules = JSON.parse(modules)
+            let values = {name, kind, description, modules: splitedModules, hours, form, cost, programImg, supervisorName, supervisorDescription, supervisorImg}
 
             const additionalProgram = await AdditionalProgram.create(values)
-
             return res.json(additionalProgram)
         } catch (e) {
             next(ApiError.badRequest(e.message))
@@ -36,19 +32,19 @@ class AdditionalProgramController {
 
     async updateProgram(req, res, next) {
         try {
-            let {id, name, kind, description, moduls, hours, form, cost, supervisorName, supervisorDescription} = req.body
-            const {programImg, supervizorImg} = req.files
+            let {id, name, kind, description, modules, hours, form, cost, supervisorName, supervisorDescription, programImg, supervisorImg} = req.body
             const program = await AdditionalProgram.findOne({
                 where: {id},
             })
-            console.log(programImg, supervizorImg)
-            let fileNameProgramImg = uuid.v4() + ".jpg"
-            await programImg.mv(path.resolve(__dirname, "..", "static", fileNameProgramImg))
-            let fileNameSupervizorImg = uuid.v4() + ".jpg"
-            await supervizorImg.mv(path.resolve(__dirname, "..", "static", fileNameSupervizorImg))
-            console.log(fileNameProgramImg, fileNameSupervizorImg)
-            const splitedModuls = JSON.parse(moduls)
-            let values = {name, kind, description, moduls: splitedModuls, hours, form, cost, programImg: fileNameProgramImg, supervisorName, supervisorDescription, supervizorImg: fileNameSupervizorImg}
+            // console.log(programImg, supervizorImg)
+            // let fileNameProgramImg = uuid.v4() + ".jpg"
+            // await programImg.mv(path.resolve(__dirname, "..", "static", fileNameProgramImg))
+            // let fileNameSupervizorImg = uuid.v4() + ".jpg"
+            // await supervizorImg.mv(path.resolve(__dirname, "..", "static", fileNameSupervizorImg))
+            // console.log(fileNameProgramImg, fileNameSupervizorImg)
+
+            const splitedModules = JSON.parse(modules)
+            let values = {name, kind, description, modules: splitedModules, hours, form, cost, programImg, supervisorName, supervisorDescription, supervisorImg}
 
             program.update(values, {where: {id}})
             return res.json(program)
@@ -66,6 +62,8 @@ class AdditionalProgramController {
         })
         return res.json(id)
     }
+
+    // GETTERS
 
     async getAll(req, res) {
         let {limit, page} = req.query

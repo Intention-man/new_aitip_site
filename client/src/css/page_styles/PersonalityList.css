@@ -1,0 +1,19 @@
+.person_block{
+    margin-bottom: 10px;
+    border-radius: 10px;
+    background: white;
+}
+
+
+.block_content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; /* adjust as needed */
+    align-items: center; /* adjust as needed */
+}
+
+.ava_img{
+    width: 100px;
+    height: 100px;
+    padding: 10px;
+}

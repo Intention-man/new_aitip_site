@@ -13,13 +13,14 @@ import '../../css/component_styles/Block.css'
  * Props:
  * @param {Object | string} imgSrc - изображение (либо импортированное, либо путь к нему).
 */
-const RoundedImg = ({ imgSrc }) => {
+const RoundedImg = ({ imgSrc, style }) => {
     return (
         <div className='RoundedImg'>
             <div
                 className='RoundedImg-img'
                 style={{
                     backgroundImage: `url(${imgSrc})`,
+                    ...style
                 }}
             />
         </div>

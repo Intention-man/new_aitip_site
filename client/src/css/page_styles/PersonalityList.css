@@ -4,16 +4,166 @@
     background: white;
 }
 
-
 .block_content {
     display: flex;
     flex-direction: row;
-    justify-content: space-between; /* adjust as needed */
-    align-items: center; /* adjust as needed */
+    justify-content: left;
+    align-items: center;
+    cursor: pointer;
 }
 
 .ava_img{
     width: 100px;
     height: 100px;
     padding: 10px;
+}
+
+.description_block{
+    display: flex;
+    flex-direction: row;
+    background: white;
+    margin-left: -10px;
+    border-radius: 10px;
+    position: relative;
+}
+
+
+
+.button_row{
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.description_buttons{
+    border-radius: 10px;
+    border: 1px var(--aitip_grey) solid;
+    width: 120px;
+    min-height: 80px;
+}
+.big_avatar{
+    width: 200px;
+    height: 200px;
+    padding: 10px;
+}
+
+.staffer_name{
+    font-size: var(--font_size_const);
+    font-weight: bold;
+    margin: 10px;
+}
+
+.general_desc{
+    font-size: calc(var(--font_size_const)*0.85);
+    margin: 10px;
+}
+
+
+.personal_data{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 10px;
+}
+
+.data_part{
+    display: flex;
+    flex-direction: row;
+    margin-right: 20px;
+    margin-bottom: 10px;
+}
+
+.data_icon{
+    width: 30px;
+    height: 25px;
+    padding-right: 5px;
+}
+
+.top_block_row{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.top_content{
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.close-btn {
+    cursor: pointer;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    border: none;
+    background: white;
+}
+
+.text_block {
+    background: var(--bgcolor);
+    border-radius: 5px;
+    justify-content: left;
+    margin-top: -10px;
+}
+
+.text_desc{
+    font-size: var(--font_size_const);
+}
+
+.text_bg{
+    background: var(--bgcolor);
+    border: 10px var(--bgcolor) solid;
+    border-radius: 10px;
+}
+
+.text_block_active {
+    background: white;
+    border-radius: 5px;
+    justify-content: left;
+    margin-top: -10px;
+}
+
+.text_bg_active{
+    background: var(--bgcolor);
+    border: 10px white solid;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+@media screen and (min-width: 1501px) {
+    .description_block{
+        min-width: 740px;
+    }
+
+    .text_block_active{
+        width: 740px;
+    }
+
+    .text_bg_active{
+        width: 740px;
+    }
+}
+
+@media screen and (max-width: 1500px) and (min-width: 601px) {
+    .description_block{
+        min-width: 580px;
+    }
+
+    .text_block_active{
+        width: 580px;
+    }
+
+    .text_bg_active{
+        width: 580px;
+    }
+
+
+}
+
+
+/*TODO Сделать версию для телефонов с нормальным блоком описания*/
+@media screen and (max-width: 600px) {
+    .description_block{
+        min-width: 200px;
+    }
 }

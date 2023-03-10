@@ -47,22 +47,18 @@ const PersonalitiesList = observer(params => {
 
                         rows.push(<Row style={{display: "grid", gridTemplateColumns: "1fr 1fr 1fr"}}>
                             {list.map(staffer =>
-                                <div key={staffer.id}
-                                     className="person_block"
-                                     onClick={() => {
-                                         changeChosenStaffer(staffer.id)
-                                     }
-                                     }>
-                                        <div className="block_content">
-                                    <img src={process.env.REACT_APP_API_URL + staffer.img}
-                                         className="ava_img"
-                                         alt="картинка чет не загрузилась"/>
-                                    <div>
-                                        <div> {staffer.name} </div>
-                                        <div> {staffer.post} </div>
+                                <div style={{marginRight: "10px"}}>
+                                    <div key={staffer.id}
+                                         className="person_block"
+                                         onClick={() => {
+                                             changeChosenStaffer(staffer.id)
+                                         }
+                                         }>
+
+                                        <SmallStafferItem staffer={staffer}/>
                                     </div>
                                 </div>
-                                </div>
+
                             )}
                         </Row>)
                         rows.push(params.chosenStaffer && lastThreeStaffId.includes(params.chosenStaffer.id) &&

@@ -43,7 +43,7 @@ const Menu = () => {
                         <button className="button_search" type="submit"></button>
                     </form>
                 </a>
-                <a style={{display: "flex", flexWrap: "nowrap"}}>
+                <a >
                     <button className="blindversion">
                         Версия для слабовидящих
                         <img src={eye} style={{color: "white", paddingLeft: "10px", paddingTop: "7px"}}/>

@@ -42,6 +42,8 @@ const StafferItem = observer(({staffer, closeStaffer}) => {
             }}
                 // onClick={() => viewDiv(staffer.id)}
             >
+
+
                 <div className="description_block">
                 <img src={process.env.REACT_APP_API_URL + staffer.img}
                      className="big_avatar"

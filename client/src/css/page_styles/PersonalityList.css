@@ -34,6 +34,7 @@
     flex-direction: row;
     list-style-type: none;
     justify-content: center;
+    margin-left: 190px;
     margin-top: 10px;
 }
 
@@ -130,32 +131,40 @@
     margin-bottom: 10px;
 }
 
+
 @media screen and (min-width: 1501px) {
     .description_block{
         min-width: 740px;
+        margin-left: 150px;
+    }
+
+    .button_row{
+        margin-left: 370px;
     }
 
     .text_block_active{
-        width: 740px;
+        min-width: 740px;
     }
 
     .text_bg_active{
-        width: 740px;
+        min-width: 740px;
     }
+
 }
 
 @media screen and (max-width: 1500px) and (min-width: 601px) {
     .description_block{
-        min-width: 580px;
+        min-width: 660px;
     }
 
     .text_block_active{
-        width: 580px;
+        width: 660px;
     }
 
     .text_bg_active{
-        width: 580px;
+        width: 660px;
     }
+
 
 
 }

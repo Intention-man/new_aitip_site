@@ -47,7 +47,7 @@ const PersonalitiesList = observer(params => {
 
                         rows.push(<Row style={{display: "grid", gridTemplateColumns: "1fr 1fr 1fr"}}>
                             {list.map(staffer =>
-                                <div style={{marginRight: "10px"}}>
+                                <div style={{marginRight: "18px"}}>
                                     <div key={staffer.id}
                                          className="person_block"
                                          onClick={() => {

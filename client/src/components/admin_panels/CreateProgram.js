@@ -124,7 +124,7 @@ const CreateProgram = observer(({program, mode}) => {
                     console.log(e.target.value)
                 }}>
                     {block_store.allFiles.map(file =>
-                        <option value={file.link}>
+                        <option value={file.fileLink}>
                             {file.name}
                         </option>
                     )}
@@ -157,7 +157,7 @@ const CreateProgram = observer(({program, mode}) => {
                     console.log(e.target.value)
                 }}>
                     {block_store.allFiles.map(file =>
-                        <option value={file.link}>
+                        <option value={file.fileLink}>
                             {file.name}
                         </option>
                     )}

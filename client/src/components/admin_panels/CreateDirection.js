@@ -122,7 +122,8 @@ const CreateDirection = observer(({direction, mode}) => {
                        onChange={e => setFullAndPartTimeFormPrice(Number(e.target.value))}/>
             </div>
             <div>
-                <label className="mini-info" htmlFor="extramuralFormPrice">Стоимость заочной формы обучения (руб / в год)</label>
+                <label className="mini-info" htmlFor="extramuralFormPrice">Стоимость заочной формы обучения (руб / в
+                    год)</label>
                 <input type="number" id="extramuralFormPrice"
                        onChange={e => setExtramuralFormPrice(Number(e.target.value))}/>
             </div>
@@ -137,11 +138,8 @@ const CreateDirection = observer(({direction, mode}) => {
                     console.log(e.target.value)
                 }}>
                     {block_store.allFiles.map(file =>
-                        <option value={file.link}>
-                            <div>
-                                <p>{file.name}</p>
-                                {/*<img src={process.env.REACT_APP_API_URL + file.link} width="100px" height="100px"/>*/}
-                            </div>
+                        <option value={file.fileLink}>
+                            <p>{file.name}</p>
                         </option>
                     )}
                 </select>
@@ -185,7 +183,8 @@ const CreateDirection = observer(({direction, mode}) => {
                                 <Dropdown.Item
                                     onClick={() => changeTest("admissionByEGE", true, i.id)}>По ЕГЭ</Dropdown.Item>
                                 <Dropdown.Item
-                                    onClick={() => changeTest("admissionByEGE", false, i.id)}>На базе профессионального образования</Dropdown.Item>
+                                    onClick={() => changeTest("admissionByEGE", false, i.id)}>На базе профессионального
+                                    образования</Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
                     </Col>
@@ -208,7 +207,8 @@ const CreateDirection = observer(({direction, mode}) => {
                 Выйти без сохранения
             </Button>
             {mode === "edit" &&
-                <Button className="buttom-close" variant="outline-danger" onClick={() => removeDirectionBachelor(direction.id).then(() => alert("Успешно удалено"))}>
+                <Button className="buttom-close" variant="outline-danger"
+                        onClick={() => removeDirectionBachelor(direction.id).then(() => alert("Успешно удалено"))}>
                     Удалить направление
                 </Button>
             }

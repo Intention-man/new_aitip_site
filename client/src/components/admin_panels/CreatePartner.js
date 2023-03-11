@@ -113,7 +113,7 @@ const CreatePartner = observer(({partner, mode}) => {
                     console.log(e.target.value)
                 }}>
                     {block_store.allFiles.map(file =>
-                        <option value={file.link}>
+                        <option value={file.fileLink}>
                             {file.name}
                         </option>
                     )}
@@ -146,7 +146,7 @@ const CreatePartner = observer(({partner, mode}) => {
                     console.log(fileList)
                 }}>
                     {block_store.allFiles.map(file =>
-                        <option value={file.link}>
+                        <option value={file.fileLink}>
                             {file.name}
                         </option>
                     )}

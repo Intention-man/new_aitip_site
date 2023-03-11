@@ -191,10 +191,9 @@ const CreateStaff = observer(({staffer, mode}) => {
                     console.log(e.target.value)
                 }}>
                     {block_store.allFiles.map(file =>
-                        <option value={file.link}>
+                        <option value={file.fileLink}>
                             <div>
                                 <p>{file.name}</p>
-                                {/*<img src={process.env.REACT_APP_API_URL + file.link} width="100px" height="100px"/>*/}
                             </div>
                         </option>
                     )}

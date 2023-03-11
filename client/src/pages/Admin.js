@@ -19,6 +19,7 @@ import DirectionEditor from "../components/admin_panels/DirectionEditor";
 import ProgramEditor from "../components/admin_panels/ProgramEditor";
 import ElectionsAndContestsEditor from "../components/admin_panels/ElectionsAndContestsEditor";
 import PartnerEditor from "../components/admin_panels/PartnerEditor";
+import OptimizationZone from "../components/admin_panels/OptimizationZone";
 
 
 const Admin = () => {
@@ -39,7 +40,8 @@ const Admin = () => {
         "Редактировать партнера": <PartnerEditor/>,
         "Добавить блок": <CreateOrEditBlock block={{fakeParam: undefined}}/>,
         "Редактировать блок": <BlocksEditor/>,
-        "Изменить порядок блоков на странице": <BlocksSwap/>
+        "Изменить порядок блоков на странице": <BlocksSwap/>,
+        "Оптимизация": <OptimizationZone/>
     }
 
 

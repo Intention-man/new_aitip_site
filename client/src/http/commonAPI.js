@@ -13,6 +13,12 @@ export const updateFileUsagesAPI = async (IdAndDelta) => {
     return data
 }
 
+export const deleteAllUnusedFiles = async () => {
+    const {data} = await $host.post("api/common/delete_all_unused_files")
+    // console.log(data)
+    return data
+}
+
 export const fetchAllFiles = async () => {
     const {data} = await $host.get("api/common/")
     return data

@@ -26,7 +26,7 @@ const CreateOrEditBlock = observer(({block, mod}) => {
             lineOrdinal: lines.length,
             kind: 0,
             params: [],
-            text: "",
+            text: [""],
             filesNames: [],
             addressFileType: ""
         }])

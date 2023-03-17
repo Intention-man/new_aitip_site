@@ -1,17 +1,25 @@
-import '../../css/component_styles/Block.css';
+import MDEditor from '@uiw/react-md-editor';
+import '../../css/component_styles/StyledText.css';
 
-/**
- * Линия текстового контента. Она нужна для того, чтобы применять необходимые стили для текста.
- * 
- * Допустимые дочерние теги:
- * - `<p>`
- * - `<h1>`,`<h2>`,`<h3>`
- * - `<ul>`, `<ol>`, `<li>`
- */
-const StyledText = ({ children }) => {
+
+const StyledText = ({ line }) => {
+    
+
     return (
-        <div className="StyledText">
-            { children }
+        <div className="StyledText-container">
+            {
+                line.text.map((columnText, i) =>
+                    <div 
+                        key={i}
+                        className="StyledText-column"
+                    >
+                        <MDEditor.Markdown 
+                            source={columnText} 
+                            style={{whiteSpace: 'pre-wrap'}}
+                        />
+                    </div>
+                )
+            }
         </div>
     );
 }

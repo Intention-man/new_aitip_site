@@ -4,7 +4,7 @@ import React, {useState, useEffect} from 'react';
 import {observer} from "mobx-react-lite";
 import {convertFiles} from "../../http/commonAPI";
 import ExtendedTextEditor from "../lines/ExtendedTextEditor";
-import TwoColumnTextEditor from './LineEditors/TwoColumnTextEditor';
+import TextLineEditor from './LineEditors/TextLineEditor';
 import "../../css/component_styles/Editor.css"
 import "../../css/component_styles/CreateLine.css"
 
@@ -19,12 +19,11 @@ const CreateOrEditLine = observer(({index, changeLine, line}) => {
         4: "Карусель",
         5: "Видео",
         6: "Документ",
-        7: "Текст в 2 колонки"
     };
 
     const [kind, setKind] = useState(0);
     const [params, setParams] = useState([]);
-    const [text, setText] = useState("");
+    const [text, setText] = useState([""]);
     const [filesNames, setFilesNames] = useState([])
     const [addressFileType, setAddressFileType] = useState("");
     const [size, setSize] = useState(1);
@@ -61,10 +60,6 @@ const CreateOrEditLine = observer(({index, changeLine, line}) => {
             changeLine("filesNames", list, index)
         });
     }
-
-    useEffect(() => {
-        var t = text;
-    }, [text]);
 
     return (
         // TODO: желательно отрефакторить этот код, разнести каждый элемент управления по отдельным компонетам
@@ -219,15 +214,14 @@ const CreateOrEditLine = observer(({index, changeLine, line}) => {
             </div>
 
             {/* Появление зоны редактирования текста*/}
-                {(kind === 1 || kind === 3) &&
-                    <ExtendedTextEditor text={text} setText={setText} changeLine={changeLine} index={index}/>
-                }
-
-            {kind === 7 &&
-                <TwoColumnTextEditor 
-                    setExternalText={setText} 
+            {kind === 3 &&
+                <ExtendedTextEditor text={text[0]} setText={(t) => setText([t])} changeLine={changeLine} index={index}/>
+            }
+            
+            {kind === 1 &&
+                <TextLineEditor
                     line={line}
-                    changeLine={changeLine} 
+                    changeLine={changeLine}
                     index={index}
                 />
             }

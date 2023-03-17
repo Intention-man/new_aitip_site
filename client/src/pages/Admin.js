@@ -20,6 +20,8 @@ import ProgramEditor from "../components/admin_panels/ProgramEditor";
 import ElectionsAndContestsEditor from "../components/admin_panels/ElectionsAndContestsEditor";
 import PartnerEditor from "../components/admin_panels/PartnerEditor";
 import OptimizationZone from "../components/admin_panels/OptimizationZone";
+import CreateSchedule from "../components/admin_panels/CreateSchedule";
+import ScheduleEditor from "../components/admin_panels/ScheduleEditor";
 
 
 const Admin = () => {
@@ -38,6 +40,8 @@ const Admin = () => {
         "Редактировать выборы или конкурс": <ElectionsAndContestsEditor/>,
         "Добавить партнера": <CreatePartner partner={{fakeParam: undefined}}/>,
         "Редактировать партнера": <PartnerEditor/>,
+        "Создать расписание": <CreateSchedule schedule={{fakeParam: undefined}}/>,
+        "Редактировать расписание": <ScheduleEditor/>,
         "Добавить блок": <CreateOrEditBlock block={{fakeParam: undefined}}/>,
         "Редактировать блок": <BlocksEditor/>,
         "Изменить порядок блоков на странице": <BlocksSwap/>,

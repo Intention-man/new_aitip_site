@@ -1,6 +1,5 @@
 import {convertFiles, fetchAllFiles, updateFileUsagesAPI} from "../http/commonAPI";
-import {useContext} from "react";
-import {Context} from "../index";
+
 
 
 export function selectFile(e, block_store) {
@@ -11,7 +10,7 @@ export function selectFile(e, block_store) {
         fetchAllFiles().then(data => {
                 block_store.setAllFiles(data.rows)
                 console.log(file)
-                return file.link
+                return file.fileLink
             }
         )
     });

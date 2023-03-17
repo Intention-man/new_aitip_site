@@ -3,7 +3,7 @@ import {$authHost, $host} from "./index";
 // Bachelor
 
 export const createDirectionBachelor = async (direction) => {
-    const {data} = await $host.post("api/direction_bachelor/", direction)
+    const {data} = await $authHost.post("api/direction_bachelor/", direction)
     console.log(data)
     return data
 }
@@ -36,7 +36,7 @@ export const fetchOneDirectionBachelor = async (id) => {
 // AddProfEdu
 
 export const createAdditionalProgram = async (program) => {
-    const {data} = await $host.post("api/additional_program/", program)
+    const {data} = await $authHost.post("api/additional_program/", program)
     console.log(data)
     return data
 }

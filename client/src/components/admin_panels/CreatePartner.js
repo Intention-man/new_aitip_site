@@ -106,7 +106,7 @@ const CreatePartner = observer(({partner, mode}) => {
                 <input className="picture-getter" type="file" id="logo" accept="image/*" required="required"
                        onChange={e => {
                            console.log(e)
-                           setLogo(selectFile(e, block_store))
+                           setLogo(selectFile(e.target.files[0], block_store))
                        }}/>
                 <select size="7" onChange={e => {
                     setLogo(e.target.value)

@@ -16,7 +16,7 @@
 }
 
 .admission-bac-content2 .Card-body h1.local_title{
-    margin: 0;
+    margin-bottom: 30px;
     text-align: center;
     background: #FFFFFF;
 }
@@ -31,11 +31,11 @@
 
 .tracks {
     display: flex;
-    width: 112%;
+    /*width: 100%;*/
     flex-direction: row;
     flex-wrap: wrap;
     margin: 0 -6% 0 -6%;
-    padding: 0 10px;
+    padding: 20px 5%;
     justify-content: center;
     text-align: center;
     background-color: var(--bgcolor);
@@ -43,18 +43,21 @@
 
 .tracks li {
     display: flex;
-    max-width: 280px;
-    height: 80px;
+    min-width: 200px;
+    height: 120px;
     margin: 0 auto;
-    padding: 0;
+    padding: 15px 0;
     justify-content: center;
     align-items: center;
     text-align: center;
     border-radius: 10px;
     font-size: var(--font_size_const);
+    width: 50%;
 }
 
 .tracks li button {
+    width: 95%;
+    background: #f5f5f5;
     display: inline-block;
     height: 100%;
     padding: 0 8px;
@@ -70,7 +73,7 @@
 
 .tracks li :focus{
     background: #FFFFFF;
-    font-weight: 500;
+    font-weight: bold;
 }
 
 .admission-bac-content2 .Card-image{

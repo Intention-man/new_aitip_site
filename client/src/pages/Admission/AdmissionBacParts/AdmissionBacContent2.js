@@ -22,10 +22,10 @@ const AdmissionBacContent2 = observer(() => {
     const {admission_store} = useContext(Context)
     const [chosenDirection, setChosenDirection] = useState({});
     const [buttonList, setButtonList] = useState([]);
-    const vocab = {};
-    admission_store.directionsBachelor.forEach(e => {
-        vocab[e.name] = e.id;
-    })
+    // const vocab = {};
+    // admission_store.directionsBachelor.forEach(e => {
+    //     vocab[e.name] = e.id;
+    // })
 
 
     useEffect(() => {
@@ -54,7 +54,6 @@ const AdmissionBacContent2 = observer(() => {
                 Выберите <span style={{color: "#076DB1"}}>направление</span>
             </h1>
             <ul className="tracks">
-
                 {/*<ButtonList buttonList={vocab} setChosenValue={admission_store.setSelectedDirectionBachelor}/>*/}
                 {/*{admission_store.directionsBachelor && forms[windowVisible]}*/}
                 {admission_store.directionsBachelor.map(d =>
@@ -62,7 +61,7 @@ const AdmissionBacContent2 = observer(() => {
                         <button
                             key={d.id}
                             onClick={() => {
-                                // console.log(admission_store.directionsBachelor)
+                                console.log(this)
                                 admission_store.setSelectedDirectionBachelor(d.id)
                                 console.log(d.id)
                             }}

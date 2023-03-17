@@ -4,7 +4,7 @@ export default class AdmissionStore {
     constructor() {
 
         this._directionsBachelor = []
-        this._selectedDirectionBachelor = 0
+        this._selectedDirectionBachelor = 1
         this._additionalPrograms = [
             // {
             //     id: 1,

@@ -6,8 +6,13 @@
     padding: 2% var(--content2_padding);
 }
 
-.admission-bac-content2 .Card-body p, .admission-bac-content2 .Card-body li{
+.admission-bac-content2 .Card-body p, .admission-bac-content2 .Card-body li, .admission-bac-content2 .Card-body tr{
     font-size: var(--font_size_const);
+}
+
+.admission-bac-content2 .Card-body table{
+    border-spacing: 5px 0;
+    border-collapse: separate;
 }
 
 .admission-bac-content2 .Card-body h1.local_title{
@@ -87,6 +92,10 @@
     margin: 20px 0;
 }
 
+h1, h3{
+    font-weight: bold;
+}
+
 .direction_inner_card .Card-image img{
     border-radius: 0;
 }
@@ -101,17 +110,18 @@
     -ms-hyphens: auto;
     display: flex;
     margin: 30px 0;
-    padding: 5px 10px;
+    padding: 5px 20px;
     border-radius: 10px;
     background: var(--bgcolor);
     justify-content: center;
     align-items: center;
+    text-align: justify;
     font-size: var(--font_size_const);
 }
 
 .admission-bac-content2 .Card-body .title_who_can_you_become{
     display: flex;
-    margin: 5px ;
+    margin: 5px 0 0 33px;
     justify-content: left;
     font-weight: 600;
     font-size: var(--font_size_const);
@@ -122,7 +132,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     column-width: calc(calc(100% - var(--content2_padding) * 2 - 120px) * 0.33);
-    padding: 8px 0 8px 40px;
+    padding: 0 0 8px 30px;
     gap: 0 40px;
     background: white;
 }
@@ -188,6 +198,7 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    margin: 10px 0 20px 0;
 }
 
 .admission-bac-content2 .Card-body .cost{
@@ -202,7 +213,7 @@
 }
 
 .admission-bac-content2 .Card-body .cost .cost_price{
-     font-size: var(--font_size_const);
+     font-size: calc(var(--font_size_const) + 8px);
 }
 
 .direction_block .last_document_of_content_2{
@@ -248,7 +259,7 @@
     }
 }
 
-/* Когда два блока с проходными баллами не помощаются на одной строке */
+/* Когда два блока с проходными баллами не помещаются на одной строке */
 @media (max-width: 615px) {
     .passing_points {
         width: 100%;

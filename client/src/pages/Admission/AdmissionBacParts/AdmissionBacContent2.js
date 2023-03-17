@@ -22,11 +22,16 @@ const AdmissionBacContent2 = observer(() => {
     const {admission_store} = useContext(Context)
     const [chosenDirection, setChosenDirection] = useState({});
     const [buttonList, setButtonList] = useState([]);
+    const vocab = {};
+    admission_store.directionsBachelor.forEach(e => {
+        vocab[e.name] = e.id;
+    })
 
 
     useEffect(() => {
+        console.log(admission_store.selectedDirectionBachelor)
         if (admission_store.selectedDirectionBachelor) {
-            fetchOneDirectionBachelor(admission_store.selectedDirectionBachelor).then(data => {
+            fetchOneDirectionBachelor(/*vocab[*/admission_store.selectedDirectionBachelor/*]*/).then(data => {
                 console.log(data)
                 setChosenDirection(data)
             })
@@ -49,11 +54,15 @@ const AdmissionBacContent2 = observer(() => {
                 Выберите <span style={{color: "#076DB1"}}>направление</span>
             </h1>
             <ul className="tracks">
+
+                {/*<ButtonList buttonList={vocab} setChosenValue={admission_store.setSelectedDirectionBachelor}/>*/}
+                {/*{admission_store.directionsBachelor && forms[windowVisible]}*/}
                 {admission_store.directionsBachelor.map(d =>
                     <li key={"small_div_" + d.id}>
                         <button
                             key={d.id}
                             onClick={() => {
+                                // console.log(admission_store.directionsBachelor)
                                 admission_store.setSelectedDirectionBachelor(d.id)
                                 console.log(d.id)
                             }}
@@ -72,7 +81,7 @@ const AdmissionBacContent2 = observer(() => {
                     className="direction_inner_card"
                 >
                     <h1>{chosenDirection.code} {chosenDirection.name}</h1>
-                    <h3>Профиль: {chosenDirection.profile}</h3>
+                    <h3 style={{width: "90%"}}>Профиль: {chosenDirection.profile}</h3>
                     <p>{chosenDirection.profession_advantages}</p>
                 </Card>}
 
@@ -81,7 +90,7 @@ const AdmissionBacContent2 = observer(() => {
                     <p className="extended_description">{chosenDirection.profession_description}</p>
                     <p className="title_who_can_you_become">Кем ты можешь стать:</p>
                     <ul className="specialties">
-                        {(chosenDirection.specialities + "").split(";").sort((a, b) => b.length - a.length).map(el =>
+                        {(chosenDirection.specialities + "").split(",").sort((a, b) => b.length - a.length).map(el =>
                             <li className="specialty" key={el}>{el}</li>
                         )}
                     </ul>
@@ -91,20 +100,32 @@ const AdmissionBacContent2 = observer(() => {
                                         <span style={{color: "#AD4820"}}>Минимальные проходные баллы
 </span> для поступающих по результатам ЕГЭ
                             </p>
-                            <ol>
-                                {chosenDirection.tests.filter(test => test.admissionByEGE === true).map(test =>
-                                    <li key={test.subject}>{test.subject} {test.minPoints}</li>)}
-                            </ol>
+                            {/*<ol>*/}
+                            {/*    {chosenDirection.tests.filter(test => test.admissionByEGE === true).map(test =>*/}
+                            {/*        <li key={test.subject}>{test.subject} {test.minPoints}</li>)}*/}
+                            {/*</ol>*/}
+                            <table style={{width:"100%"}}>
+                                <tbody>
+                                    {chosenDirection.tests.filter(test => test.admissionByEGE === true).map(test =>{
+                                        return <tr key={test.subject}><td>{test.subject}</td><td style={{width: "30%"}}><span style={{color: "#AD4820", fontWeight: "bold"}}>{test.minPoints}</span> балл{(5 > test.minPoints%10 > 0) ? "а" : "ов"}</td></tr>;})}
+                                </tbody>
+                            </table>
                         </div>
                         <div className="passing_points" style={{borderColor: "#076DB1"}}>
                             <p className="local_title">
                                 <span style={{color: "#076DB1"}}>Минимальные проходные баллы </span> для поступающих на
                                 базе профессионального образования
                             </p>
-                            <ol>
-                                {chosenDirection.tests.filter(test => test.admissionByEGE === false).map(test =>
-                                    <li key={test.subject}>{test.subject} {test.minPoints}</li>)}
-                            </ol>
+                            {/*<ol>*/}
+                            {/*    {chosenDirection.tests.filter(test => test.admissionByEGE === false).map(test =>*/}
+                            {/*        <li key={test.subject}>{test.subject} {test.minPoints}</li>)}*/}
+                            {/*</ol>*/}
+                            <table style={{width:"100%"}}>
+                                <tbody>
+                                {chosenDirection.tests.filter(test => test.admissionByEGE === false).map(test =>{
+                                    return <tr key={test.subject}><td>{test.subject}</td><td><span style={{color: "#076DB1", fontWeight: "bold"}}>{test.minPoints}</span> балл{(5 > test.minPoints%10 > 0) ? "а" : "ов"}</td></tr>;})}
+                                </tbody>
+                            </table>
                         </div>
                         <div className="_2_documents">
                             <div className="_1_of_first_2_documents">
@@ -121,11 +142,11 @@ const AdmissionBacContent2 = observer(() => {
                     </div>
                     <div className="cost_zone">
                         <div className="cost">
-                            <p className="cost_price">{chosenDirection.full_and_part_time_form_price}</p>
+                            <p className="cost_price">{chosenDirection.full_and_part_time_form_price.toLocaleString()}</p>
                             <p className="cost_form">Очно-заочная</p>
                         </div>
                         <div className="cost">
-                            <p className="cost_price">{chosenDirection.extramural_form_price}</p>
+                            <p className="cost_price">{chosenDirection.extramural_form_price.toLocaleString()}</p>
                             <p className="cost_form">Заочная</p>
                         </div>
                     </div>

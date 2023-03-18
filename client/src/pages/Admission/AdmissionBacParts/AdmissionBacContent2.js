@@ -23,25 +23,22 @@ const AdmissionBacContent2 = observer(() => {
     const {admission_store} = useContext(Context)
     const [chosenDirection, setChosenDirection] = useState({});
     const [buttonList, setButtonList] = useState([]);
-    // const vocab = {};
-    // admission_store.directionsBachelor.forEach(e => {
-    //     vocab[e.name] = e.id;
-    // })
-
+    const [chosenDirectionName, setChosenDirectionName] = useState("");
 
     useEffect(() => {
-        console.log(admission_store.selectedDirectionBachelor)
-        if (admission_store.selectedDirectionBachelor) {
-            fetchOneDirectionBachelor(/*vocab[*/admission_store.selectedDirectionBachelor/*]*/).then(data => {
-                console.log(data)
-                setChosenDirection(data)
+        if(chosenDirectionName) {
+            console.log(chosenDirectionName)
+            fetchOneDirectionBachelor(Array.from(admission_store.directionsBachelor.filter(e => e.name === chosenDirectionName))[0].id).then(data => {
+                setChosenDirection(data);
             })
+            console.log(chosenDirection)
         }
-    }, [admission_store.selectedDirectionBachelor])
+    }, [chosenDirectionName])
 
 
     useEffect(() => {
         admission_store.directionsBachelor.forEach(direction => setButtonList([...buttonList, {name: direction.name, value: direction.id}]))
+        admission_store.directionsBachelor && admission_store.directionsBachelor[0] && setChosenDirectionName(admission_store.directionsBachelor[0].name)
     }, [admission_store.directionsBachelor]);
 
 
@@ -54,24 +51,24 @@ const AdmissionBacContent2 = observer(() => {
             <h1 className="local_title">
                 Выберите <span style={{color: "#076DB1"}}>направление</span>
             </h1>
-            <ul className="tracks">
-                {/*<ButtonList buttonList={vocab} setChosenValue={admission_store.setSelectedDirectionBachelor}/>*/}
+            {/*<ul className="tracks">*/}
+                <ButtonList buttonList={admission_store.directionsBachelor.map(e => e.name)} setChosenValue={setChosenDirectionName}/>
                 {/*{admission_store.directionsBachelor && forms[windowVisible]}*/}
-                {admission_store.directionsBachelor.map(d =>
-                    <li key={"small_div_" + d.id}>
-                        <button
-                            key={d.id}
-                            onClick={() => {
-                                console.log(this)
-                                admission_store.setSelectedDirectionBachelor(d.id)
-                                console.log(d.id)
-                            }}
-                        >
-                            {d.name}
-                        </button>
-                    </li>
-                )}
-            </ul>
+                {/*{admission_store.directionsBachelor.map(d =>*/}
+                {/*    <li key={"small_div_" + d.id}>*/}
+                {/*        <button*/}
+                {/*            key={d.id}*/}
+                {/*            onClick={() => {*/}
+                {/*                console.log(this)*/}
+                {/*                admission_store.setSelectedDirectionBachelor(d.id)*/}
+                {/*                console.log(d.id)*/}
+                {/*            }}*/}
+                {/*        >*/}
+                {/*            {d.name}*/}
+                {/*        </button>*/}
+                {/*    </li>*/}
+                {/*)}*/}
+            {/*</ul>*/}
             {/*{buttonList.length > 0 && <ButtonList buttonList={buttonList}></ButtonList>}*/}
             {chosenDirection.hasOwnProperty("name") &&
                 <Card
@@ -98,15 +95,11 @@ const AdmissionBacContent2 = observer(() => {
                         <div className="passing_points" style={{borderColor: "#AD4820"}}>
                             <p className="local_title">
                                         <span style={{color: "#AD4820"}}>Минимальные проходные баллы
-</span> для поступающих по результатам ЕГЭ
+                                        </span> для поступающих по результатам ЕГЭ
                             </p>
-                            {/*<ol>*/}
-                            {/*    {chosenDirection.tests.filter(test => test.admissionByEGE === true).map(test =>*/}
-                            {/*        <li key={test.subject}>{test.subject} {test.minPoints}</li>)}*/}
-                            {/*</ol>*/}
-                            <table style={{width:"100%"}}>
+                             <table style={{width:"100%"}}>
                                 <tbody>
-                                    {chosenDirection.tests.filter(test => test.admissionByEGE === true).map(test =>{
+                                    {chosenDirection && chosenDirection.tests && chosenDirection.tests.filter(test => test.admissionByEGE === true).map(test =>{
                                         return <tr key={test.subject}><td>{test.subject}</td><td style={{width: "30%"}}><span style={{color: "#AD4820", fontWeight: "bold"}}>{test.minPoints}</span> балл{(5 > test.minPoints%10 > 0) ? "а" : "ов"}</td></tr>;})}
                                 </tbody>
                             </table>
@@ -116,13 +109,9 @@ const AdmissionBacContent2 = observer(() => {
                                 <span style={{color: "#076DB1"}}>Минимальные проходные баллы </span> для поступающих на
                                 базе профессионального образования
                             </p>
-                            {/*<ol>*/}
-                            {/*    {chosenDirection.tests.filter(test => test.admissionByEGE === false).map(test =>*/}
-                            {/*        <li key={test.subject}>{test.subject} {test.minPoints}</li>)}*/}
-                            {/*</ol>*/}
                             <table style={{width:"100%"}}>
                                 <tbody>
-                                {chosenDirection.tests.filter(test => test.admissionByEGE === false).map(test =>{
+                                {chosenDirection && chosenDirection.tests && chosenDirection.tests.filter(test => test.admissionByEGE === false).map(test =>{
                                     return <tr key={test.subject}><td>{test.subject}</td><td><span style={{color: "#076DB1", fontWeight: "bold"}}>{test.minPoints}</span> балл{(5 > test.minPoints%10 > 0) ? "а" : "ов"}</td></tr>;})}
                                 </tbody>
                             </table>

@@ -57,9 +57,18 @@ alignCenter {
     text-align: center;
 }
 
-.TwoColumnTextEditor-columnsContainer {
-    padding: 30px 0;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+.TextLineEditor-editorPanel {
+    display:  grid;
     gap: 0 20px;
+    grid-auto-columns: minmax(0, 1fr);
+    grid-auto-flow: column;
+}
+
+.TextLineEditor-settingsPanel {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 10px 20px;
+    padding: 20px 0;
 }

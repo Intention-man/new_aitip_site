@@ -17,6 +17,32 @@ const OurColorPicker = ({ type, isDisabled, onColorPick }) => {
             components={{ Option: IconOption }}
             onChange={e => onColorPick(e.value)}
             isDisabled={isDisabled}
+            styles={{
+                control: (provided, state) => ({
+                    ...provided,
+                    minHeight: '27px',
+                    height: '27px',
+                    border: 'none'
+                }),
+
+                valueContainer: (provided, state) => ({
+                    ...provided,
+                    height: '27px',
+                    padding: '0 6px 10px 2px'
+                }),
+
+                input: (provided, state) => ({
+                    ...provided,
+                    margin: '-3px',
+                }),
+                indicatorSeparator: state => ({
+                    display: 'none',
+                }),
+                indicatorsContainer: (provided, state) => ({
+                    ...provided,
+                    height: '27px',
+                }),
+            }}
         />  
     );
 }
@@ -25,12 +51,18 @@ const { Option } = components;
 
 const IconOption = props => (
     <Option {...props}>
-        <img
-            src={props.data.icon}
-            style={{ width: 12 }}
-            alt={props.data.label}
-        />
-        {props.data.label}
+        <div style={{
+            display: 'flex',
+            flexDirection: 'row',
+            gap: '0 10px',
+        }}>
+            <img
+                src={props.data.icon}
+                style={{ width: 12 }}
+                alt={props.data.label}
+            />
+            {props.data.label}
+        </div>
     </Option>
 );
 

@@ -47,34 +47,32 @@ const TextLineEditor = ({ line, changeLine, index }) => {
     return (
        <div className="TextLineEditor-rootContainer">
             <div className="TextLineEditor-settingsPanel">
-                <form>
-                    <label>
-                        Количество колонок:
-                        <input 
-                            type="number" 
-                            min={1} 
-                            max={3}
-                            value={columnsNumber}
-                            onChange={e => onColumnNumberChange(e.target.value)}
-                        />
-                    </label>
-                    <label>
-                        Цвет фона текста:
-                        <OurColorPicker 
-                            type='background'
-                            isDisabled={backgroundColor == null && borderColor != null}
-                            onColorPick={e => onColorChange(e, borderColor)}
-                        />
-                    </label>
-                    <label>
-                        Цвет рамки вокруг текста:
-                        <OurColorPicker 
-                            type='border'
-                            isDisabled={backgroundColor != null && borderColor == null}
-                            onColorPick={e => onColorChange(backgroundColor, e)}
-                        />
-                    </label>
-                </form>
+                <label>
+                    Количество колонок:
+                    <input 
+                        type="number" 
+                        min={1} 
+                        max={3}
+                        value={columnsNumber}
+                        onChange={e => onColumnNumberChange(e.target.value)}
+                    />
+                </label>
+                <label>
+                    Цвет фона текста:
+                    <OurColorPicker 
+                        type='background'
+                        isDisabled={backgroundColor == null && borderColor != null}
+                        onColorPick={e => onColorChange(e, borderColor)}
+                    />
+                </label>
+                <label>
+                    Цвет рамки вокруг текста:
+                    <OurColorPicker 
+                        type='border'
+                        isDisabled={backgroundColor != null && borderColor == null}
+                        onColorPick={e => onColorChange(backgroundColor, e)}
+                    />
+                </label>
             </div>
             <div className="TextLineEditor-editorPanel">
                 {

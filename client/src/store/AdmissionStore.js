@@ -21,10 +21,10 @@ export default class AdmissionStore {
         ]
         this._selectedRetrainingProgram = 0
         this._selectedDevelopmentProgram = 0
+        this.setSelectedDirectionBachelor = this.setSelectedDirectionBachelor.bind(this)
 
         makeAutoObservable(this)
     }
-
 
     setDirectionsBachelor(directionsBachelor) {
         this._directionsBachelor = directionsBachelor

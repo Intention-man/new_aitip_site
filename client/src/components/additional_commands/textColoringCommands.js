@@ -1,7 +1,7 @@
 import React from "react";
 import ColorBlackIcon from "../../local_assets/icons/color-black.svg";
-import ColorRedIcon from "../../local_assets/icons/color-red.svg";
 import ColorBlueIcon from "../../local_assets/icons/color-blue.svg";
+import ColorRedIcon from "../../local_assets/icons/color-red.svg";
 import ColorGreyIcon from "../../local_assets/icons/color-grey.svg";
 
 /**

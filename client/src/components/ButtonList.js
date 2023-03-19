@@ -8,7 +8,7 @@ const ButtonList = ({buttonList, chosenValue, setChosenValue}) => {
     return (
         <ul>
             {Object.keys(buttonList).map(key =>
-                <Button className="button-admin" onClick={() => setChosenValue(key)}>
+                <Button className="button-admin" key={key} onClick={() => setChosenValue(key)}>
                     {key}
                 </Button>
             )}

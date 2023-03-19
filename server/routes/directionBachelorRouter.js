@@ -8,6 +8,8 @@ const checkRole = require("../middleware/checkRoleMiddleware")
 router.post("/", directionBachelorController.create)
 router.post("/update", directionBachelorController.updateDirection)
 router.post("/remove/:id", directionBachelorController.removeDirection)
+router.post("/remove_test/:id", directionBachelorController.removeTest)
+
 router.get("/", directionBachelorController.getAll)
 router.get("/:id", directionBachelorController.getOne)
 

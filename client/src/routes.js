@@ -6,7 +6,7 @@ import {
     HISTORY, INDUSTRIAL_P, INFO_EDU_ORG, INTERNATIONAL_ACT,
     LEGAL_CLINIC,
     MAIN_ROUTE, PERSONALITIES_PAGE, SCIENCE, SCIENCE_P, STAFF,
-    STRUCTURE, STUDENTS
+    STRUCTURE, STUDENTS, SUPERADMIN
 } from "./consts/pageConsts";
 import Main from "./pages/Main";
 import Contacts from "./pages/Institute/Contacts";
@@ -29,6 +29,7 @@ import Employees from "./pages/Employees/Employees";
 import Students from "./pages/Students/Students";
 import SciencePartners from "./pages/Partners/SciencePartners";
 import Auth from "./pages/Auth";
+import SuperAdminPage from "./pages/SuperAdminPage";
 
 
 export const publicRoutes = [
@@ -132,6 +133,11 @@ export const publicRoutes = [
         path: AUTH,
         Component: <Auth/>, 
         name: "Авторизация"
+    },
+    {
+        path: SUPERADMIN,
+        Component: <SuperAdminPage/>,
+        name: "СуперАдмин"
     },
 ]
 

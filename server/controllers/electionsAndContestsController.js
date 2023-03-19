@@ -1,11 +1,9 @@
 /* Функции создания и получения данных между сервером и БД. Ссылки, по которым они работают написаны в electionsAndContestsRouter
 */
 
-const uuid = require("uuid")
-const path = require("path")
+
 const ApiError = require("../error/ApiError")
 const {ElectionsAndContests} = require("../models/defaultModels/electionsAndContestsModel");
-const {AdditionalProgram} = require("../models/defaultModels/admissionModels");
 
 
 

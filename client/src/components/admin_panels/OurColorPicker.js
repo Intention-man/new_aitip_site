@@ -2,9 +2,17 @@ import Select, { components } from 'react-select';
 import { ourColorsOptions } from '../../consts/ourColorOptionsConsts';
 
 
+/**
+ * Компонент разворачивающегося списка с выбором цветов, указанных в константах сайта
+ * 
+ * Пропсы:
+ * @param {string} type Тип контента, для которого выбирается цвет (text, background, border) 
+ * @param {boolean} isDiabled Сделать ли данное поле неактивным (оно станет недоступным для выбора) 
+ * @param {function} onColorPick Callback, который должен вызываться при изменении цвета. Получает значение выбранного цвета
+ * @returns Компонент списка цветов
+ */
 const OurColorPicker = ({ type, isDisabled, onColorPick }) => {
 
-    
     const getOurColors = () => {
         // TODO: вынести объявление наших цветов в едином хранилище для них
         return ourColorsOptions.filter(e => e.types.includes(type));
@@ -56,7 +64,7 @@ const IconOption = props => (
             flexDirection: 'row',
             gap: '0 10px',
         }}>
-            <img
+            <img  // TODO: сделать это не изображениями, а с помощью svg/css, динамически устанавливающих свой цвет
                 src={props.data.icon}
                 style={{ width: 12 }}
                 alt={props.data.label}

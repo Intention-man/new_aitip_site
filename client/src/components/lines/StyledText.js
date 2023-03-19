@@ -2,6 +2,13 @@ import MDEditor from '@uiw/react-md-editor';
 import '../../css/component_styles/StyledText.css';
 
 
+/**
+ * Компонент линии текста, стилизованного с помощью Markdown.
+ * Текст может быть разбит в несколько колонок, иметь цвет границы или фона.
+ * 
+ * @param {line} Объект линии (???) TODO 
+ * @returns Компонент линии стилизованного текста
+ */
 const StyledText = ({ line }) => {
     
     

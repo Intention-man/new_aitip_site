@@ -1,7 +1,17 @@
+/**
+ * Команды для MDEdtior (он внутри компонента ExtendedTextEditor) для выравнивания текста
+ */
 import AlignLeftIcon from "../../local_assets/icons/align-left.svg";
 import AlignRightIcon from "../../local_assets/icons/align-right.svg";
 import AlignCenterIcon from "../../local_assets/icons/align-center.svg";
 
+/**
+ * Внутрення функция для изменения значения выравнивания с помощью HTML-тегов
+ * 
+ * @param {*} state 
+ * @param {*} api 
+ * @param {string} alignment Значение выравнивания (left, right, center)
+ */
 const changeAlignment = (state, api, alignment) => {
     const toReplace = state.selectedText
                                 .replace('<alignRight>', '')
@@ -22,6 +32,9 @@ const changeAlignment = (state, api, alignment) => {
     }
 }
 
+/**
+ * Команда для выравнивания текста по центру
+ */
 export const alignTextCenter = {
     name: 'alignTextCenter',
     keyCommand: 'alignTextCenter',
@@ -35,6 +48,9 @@ export const alignTextCenter = {
     execute: (state, api) => changeAlignment(state, api, "center"),
 }
 
+/**
+ * Команда для выравнивания текста по центру
+ */
 export const alignTextRight = {
     name: 'alignTextRight',
     keyCommand: 'alignTextRight',
@@ -48,6 +64,9 @@ export const alignTextRight = {
     execute: (state, api) => changeAlignment(state, api, "right"),
 }
 
+/**
+ * Команда для выравнивания текста по центру
+ */
 export const alignTextLeft = {
     name: 'alignTextLeft',
     keyCommand: 'alignTextLeft',

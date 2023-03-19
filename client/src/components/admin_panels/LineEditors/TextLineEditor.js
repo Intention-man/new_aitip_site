@@ -3,6 +3,15 @@ import ExtendedTextEditor from "../../lines/ExtendedTextEditor";
 import OurColorPicker from "../OurColorPicker";
 import "../../../css/component_styles/Editor.css";
 
+/**
+ * Компонент редактора текстовой линии
+ * 
+ * Пропы:
+ * @param {Object} line Объект линии, которую редактирует в данный момент этот компонент
+ * @param {function} changeLine Callback для вызова каждый раз, когда меняется line
+ * @param {*} index Индекс данной линии (???) TODO
+ * @returns Компонент редактора линии
+ */
 const TextLineEditor = ({ line, changeLine, index }) => {
 
     const [columnsNumber, setColumnsNumber] = useState(1);

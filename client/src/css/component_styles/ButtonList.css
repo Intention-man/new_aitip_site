@@ -1,0 +1,36 @@
+.button_list{
+    text-align: center;
+    background-color: var(--bgcolor);
+    margin: 0 -6%;
+    padding: 20px 5%;
+}
+
+.button_list > button {
+    width: calc(50% - 20px);
+    background: #f5f5f5;
+    display: inline-block;
+    height: 90px;
+    padding: 0 8px;
+    text-align: center;
+    border-radius: 10px;
+    border-width: 0;
+    color: #000000;
+    margin: 10px 10px;
+}
+
+.button_list > button:active{
+    background: #FFFFFF;
+    /*scale: 1.15;*/
+    color: #000000;
+}
+
+.button_list > button:hover{
+    background: #FFFFFF;
+    scale: 1.1;
+    color: #000000;
+}
+
+.button_list > button:focus{
+    background: #FFFFFF;
+    font-weight: bold;
+}

@@ -1,0 +1,29 @@
+.custom_button {
+    width: calc(100% - 40px);
+    background: #f0f0f0;
+    display: inline-block;
+    height: 90px;
+    padding: 0 8px;
+    text-align: center;
+    border-radius: 10px;
+    border-width: 0;
+    color: #000000;
+    margin: auto;
+}
+
+.custom_button:active{
+    background: #F9F9F9;
+    /*scale: 1.15;*/
+    color: #000000;
+}
+
+.custom_button:hover{
+    background: #F9F9F9;
+    scale: 1.1;
+    color: #000000;
+}
+
+.custom_button:focus{
+    background: #F9F9F9;
+    font-weight: bold;
+}

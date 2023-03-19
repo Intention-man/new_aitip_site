@@ -4,7 +4,6 @@ import "../../../css/page_styles/AdmissionBac2.css"
 import {fetchOneDirectionBachelor} from "../../../http/admissionAPI";
 import {observer} from "mobx-react-lite";
 import {Context} from "../../../index";
-import ButtonList from "../../../components/ButtonList";
 
 const AdmissionBacContent2 = observer(() => {
     // const directions = ["Экономика", "Менеджмент", "Юриспруденция", "Государственное и муниципальное управление", "Туризм"]

@@ -39,11 +39,7 @@ const Block = observer(({ block, useDatabase }) => {
             <h1>{block.header}</h1>
             {
                 myLines.length > 0 && myLines.map(line =>
-                    {
-                        return (
-                            <LineDisplay key={line.id} line={line}/>
-                        )
-                    }
+                    <LineDisplay key={line.id} line={line}/>
                 )
             }
         </div>

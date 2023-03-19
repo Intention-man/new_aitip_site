@@ -12,7 +12,7 @@ const LineDisplay = observer(({line}) => {
         // TODO: желательно отрефакторить этот код, разнести этот контент в компоненты в самих линий
 
         <>
-            {(line.kind === 1 && line.text[0].length > 0) &&
+            {(line.kind === 1 && line.text.length > 0 && line.text[0].length > 0) &&
                 <StyledText
                     line={line}
                 />

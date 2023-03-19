@@ -10,11 +10,11 @@ const StyledText = ({ line }) => {
         
         const backgroundColor = line.params[0];
         if (backgroundColor != null)
-            className.push(`StyledText-mdText-bg-${backgroundColor}`)
+            className.push('StyledText-mdText-bg', `StyledText-mdText-bg-${backgroundColor}`)
 
         const borderColor = line.params[1];
         if (borderColor != null)
-            className.push(`StyledText-mdText-border-${borderColor}`);
+            className.push('StyledText-mdText-border', `StyledText-mdText-border-${borderColor}`);
         
         return className.join(' ');
     }

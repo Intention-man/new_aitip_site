@@ -5,6 +5,7 @@ import {createBlock, removeBlock, updateBlock} from "../../http/blockAPI";
 import {publicRoutes} from "../../routes";
 import "../../css/component_styles/Editor.css"
 import LineDisplay from "../common/LineDisplay";
+import Block from '../common/Block';
 
 
 const CreateOrEditBlock = observer(({block, mod}) => {
@@ -117,11 +118,13 @@ const CreateOrEditBlock = observer(({block, mod}) => {
             <button onClick={addLine}>Добавить новую линию</button>
             <h2>Как выглядит блок</h2>
             {lines.length > 0 &&
-                lines.map(line => {
-                    return (
-                        <LineDisplay line={line}/>
-                    )
-                })
+                <Block
+                    block={{
+                        header: header,
+                        lines: lines
+                    }} // FIXME: ох, это ужасный костыль
+                    useDatabase={false}
+                />
             }
             <button onClick={saveBlock}>Сохранить блок</button>
             <button onClick={() => removeBlock(block.id)}>Удалить блок</button>

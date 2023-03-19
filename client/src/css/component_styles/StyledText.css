@@ -10,21 +10,28 @@
 }
 
 .StyledText-mdText {
-    padding: 30px;
-    border-radius: var(--default_border_radius);
     word-wrap: normal;
     height: 100%;
     border-width: var(--default_border_width);
     border-style: solid;
     border-color: rgba(0, 0, 0, 0);
+    border-radius: var(--default_border_radius);
 }
 
 .StyledText-mdText p {
     word-break: break-all;
 }
 
+.StyledText-mdText-bg {
+    padding: 10px 20px;
+}
+
 .StyledText-mdText-bg-grey {
-    background-color: var(--aitip_grey);
+    background-color: var(--aitip_bg_grey);
+}
+
+.StyledText-mdText-border {
+    padding: 10px 20px;
 }
 
 .StyledText-mdText-border-grey {

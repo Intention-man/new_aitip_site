@@ -233,6 +233,10 @@ h1, h3{
     margin: auto 50px auto 0;
 }
 
+.Card-left{
+    margin: 0 0 0 -5.5%;
+}
+
 /* MEDIA */
 
 

@@ -86,7 +86,7 @@ const AdmissionBacContent2 = observer(() => {
                     <p className="extended_description">{chosenDirection.profession_description}</p>
                     <p className="title_who_can_you_become">Кем ты можешь стать:</p>
                     <ul className="specialties">
-                        {(chosenDirection.specialities + "").split(",").sort((a, b) => b.length - a.length).map(el =>
+                        {(chosenDirection.specialities + "").split(";").sort((a, b) => b.length - a.length).map(el =>
                             <li className="specialty" key={el}>{el}</li>
                         )}
                     </ul>

@@ -39,10 +39,10 @@
 }
 
 .description_buttons{
-    border-radius: 10px;
-    border: 1px var(--aitip_grey) solid;
+    border: none;
     width: 120px;
     min-height: 80px;
+    border-radius: 10px;
 }
 .big_avatar{
     width: 200px;
@@ -144,6 +144,7 @@
 
     .text_block_active{
         min-width: 740px;
+        margin-left: 160px;
     }
 
     .text_bg_active{

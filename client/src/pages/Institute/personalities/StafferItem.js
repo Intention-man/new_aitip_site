@@ -79,36 +79,10 @@ const StafferItem = observer(({staffer, closeStaffer}) => {
                 </div>
             </div>
             </div>
-            <div id="div_for_button_list" >
-                <ul className="tracks button_row">
-                    {Object.entries(textsNames).map(([k, v]) => (v &&
-                            <li key={k} style={{marginRight: "10px"}}>
-                                <button className="description_buttons" id="my_button"
-                                    style={{backgroundColor: (activeText === v ? "white" : "#EEEEEE"), fontWeight: (activeText === v ? "bold" : "normal")}}
-                                    key={k}
-                                    onClick={() => {
-                                        setActiveText(v)
-                                        const textField = document.querySelector('.text_block');
-                                        const textField1 = document.querySelector('.text_bg');
-                                        textField.classList.remove("text_block");
-                                        textField.classList.add("text_block_active");
-                                        textField1.classList.remove("text_bg");
-                                        textField1.classList.add("text_bg_active");
+            <div style={{width: "740px", minHeight: "50px", backgroundColor: "white", marginLeft: "150px"}}>
 
-                                        /*let p = document.createElement('p');
-
-                                        document.getElementById("div_for_button_list").appendChild(p);
-                                        p.appendChild(document.createTextNode(v))*/
-                                    }
-                                    }
-                                >
-                                    {k}
-                                </button>
-                            </li>
-                        )
-                    )}
-                </ul>
             </div>
+
 
             <div className="text_block">
                 <div className="text_bg">

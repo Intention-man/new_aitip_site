@@ -56,7 +56,7 @@ const App = observer(() => {
                     <a href="">ЕОИС</a>
                 </SideBar>
             </div>
-             {/*<ProFooter/>*/}
+             <ProFooter/>
         </BrowserRouter>
     )
 })

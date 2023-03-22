@@ -55,6 +55,7 @@ const CreateOrEditLine = observer(({index, changeLine, line}) => {
         files.forEach(el => formData.append("files", el));
         console.log(files)
         convertFiles(formData).then(list => {
+            console.log(list)
             setFilesNames(list);
             changeLine("filesNames", list, index)
         });
@@ -189,20 +190,21 @@ const CreateOrEditLine = observer(({index, changeLine, line}) => {
                         {/*Для документов добавление и вывод пока не сделаны*/}
                         {kind === 6 &&
                             <div>
-                                <input type="file" onChange={(e) => {
+                                <input className="pretty_inputs" type="file" onChange={(e) => {
                                     console.log(e.target.files[0])
                                     setAddressFileType("local")
                                     changeLine("addressFileType", "local", index)
                                     addFiles(Array.from(e.target.files))
                                 }}/>
 
-                                <input type="text" onChange={(e) => {
+                                <label>Введите ссылки на документы:</label>
+                                <input type="text" style={{marginBottom: "20px"}} onChange={(e) => {
                                     setAddressFileType("global")
-                                    changeLine("addressFileType", "global", index)
-                                    setFilesNames([e.target.value])
+                                    setFilesNames([e.target.value.split("; ")])
+                                    changeLine("filesNames", e.target.value.split("; "), index)
                                 }}/>
 
-                                <label>Введите название документа (которое будут видеть пользователи на сайте)</label>
+                                <label>Введите название документа (которое будут видеть пользователи на сайте):</label>
                                 <input type="text" onChange={(e) => {
                                     setDocNames(e.target.value)
                                 }}/>

@@ -27,7 +27,7 @@ class CommonController {
 
                 const fileWrapper = await FileWrapper.create({
                     name: fileLabel,
-                    link: fileLink
+                    fileLink: fileLink
                 })
             })
             console.log(filesNamesList)

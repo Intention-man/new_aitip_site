@@ -19,7 +19,7 @@ const DirectionBachelor = sequelize.define("direction_bachelor", {
 const EntranceTest = sequelize.define("entrance_test", {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     subject: {type: DataTypes.STRING, allowNull: false},
-    min_points: {type: DataTypes.INTEGER, allowNull: false},
+    minPoints: {type: DataTypes.INTEGER, allowNull: false},
     isNecessary: {type: DataTypes.BOOLEAN},
     admissionByEGE: {type: DataTypes.BOOLEAN}
 })
@@ -29,14 +29,14 @@ const AdditionalProgram = sequelize.define("additional_program", {
     name: {type: DataTypes.STRING, unique: true, allowNull: false},
     kind: {type: DataTypes.TEXT, allowNull: false},
     description: {type: DataTypes.TEXT, allowNull: false},
-    moduls: {type: DataTypes.ARRAY(DataTypes.TEXT), allowNull: false},
+    modules: {type: DataTypes.ARRAY(DataTypes.TEXT), allowNull: false},
     hours: {type: DataTypes.INTEGER, allowNull: false},
     form: {type: DataTypes.STRING, allowNull: false},
     cost: {type: DataTypes.INTEGER, allowNull: false},
     programImg: {type: DataTypes.TEXT, allowNull: false},
     supervisorName: {type: DataTypes.STRING, allowNull: false},
     supervisorDescription: {type: DataTypes.TEXT, allowNull: false},
-    supervizorImg: {type: DataTypes.TEXT, allowNull: false}
+    supervisorImg: {type: DataTypes.TEXT, allowNull: false}
 })
 
 //RELATION

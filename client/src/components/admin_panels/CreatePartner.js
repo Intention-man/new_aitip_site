@@ -132,8 +132,9 @@ const CreatePartner = observer(({partner, mode}) => {
                 <label className="mini-info" htmlFor="jointProjectsPhotos">Фотографии совместных проектов</label>
                 <input className="picture-getter" type="file" multiple="multiple" accept="image/*" required="required"
                        id="jointProjectsPhotos" onChange={e => {
-                    const fileList = []
+                    let fileList = []
                     Array.from(e.target.files).forEach(file => fileList.push(selectFile(file, block_store)))
+
                     setJointProjectsPhotos(fileList)
                 }
                 }/>
@@ -151,8 +152,8 @@ const CreatePartner = observer(({partner, mode}) => {
                         </option>
                     )}
                 </select>
-                {(typeof logo === "string") ? <Carusel photos={jointProjectsPhotos} addressFileType="local"/> :
-                    <p>{typeof logo}</p>}
+                {(jointProjectsPhotos.length > 0) ? <Carusel photos={jointProjectsPhotos} addressFileType="local"/> :
+                    <p>{typeof jointProjectsPhotos}</p>}
             </div>
 
 

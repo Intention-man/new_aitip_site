@@ -22,6 +22,8 @@ import PartnerEditor from "../components/admin_panels/PartnerEditor";
 import OptimizationZone from "../components/admin_panels/OptimizationZone";
 import CreateSchedule from "../components/admin_panels/CreateSchedule";
 import ScheduleEditor from "../components/admin_panels/ScheduleEditor";
+import CreateLab from "../components/admin_panels/CreateLab";
+import LabEditor from "../components/admin_panels/LabEditor";
 
 
 const Admin = () => {
@@ -42,6 +44,9 @@ const Admin = () => {
         "Редактировать партнера": <PartnerEditor/>,
         "Создать расписание": <CreateSchedule schedule={{fakeParam: undefined}}/>,
         "Редактировать расписание": <ScheduleEditor/>,
+        "Создать лабораторию": <CreateLab lab={{fakeParam: undefined}}/>,
+        "Редактировать лабораторию": <LabEditor/>,
+
         "Добавить блок": <CreateOrEditBlock block={{fakeParam: undefined}}/>,
         "Редактировать блок": <BlocksEditor/>,
         "Изменить порядок блоков на странице": <BlocksSwap/>,

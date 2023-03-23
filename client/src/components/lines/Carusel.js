@@ -6,7 +6,7 @@ import vector1 from "../../local_assets/Vector1.png"
 
 const Carusel = ({photos, addressFileType, params}) => {
     if (photos && typeof photos === "string") {photos = [photos]}
-    console.log(typeof photos);
+    console.log(photos);
     const [currentSlideNumber, setCurrentSlideNumber] = useState(0)
     console.log(params)
     const [size, setSize] = useState(params ? params[0]: 1);

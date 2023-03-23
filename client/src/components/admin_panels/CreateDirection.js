@@ -131,7 +131,9 @@ const CreateDirection = observer(({direction, mode}) => {
             <div style={{marginBottom: "2%"}}>
                 <label className="mini-info" htmlFor="img">Картинка</label>
                 <input className="picture-getter" type="file" id="img" accept="image/*" onChange={e => {
-                    setFile(selectFile(e.target.files[0], block_store))
+                    let newFile = selectFile(e.target.files[0], block_store);
+                    console.log(newFile)
+                    setFile(newFile)
                 }}/>
                 <select size="7" onChange={e => {
                     setFile(e.target.value)

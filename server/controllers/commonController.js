@@ -23,15 +23,16 @@ class CommonController {
                 } else {
                     fileLink = uuid.v4() + "." + file.name.split(".")[1]
                 }
-                await file.mv(path.resolve(__dirname, "..", "static", fileLink))
-                filesLinksList.push(fileLink)
-
+                filesLinksList.push(fileLink);
+                console.log("fileLink: " + fileLink)
+                await file.mv(path.resolve(__dirname, "..", "static", fileLink));
+                console.log(1 + " " + filesLinksList);
                 const fileWrapper = await FileWrapper.create({
                     name: fileLabel,
                     fileLink: fileLink
                 })
             })
-            console.log(filesLinksList)
+            console.log(2 + " " + filesLinksList)
             return res.json(filesLinksList)
         } catch (e) {
             next(ApiError.badRequest(e.message))
@@ -49,7 +50,12 @@ class CommonController {
             console.log(Object.values(file))
             newCountUsages = Number(file.countUsages) + Number(delta)
             console.log(newCountUsages)
-            file.update({id: file.id, name: file.name, fileLink: file.fileLink, countUsages: newCountUsages}, {where: {id: file.id}})
+            file.update({
+                id: file.id,
+                name: file.name,
+                fileLink: file.fileLink,
+                countUsages: newCountUsages
+            }, {where: {id: file.id}})
         }
         return res.json(newCountUsages)
     }
@@ -94,17 +100,6 @@ class CommonController {
                     }
                 }
             });
-            // const deleteFile = './docs/deleteme.txt'
-            // if (fs.existsSync(deleteFile)) {
-            //     fs.unlink(deleteFile, (err) => {
-            //         if (err) {
-            //             console.log(err);
-            //         }
-            //         console.log('deleted');
-            //     })
-            // }
-            // console.log(filesNamesList)
-            // return res.json(filesNamesList)
         } catch (e) {
             next(ApiError.badRequest(e.message))
         }

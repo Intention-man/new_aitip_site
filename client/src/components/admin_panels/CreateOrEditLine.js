@@ -61,8 +61,9 @@ const CreateOrEditLine = observer(({index, changeLine, line}) => {
         });
     }
 
+
     return (
-        // TODO: желательно отрефакторить этот код, разнести каждый элемент управления по отдельным компонетам
+        // TODO: желательно отрефакторить этот код, разнести каждый элемент управления по отдельным компонентам
 
         <div style={{margin: "30px 10px", borderColor: "blue", borderWidth: "3px"}}>
             <div>

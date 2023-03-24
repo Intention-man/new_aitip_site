@@ -1,7 +1,6 @@
-footer {
+.main_footer {
     background-color: var(--aitip_blue);
     color: white;
-    position: relative;
     bottom: 0;
     left: 0;
     width: 100%;

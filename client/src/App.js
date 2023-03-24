@@ -35,7 +35,7 @@ const App = observer(() => {
     return (
         <BrowserRouter>
             <Menu/>
-            <div className='rootContainer'>
+            <div className='rootContainer' id="rootCont">
                 <SideBar
                     alignment='left'
                     isSticky={true}

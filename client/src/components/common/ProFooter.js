@@ -4,10 +4,29 @@ import location from "../../local_assets/location.png"
 import internet from "../../local_assets/global.png"
 import phone from "../../local_assets/icons/svg white/Phone.svg"
 import mail from "../../local_assets/sms.png"
+
+
+function getHeight(){
+    window.addEventListener('load', function() {
+        // Дожидаемся полной загрузки страницы
+        const body = document.body;
+        const footer = document.querySelector('footer');
+        const bodyHeight = body.offsetHeight;
+        const footerHeight = footer.offsetHeight;
+        console.log(bodyHeight - footerHeight)
+        if (bodyHeight - footerHeight < 0.75 * window.innerHeight) {
+            footer.style.position = 'fixed';
+        } else {
+            footer.style.position = 'relative';
+        }
+    });
+}
+
+
 const ProFooter = () => {
     return (
         <div>
-            <footer>
+            <footer className="main_footer" ref={getHeight}>
                 <div className="container">
                     <div className="row">
                         <div className="col">

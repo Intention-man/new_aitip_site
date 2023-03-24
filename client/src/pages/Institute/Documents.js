@@ -33,9 +33,7 @@ const Documents = () => {
             {/*</div>*/}
             {/*</div>*/}
             <DocumentLine fileLink={link}/>
-            <DocumentLine fileLink={link}/>
-            <DocumentLine fileLink={link}/>
-            <DocumentLine fileLink={link}/>
+
         </div>
     );
 };

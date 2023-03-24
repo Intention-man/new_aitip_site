@@ -4,10 +4,28 @@ import internet from "../../local_assets/global.png";
 import phone from "../../local_assets/icons/svg white/Phone.svg";
 import mail from "../../local_assets/sms.png";
 import "../../css/component_styles/MobileFooter.css"
+
+function getHeight(){
+    window.addEventListener('load', function() {
+        // Дожидаемся полной загрузки страницы
+        const body = document.body;
+        const footer = document.querySelector('footer');
+        const bodyHeight = body.offsetHeight;
+        const footerHeight = footer.offsetHeight;
+        console.log(bodyHeight - footerHeight)
+        if (bodyHeight - footerHeight < 0.75 * window.innerHeight) {
+            footer.style.position = 'fixed';
+        } else {
+            footer.style.position = 'relative';
+        }
+    });
+}
+
+
 const MobileFooter = () => {
     return (
         <div>
-            <footer>
+            <footer ref={getHeight}>
                 <div className="footer-container">
                     <ul>
                         <li><h3>Где нас найти?</h3></li>

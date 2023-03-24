@@ -48,7 +48,10 @@ const CreateSchedule = observer(({schedule, mode}) => {
         formData.append("group", group)
         formData.append("fileLink", fileLink);
 
-        (mode === "edit") ? updateSchedule(formData).then(() => alert("Успешно обновлено")): createSchedule(formData).then(() => alert("Успешно создано"))
+        (mode === "edit") ? updateSchedule(formData).then(() => alert("Успешно обновлено")): createSchedule(formData).then(() => {
+            alert("Успешно добавлено")
+            mode = "edit"
+        })
     }
 
     return (

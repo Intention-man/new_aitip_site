@@ -69,7 +69,10 @@ const CreatePartner = observer(({partner, mode}) => {
         formData.append("jointProjectsPhotos", JSON.stringify(jointProjectsPhotos));
         // formData.append("jointProjectsPhotos", JSON.stringify(jointProjectsPhotos))
         console.log(jointProjectsPhotos);
-        (mode === "edit") ? updatePartner(formData).then(() => alert("Успешно обновлено")): createPartner(formData).then(() => alert("Успешно создано"))
+        (mode === "edit") ? updatePartner(formData).then(() => alert("Успешно обновлено")): createPartner(formData).then(() => {
+            alert("Успешно добавлено")
+            mode = "edit"
+        })
     }
 
     return (
@@ -96,11 +99,6 @@ const CreatePartner = observer(({partner, mode}) => {
                           onChange={e => setDescription(e.target.value)}/>
             </div>
 
-            {/*<div>*/}
-            {/*    <label className="mini-info" htmlFor="logo">Логотип/фото</label>*/}
-            {/*    <input className="picture-getter" type="file" id="logo" accept="image/*" required="required"*/}
-            {/*           title="Необходимо выбрать минимум один файл" onChange={e => setLogo(e.target.files[0])}/>*/}
-            {/*</div>*/}
             <div style={{marginBottom: "2%"}}>
                 <label className="mini-info" htmlFor="logo">Логотип/фото</label>
                 <input className="picture-getter" type="file" id="logo" accept="image/*" required="required"
@@ -140,7 +138,6 @@ const CreatePartner = observer(({partner, mode}) => {
                 }/>
                 <select size="7" multiple="multiple" onChange={e => {
                     let fileList = []
-                    // Array.from(e.target.selectedOptions).forEach(option => fileList.push(option.value))
                     fileList = [...e.target.selectedOptions]
                         .map(option => option.value);
                     setJointProjectsPhotos(fileList)

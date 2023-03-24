@@ -4,13 +4,12 @@ import vector from "../../local_assets/Vector.png"
 import vector1 from "../../local_assets/Vector1.png"
 
 
-const Carusel = ({photos, addressFileType, params}) => {
+const Carusel = ({photos, addressFileType, getRatio, color}) => {
     if (photos && typeof photos === "string") {photos = [photos]}
     console.log(photos);
     const [currentSlideNumber, setCurrentSlideNumber] = useState(0)
-    console.log(params)
-    const [size, setSize] = useState(params ? params[0]: 1);
-    const [dotColor, setDotColor] = useState(params ? params[1] : "blue");
+    const [ratio, setRatio] = useState(getRatio ? getRatio : 1);
+    const [dotColor, setDotColor] = useState(color ? color : "blue");
 
 
     useEffect(() => {
@@ -28,7 +27,7 @@ const Carusel = ({photos, addressFileType, params}) => {
             <div className="slideshow-container">
                 <a className="prev" onClick={() => setCurrentSlideNumber(prev => (prev > 0 ? prev-1 : photos.length-1))}><img src={vector} style={{margin: "0"}} width="7" height="12"/></a>
                 <div className="mySlides">
-                    <img src={addressFileType === "global" ? photos[currentSlideNumber] : process.env.REACT_APP_API_URL + photos[currentSlideNumber]} width={window.innerWidth*0.5} height={size*window.innerWidth*0.5}/>
+                    <img src={addressFileType === "global" ? photos[currentSlideNumber] : process.env.REACT_APP_API_URL + photos[currentSlideNumber]} width={window.innerWidth*0.5} height={ratio*window.innerWidth*0.5}/>
                 </div>
                 <a className="next" onClick={() => setCurrentSlideNumber(prev => (prev < photos.length-1 ? prev+1 : 0))}><img src={vector1} width="7" height="12"/></a>
             </div>

@@ -62,7 +62,10 @@ const CreateProgram = observer(({program, mode}) => {
         formData.append("supervisorName", supervisorName)
         formData.append("supervisorDescription", supervisorDescription)
         formData.append("supervisorImg", supervisorImg);
-        (mode === "edit") ? updateAdditionalProgram(formData).then(() => alert("Успешно обновлено")) : createAdditionalProgram(formData).then(() => alert("Успешно добавлено"))
+        (mode === "edit") ? updateAdditionalProgram(formData).then(() => alert("Успешно обновлено")) : createAdditionalProgram(formData).then(() => {
+            alert("Успешно добавлено")
+            mode = "edit"
+        })
     }
 
     return (

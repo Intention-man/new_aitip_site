@@ -99,7 +99,10 @@ const CreateStaff = observer(({staffer, mode}) => {
         for (let [key, val] of formData.entries()) {
             console.log(key, val);
         }
-        (mode === "edit") ? updateStaffer(formData).then(data => alert("Успешно обновлено")) : createStaffer(formData).then(data => alert("Успешно добавлено"));
+        (mode === "edit") ? updateStaffer(formData).then(data => alert("Успешно обновлено")) : createStaffer(formData).then(data => {
+            alert("Успешно добавлено")
+            mode = "edit"
+        });
         return true
     }
 

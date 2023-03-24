@@ -82,7 +82,10 @@ const CreateLab = observer(({lab, mode}) => {
         formData.append("text2", text2)
         formData.append("text3", text3)
         formData.append("carousel_photos_links", JSON.stringify(carouselPhotosLinks));
-        (mode === "edit") ? updateLab(formData).then(() => alert("Успешно обновлено")): createLab(formData).then(() => alert("Успешно создано"))
+        (mode === "edit") ? updateLab(formData).then(() => alert("Успешно обновлено")): createLab(formData).then(() => {
+            alert("Успешно добавлено")
+            mode = "edit"
+        })
     }
 
 

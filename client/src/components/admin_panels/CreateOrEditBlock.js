@@ -6,27 +6,31 @@ import {publicRoutes} from "../../routes";
 import "../../css/component_styles/Editor.css"
 import LineDisplay from "../common/LineDisplay";
 import Block from '../common/Block';
+import {updateFileUsages} from "../commonPanelsFunctions";
 
 
 const CreateOrEditBlock = observer(({block, mod}) => {
 
-    console.log(block.lines)
+    // console.log(block.lines)
     // возвращаемые "наверх" значения
     const isEmpty = block.hasOwnProperty("fakeParam");
     const prevLinesIdList = isEmpty ? [] : block.lines.map(line => line.id)
 
-    const [isNews, setIsNews] = useState(isEmpty ? "" : block.isNews);
+    const [isNews, setIsNews] = useState(isEmpty ? false : block.isNews);
     const [header, setHeader] = useState(isEmpty ? "" : block.header);
     const [pageLink, setPageLink] = useState(isEmpty ? "" : block.pageLink);
     const [ordinal, setOrdinal] = useState(isEmpty ? -1 : block.ordinal);
     const [lines, setLines] = useState(isEmpty ? [] : block.lines.sort((line1, line2) => line1.lineOrdinal - line2.lineOrdinal));
+
+    const [doUpdateUsages, setDoUpdateUsages] = useState(false);
+    const [removedLineIndex, setRemovedLineIndex] = useState(-1);
 
 
     const addLine = () => {
         setLines([...lines, {
             lineOrdinal: lines.length,
             kind: 0,
-            params: [],
+            params: {},
             text: [""],
             filesNames: [],
             addressFileType: ""
@@ -53,17 +57,28 @@ const CreateOrEditBlock = observer(({block, mod}) => {
         }
         newLineList.sort((line1, line2) => line1.lineOrdinal - line2.lineOrdinal)
         setLines(newLineList)
-        console.log(newLineList)
-     }
-
-    const removeLine = (number) => {
-        console.log(lines.filter(line => lines.indexOf(line) !== number).map(line => ({...line, ["lineOrdinal"]: lines.indexOf(line)})))
-        setLines(lines.filter(line => lines.indexOf(line) !== number).map(line => ({...line, ["lineOrdinal"]: lines.indexOf(line)})))
+        // console.log(newLineList)
     }
 
-    const saveBlock = () => {
+    const removeLine = (number) => {
+        console.log(typeof number)
+        console.log(lines.filter(line => line.lineOrdinal === number))
+        let removingLine = Array.from(lines.filter(line => line.lineOrdinal === number))[0];
+        (removingLine.filesNames !== null) && removingLine.filesNames.forEach(photo => updateFileUsages(photo, -1));
+        // console.log(lines.filter(line => lines.indexOf(line) !== number).map(line => ({
+        //     ...line,
+        //     ["lineOrdinal"]: lines.indexOf(line)
+        // })))
+        setLines(lines.filter(line => lines.indexOf(line) !== number).map(line => ({
+            ...line,
+            ["lineOrdinal"]: lines.indexOf(line)
+        })))
+        setRemovedLineIndex(number)
+    }
+
+    const saveBlock = async () => {
         const formData = new FormData()
-        console.log(block.id)
+        console.log(lines)
         block.id && formData.append("id", block.id)
         formData.append("isNews", isNews)
         formData.append("header", header)
@@ -71,7 +86,9 @@ const CreateOrEditBlock = observer(({block, mod}) => {
         formData.append("ordinal", `${ordinal}`)
         formData.append("lines", JSON.stringify(lines))
         formData.append("prevLinesIdList", JSON.stringify(prevLinesIdList))
-        mod === "edit" ? updateBlock(formData).then(data => console.log(data)) : createBlock(formData).then(data => console.log(data))
+        mod === "edit" ? updateBlock(formData).then(data => {
+        }) : createBlock(formData).then(data => {
+        })
     };
 
 
@@ -96,23 +113,25 @@ const CreateOrEditBlock = observer(({block, mod}) => {
             </select>
             <p>Введите номер блока на странице</p>
             <input placeholder={ordinal} onChange={(e) => setOrdinal(Number(e.target.value))}/>
-
-
             {lines.length > 0 && lines.map(line => {
-                console.log(lines)
-                return (
-                    <div style={{margin: "10px", padding: "10px", border: "5px solid #8888FF"}}>
-                        <CreateOrEditLine key={line.lineOrdinal} changeLine={changeLine} index={line.lineOrdinal} line={line}/>
-                        <LineDisplay line={line}/>
+                    // console.log(lines)
+                    return (
+                        <div style={{margin: "10px", padding: "10px", border: "5px solid #8888FF"}}>
+                            <CreateOrEditLine key={line.lineOrdinal} changeLine={changeLine} index={line.lineOrdinal}
+                                              line={line} doUpdateUsages={doUpdateUsages}
+                                              removedLineIndex={removedLineIndex}/>
+                            <LineDisplay line={line}/>
+                            {line.lineOrdinal > 0 &&
+                                <button onClick={() => swapLines(line.lineOrdinal - 1, line.lineOrdinal)}>Передвинуть линию
+                                    на 1 выше</button>}
+                            {(line.lineOrdinal + 1) < lines.length &&
+                                <button onClick={() => swapLines(line.lineOrdinal, line.lineOrdinal + 1)}>Передвинуть линию
+                                    на 1 ниже</button>}
 
-                        {line.lineOrdinal > 0 && <button onClick={() => swapLines(line.lineOrdinal - 1, line.lineOrdinal)}>Передвинуть линию на 1 выше</button>}
-                        {(line.lineOrdinal + 1) < lines.length && <button onClick={() => swapLines(line.lineOrdinal, line.lineOrdinal + 1)}>Передвинуть линию на 1 ниже</button>}
-
-                        <button onClick={() => removeLine(line.lineOrdinal)}>Удалить линию</button>
-                    </div>
-                )
-            }
-                
+                            <button onClick={() => removeLine(line.lineOrdinal)}>Удалить линию</button>
+                        </div>
+                    )
+                }
             )}
 
             <button onClick={addLine}>Добавить новую линию</button>
@@ -126,7 +145,13 @@ const CreateOrEditBlock = observer(({block, mod}) => {
                     useDatabase={false}
                 />
             }
-            <button onClick={saveBlock}>Сохранить блок</button>
+            <button onClick={() => {
+                saveBlock().then(bool => {
+                    setDoUpdateUsages(true)
+                    alert("Блок успешно обновлен")
+                    setTimeout(() => setDoUpdateUsages(false), 2000)
+                })
+            }}>Сохранить блок</button>
             <button onClick={() => removeBlock(block.id)}>Удалить блок</button>
         </div>
     )

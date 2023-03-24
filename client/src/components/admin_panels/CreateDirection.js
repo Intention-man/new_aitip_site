@@ -81,7 +81,10 @@ const CreateDirection = observer(({direction, mode}) => {
         formData.append("full_and_part_time_form_price", `${fullAndPartTimeFormPrice}`)
         formData.append("file", file)
         formData.append("tests", JSON.stringify(tests));
-        (mode === "edit") ? updateDirectionBachelor(formData).then(() => alert("Успешно обновлено")) : createDirectionBachelor(formData).then(() => alert("Успешно добавлено"));
+        (mode === "edit") ? updateDirectionBachelor(formData).then(() => alert("Успешно обновлено")) : createDirectionBachelor(formData).then(() => {
+            alert("Успешно добавлено")
+            mode = "edit"
+        });
         return true
     }
 

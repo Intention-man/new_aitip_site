@@ -50,7 +50,7 @@ const Admin = () => {
         "Добавить блок": <CreateOrEditBlock block={{fakeParam: undefined}}/>,
         "Редактировать блок": <BlocksEditor/>,
         "Изменить порядок блоков на странице": <BlocksSwap/>,
-        // "Оптимизация": <OptimizationZone/>
+        "Оптимизация": <OptimizationZone/>
     }
 
 

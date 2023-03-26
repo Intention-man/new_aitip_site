@@ -1,5 +1,5 @@
 import MDEditor from '@uiw/react-md-editor';
-import '../../css/component_styles/StyledText.css';
+import "../../css/component_styles/StyledText.css"
 
 
 /**
@@ -36,7 +36,7 @@ const StyledText = ({ line }) => {
                     >
                         <MDEditor.Markdown 
                             className={getMarkdownClassname()}
-                            source={columnText} 
+                            sВource={columnText}
                             style={{whiteSpace: 'pre-wrap'}}
                         />
                     </div>

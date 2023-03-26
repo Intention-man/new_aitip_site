@@ -35,7 +35,7 @@ const App = observer(() => {
     return (
         <BrowserRouter>
             <Menu/>
-            <div className='rootContainer'>
+            <div className='rootContainer' id="rootCont">
                 <SideBar
                     alignment='left'
                     isSticky={true}
@@ -56,7 +56,6 @@ const App = observer(() => {
                     <a href="">ЕОИС</a>
                 </SideBar>
             </div>
-             {/*<ProFooter/>*/}
         </BrowserRouter>
     )
 })

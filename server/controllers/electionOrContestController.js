@@ -3,18 +3,18 @@
 
 
 const ApiError = require("../error/ApiError")
-const {ElectionsAndContests} = require("../models/defaultModels/electionOrContestModel");
+const {ElectionOrContest} = require("../models/defaultModels/electionOrContestModel");
 
 
 
-class ElectionsAndContestsController {
+class ElectionsOrContestController {
     async create(req, res, next) {
         try{
             let {name, kind, applicationsAcceptanceDateStart, applicationsAcceptanceDateEnd, applicationsAcceptancePlace, eventDate, eventTime, eventPlace} = req.body
 
             let values = {name, kind, applicationsAcceptanceDateStart, applicationsAcceptanceDateEnd, applicationsAcceptancePlace, eventDate, eventTime, eventPlace}
 
-            const electionsAndContests = await ElectionsAndContests.create(values)
+            const electionsAndContests = await ElectionOrContest.create(values)
 
             return res.json(electionsAndContests)
         } catch (e) {
@@ -26,7 +26,7 @@ class ElectionsAndContestsController {
         try {
             let {id, name, kind, applicationsAcceptanceDateStart, applicationsAcceptanceDateEnd, applicationsAcceptancePlace, eventDate, eventTime, eventPlace} = req.body
 
-            const eAC = await ElectionsAndContests.findOne({
+            const eAC = await ElectionOrContest.findOne({
                 where: {id},
             })
 
@@ -43,7 +43,7 @@ class ElectionsAndContestsController {
         console.log(req.params)
         let {id} = req.params
         console.log(id)
-        await ElectionsAndContests.destroy({
+        await ElectionOrContest.destroy({
             where: {id}
         })
         return res.json(id)
@@ -54,9 +54,9 @@ class ElectionsAndContestsController {
         page = page || 1
         limit = limit || 10000
         let offset = limit * (page - 1)
-        let electionsAndContests = await ElectionsAndContests.findAndCountAll({limit, offset})
+        let electionsAndContests = await ElectionOrContest.findAndCountAll({limit, offset})
         return res.json(electionsAndContests)
     }
 }
 
-module.exports = new ElectionsAndContestsController
+module.exports = new ElectionsOrContestController

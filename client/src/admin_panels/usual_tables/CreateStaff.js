@@ -8,8 +8,9 @@ import {observer} from "mobx-react-lite";
 import {createStaffer, removeStaffer, updateStaffer} from "../../http/staffAPI";
 import "../../css/page_styles/AdminPanel.css";
 import "../../css/component_styles/PersonalitiesFilter.css";
-import {selectFile, updateFileUsages} from "../commonPanelsFunctions";
-import BigImg from "../lines/BigImg";
+import {updateFileUsages, selectFile} from "../../additional_commands/commonPanelsFunctions";
+import BigImg from "../../components/lines/BigImg";
+
 
 
 const CreateStaff = observer(({staffer, mode}) => {

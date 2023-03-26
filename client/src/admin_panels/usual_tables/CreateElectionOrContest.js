@@ -10,8 +10,7 @@ import {
 } from "../../http/electionsAndContestsAPI";
 import "../../css/page_styles/AdminPanel.css"
 import {useEffect} from "react";
-import {updateFileUsages} from "../commonPanelsFunctions";
-import {removePartner} from "../../http/partnersAPI";
+
 
 
 const CreateElectionOrContest = observer(({eAC, mode}) => {

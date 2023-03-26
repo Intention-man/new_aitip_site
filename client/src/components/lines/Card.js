@@ -2,7 +2,6 @@ import React from "react";
 import FadingImg from "./FadingImg";
 import RoundedImg from "./RoundedImg";
 import "../../css/component_styles/Block.css";
-import StyledText from "./StyledText";
 
 /** 
  * Компонент линии вида "Карточка". Она содержит изображение (слева или справа) и часть с основным контентом.
@@ -14,10 +13,10 @@ import StyledText from "./StyledText";
         imgType='fading'
         imgSrc={ImportedImage}
     >
-        <StyledText>
+        <div>
             <h1>Title</h1>
             <p>Some content...</p>
-        </StyledText>
+        </div>
     </Card>
  * ```
  * Данный код задаёт карточку с изображением ImportedImage, расположенным слева ("left"). 

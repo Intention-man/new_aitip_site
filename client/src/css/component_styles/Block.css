@@ -30,35 +30,6 @@
 
 /* Lines styles */
 
-.StyledText {
-    padding: 20px 20px 10px 20px;
-}
-
-.StyledText p, .StyledText li, .StyledText h1, .StyledText h2, .StyledText h3, .StyledText a {
-    color: var(--text-color);
-    font-family: var(--font-family);
-}
-
-.StyledText p, .StyledText li, .StyledText a {
-    font-size: var(--normal-font-size);
-    font-weight: var(--normal-font-weight);
-}
-
-.StyledText h1 {
-    font-size: var(--h1-font-size);
-    font-weight: var(--h1-font-weight);
-}
-
-.StyledText h2 {
-    font-size: var(--h2-font-size);
-    font-weight: var(--h2-font-weight);
-}
-
-.StyledText h3 {
-    font-size: var(--h3-font-size);
-    font-weight: var(--h3-font-weight);
-}
-
 .Card {
     display: flex;
     flex-direction: column;
@@ -146,6 +117,7 @@
 
 .RoundedImg-img {
     background-size: cover;
+    background-position: center; /*FIXME*/
     border-radius: 100%;
     aspect-ratio: 1 / 1;
 }

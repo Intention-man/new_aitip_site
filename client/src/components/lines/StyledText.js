@@ -1,17 +1,47 @@
-import '../../css/component_styles/Block.css';
+import MDEditor from '@uiw/react-md-editor';
+import '../../css/component_styles/StyledText.css';
+
 
 /**
- * Линия текстового контента. Она нужна для того, чтобы применять необходимые стили для текста.
+ * Компонент линии текста, стилизованного с помощью Markdown.
+ * Текст может быть разбит в несколько колонок, иметь цвет границы или фона.
  * 
- * Допустимые дочерние теги:
- * - `<p>`
- * - `<h1>`,`<h2>`,`<h3>`
- * - `<ul>`, `<ol>`, `<li>`
+ * @param {line} Объект линии (???) TODO 
+ * @returns Компонент линии стилизованного текста
  */
-const StyledText = ({ children }) => {
+const StyledText = ({ line }) => {
+    
+    
+    const getMarkdownClassname = () => {
+        const className = ['StyledText-mdText'];
+        
+        const backgroundColor = line.params !== null && line.params.backgroundColor;
+        if (backgroundColor != null)
+            className.push('StyledText-mdText-bg', `StyledText-mdText-bg-${backgroundColor}`)
+
+        const borderColor = line.params !== null && line.params.borderColor;
+        if (borderColor != null)
+            className.push('StyledText-mdText-border', `StyledText-mdText-border-${borderColor}`);
+        
+        return className.join(' ');
+    }
+
     return (
-        <div className="StyledText">
-            { children }
+        <div className="StyledText-container">
+            {
+                line.text.map((columnText, i) =>
+                    <div 
+                        key={i}
+                        className="StyledText-column"
+                    >
+                        <MDEditor.Markdown 
+                            className={getMarkdownClassname()}
+                            source={columnText} 
+                            style={{whiteSpace: 'pre-wrap'}}
+                        />
+                    </div>
+                )
+            }
         </div>
     );
 }

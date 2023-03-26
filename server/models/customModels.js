@@ -15,8 +15,8 @@ const CustomBlock = sequelize.define("block", {
 const Line = sequelize.define("line", {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     kind: {type: DataTypes.INTEGER, allowNull: false},
-    params: {type: DataTypes.ARRAY(DataTypes.STRING)},
-    text: {type: DataTypes.TEXT},
+    params: {type: DataTypes.JSON},
+    text: {type: DataTypes.ARRAY(DataTypes.TEXT)},
     filesNames: {type: DataTypes.ARRAY(DataTypes.TEXT)},
     addressFileType: {type: DataTypes.STRING},
     lineOrdinal: {type: DataTypes.INTEGER, allowNull: false},

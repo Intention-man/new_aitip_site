@@ -17,7 +17,6 @@ const CreateStaff = observer(({staffer, mode}) => {
     const {block_store} = useContext(Context)
 
     const isEmpty = staffer.hasOwnProperty("fakeParam");
-    // console.log(staffer, isEmpty)
 
     const [name, setName] = useState(isEmpty ? "" : staffer.name)
     const [post, setPost] = useState(isEmpty ? "" : staffer.post)
@@ -100,7 +99,10 @@ const CreateStaff = observer(({staffer, mode}) => {
         for (let [key, val] of formData.entries()) {
             console.log(key, val);
         }
-        (mode === "edit") ? updateStaffer(formData).then(data => alert("Успешно обновлено")) : createStaffer(formData).then(data => alert("Успешно добавлено"));
+        (mode === "edit") ? updateStaffer(formData).then(data => alert("Успешно обновлено")) : createStaffer(formData).then(data => {
+            alert("Успешно добавлено")
+            mode = "edit"
+        });
         return true
     }
 
@@ -184,7 +186,7 @@ const CreateStaff = observer(({staffer, mode}) => {
             <div>
                 <label htmlFor="img" className="mini-info">Картинка</label>
                 <input className="picture-getter" type="file" id="img" accept="image/*" onChange={e => {
-                    setFile(selectFile(e, block_store))
+                    setFile(selectFile(e.target.files[0], block_store))
                 }}/>
                 <select size="7" onChange={e => {
                     setFile(e.target.value)

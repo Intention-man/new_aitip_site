@@ -24,7 +24,7 @@ const Main = observer(() => {
         <BlockContainer>
             {
                 myBlocks.map(block =>
-                    <Block key={block.id} block={block}/>
+                    <Block key={block.id} block={block} useDatabase={true}/>
                 )
             }
         </BlockContainer>

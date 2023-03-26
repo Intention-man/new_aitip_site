@@ -14,21 +14,6 @@
     background-color: var(--color-canvas-default);
 }
 
-.own_black {
-    color: var(--aitip_black);
-}
-
-.own_grey {
-    color: var(--aitip_grey);
-}
-
-.own_blue {
-    color: var(--aitip_blue);
-}
-
-.own_red {
-    color: var(--aitip_red);
-}
 
 .font_small {
     font-size: calc(var(--font_size_const) * 0.7);
@@ -44,4 +29,46 @@
 
 .font_big {
     font-size: calc(var(--font_size_const) * 1.5);
+}
+
+black {
+    color: var(--aitip_black);
+}
+
+grey {
+    color: var(--aitip_grey);
+}
+
+blue {
+    color: var(--aitip_blue);
+}
+
+red {
+    color: var(--aitip_red);
+}
+
+alignRight {
+    display: block;
+    text-align: right;
+}
+
+alignCenter {
+    display: block;
+    text-align: center;
+}
+
+.TextLineEditor-editorPanel {
+    display:  grid;
+    gap: 0 20px;
+    grid-auto-columns: minmax(0, 1fr);
+    grid-auto-flow: column;
+}
+
+.TextLineEditor-settingsPanel {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 10px 20px;
+    padding: 20px 0;
 }

@@ -81,7 +81,10 @@ const CreateDirection = observer(({direction, mode}) => {
         formData.append("full_and_part_time_form_price", `${fullAndPartTimeFormPrice}`)
         formData.append("file", file)
         formData.append("tests", JSON.stringify(tests));
-        (mode === "edit") ? updateDirectionBachelor(formData).then(() => alert("Успешно обновлено")) : createDirectionBachelor(formData).then(() => alert("Успешно добавлено"));
+        (mode === "edit") ? updateDirectionBachelor(formData).then(() => alert("Успешно обновлено")) : createDirectionBachelor(formData).then(() => {
+            alert("Успешно добавлено")
+            mode = "edit"
+        });
         return true
     }
 
@@ -131,7 +134,9 @@ const CreateDirection = observer(({direction, mode}) => {
             <div style={{marginBottom: "2%"}}>
                 <label className="mini-info" htmlFor="img">Картинка</label>
                 <input className="picture-getter" type="file" id="img" accept="image/*" onChange={e => {
-                    setFile(selectFile(e.target.files[0], block_store))
+                    let newFile = selectFile(e.target.files[0], block_store);
+                    console.log(newFile)
+                    setFile(newFile)
                 }}/>
                 <select size="7" onChange={e => {
                     setFile(e.target.value)

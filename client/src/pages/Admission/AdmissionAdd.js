@@ -17,7 +17,10 @@ const AdmissionAdd = observer(() => {
     }, [])
 
     return (
-        <></>
+        <div style={{display: "flex",flexDirection: "column"}}>
+            <AdmissionAddContent2 style={{width: "100%"}}/>
+            <AdmissionAddContent3/>
+        </div>
     );
 });
 

@@ -28,6 +28,7 @@ function myFunction() {
 }
 
 
+
 const Menu = () => {
     return (
         <div>
@@ -36,14 +37,14 @@ const Menu = () => {
                 <a className="crunch" id="Kostyl"><p className="heading_color">Алтайский институт труда и права</p></a>
                 <a>
                     <form>
-                        <button className="button-fake">
+                        <button className="button-fake" style={{cursor: "default"}}>
                             <img src={search} width="25" height="25"/>
                         </button>
                         <input type="text" placeholder="Поиск по сайту"/>
                         <button className="button_search" type="submit"></button>
                     </form>
                 </a>
-                <a style={{display: "flex", flexWrap: "nowrap"}}>
+                <a >
                     <button className="blindversion">
                         Версия для слабовидящих
                         <img src={eye} style={{color: "white", paddingLeft: "10px", paddingTop: "7px"}}/>

@@ -7,6 +7,7 @@ import StafferItem from "./StafferItem";
 import {observer} from "mobx-react-lite";
 import "../../../css/page_styles/PersonalityList.css"
 import {Row} from "react-bootstrap";
+import SmallStafferItem from "./SmallStafferItem";
 
 
 const PersonalitiesList = observer(params => {

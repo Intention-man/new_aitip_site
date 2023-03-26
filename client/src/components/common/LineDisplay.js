@@ -7,6 +7,11 @@ import BigImg from "../lines/BigImg";
 import StyledText from '../lines/StyledText';
 import {logDOM} from "@testing-library/react";
 
+/**
+ * Line display component. Depending on the line kind and other fields' values, draws line
+ * @type {React.FunctionComponent<{readonly line?: *}>}
+ * @param {object} line
+ */
 
 const LineDisplay = observer(({line}) => {
     // let [line, setLine] = useState({});

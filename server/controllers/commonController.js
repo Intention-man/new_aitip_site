@@ -1,4 +1,4 @@
-// Общие для всех БД таблиц функции
+// Common for every table functions, related to files
 
 const uuid = require("uuid");
 const path = require("path");
@@ -8,6 +8,7 @@ const {FileWrapper} = require("../models/fileWrapperModel");
 
 
 class CommonController {
+    // add file to server/static and create new record in file_wrapper table. Returns link to this file (= encoded file name in static)
     async convertFiles(req, res, next) {
         try {
             let {files} = req.files;
@@ -39,6 +40,7 @@ class CommonController {
         }
     }
 
+    // increase or decrease file usages after saving changes at one of admin panels
     async updateFileUsages(req, res) {
         let {fileLink, delta} = req.body
         console.log(fileLink, delta)
@@ -60,6 +62,7 @@ class CommonController {
         return res.json(newCountUsages)
     }
 
+    // now, unused function of remove 1 file by id
     async removeFile(req, res) {
         console.log(req.params)
         let {id} = req.params
@@ -70,6 +73,7 @@ class CommonController {
         return res.json(id)
     }
 
+    // "optimization function": delete all files from static, that there are in static, but not in file_wrapper and all files from static and file_wrapper, that has no (=0) countUsages (it has written in file_wrapper table)
     async deleteAllUnusedFiles(req, res, next) {
         try {
             const directoryPath = path.resolve(__dirname, "..", "static");
@@ -105,6 +109,7 @@ class CommonController {
         }
     }
 
+    // getAllFiles
     async getAllFiles(req, res, next) {
         try {
             let {limit, page} = req.query

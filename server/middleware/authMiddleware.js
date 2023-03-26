@@ -1,3 +1,5 @@
+// function checking user authorization
+
 const jwt = require("jsonwebtoken")
 
 

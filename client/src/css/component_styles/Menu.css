@@ -167,7 +167,7 @@ body {
     display: none;
 }
 
-@media screen and (max-width: 1156px) {
+@media screen and (max-width: 1156px) and (min-width: 449px){
     .topnav a:not(:first-child) {display: none;}
     .topnav a.icon {
         float: right;
@@ -193,10 +193,9 @@ body {
     }
 }
 
-@media screen and (max-width: 1156px) {
+@media screen and (max-width: 1156px) and (min-width: 449px){
     .topnav.responsive {position: relative;}
     .topnav.responsive .icon {
-        position: absolute;
         right: 0;
         top: 0;
     }
@@ -228,4 +227,73 @@ body {
         font-size: 16px;
     }
 
+}
+
+@media screen and (max-width: 448px){
+    .topnav a:not(:first-child) {display: none;}
+    .topnav a.icon {
+        float: right;
+        right: 0;
+        top: 17px;
+        display: flex;
+        position: absolute;
+    }
+
+    .bottom_menu a {
+        display: none;
+    }
+
+    .logo{
+        position: absolute;
+        top: 0.5%;
+        left: 2%;
+        z-index: 1000;
+        width: 50px;
+        height: 60px;
+    }
+
+    .crunch {
+        margin-left: 12%;
+        font-size: 9px;
+    }
+}
+
+@media screen and (max-width: 448px) {
+    .topnav.responsive {
+        position: relative;
+    }
+
+    .topnav.responsive .icon {
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+
+    .topnav.responsive a {
+        float: none;
+        display: block;
+        text-align: center;
+    }
+
+    .bottom_menu.responsive {
+        position: relative;
+        background: #076DB1;
+    }
+
+    .bottom_menu.responsive a {
+        float: none;
+        display: block;
+        text-align: center;
+        color: white;
+    }
+
+    .logo.responsive {
+        display: none;
+    }
+
+    .crunch.responsive {
+        margin-left: 0;
+        float: left;
+        font-size: 12px;
+    }
 }

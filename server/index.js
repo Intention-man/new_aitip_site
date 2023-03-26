@@ -1,12 +1,15 @@
+// Main server file, that starts server app work and connect to database by db.js
+
+
 require("dotenv").config()
 const express = require("express")
 const sequelize = require("./db")
 const admission_models = require("./models/defaultModels/admissionModels")
-const elections_and_contests_model = require("./models/defaultModels/electionsAndContestsModel")
+const elections_and_contests_model = require("./models/defaultModels/electionOrContestModel")
 const lab_models = require("./models/defaultModels/labModel")
 const user_models = require("./models/defaultModels/userModels")
 const staffer_models = require("./models/defaultModels/staffModel")
-const partners_model = require("./models/defaultModels/partnersModel")
+const partners_model = require("./models/defaultModels/partnerModel")
 const schedule_model = require("./models/defaultModels/scheduleModel")
 const custom_models = require("./models/customModels")
 const file_wrapper_model = require("./models/fileWrapperModel")

@@ -1,0 +1,29 @@
+footer {
+    position: relative;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    background-color: var(--aitip_blue);
+    color: white;
+}
+
+.footer-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.footer-container ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.footer-container li {
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+}

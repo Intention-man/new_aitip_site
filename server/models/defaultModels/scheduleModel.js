@@ -1,4 +1,4 @@
-// Модель таблицы Партнеры. Поля, их типы данных и свойства
+// Schedule models definition. Every is similar with definition attributes, during creation SQL tables
 
 const sequelize = require("../../db")
 const {DataTypes} = require("sequelize")

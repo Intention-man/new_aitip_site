@@ -1,11 +1,11 @@
-/* Функции создания и получения данных между сервером и БД. Ссылки, по которым они работают написаны в staffRouter
+/* Функции создания и получения данных между сервером и БД. Ссылки, по которым они работают написаны в scheduleRouter
 */
 
 
 const ApiError = require("../error/ApiError")
 const { Op } = require('sequelize')
 const {Schedule} = require("../models/defaultModels/scheduleModel");
-const {Partners} = require("../models/defaultModels/partnersModel");
+const {Partners} = require("../models/defaultModels/partnerModel");
 
 
 class ScheduleController {

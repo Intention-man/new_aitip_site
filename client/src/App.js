@@ -5,7 +5,7 @@ import { observer } from "mobx-react-lite";
 import { BrowserRouter } from "react-router-dom";
 import AppRouter from "./components/AppRouter";
 import Menu from "./components/common/Menu";
-import ProFooter from "./components/common/ProFooter";
+import ShowFooter from "./components/common/ShowFooter";
 import SideBar from './components/common/SideBar';
 import LinksPanel from './components/common/LinksPanel';
 import { Context } from "./index";
@@ -35,7 +35,7 @@ const App = observer(() => {
     return (
         <BrowserRouter>
             <Menu/>
-            <div className='rootContainer'>
+            <div className='rootContainer' id="rootCont">
                 <SideBar
                     alignment='left'
                     isSticky={true}
@@ -56,7 +56,6 @@ const App = observer(() => {
                     <a href="">ЕОИС</a>
                 </SideBar>
             </div>
-             <ProFooter/>
         </BrowserRouter>
     )
 })

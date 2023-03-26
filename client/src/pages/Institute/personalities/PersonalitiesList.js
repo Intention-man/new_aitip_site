@@ -59,7 +59,6 @@ const PersonalitiesList = observer(params => {
                                         <SmallStafferItem staffer={staffer}/>
                                     </div>
                                 </div>
-
                             )}
                         </Row>)
                         rows.push(params.chosenStaffer && lastThreeStaffId.includes(params.chosenStaffer.id) &&

@@ -1,10 +1,10 @@
-/* Функции создания и получения данных между сервером и БД. Ссылки, по которым они работают написаны в PartnersRouter
+/* Функции создания и получения данных между сервером и БД. Ссылки, по которым они работают написаны в partnersRouter
 */
 
 const uuid = require("uuid")
 const path = require("path")
 const ApiError = require("../error/ApiError")
-const {Partners} = require("../models/defaultModels/partnersModel");
+const {Partners} = require("../models/defaultModels/partnerModel");
 
 
 class PartnersController {

@@ -1,3 +1,5 @@
+// Every router - explorer between server controller class and client API functions set (from "client/src/http" folder). Where (in index.js) we associate each router with their relative reference by which we API functions send (GET and POST) responses to server
+
 const Router = require("express")
 const router = new Router()
 const commonRouter = require("./commonRouter")

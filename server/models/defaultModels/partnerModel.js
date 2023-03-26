@@ -1,10 +1,10 @@
-// Модель таблицы Партнеры. Поля, их типы данных и свойства
+// Partner model definition. Every is similar with definition attributes, during creation SQL tables
 
 const sequelize = require("../../db")
 const {DataTypes} = require("sequelize")
 
 
-const Partners = sequelize.define("partner", {
+const Partner = sequelize.define("partner", {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     name: {type: DataTypes.STRING, allowNull: false, unique: true},
     kind: {type: DataTypes.STRING, allowNull: false},
@@ -15,4 +15,4 @@ const Partners = sequelize.define("partner", {
 })
 
 
-module.exports = {Partners}
+module.exports = {Partner}

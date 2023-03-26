@@ -1,4 +1,4 @@
-// Подключение к базе данных
+// Sequelize (="DB object") definition by server/.env data
 
 
 const {Sequelize} = require("sequelize");

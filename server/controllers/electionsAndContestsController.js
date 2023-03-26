@@ -1,9 +1,9 @@
-/* Функции создания и получения данных между сервером и БД. Ссылки, по которым они работают написаны в electionsAndContestsRouter
+/* Функции создания и получения данных между сервером и БД. Ссылки, по которым они работают написаны в electionOrContestRouter
 */
 
 
 const ApiError = require("../error/ApiError")
-const {ElectionsAndContests} = require("../models/defaultModels/electionsAndContestsModel");
+const {ElectionsAndContests} = require("../models/defaultModels/electionOrContestModel");
 
 
 

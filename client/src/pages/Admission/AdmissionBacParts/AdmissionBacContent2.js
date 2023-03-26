@@ -1,9 +1,10 @@
 import React, {useContext, useEffect, useState} from 'react';
 import Card from '../../../components/lines/Card';
-import "../../../css/page_styles/AdmissionBac2.css"
+import "../../../css/page_styles/Admission.css";
 import {fetchOneDirectionBachelor} from "../../../http/admissionAPI";
 import {observer} from "mobx-react-lite";
 import {Context} from "../../../index";
+import ButtonList from "../../../components/ButtonList";
 
 const AdmissionBacContent2 = observer(() => {
     // const directions = ["Экономика", "Менеджмент", "Юриспруденция", "Государственное и муниципальное управление", "Туризм"]
@@ -22,20 +23,22 @@ const AdmissionBacContent2 = observer(() => {
     const {admission_store} = useContext(Context)
     const [chosenDirection, setChosenDirection] = useState({});
     const [buttonList, setButtonList] = useState([]);
-
+    const [chosenDirectionName, setChosenDirectionName] = useState("");
 
     useEffect(() => {
-        if (admission_store.selectedDirectionBachelor) {
-            fetchOneDirectionBachelor(admission_store.selectedDirectionBachelor).then(data => {
-                console.log(data)
-                setChosenDirection(data)
+        if(chosenDirectionName) {
+            console.log(chosenDirectionName)
+            fetchOneDirectionBachelor(Array.from(admission_store.directionsBachelor.filter(e => e.name === chosenDirectionName))[0].id).then(data => {
+                setChosenDirection(data);
             })
+            console.log(chosenDirection)
         }
-    }, [admission_store.selectedDirectionBachelor])
+    }, [chosenDirectionName])
 
 
     useEffect(() => {
         admission_store.directionsBachelor.forEach(direction => setButtonList([...buttonList, {name: direction.name, value: direction.id}]))
+        admission_store.directionsBachelor && admission_store.directionsBachelor[0] && setChosenDirectionName(admission_store.directionsBachelor[0].name)
     }, [admission_store.directionsBachelor]);
 
 
@@ -48,21 +51,24 @@ const AdmissionBacContent2 = observer(() => {
             <h1 className="local_title">
                 Выберите <span style={{color: "#076DB1"}}>направление</span>
             </h1>
-            <ul className="tracks">
-                {admission_store.directionsBachelor.map(d =>
-                    <li key={"small_div_" + d.id}>
-                        <button
-                            key={d.id}
-                            onClick={() => {
-                                admission_store.setSelectedDirectionBachelor(d.id)
-                                console.log(d.id)
-                            }}
-                        >
-                            {d.name}
-                        </button>
-                    </li>
-                )}
-            </ul>
+            {/*<ul className="tracks">*/}
+                <ButtonList buttonList={admission_store.directionsBachelor.map(e => e.name)} setChosenValue={setChosenDirectionName}/>
+                {/*{admission_store.directionsBachelor && forms[windowVisible]}*/}
+                {/*{admission_store.directionsBachelor.map(d =>*/}
+                {/*    <li key={"small_div_" + d.id}>*/}
+                {/*        <button*/}
+                {/*            key={d.id}*/}
+                {/*            onClick={() => {*/}
+                {/*                console.log(this)*/}
+                {/*                admission_store.setSelectedDirectionBachelor(d.id)*/}
+                {/*                console.log(d.id)*/}
+                {/*            }}*/}
+                {/*        >*/}
+                {/*            {d.name}*/}
+                {/*        </button>*/}
+                {/*    </li>*/}
+                {/*)}*/}
+            {/*</ul>*/}
             {/*{buttonList.length > 0 && <ButtonList buttonList={buttonList}></ButtonList>}*/}
             {chosenDirection.hasOwnProperty("name") &&
                 <Card
@@ -72,7 +78,7 @@ const AdmissionBacContent2 = observer(() => {
                     className="direction_inner_card"
                 >
                     <h1>{chosenDirection.code} {chosenDirection.name}</h1>
-                    <h3>Профиль: {chosenDirection.profile}</h3>
+                    <h3 style={{width: "90%"}}>Профиль: {chosenDirection.profile}</h3>
                     <p>{chosenDirection.profession_advantages}</p>
                 </Card>}
 
@@ -89,22 +95,26 @@ const AdmissionBacContent2 = observer(() => {
                         <div className="passing_points" style={{borderColor: "#AD4820"}}>
                             <p className="local_title">
                                         <span style={{color: "#AD4820"}}>Минимальные проходные баллы
-</span> для поступающих по результатам ЕГЭ
+                                        </span> для поступающих по результатам ЕГЭ
                             </p>
-                            <ol>
-                                {chosenDirection.tests.filter(test => test.admissionByEGE === true).map(test =>
-                                    <li key={test.subject}>{test.subject} {test.minPoints}</li>)}
-                            </ol>
+                             <table style={{width:"100%"}}>
+                                <tbody>
+                                    {chosenDirection && chosenDirection.tests && chosenDirection.tests.filter(test => test.admissionByEGE === true).map(test =>{
+                                        return <tr key={test.subject}><td>{test.subject}</td><td style={{width: "30%"}}><span style={{color: "#AD4820", fontWeight: "bold"}}>{test.minPoints}</span> балл{(5 > test.minPoints%10 > 0) ? "а" : "ов"}</td></tr>;})}
+                                </tbody>
+                            </table>
                         </div>
                         <div className="passing_points" style={{borderColor: "#076DB1"}}>
                             <p className="local_title">
                                 <span style={{color: "#076DB1"}}>Минимальные проходные баллы </span> для поступающих на
                                 базе профессионального образования
                             </p>
-                            <ol>
-                                {chosenDirection.tests.filter(test => test.admissionByEGE === false).map(test =>
-                                    <li key={test.subject}>{test.subject} {test.minPoints}</li>)}
-                            </ol>
+                            <table style={{width:"100%"}}>
+                                <tbody>
+                                {chosenDirection && chosenDirection.tests && chosenDirection.tests.filter(test => test.admissionByEGE === false).map(test =>{
+                                    return <tr key={test.subject}><td>{test.subject}</td><td><span style={{color: "#076DB1", fontWeight: "bold"}}>{test.minPoints}</span> балл{(5 > test.minPoints%10 > 0) ? "а" : "ов"}</td></tr>;})}
+                                </tbody>
+                            </table>
                         </div>
                         <div className="_2_documents">
                             <div className="_1_of_first_2_documents">
@@ -121,11 +131,11 @@ const AdmissionBacContent2 = observer(() => {
                     </div>
                     <div className="cost_zone">
                         <div className="cost">
-                            <p className="cost_price">{chosenDirection.full_and_part_time_form_price}</p>
+                            <p className="cost_price">{chosenDirection.full_and_part_time_form_price.toLocaleString()}</p>
                             <p className="cost_form">Очно-заочная</p>
                         </div>
                         <div className="cost">
-                            <p className="cost_price">{chosenDirection.extramural_form_price}</p>
+                            <p className="cost_price">{chosenDirection.extramural_form_price.toLocaleString()}</p>
                             <p className="cost_form">Заочная</p>
                         </div>
                     </div>
@@ -142,6 +152,7 @@ const AdmissionBacContent2 = observer(() => {
                     </button>
                 </div>}
         </Card>
+
 
     );
 });

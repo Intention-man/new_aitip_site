@@ -1,29 +1,19 @@
-/* Функции создания и получения данных между сервером и БД. Ссылки, по которым они работают написаны в PartnersRouter
+/* Функции создания и получения данных между сервером и БД. Ссылки, по которым они работают написаны в partnersRouter
 */
 
 const uuid = require("uuid")
 const path = require("path")
 const ApiError = require("../error/ApiError")
-const {Partners} = require("../models/defaultModels/partnersModel");
-
+const {Partners} = require("../models/defaultModels/partnerModel");
 
 
 class PartnersController {
     async create(req, res, next) {
         try{
-            let {name, kind, description, jointProjectsDescription} = req.body
-            const {logo, jointProjectsPhotoes} = req.files
-            let fileList = []
-            jointProjectsPhotoes.map(photo => {
-                let fileName = uuid.v4() + ".jpg"
-                photo.mv(path.resolve(__dirname, "..", "static", fileName))
-                fileList.push(fileName)
-            })
-            console.log(fileList)
-            let fileNameImg = uuid.v4() + ".jpg"
-            await logo.mv(path.resolve(__dirname, "..", "static", fileNameImg))
+            const {name, kind, logo, description, jointProjectsDescription, jointProjectsPhotos} = req.body
+            const splitedJointProjectsPhotos = JSON.parse(jointProjectsPhotos)
 
-            let values = {name, kind, description, logo: fileNameImg,jointProjectsDescription, jointProjectsPhotoes: fileList}
+            let values = {name, kind, description, logo, jointProjectsDescription, jointProjectsPhotos: splitedJointProjectsPhotos}
             const partners = await Partners.create(values)
 
             return res.json(partners)
@@ -32,26 +22,17 @@ class PartnersController {
         }
     }
 
-    async updateParther(req, res, next) {
+    async updatePartner(req, res, next) {
         try {
-            let {id, name, kind, description, jointProjectsDescription} = req.body
-            const {logo, jointProjectsPhotoes} = req.files
-
-            let fileList = []
-            jointProjectsPhotoes.map(photo => {
-                let fileName = uuid.v4() + ".jpg"
-                photo.mv(path.resolve(__dirname, "..", "static", fileName))
-                fileList.push(fileName)
-            })
-            console.log(fileList)
-            let fileNameImg = uuid.v4() + ".jpg"
-            await logo.mv(path.resolve(__dirname, "..", "static", fileNameImg))
-
+            let {id, name, kind, logo, description, jointProjectsDescription, jointProjectsPhotos} = req.body
+            console.log("Controller")
+            const splitedJointProjectsPhotos = JSON.parse(jointProjectsPhotos)
 
             const partner = await Partners.findOne({
                 where: {id},
             })
-            let values = {name, kind, description, logo: fileNameImg,jointProjectsDescription, jointProjectsPhotoes: fileList}
+            console.log("partner: ", partner)
+            let values = {name, kind, description, logo, jointProjectsDescription, jointProjectsPhotos: splitedJointProjectsPhotos}
 
             partner.update(values, {where: {id}})
             return res.json(partner)
@@ -60,7 +41,7 @@ class PartnersController {
         }
     }
 
-    async removeParther(req, res) {
+    async removePartner(req, res) {
         console.log(req.params)
         let {id} = req.params
         console.log(id)

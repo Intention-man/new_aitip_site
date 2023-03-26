@@ -8,15 +8,15 @@ import {observer} from "mobx-react-lite";
 import {createStaffer, removeStaffer, updateStaffer} from "../../http/staffAPI";
 import "../../css/page_styles/AdminPanel.css";
 import "../../css/component_styles/PersonalitiesFilter.css";
-import {convertFiles, fetchAllFiles} from "../../http/commonAPI";
+import {selectFile, updateFileUsages} from "../commonPanelsFunctions";
+import BigImg from "../lines/BigImg";
 
 
-const CreateStaff = observer(({staffer, mod}) => {
+const CreateStaff = observer(({staffer, mode}) => {
     const {admission_store} = useContext(Context)
     const {block_store} = useContext(Context)
 
     const isEmpty = staffer.hasOwnProperty("fakeParam");
-    // console.log(staffer, isEmpty)
 
     const [name, setName] = useState(isEmpty ? "" : staffer.name)
     const [post, setPost] = useState(isEmpty ? "" : staffer.post)
@@ -32,9 +32,11 @@ const CreateStaff = observer(({staffer, mod}) => {
     const [phoneNumber, setPhoneNumber] = useState(isEmpty ? "" : staffer.phone_number);
     const [adress, setAdress] = useState(isEmpty ? "" : staffer.adress);
     const [file, setFile] = useState(isEmpty ? null : staffer.img)
+    const [prevFile, setPrevFile] = useState(isEmpty ? null : staffer.img);
+
 
     useEffect(() => {
-        if (mod === "edit") {
+        if (mode === "edit") {
             document.getElementById('name').value = name
             document.getElementById('post').value = post
             document.getElementById('academic_degree').value = academicDegree
@@ -53,6 +55,7 @@ const CreateStaff = observer(({staffer, mod}) => {
         console.log(directionsBac)
         console.log(programsAdd)
     }, [directionsBac, programsAdd]);
+
 
     const addDirection = (directionName) => {
         setDirectionsBac([...directionsBac, directionName])
@@ -74,20 +77,10 @@ const CreateStaff = observer(({staffer, mod}) => {
         console.log(programsAdd)
     }
 
-    const selectFile = (e) => {
-        const fileObject = e.target.files[0]
-        const formData = new FormData();
-        formData.append("files", fileObject)
-        console.log(file)
-        convertFiles(formData).then(fileLink => {
-            setFile(fileLink);
-        });
-    }
-
-    const saveStaffer = () => {
+     const saveStaffer = async () => {
         const formData = new FormData()
-        console.log(bio, publications, disciplinesAndCourses, projects)
-        Object.keys(formData).forEach(k => console.log(formData.getAll(k)))
+        console.log(file)
+        // Object.keys(formData).forEach(k => console.log(formData.getAll(k)))
         staffer.id && formData.append("id", staffer.id)
         formData.append("name", name)
         formData.append("post", post)
@@ -102,11 +95,15 @@ const CreateStaff = observer(({staffer, mod}) => {
         formData.append("email", email)
         formData.append("phone_number", phoneNumber)
         formData.append("adress", adress)
-        formData.append("img", file)
+        formData.append("file", file);
         for (let [key, val] of formData.entries()) {
             console.log(key, val);
         }
-        (mod === "edit") ? updateStaffer(formData).then(data => console.log(data)) : createStaffer(formData).then(data => console.log(data))
+        (mode === "edit") ? updateStaffer(formData).then(data => alert("Успешно обновлено")) : createStaffer(formData).then(data => {
+            alert("Успешно добавлено")
+            mode = "edit"
+        });
+        return true
     }
 
 
@@ -188,21 +185,22 @@ const CreateStaff = observer(({staffer, mod}) => {
             </div>
             <div>
                 <label htmlFor="img" className="mini-info">Картинка</label>
-                <input className="picture-getter" type="file" id="img" onChange={e => selectFile(e)}/>
+                <input className="picture-getter" type="file" id="img" accept="image/*" onChange={e => {
+                    setFile(selectFile(e.target.files[0], block_store))
+                }}/>
                 <select size="7" onChange={e => {
                     setFile(e.target.value)
                     console.log(e.target.value)
                 }}>
                     {block_store.allFiles.map(file =>
-                        <option value={file.link}>
+                        <option value={file.fileLink}>
                             <div>
                                 <p>{file.name}</p>
-                                <img src={process.env.REACT_APP_API_URL + file.link} width="100px" height="100px"/>
                             </div>
                         </option>
                     )}
                 </select>
-                {(typeof file === "string") ? <img src={process.env.REACT_APP_API_URL + file}/> : <p>{typeof file}</p>}
+                {(typeof file === "string") ? <BigImg imgSrc={process.env.REACT_APP_API_URL + file}/> : <p>{typeof file}</p>}
             </div>
 
 
@@ -210,11 +208,15 @@ const CreateStaff = observer(({staffer, mod}) => {
                 Закрыть
             </Button>
             <Button style={{marginTop: "5%", marginBottom: "5%"}} variant="outline-success" onClick={() => {
-                saveStaffer()
+                saveStaffer().then((bool) => {
+                    (prevFile !== null) && updateFileUsages(prevFile, -1)
+                    updateFileUsages(file, 1)
+                    setPrevFile(file)
+                })
             }}>
                 Сохранить сотрудника
             </Button>
-            {mod === "edit" &&
+            {mode === "edit" &&
                 <Button style={{marginTop: "5%", marginBottom: "5%"}} variant="outline-success" onClick={() => {
                     removeStaffer(staffer.id).then(() => alert("Сотрудник успешно удален"))
                 }}>

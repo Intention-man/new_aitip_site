@@ -1,3 +1,5 @@
+// function checking user role
+
 const jwt = require("jsonwebtoken")
 
 

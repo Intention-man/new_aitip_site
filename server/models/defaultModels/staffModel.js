@@ -1,4 +1,4 @@
-// Модель сотрудника: поля, которые будут у каждого сотрудника, их типы данных и свойства.
+// Staffer model definition. Every is similar with definition attributes, during creation SQL tables
 
 const sequelize = require("../../db")
 const {DataTypes} = require("sequelize")

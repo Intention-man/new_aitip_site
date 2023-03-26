@@ -1,36 +1,60 @@
-import React, {useState} from 'react';
+import React from 'react';
 import MDEditor, {commands} from "@uiw/react-md-editor";
+import { getTextColorCommands } from "../additional_commands/textColoringCommands";
+import { alignTextCenter, alignTextRight, alignTextLeft } from '../additional_commands/textAlignCommands';
+import AlignLeftIcon from "../../local_assets/icons/align-left.svg";
+import ColorChangeIcon from '../../local_assets/icons/color-fill.svg';
 import "../../css/component_styles/Editor.css"
-import {blackText, blueText, greyText, redText} from "../textColoringCommands";
 
-const ExtendedTextEditor = ({text, setText, changeLine, index}) => {
 
-    // const changeTextColorButtons = {
-    //     "Черный": "own_black",
-    //     "Серый": "own_grey",
-    //     "Синий": "own_blue",
-    //     "Красный": "own_red",
-    // }
-
+const ExtendedTextEditor = ({text, setText}) => {
 
     return (
         <MDEditor
             value={text}
             preview="edit"
-            commands={[commands.bold, commands.italic, commands.link, commands.quote, commands.orderedListCommand, commands.unorderedListCommand, commands.checkedListCommand, commands.hr,
-                commands.group([blueText, redText, blackText, greyText],
+            commands={[
+                commands.bold, 
+                commands.italic, 
+                commands.group(getTextColorCommands(),
                     {
-                        name: 'Изменить цвет выделенного текста',
-                        groupName: 'Изменить цвет выделенного текста',
-                        buttonProps: {'aria-label': 'Изменить цвет выделенного текста'}
+                        name: 'textColor',
+                        groupName: 'textColor',
+                        buttonProps: {
+                            'aria-label': 'Изменить цвет выделенного текста',
+                            'title': 'Изменить цвет выделенного текста'
+                        },
+                        icon: (
+                            <img style={{width: '12px', height: '12px'}} src={ColorChangeIcon} />
+                        )
                     }
-                )
-            ]
-            }
-            extraCommands={[commands.fullscreen]}
+                ),
+                commands.group([alignTextLeft, alignTextCenter, alignTextRight], 
+                    {
+                        name: "textAlign",
+                        groupName: "textAlign",    
+                        buttonProps: {
+                            'aria-label': "Изменить выравнивание выделенного текста",
+                            'title': "Изменить выравнивание выделенного текста"
+                        },
+                        icon: (
+                            <img style={{width: '12px', height: '12px'}} src={AlignLeftIcon} />
+                        )
+                    }
+                ),
+                commands.divider,
+                commands.link, 
+                commands.quote, 
+                commands.orderedListCommand, 
+                commands.unorderedListCommand, 
+                commands.checkedListCommand, 
+                commands.hr,
+            ]}
+            extraCommands={[
+                commands.fullscreen
+            ]}
             onChange={(val) => {
                 setText(val)
-                changeLine("text", val, index)
             }}
         />
     );

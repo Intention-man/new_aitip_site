@@ -7,12 +7,13 @@ export const createPartner = async (partner) => {
 }
 
 export const updatePartner = async (partner) => {
-    const {data} = await $authHost.post("api/partner/update", partner)
+    console.log("API")
+    const {data} = await $authHost.post("api/partners/update", partner)
     return data
 }
 
 export const removePartner = async (id) => {
-    const {data} = await $authHost.post("api/partner/remove/" + id)
+    const {data} = await $authHost.post("api/partners/remove/" + id)
     return data
 }
 

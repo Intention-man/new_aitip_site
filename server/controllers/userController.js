@@ -1,3 +1,6 @@
+/* Функции создания и получения данных между сервером и БД. Ссылки, по которым они работают написаны в userRouter
+*/
+
 const ApiError = require("../error/ApiError")
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
@@ -10,6 +13,7 @@ const generateJwt = (id, email, role) => {
 
 class UserController {
     async registration(req, res, next) {
+        console.log(1)
         const {email, password, role} = req.body
 
         if (!email || !password) {
@@ -22,7 +26,7 @@ class UserController {
         const hashPassword = await bcrypt.hash(password, 5)
 
         const user = await User.create({email, password: hashPassword, role})
-
+        console.log(1)
         const token = generateJwt(user.id, user.email, user.role)
         return res.json({token})
     }

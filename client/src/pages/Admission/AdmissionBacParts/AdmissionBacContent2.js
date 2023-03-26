@@ -4,7 +4,6 @@ import "../../../css/page_styles/AdmissionBac2.css"
 import {fetchOneDirectionBachelor} from "../../../http/admissionAPI";
 import {observer} from "mobx-react-lite";
 import {Context} from "../../../index";
-import ButtonList from "../../../components/ButtonList";
 
 const AdmissionBacContent2 = observer(() => {
     // const directions = ["Экономика", "Менеджмент", "Юриспруденция", "Государственное и муниципальное управление", "Туризм"]
@@ -49,22 +48,22 @@ const AdmissionBacContent2 = observer(() => {
             <h1 className="local_title">
                 Выберите <span style={{color: "#076DB1"}}>направление</span>
             </h1>
-            {/*<ul className="tracks">*/}
-            {/*    {admission_store.directionsBachelor.map(d =>*/}
-            {/*        <li key={"small_div_" + d.id}>*/}
-            {/*            <button*/}
-            {/*                key={d.id}*/}
-            {/*                onClick={() => {*/}
-            {/*                    admission_store.setSelectedDirectionBachelor(d.id)*/}
-            {/*                    console.log(d.id)*/}
-            {/*                }}*/}
-            {/*            >*/}
-            {/*                {d.name}*/}
-            {/*            </button>*/}
-            {/*        </li>*/}
-            {/*    )}*/}
-            {/*</ul>*/}
-            {buttonList.length > 0 && <ButtonList buttonList={buttonList}></ButtonList>}
+            <ul className="tracks">
+                {admission_store.directionsBachelor.map(d =>
+                    <li key={"small_div_" + d.id}>
+                        <button
+                            key={d.id}
+                            onClick={() => {
+                                admission_store.setSelectedDirectionBachelor(d.id)
+                                console.log(d.id)
+                            }}
+                        >
+                            {d.name}
+                        </button>
+                    </li>
+                )}
+            </ul>
+            {/*{buttonList.length > 0 && <ButtonList buttonList={buttonList}></ButtonList>}*/}
             {chosenDirection.hasOwnProperty("name") &&
                 <Card
                     width={12}
@@ -82,7 +81,7 @@ const AdmissionBacContent2 = observer(() => {
                     <p className="extended_description">{chosenDirection.profession_description}</p>
                     <p className="title_who_can_you_become">Кем ты можешь стать:</p>
                     <ul className="specialties">
-                        {Object.values(chosenDirection.specialities).sort((a, b) => b.length - a.length).map(el =>
+                        {(chosenDirection.specialities + "").split(";").sort((a, b) => b.length - a.length).map(el =>
                             <li className="specialty" key={el}>{el}</li>
                         )}
                     </ul>
@@ -94,7 +93,7 @@ const AdmissionBacContent2 = observer(() => {
                             </p>
                             <ol>
                                 {chosenDirection.tests.filter(test => test.admissionByEGE === true).map(test =>
-                                    <li key={test.subject}>{test.subject} {test.min_points}</li>)}
+                                    <li key={test.subject}>{test.subject} {test.minPoints}</li>)}
                             </ol>
                         </div>
                         <div className="passing_points" style={{borderColor: "#076DB1"}}>
@@ -104,7 +103,7 @@ const AdmissionBacContent2 = observer(() => {
                             </p>
                             <ol>
                                 {chosenDirection.tests.filter(test => test.admissionByEGE === false).map(test =>
-                                    <li key={test.subject}>{test.subject} {test.min_points}</li>)}
+                                    <li key={test.subject}>{test.subject} {test.minPoints}</li>)}
                             </ol>
                         </div>
                         <div className="_2_documents">

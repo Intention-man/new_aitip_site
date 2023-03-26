@@ -1,3 +1,6 @@
+// Admission models definition. Every is similar with definition attributes, during creation SQL tables
+
+
 const sequelize = require("../../db")
 const {DataTypes} = require("sequelize")
 
@@ -15,7 +18,7 @@ const DirectionBachelor = sequelize.define("direction_bachelor", {
     img: {type: DataTypes.TEXT, allowNull: false}
 })
 
-
+// table, related DirectionBachelor with the many-to-1 relationship
 const EntranceTest = sequelize.define("entrance_test", {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     subject: {type: DataTypes.STRING, allowNull: false},

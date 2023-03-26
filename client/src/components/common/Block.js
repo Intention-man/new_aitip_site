@@ -1,21 +1,26 @@
+/**
+ * Компонент блока контента.
+ *
+ * Блок - это группа линий. Все переданные блоку линии располагаются на одном прямоугольнике, обособленном от других блоков.
+ *
+ * @param {object} block Объект блока (???) TODO
+ * @param {boolean} useDatabase Стоит ли загружать блок из базы данных. Если нет,
+ * то передавайте в пропе block поле lines с линиями и heading c заголовком блока (это временный костыль :/)
+ * @returns Компонент блока для размещения в BlockContainer
+ */
+
 import { observer } from 'mobx-react-lite';
 import { useContext, useState, useEffect } from 'react';
 import { Context } from '../../index';
 import LineDisplay from './LineDisplay';
 import '../../css/component_styles/Block.css';
 
-/**
- * Компонент блока контента. 
- * 
- * Блок - это группа линий. Все переданные блоку линии располагаются на одном прямоугольнике, обособленном от других блоков. 
- * 
- * @param {string} linkName - имя данного блока, которое будет отображаться в виде ссылки в боковой панели с ссылками на все блоки страницы
- */
+
 const Block = observer(({ block, useDatabase }) => {
     // TODO: отрефакторить этот код, так как хотелось бы создавать блок необязательно обращаясь к БД.
     // Например, когда мы хотим показать превью блока, ещё не сохранённого пользователем.
     // Нужно убрать проп block, заменив его на важные для блока пропы (header, lines и др.).
-    console.log('Block:', block)
+    // console.log('Block:', block)
     const {block_store} = useContext(Context);
 
     const [myLines, setMyLines] = useState([]);
@@ -23,6 +28,7 @@ const Block = observer(({ block, useDatabase }) => {
     useEffect(() => {
         if (useDatabase) {
             console.log(block.id)
+            console.log(block_store.lines)
             setMyLines(block_store.lines.filter(line => line.blockId === block.id).sort((a, b) => a.lineOrdinal - b.lineOrdinal))
             console.log(block_store.lines.filter(line => line.blockId === block.id).sort((a, b) => a.lineOrdinal - b.lineOrdinal))
         } else {
@@ -45,5 +51,6 @@ const Block = observer(({ block, useDatabase }) => {
         </div>
     );
 })
+
 
 export default Block;

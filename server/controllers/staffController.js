@@ -1,7 +1,6 @@
 /* Функции создания и получения данных между сервером и БД. Ссылки, по которым они работают написаны в staffRouter
 */
 
-
 const {Staffer} = require("../models/defaultModels/staffModel")
 const ApiError = require("../error/ApiError")
 const { Op } = require('sequelize')

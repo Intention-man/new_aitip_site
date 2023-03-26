@@ -3,6 +3,15 @@ import ExtendedTextEditor from "../../lines/ExtendedTextEditor";
 import OurColorPicker from "../OurColorPicker";
 import "../../../css/component_styles/Editor.css";
 
+/**
+ * Компонент редактора текстовой линии
+ * 
+ * Пропы:
+ * @param {Object} line Объект линии, которую редактирует в данный момент этот компонент
+ * @param {function} changeLine Callback для вызова каждый раз, когда меняется line
+ * @param {*} index Индекс данной линии (???) TODO
+ * @returns Компонент редактора линии
+ */
 const TextLineEditor = ({ line, changeLine, index }) => {
 
     const [columnsNumber, setColumnsNumber] = useState(1);
@@ -33,13 +42,15 @@ const TextLineEditor = ({ line, changeLine, index }) => {
         // Так как нельзя выбрать одновременно и цвет фона, и цвет границы, то при изменении одного из них сбрасываем второй
 
         // Находим, что действительно изменилось 
-        if (newBackgroundColor != backgroundColor)
+        if (newBackgroundColor != backgroundColor) {
             newBorderColor = null;
-        else if (newBorderColor != borderColor)
+            line.params["backgroundColor"] = newBackgroundColor
+        }
+        else if (newBorderColor != borderColor) {
             newBackgroundColor = null;
-
-        changeLine('params', [newBackgroundColor, newBorderColor], index);
-            
+            line.params["borderColor"] = newBorderColor
+        }
+        changeLine("params", line.params, index)
         setBackgroundColor(newBackgroundColor);
         setBorderColor(newBorderColor);
     }

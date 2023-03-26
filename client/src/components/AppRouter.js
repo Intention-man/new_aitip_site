@@ -14,12 +14,12 @@ const AppRouter = observer(() => {
     const {block_store} = useContext(Context);
 
     useEffect(() => {
-        fetchBlocks().then(data => {
-            block_store.setBlocks(data.rows)
-            console.log(data.rows)
-        })
         fetchLines().then(data => {
             block_store.setLines(data.rows)
+            console.log(data.rows)
+        })
+        fetchBlocks().then(data => {
+            block_store.setBlocks(data.rows)
             console.log(data.rows)
         })
     }, [])

@@ -1,3 +1,5 @@
+// Constructor's models definition. Every is similar with definition attributes, during creation SQL tables
+
 const sequelize = require("../db")
 const {DataTypes} = require("sequelize")
 
@@ -15,7 +17,7 @@ const CustomBlock = sequelize.define("block", {
 const Line = sequelize.define("line", {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     kind: {type: DataTypes.INTEGER, allowNull: false},
-    params: {type: DataTypes.ARRAY(DataTypes.STRING)},
+    params: {type: DataTypes.JSON},
     text: {type: DataTypes.ARRAY(DataTypes.TEXT)},
     filesNames: {type: DataTypes.ARRAY(DataTypes.TEXT)},
     addressFileType: {type: DataTypes.STRING},

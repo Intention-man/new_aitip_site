@@ -6,6 +6,9 @@ import { findDOMNode } from 'react-dom';
 /**
  * Контейнер для всех блоков текущей страницы. Все блоки должны помещаться в этот контейнер. 
  * Помимо того, что этот контейнер определяет позиционирование блоков, он также служит интерфейсом между блоками страницы и боковой панелью с ссылками.
+ * 
+ * @param {array} children Массив из компонентов Block
+ * @returns Компонент списка блоков
  */
 const BlockContainer = ({ children }) => {    
     const updateLinksPanel = useContext(ContentContext);  // Получаем callback из ContentContext для передачи текущих активных блоков

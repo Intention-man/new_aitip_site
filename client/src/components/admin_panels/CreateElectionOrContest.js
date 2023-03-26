@@ -53,7 +53,10 @@ const CreateElectionOrContest = observer(({eAC, mode}) => {
         formData.append("eventDate", eventDate)
         formData.append("eventTime", eventTime)
         formData.append("eventPlace", eventPlace);
-        mode === "edit" ? updateElectionsAndContests(formData).then(() => alert("Успешно обновлено")) : createElectionsAndContests(formData).then(() => alert("Успешно добавлено"))
+        mode === "edit" ? updateElectionsAndContests(formData).then(() => alert("Успешно обновлено")) : createElectionsAndContests(formData).then(() => {
+            alert("Успешно добавлено")
+            mode = "edit"
+        })
     }
 
     return (

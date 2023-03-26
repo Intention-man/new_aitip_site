@@ -9,7 +9,6 @@ import CreatePartner from "./CreatePartner";
 
 
 const PartnerEditor = observer(() => {
-    const {admission_store} = useContext(Context);
     const [partners, setPartners] = useState([]);
     const [chosenPartner, setChosenPartner] = useState({});
     const [partnerId, setPartnerId] = useState(0);

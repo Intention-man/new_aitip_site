@@ -1,3 +1,6 @@
+/* Функции создания и получения данных между сервером и БД. Ссылки, по которым они работают написаны в userRouter
+*/
+
 const ApiError = require("../error/ApiError")
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")

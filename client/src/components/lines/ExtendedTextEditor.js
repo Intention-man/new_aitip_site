@@ -6,6 +6,7 @@ import AlignLeftIcon from "../../local_assets/icons/align-left.svg";
 import ColorChangeIcon from '../../local_assets/icons/color-fill.svg';
 import "../../css/component_styles/Editor.css"
 
+
 const ExtendedTextEditor = ({text, setText}) => {
 
     return (

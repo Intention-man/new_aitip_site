@@ -18,6 +18,7 @@ const CreateSchedule = observer(({schedule, mode}) => {
     const isEmpty = schedule.hasOwnProperty("fakeParam");
 
     const [name, setName] = useState(isEmpty ? "" : schedule.name)
+    const [kind, setKind] = useState("");
     const [group, setGroup] = useState(isEmpty ? "" : schedule.group);
     const [fileLink, setFileLink] = useState(isEmpty ? "" : schedule.fileLink);
     const [prevFileLink, setPrevFileLink] = useState(isEmpty ? "" : schedule.fileLink);
@@ -25,6 +26,7 @@ const CreateSchedule = observer(({schedule, mode}) => {
     useEffect(() => {
         if (mode === "edit") {
             document.getElementById('name').value = name
+            document.getElementById('kind').value = kind
             document.getElementById('group').value = group
         }
     }, [])
@@ -42,10 +44,14 @@ const CreateSchedule = observer(({schedule, mode}) => {
         const formData = new FormData()
         schedule.id && formData.append("id", schedule.id)
         formData.append("name", name)
+        formData.append("kind", kind)
         formData.append("group", group)
         formData.append("fileLink", fileLink);
 
-        (mode === "edit") ? updateSchedule(formData).then(() => alert("Успешно обновлено")): createSchedule(formData).then(() => alert("Успешно создано"))
+        (mode === "edit") ? updateSchedule(formData).then(() => alert("Успешно обновлено")): createSchedule(formData).then(() => {
+            alert("Успешно добавлено")
+            mode = "edit"
+        })
     }
 
     return (
@@ -55,6 +61,12 @@ const CreateSchedule = observer(({schedule, mode}) => {
                 <textarea className="big-info" id="name"
                           onChange={e => setName(e.target.value)}/>
             </div>
+
+            <select id="kind" size="1" value={kind} onChange={e => setKind(e.target.value)}>
+                <option id="Бакалавриат">Бакалавриат</option>
+                <option id="Профессиональная переподготовка">Профессиональная переподготовка</option>
+                <option id="Повышение квалификации">Повышение квалификации</option>
+            </select>
 
             <div>
                 <label className="mini-info" htmlFor="group">Номер группы</label>

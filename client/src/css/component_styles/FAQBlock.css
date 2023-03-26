@@ -1,0 +1,30 @@
+.faq_container{
+    background: #FFFFFF;
+    margin-top: 30px;
+}
+
+.faq_container > p.title{
+    font-size: calc(var(--font_size_const)* 1.3);
+    text-align: center;
+    font-weight: bold;
+}
+
+p.faq_question{
+    font-size: calc(var(--font_size_const)* 1.2) !important;
+    font-weight: bold;
+    cursor: pointer;
+    display: inline-block;
+    margin: 0;
+}
+
+.faq_answer_container.hidden{
+
+}
+
+.faq_answer_container{
+    overflow: hidden;
+    margin: 0 0 20px 0;
+    font-size: var(--font_size_const);
+    height: 0;
+    transition: height 0.3s ease-in-out;
+}

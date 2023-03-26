@@ -3,13 +3,13 @@
 
 const Router = require("express")
 const router = new Router()
-const partnersController = require("../controllers/partnersController")
+const partnerController = require("../controllers/partnerController")
 const checkRole = require("../middleware/checkRoleMiddleware")
 
-router.post("/", partnersController.create)
-router.post("/update", partnersController.updatePartner)
-router.post("/remove/:id", partnersController.removePartner)
-router.get("/", partnersController.getAll)
+router.post("/", partnerController.create)
+router.post("/update", partnerController.updatePartner)
+router.post("/remove/:id", partnerController.removePartner)
+router.get("/", partnerController.getAll)
 
 
 module.exports = router

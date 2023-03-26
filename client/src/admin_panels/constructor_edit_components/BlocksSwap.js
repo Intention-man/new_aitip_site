@@ -1,10 +1,11 @@
 import React, {useEffect} from 'react';
-import Block from "../common/Block";
+
 import {useState} from "react";
 import {useContext} from "react";
 import {Context} from "../../index";
 import {moveBlocks, updateBlock} from "../../http/blockAPI";
 import {publicRoutes} from "../../routes";
+import Block from "../../components/common/Block";
 
 
 const BlocksSwap = () => {

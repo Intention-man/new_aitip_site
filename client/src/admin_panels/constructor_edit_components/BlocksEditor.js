@@ -4,7 +4,8 @@ import {Context} from "../../index";
 import {publicRoutes} from "../../routes";
 import {observer} from "mobx-react-lite";
 import {fetchOneBlock} from "../../http/blockAPI";
-import CreateOrEditBlock from "./../admin_panels/CreateOrEditBlock";
+import CreateOrEditBlock from "./CreateOrEditBlock";
+
 
 
 const BlockEditor = observer(() => {

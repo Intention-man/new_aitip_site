@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import ExtendedTextEditor from "../../lines/ExtendedTextEditor";
+import {useState } from "react";
 import OurColorPicker from "../OurColorPicker";
-import "../../../css/component_styles/Editor.css";
+import "../../css/component_styles/Editor.css";
+import ExtendedTextEditor from "../../components/lines/ExtendedTextEditor";
 
 /**
  * Компонент редактора текстовой линии

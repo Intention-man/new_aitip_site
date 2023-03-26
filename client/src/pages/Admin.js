@@ -1,29 +1,30 @@
 import React, {useContext, useEffect, useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Container} from "react-bootstrap";
-import CreateDirection from "../components/admin_panels/CreateDirection";
-import CreateStaff from "../components/admin_panels/CreateStaff";
+
 import {fetchAdditionalPrograms, fetchDirectionsBachelor} from "../http/admissionAPI";
 import {Context} from "../index";
-import CreateProgram from "../components/admin_panels/CreateProgram";
-import CreateElectionOrContest from "../components/admin_panels/CreateElectionOrContest";
-import CreatePartner from "../components/admin_panels/CreatePartner";
-import CreateOrEditBlock from "../components/admin_panels/CreateOrEditBlock"
-import BlocksEditor from "../components/admin_panels/BlocksEditor";
-import BlocksSwap from "../components/admin_panels/BlocksSwap";
-import "../css/page_styles/AdminPanel.css"
-import StaffEditor from "../components/admin_panels/StaffEditor";
+import CreateStaff from "../admin_panels/usual_tables/CreateStaff";
+import StaffEditor from "../admin_panels/usual_tables/StaffEditor";
+import CreateDirection from "../admin_panels/usual_tables/CreateDirection";
+import DirectionEditor from "../admin_panels/usual_tables/DirectionEditor";
+import CreateProgram from "../admin_panels/usual_tables/CreateProgram";
+import ProgramEditor from "../admin_panels/usual_tables/ProgramEditor";
+import ElectionsAndContestsEditor from "../admin_panels/usual_tables/ElectionsAndContestsEditor";
+import CreateElectionOrContest from "../admin_panels/usual_tables/CreateElectionOrContest";
+import CreatePartner from "../admin_panels/usual_tables/CreatePartner";
+import PartnerEditor from "../admin_panels/usual_tables/PartnerEditor";
+import CreateSchedule from "../admin_panels/usual_tables/CreateSchedule";
+import ScheduleEditor from "../admin_panels/usual_tables/ScheduleEditor";
+import CreateLab from "../admin_panels/usual_tables/CreateLab";
+import LabEditor from "../admin_panels/usual_tables/LabEditor";
+import CreateOrEditBlock from "../admin_panels/constructor_edit_components/CreateOrEditBlock";
+import BlocksSwap from "../admin_panels/constructor_edit_components/BlocksSwap";
+import OptimizationZone from "../admin_panels/OptimizationZone";
+import BlocksEditor from "../admin_panels/constructor_edit_components/BlocksEditor";
 import ButtonList from "../components/ButtonList";
 import {fetchAllFiles} from "../http/commonAPI";
-import DirectionEditor from "../components/admin_panels/DirectionEditor";
-import ProgramEditor from "../components/admin_panels/ProgramEditor";
-import ElectionsAndContestsEditor from "../components/admin_panels/ElectionsAndContestsEditor";
-import PartnerEditor from "../components/admin_panels/PartnerEditor";
-import OptimizationZone from "../components/admin_panels/OptimizationZone";
-import CreateSchedule from "../components/admin_panels/CreateSchedule";
-import ScheduleEditor from "../components/admin_panels/ScheduleEditor";
-import CreateLab from "../components/admin_panels/CreateLab";
-import LabEditor from "../components/admin_panels/LabEditor";
+
 
 
 const Admin = () => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import {deleteAllUnusedFiles} from "../../http/commonAPI";
+import {deleteAllUnusedFiles} from "../http/commonAPI";
 
 const OptimizationZone = () => {
     return (

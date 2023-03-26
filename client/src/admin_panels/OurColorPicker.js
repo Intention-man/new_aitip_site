@@ -1,5 +1,5 @@
 import Select, { components } from 'react-select';
-import { ourColorsOptions } from '../../consts/ourColorOptionsConsts';
+import { ourColorsOptions } from '../consts/ourColorOptionsConsts';
 
 
 /**

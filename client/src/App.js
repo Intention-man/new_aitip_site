@@ -10,6 +10,7 @@ import SideBar from './components/common/SideBar';
 import LinksPanel from './components/common/LinksPanel';
 import { Context } from "./index";
 import ContentContext from './components/contexts/ContentContext';
+import ProFooter from "./components/common/ProFooter";
 
 
 const App = observer(() => {
@@ -56,6 +57,7 @@ const App = observer(() => {
                     <a href="">ЕОИС</a>
                 </SideBar>
             </div>
+            {/*<ShowFooter/>*/}
         </BrowserRouter>
     )
 })

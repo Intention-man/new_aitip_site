@@ -3,13 +3,13 @@
 
 const Router = require("express")
 const router = new Router()
-const electionsAndContestsController = require("../controllers/electionsAndContestsController")
+const electionOrContestController = require("../controllers/electionOrContestController")
 const checkRole = require("../middleware/checkRoleMiddleware")
 
-router.post("/", electionsAndContestsController.create)
-router.post("/update", electionsAndContestsController.updateEAC)
-router.post("/remove/:id", electionsAndContestsController.removeEAC)
-router.get("/", electionsAndContestsController.getAll)
+router.post("/", electionOrContestController.create)
+router.post("/update", electionOrContestController.updateEAC)
+router.post("/remove/:id", electionOrContestController.removeEAC)
+router.get("/", electionOrContestController.getAll)
 
 
 module.exports = router

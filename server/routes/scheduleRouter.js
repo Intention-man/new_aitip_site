@@ -6,9 +6,10 @@ const router = new Router()
 const scheduleController = require("../controllers/scheduleController")
 const checkRole = require("../middleware/checkRoleMiddleware")
 
-router.post("/", scheduleController.create)
-router.post("/update", scheduleController.updateSchedule)
-router.post("/remove/:id", scheduleController.removeSchedule)
+router.post("/", checkRole("ADMIN"), scheduleController.create)
+router.post("/update", checkRole("ADMIN"), scheduleController.updateSchedule)
+router.post("/remove/:id", checkRole("ADMIN"), scheduleController.removeSchedule)
+
 router.get("/", scheduleController.getAll)
 
 

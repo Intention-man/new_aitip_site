@@ -24,10 +24,11 @@ import OptimizationZone from "../admin_panels/OptimizationZone";
 import BlocksEditor from "../admin_panels/constructor_edit_components/BlocksEditor";
 import ButtonList from "../components/ButtonList";
 import {fetchAllFiles} from "../http/commonAPI";
+import {observer} from "mobx-react-lite";
 
 
 
-const Admin = () => {
+const Admin = observer(() => {
     const {admission_store} = useContext(Context)
     const {block_store} = useContext(Context)
 
@@ -74,6 +75,6 @@ const Admin = () => {
             {windowVisible && forms[windowVisible]}
         </Container>
     );
-};
+});
 
 export default Admin;

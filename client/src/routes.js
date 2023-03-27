@@ -134,16 +134,17 @@ export const publicRoutes = [
         Component: <Auth/>, 
         name: "Авторизация"
     },
-    {
-        path: SUPERADMIN,
-        Component: <SuperAdminPage/>,
-        name: "СуперАдмин"
-    },
 ]
 
 export const authRoutes = [
     {
         path: ADMIN,
-        Component: <Admin/>
+        Component: <Admin/>,
+        name: "Страница администратора"
+    },
+    {
+        path: SUPERADMIN,
+        Component: <SuperAdminPage/>,
+        name: "СуперАдмин"
     },
 ]

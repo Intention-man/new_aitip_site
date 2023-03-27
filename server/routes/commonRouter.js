@@ -7,9 +7,9 @@ const commonController = require("../controllers/commonController")
 const checkRole = require("../middleware/checkRoleMiddleware")
 
 
-router.post("/convert_files", commonController.convertFiles)
-router.post("/update_file_usages", commonController.updateFileUsages)
-router.post("/delete_all_unused_files", commonController.deleteAllUnusedFiles)
+router.post("/convert_files", checkRole("ADMIN"), commonController.convertFiles)
+router.post("/update_file_usages", checkRole("ADMIN"), commonController.updateFileUsages)
+router.post("/delete_all_unused_files", checkRole("ADMIN"), commonController.deleteAllUnusedFiles)
 
 router.get("/", commonController.getAllFiles)
 

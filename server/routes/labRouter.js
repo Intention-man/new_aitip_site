@@ -6,9 +6,10 @@ const router = new Router()
 const labController = require("../controllers/labController")
 const checkRole = require("../middleware/checkRoleMiddleware")
 
-router.post("/", labController.create)
-router.post("/update", labController.updateLab)
-router.post("/remove/:id", labController.removeLab)
+router.post("/", checkRole("ADMIN"), labController.create)
+router.post("/update", checkRole("ADMIN"), labController.updateLab)
+router.post("/remove/:id", checkRole("ADMIN"), labController.removeLab)
+
 router.get("/", labController.getAll)
 
 

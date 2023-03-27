@@ -6,10 +6,11 @@ const router = new Router()
 const partnerController = require("../controllers/partnerController")
 const checkRole = require("../middleware/checkRoleMiddleware")
 
-router.post("/", partnerController.create)
-router.post("/update", partnerController.updatePartner)
-router.post("/remove/:id", partnerController.removePartner)
-router.get("/", partnerController.getAll)
+router.post("/", checkRole("ADMIN"), partnerController.create)
+router.post("/update", checkRole("ADMIN"), partnerController.updatePartner)
+router.post("/remove/:id", checkRole("ADMIN"), partnerController.removePartner)
+
+router.get("/", checkRole("ADMIN"), partnerController.getAll)
 
 
 module.exports = router

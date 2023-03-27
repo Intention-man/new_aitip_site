@@ -3,14 +3,12 @@
 import { useContext, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { BrowserRouter } from "react-router-dom";
-import AppRouter from "./components/AppRouter";
-import Menu from "./components/common/Menu";
-import ShowFooter from "./components/common/ShowFooter";
-import SideBar from './components/common/SideBar';
-import LinksPanel from './components/common/LinksPanel';
+import AppRouter from "./AppRouter";
+import Menu from "./components/permanent/Menu";
+import SideBar from './components/permanent/SideBar';
+import LinksPanel from './components/permanent/LinksPanel';
 import { Context } from "./index";
 import ContentContext from './components/contexts/ContentContext';
-import ProFooter from "./components/common/ProFooter";
 
 
 const App = observer(() => {

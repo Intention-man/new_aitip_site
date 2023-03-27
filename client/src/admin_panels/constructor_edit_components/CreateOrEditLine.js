@@ -2,7 +2,6 @@
 
 import React, {useState, useEffect} from 'react';
 import {observer} from "mobx-react-lite";
-
 import "../../css/component_styles/Editor.css"
 import "../../css/component_styles/CreateLine.css"
 import {useContext} from "react";

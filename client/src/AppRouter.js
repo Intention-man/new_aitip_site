@@ -2,12 +2,12 @@
 
 import React, {useContext, useEffect} from 'react';
 import {Route} from "react-router-dom";
-import {Routes} from "react-router";
+import {Navigate, Routes} from "react-router";
 import {observer} from "mobx-react-lite";
 import {Context} from "./index";
 import {fetchBlocks, fetchLines} from "./http/blockAPI";
 import {authRoutes, publicRoutes} from "./routes";
-import Main from "./pages/Main";
+import {check} from "./http/userAPI";
 
 
 const AppRouter = observer(() => {
@@ -26,6 +26,15 @@ const AppRouter = observer(() => {
             block_store.setBlocks(data.rows)
             console.log(data.rows)
         })
+        try {
+            check().then(response => {
+                console.log(response)
+            })
+        } catch (error) {
+            const { response } = error;
+            const { request, ...errorObject } = response; // take everything but 'request'
+            console.log(errorObject);
+        }
     }, [])
 
     const aRoutes = authRoutes.map(
@@ -40,13 +49,16 @@ const AppRouter = observer(() => {
 
     return (
         <Routes>
-            {aRoutes}
+            {user_store.isAuth && aRoutes}
             {pRoutes}
-            <Route path="*" element={<Main/>}/>
+            <Route
+                path="*"
+                element={<Navigate to="/" replace={true} />}
+            />
+            {/*<Redirect path="*" element={<Main/>}/>*/}
         </Routes>
     );
 })
 
 
 export default AppRouter;
-

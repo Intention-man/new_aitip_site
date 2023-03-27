@@ -10,7 +10,7 @@ import "../../css/component_styles/CreateLine.css"
 import {selectFile, updateFileUsages} from "../commonPanelsFunctions";
 import {useContext} from "react";
 import {Context} from "../../index";
-import LineDisplay from "../common/LineDisplay";
+import LineDisplay from "../permanent/LineDisplay";
 
 
 const CreateOrEditLine = observer(({index, changeLine, currentLine, doUpdateUsages, removedLineIndex}) => {

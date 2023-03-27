@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react-lite';
 import React, {useContext, useEffect, useState} from 'react';
-import Block from '../../components/common/Block';
-import BlockContainer from '../../components/common/BlockContainer';
+import Block from '../../components/permanent/Block';
+import BlockContainer from '../../components/permanent/BlockContainer';
 import { Context } from "../../index";
 import "../../css/main.css"
 import "../../css/main.css";

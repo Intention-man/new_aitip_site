@@ -4,8 +4,8 @@ import CreateOrEditLine from "./CreateOrEditLine";
 import {createBlock, removeBlock, updateBlock} from "../../http/blockAPI";
 import {publicRoutes} from "../../routes";
 import "../../css/component_styles/Editor.css"
-import LineDisplay from "../../components/common/LineDisplay";
-import Block from "../../components/common/Block";
+import LineDisplay from "../../components/permanent/LineDisplay";
+import Block from "../../components/permanent/Block";
 import {updateFileUsages} from "../../additional_commands/commonPanelsFunctions";
 
 

@@ -5,7 +5,7 @@ import {useContext} from "react";
 import {Context} from "../../index";
 import {moveBlocks, updateBlock} from "../../http/blockAPI";
 import {publicRoutes} from "../../routes";
-import Block from "../../components/common/Block";
+import Block from "../../components/permanent/Block";
 
 
 const BlocksSwap = () => {

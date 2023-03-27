@@ -6,6 +6,10 @@ const router = new Router()
 const electionOrContestController = require("../controllers/electionOrContestController")
 const checkRole = require("../middleware/checkRoleMiddleware")
 
+router.post("/", checkRole("ADMIN"), electionOrContestController.create)
+router.post("/update", checkRole("ADMIN"), electionOrContestController.updateEAC)
+router.post("/remove/:id", checkRole("ADMIN"), electionOrContestController.removeEAC)
+
 router.post("/", electionOrContestController.create)
 router.post("/update", electionOrContestController.updateEAC)
 router.post("/remove/:id", electionOrContestController.removeEAC)

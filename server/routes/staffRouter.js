@@ -7,9 +7,10 @@ const staffController = require("../controllers/staffController")
 const checkRole = require("../middleware/checkRoleMiddleware")
 
 
-router.post("/", staffController.create)
-router.post("/update", staffController.updateStaffer)
-router.post("/remove/:id", staffController.removeStaffer)
+router.post("/", checkRole("ADMIN"), staffController.create)
+router.post("/update", checkRole("ADMIN"), staffController.updateStaffer)
+router.post("/remove/:id", checkRole("ADMIN"), staffController.removeStaffer)
+
 router.get("/", staffController.getAll)
 router.get("/:id", staffController.getOne)
 

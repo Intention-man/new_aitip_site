@@ -5,6 +5,7 @@ import internet from "../../local_assets/global.png"
 import phone from "../../local_assets/icons/svg white/Phone.svg"
 import mail from "../../local_assets/sms.png"
 
+
 /*
 const ProFooter = () => {
     return (
@@ -50,6 +51,7 @@ const ProFooter = () => {
             </div>
             <div className="footer"></div>
 */
+
 
 
 function getHeight(){

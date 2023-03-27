@@ -11,6 +11,10 @@ router.post("/update", checkRole("ADMIN"), partnerController.updatePartner)
 router.post("/remove/:id", checkRole("ADMIN"), partnerController.removePartner)
 
 router.get("/", checkRole("ADMIN"), partnerController.getAll)
+router.post("/", partnerController.create)
+router.post("/update", partnerController.updatePartner)
+router.post("/remove/:id", partnerController.removePartner)
+router.get("/", partnerController.getAll)
 
 
 module.exports = router

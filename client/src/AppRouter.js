@@ -12,8 +12,10 @@ import Main from "./pages/Main";
 
 const AppRouter = observer(() => {
     const {block_store} = useContext(Context);
+
     const {user_store} = useContext(Context);
     console.log(user_store.isAuth)
+
 
     useEffect(() => {
         fetchLines().then(data => {
@@ -47,3 +49,4 @@ const AppRouter = observer(() => {
 
 
 export default AppRouter;
+

@@ -6,6 +6,7 @@ import BlockContainer from "../components/display/BlockContainer";
 import Block from "../components/display/Block"
 
 
+
 const Main = observer(() => {
     const {block_store} = useContext(Context);
 

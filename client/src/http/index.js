@@ -12,7 +12,7 @@ const $authHost = axios.create({
 
 // checking that admin token (that appear after authorization) was created
 const authInterceptor = config => {
-    config.headers.authorization = `Bearer ${localStorage.getItem("token")}`
+    config.headers.authorization = `Bearer ${sessionStorage.getItem("token")}`
     return config
 }
 

@@ -15,7 +15,7 @@ const userRouter = require("./userRouter")
 
 
 router.use("/block", blockRouter)
-router.use("/permanent", commonRouter)
+router.use("/common", commonRouter)
 router.use("/staff", staffRouter)
 router.use("/schedule", scheduleRouter)
 router.use("/direction_bachelor", directionBachelorRouter)

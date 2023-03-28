@@ -5,7 +5,6 @@ import Card from "../lines/Card";
 import Carusel from "../lines/Carusel";
 import BigImg from "../lines/BigImg";
 import StyledText from '../lines/StyledText';
-import {logDOM} from "@testing-library/react";
 
 /**
  * Line display component. Depending on the line kind and other fields' values, draws line
@@ -19,7 +18,7 @@ const LineDisplay = observer(({line}) => {
     // useEffect(() => {
     //     setLine(currentLine)
     // }, []);
-    console.log((line.kind === 4) + (line.filesNames.length > 0) + line.addressFileType.length > 0)
+    // console.log((line.kind === 4) + (line.filesNames.length > 0) + line.addressFileType.length > 0)
 
     return (
         // TODO: желательно отрефакторить этот код, разнести этот контент в компоненты в самих линий

@@ -15,7 +15,7 @@ const CreateSchedule = observer(({schedule, mode}) => {
     const isEmpty = schedule.hasOwnProperty("fakeParam");
 
     const [name, setName] = useState(isEmpty ? "" : schedule.name)
-    const [kind, setKind] = useState("");
+    const [kind, setKind] = useState(isEmpty ? "" : schedule.kind);
     const [group, setGroup] = useState(isEmpty ? "" : schedule.group);
     const [fileLink, setFileLink] = useState(isEmpty ? "" : schedule.fileLink);
     const [prevFileLink, setPrevFileLink] = useState(isEmpty ? "" : schedule.fileLink);
@@ -59,10 +59,9 @@ const CreateSchedule = observer(({schedule, mode}) => {
                           onChange={e => setName(e.target.value)}/>
             </div>
 
-            <select id="kind" size="1" value={kind} onChange={e => setKind(e.target.value)}>
+            <select id="kind" size="3" value={kind} onChange={e => setKind(e.target.value)}>
                 <option id="Бакалавриат">Бакалавриат</option>
-                <option id="Профессиональная переподготовка">Профессиональная переподготовка</option>
-                <option id="Повышение квалификации">Повышение квалификации</option>
+                <option id="ДПО">ДПО</option>
             </select>
 
             <div>

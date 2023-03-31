@@ -11,8 +11,6 @@ import {check} from "./http/userAPI";
 
 
 const AppRouter = observer(() => {
-    console.log(localStorage)
-    console.log(sessionStorage)
     const {block_store} = useContext(Context);
     const {user_store} = useContext(Context);
     // const isAdmin = useMemo(() => user_store.isAuth, [user_store.isAuth]);

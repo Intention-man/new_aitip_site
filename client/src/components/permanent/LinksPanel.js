@@ -72,7 +72,7 @@ class LinksPanel extends React.Component {
     navigateToBlock(event) {
         event.preventDefault();  // Отключить дефолтный переход по ссылке 
         for (let link of this.props.links) {  // Поиск кликнутого блока
-            if (link.id == event.target.id && link.domNode) {  
+            if (link.id === event.target.id && link.domNode) {
                 link.domNode.scrollIntoView({behavior: 'smooth', block: 'start'});
             }
         }

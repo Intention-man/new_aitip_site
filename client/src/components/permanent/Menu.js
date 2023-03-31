@@ -1,9 +1,11 @@
-import React from 'react';
+import React, {useContext, useState} from 'react';
 import "../../css/component_styles/Menu.css"
 import "../../assets/fonts/font-awesome.min.css"
 import logotip from "../../local_assets/Logo (1).png"
 import search from "../../local_assets/search.png"
 import eye from "../../local_assets/eye.png"
+import {Context} from "../../index";
+import Button from "../Button";
 
 function myFunction() {
     const x = document.getElementById("myTopnav");
@@ -28,7 +30,6 @@ function myFunction() {
 }
 
 
-
 const Menu = () => {
     return (
         <div>
@@ -41,10 +42,10 @@ const Menu = () => {
                             <img src={search} width="25" height="25"/>
                         </button>
                         <input type="text" placeholder="Поиск по сайту"/>
-                        <button className="button_search" type="submit"></button>
+                        <button className="button_search"></button>
                     </form>
                 </a>
-                <a >
+                <a>
                     <button className="blindversion">
                         Версия для слабовидящих
                         <img src={eye} style={{color: "white", paddingLeft: "10px", paddingTop: "7px"}}/>

@@ -11,8 +11,8 @@ const {Partners} = require("../models/defaultModels/partnerModel");
 class ScheduleController {
     async create(req, res, next) {
         try{
-            let {name, group, fileLink} = req.body
-            const schedule = await Schedule.create({name, group, fileLink})
+            let {kind, name, group, fileLink} = req.body
+            const schedule = await Schedule.create({kind, name, group, fileLink})
             return res.json(schedule)
         } catch (e) {
             next(ApiError.badRequest(e.message))
@@ -21,11 +21,11 @@ class ScheduleController {
 
     async updateSchedule(req, res, next) {
         try {
-            let {id, name, group, fileLink} = req.body
+            let {id, kind, name, group, fileLink} = req.body
             const schedule = await Schedule.findOne({
                 where: {id},
             })
-            schedule.update({name, group, fileLink}, {where: {id}})
+            schedule.update({kind, name, group, fileLink}, {where: {id}})
 
             return res.json(schedule)
         } catch (e) {

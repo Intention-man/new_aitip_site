@@ -1,5 +1,6 @@
 // BrowserRouter - обертка для запуска всех страниц. На каждой странице будут меню (NavBar), а также компонент-страница (какую страницу запускать решает AppRouter)
 
+
 import {useContext, useEffect, useState} from "react";
 import {observer} from "mobx-react-lite";
 import {BrowserRouter} from "react-router-dom";
@@ -11,6 +12,7 @@ import ContentContext from './components/contexts/ContentContext';
 import LinksPanel from "./components/permanent/LinksPanel";
 import {check} from "./http/userAPI";
 import {Spinner} from "react-bootstrap";
+
 
 
 const App = observer(() => {

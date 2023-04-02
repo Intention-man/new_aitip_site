@@ -8,14 +8,16 @@ import Carusel from "../../components/lines/Carusel";
 
 const Students = () => {
     const [allSchedules, setAllSchedules] = useState([]);
+    const [choosenSchedule, setChoosenSchedule] = useState("");
     const [allLabs, setAllLabs] = useState([]);
     const [choosenLabName, setChoosenLabName] = useState({});
     const [choosenLab, setChoosenLab] = useState({});
-    const forms = ["Бакалавриат", "Профессиональная переподготовка", "Курсы дополнительно профессионального образования"];
+    const forms = {"Бакалавриат":"Бакалавриат", "Дополнительное профессиональное образование":"ДПО"};
 
     useEffect(() => {
         fetchSchedules().then(data => {
                 setAllSchedules(data.rows);
+                setChoosenSchedule(forms[Object.keys(forms)[0]]);
                 console.log(data);
             }
         )
@@ -36,9 +38,9 @@ const Students = () => {
             <p className="content_title">Студентам</p>
             <div className="schedule_container">
                 <p className="local_title">Расписание занятий</p>
-                <ButtonList buttonList={forms}/>
+                <ButtonList buttonList={forms} setChosenValue={setChoosenSchedule}/>
                 <div className="schedules">
-                {allSchedules && allSchedules.map(schedule =>
+                {allSchedules && allSchedules.filter(e => e.kind === forms[choosenSchedule]).map(schedule =>
                     <a href={process.env.REACT_APP_API_URL + schedule.fileLink}
                        download target="_blank">
                         <div>
@@ -79,7 +81,7 @@ const Students = () => {
                         <img width="300" height="300" src={process.env.REACT_APP_API_URL + choosenLab.supervisor_photo} alt="Чет не пошло как-то с картинкой..."/>}
                 </div>}
                 {choosenLab && <><p className="labs_comment">{choosenLab.text2}</p>
-                <Carusel photos={choosenLab.carousel_photos_links} addressFileType="local"/>
+                {choosenLab && choosenLab.carousel_photos_links && <Carusel photos={choosenLab.carousel_photos_links} addressFileType="local"/>}
                 <p className="labs_comment" style={{paddingBottom: "30px"}}>{choosenLab.text3}</p></>}
             </div>
         </div>

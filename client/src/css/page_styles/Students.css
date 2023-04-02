@@ -127,3 +127,8 @@
         width: 50%;
     }
 }
+@media (max-width: 369px) {
+    .schedules > a{
+        width: 100%;
+    }
+}

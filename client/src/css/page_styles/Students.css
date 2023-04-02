@@ -1,0 +1,129 @@
+.local_title{
+    text-align: center;
+    font-size: calc(var(--font_size_const) * 1.4);
+    font-weight: bold;
+    padding: 30px 0;
+}
+
+.content_title{
+    color: #076DB1;
+    font-size: calc(var(--font_size_const) * 1.4);
+    font-weight: bold;
+    margin: 30px 0;
+}
+
+.schedule_container, .labs_container{
+    background: #FFFFFF;
+    border-radius: 10px;
+}
+
+.labs_container > *{
+    margin: 0 30px;
+}
+
+.labs_comment{
+    text-align: justify;
+    margin-bottom: 20px;
+}
+
+.schedules{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 50px;
+}
+
+.schedules > a{
+    text-decoration: none;
+    color: #000000;
+    display: flex;
+    flex-direction: column;
+    min-width: 150px;
+    padding: 5px;
+    width: 33.33%;
+}
+
+.schedules > a > div{
+    display: flex;
+    flex-direction: row;
+}
+
+.schedules .group{
+    text-align: left;
+    font-size: calc(var(--font_size_const) * 1.2);
+    margin: 0;
+}
+
+.schedules .updated_at{
+    color: #999999;
+}
+
+.button_list{
+    margin: 0;
+}
+
+.button_list > button{
+    min-width: 240px;
+}
+
+.Card{
+    margin: 0;
+}
+
+.Card p{
+    margin: 0 25px;
+}
+
+.Card img{
+    border-radius: 0;
+}
+
+.supervisor_name{
+    font-weight: bold;
+}
+.supervisor{
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.supervisor > img{
+    /*width: 30%;*/
+    /*height: 100%;*/
+    min-width: 200px;
+    margin: 30px auto;
+    border-radius: 100%;
+    background-image: url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Asodipodi%3D%22http%3A%2F%2Fsodipodi.sourceforge.net%2FDTD%2Fsodipodi-0.dtd%22%20xmlns%3Ainkscape%3D%22http%3A%2F%2Fwww.inkscape.org%2Fnamespaces%2Finkscape%22%20width%3D%22256%22%20height%3D%22256%22%20viewBox%3D%220%200%20256%20256%22%20version%3D%221.1%22%20id%3D%22svg8%22%3E%20%3Cg%20inkscape%3Alabel%3D%22icon%22%20inkscape%3Agroupmode%3D%22layer%22%20id%3D%22layer1%22%3E%20%3Cpath%20style%3D%22fill%3Anone%3Bstroke%3A%23000000%3Bstroke-width%3A15.99953938%3Bstroke-linecap%3Around%3Bstroke-linejoin%3Around%3Bstroke-miterlimit%3A4%3Bstroke-dasharray%3Anone%3Bstroke-opacity%3A1%22%20d%3D%22M%2016.056766%2C240%20H%20239.94325%22%20id%3D%22path905%22%20inkscape%3Aconnector-curvature%3D%220%22%20sodipodi%3Anodetypes%3D%22cc%22%20%2F%3E%20%3Cpath%20style%3D%22fill%3Anone%3Bstroke%3A%23000000%3Bstroke-width%3A15.99953938%3Bstroke-linecap%3Around%3Bstroke-linejoin%3Around%3Bstroke-miterlimit%3A4%3Bstroke-dasharray%3Anone%3Bstroke-opacity%3A1%22%20d%3D%22m%2016.056766%2C240%20c%200%2C-47.97569%2031.983762%2C-64.0813%2031.983762%2C-64.0813%2015.991919%2C-9.23291%2031.9838%2C0%2047.975681%2C-15.99189%22%20id%3D%22path907%22%20sodipodi%3Anodetypes%3D%22ccc%22%20inkscape%3Aconnector-curvature%3D%220%22%20%2F%3E%20%3Cpath%20style%3D%22fill%3Anone%3Bstroke%3A%23000000%3Bstroke-width%3A15.99953938%3Bstroke-linecap%3Around%3Bstroke-linejoin%3Around%3Bstroke-miterlimit%3A4%3Bstroke-dasharray%3Anone%3Bstroke-opacity%3A1%22%20d%3D%22m%2096.016209%2C159.92681%20c%200%2C0%2015.991921%2C15.99189%2031.983801%2C15.99189%22%20id%3D%22path909%22%20sodipodi%3Anodetypes%3D%22cc%22%20inkscape%3Aconnector-curvature%3D%220%22%20%2F%3E%20%3Cpath%20style%3D%22fill%3Anone%3Bstroke%3A%23000000%3Bstroke-width%3A15.99953938%3Bstroke-linecap%3Around%3Bstroke-linejoin%3Around%3Bstroke-miterlimit%3A4%3Bstroke-dasharray%3Anone%3Bstroke-opacity%3A1%22%20d%3D%22m%20239.94325%2C240%20c%200%2C-47.97569%20-31.9838%2C-64.0813%20-31.9838%2C-64.0813%20-15.99188%2C-9.23291%20-31.98376%2C0%20-47.97564%2C-15.99189%22%20id%3D%22path907-5%22%20sodipodi%3Anodetypes%3D%22ccc%22%20inkscape%3Aconnector-curvature%3D%220%22%20%2F%3E%20%3Cpath%20style%3D%22fill%3Anone%3Bstroke%3A%23000000%3Bstroke-width%3A15.99953938%3Bstroke-linecap%3Around%3Bstroke-linejoin%3Around%3Bstroke-miterlimit%3A4%3Bstroke-dasharray%3Anone%3Bstroke-opacity%3A1%22%20d%3D%22m%20159.98381%2C159.92681%20c%200%2C0%20-15.99192%2C15.99189%20-31.9838%2C15.99189%22%20id%3D%22path909-6%22%20sodipodi%3Anodetypes%3D%22cc%22%20inkscape%3Aconnector-curvature%3D%220%22%20%2F%3E%20%3Cpath%20id%3D%22path974%22%20style%3D%22fill%3Anone%3Bstroke%3A%23000000%3Bstroke-width%3A15.99953938%3Bstroke-linecap%3Around%3Bstroke-linejoin%3Around%3Bstroke-miterlimit%3A4%3Bstroke-dasharray%3Anone%22%20d%3D%22m%20128.00001%2C15.99977%20c%2031.9838%2C0%2047.97568%2C15.991881%2047.97568%2C63.967561%200%2C39.979759%20-31.9838%2C63.967599%20-47.97568%2C63.967599%22%20sodipodi%3Anodetypes%3D%22csc%22%20inkscape%3Aconnector-curvature%3D%220%22%20%2F%3E%20%3Cpath%20id%3D%22path974-1%22%20style%3D%22fill%3Anone%3Bstroke%3A%23000000%3Bstroke-width%3A15.99953938%3Bstroke-linecap%3Around%3Bstroke-linejoin%3Around%3Bstroke-miterlimit%3A4%3Bstroke-dasharray%3Anone%22%20d%3D%22m%20128.00001%2C15.99977%20c%20-31.983801%2C0%20-47.975682%2C15.991881%20-47.975682%2C63.967561%200%2C39.979759%2031.983802%2C63.967599%2047.975682%2C63.967599%22%20sodipodi%3Anodetypes%3D%22csc%22%20inkscape%3Aconnector-curvature%3D%220%22%20%2F%3E%20%3Cpath%20style%3D%22fill%3Anone%3Bstroke%3A%23000000%3Bstroke-width%3A15.99953938%3Bstroke-linecap%3Around%3Bstroke-linejoin%3Around%3Bstroke-miterlimit%3A4%3Bstroke-dasharray%3Anone%3Bstroke-opacity%3A1%22%20d%3D%22m%20159.98381%2C159.92681%20-7.41232%2C-27.66304%22%20id%3D%22path1014%22%20inkscape%3Aconnector-curvature%3D%220%22%20%2F%3E%20%3Cpath%20style%3D%22fill%3Anone%3Bstroke%3A%23000000%3Bstroke-width%3A15.99953938%3Bstroke-linecap%3Around%3Bstroke-linejoin%3Around%3Bstroke-miterlimit%3A4%3Bstroke-dasharray%3Anone%3Bstroke-opacity%3A1%22%20d%3D%22m%2096.016209%2C159.92681%207.412321%2C-27.66304%22%20id%3D%22path1016%22%20inkscape%3Aconnector-curvature%3D%220%22%20%2F%3E%20%3C%2Fg%3E%20%3C%2Fsvg%3E');
+    background-size: 100% 100%;
+}
+
+.supervisor > div{
+    width: 50%;
+    height: 100%;
+    min-width: 200px;
+    margin: auto 50px auto 0;
+}
+
+.carusel{
+    margin: 30px 0;
+}
+
+
+@media (max-width: 600px) {
+    .schedules{
+        margin: 25px;
+    }
+    .button_list > button{
+        width: 100%;
+    }
+    .supervisor{
+        flex-direction: column-reverse;
+    }
+    .supervisor > div{
+        width: 100%;
+        margin-top: 20px;
+    }
+}
+@media (max-width: 567px) {
+    .schedules > a{
+        width: 50%;
+    }
+}

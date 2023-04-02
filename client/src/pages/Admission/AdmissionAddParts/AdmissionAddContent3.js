@@ -84,7 +84,7 @@ const AdmissionAddContent3 = observer(() => {
                         <p className="supervisor_description">{chosenDevelopmentProgram.supervisorDescription}</p>}
                 </div>
                 {chosenDevelopmentProgram.supervisorImg &&
-                    <img width="300" height="300" src={"http://localhost:3000/"+chosenDevelopmentProgram.supervisorImg} alt="Чет не пошло как-то с картинкой..."/>}
+                    <img width="300" height="300" src={process.env.REACT_APP_API_URL + chosenDevelopmentProgram.supervisorImg} alt="Чет не пошло как-то с картинкой..."/>}
             </div>
             <div className="direction_block" style={{marginTop: "30px"}}>
                 <div className="last_document_of_content_2">

@@ -1,8 +1,11 @@
 .button_list{
     text-align: center;
-    background-color: var(--bgcolor);
-    margin: 0 -5%;
+    background-color: #fafafa;
+    margin: 0 -5.6%;
     padding: 20px 5%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .button_list > button {

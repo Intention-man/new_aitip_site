@@ -13,8 +13,8 @@ import {Button, Col, Dropdown, FormControl, Modal, Row} from "react-bootstrap";
 import "../../css/page_styles/AdminPanel.css"
 import {useContext, useEffect} from "react";
 import {Context} from "../../index";
-import {selectFile, updateFileUsages} from "../commonPanelsFunctions";
-import {useNavigate} from "react-router";
+import {updateFileUsages, selectFile} from "../../additional_commands/commonPanelsFunctions";
+
 
 
 const CreateDirection = observer(({direction, mode}) => {

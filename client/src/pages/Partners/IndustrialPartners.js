@@ -15,11 +15,11 @@ const IndustrialPartners = observer(() => {
 
     return (
         <div>
-            {industrialPartners.map(partner =>
+            {industrialPartners && industrialPartners.map(partner =>
                 <div>
                     <p>{partner.name} {partner.description}</p>
                     <img src={process.env.REACT_APP_API_URL + partner.logo}/>
-                    {partner.jointProjectsPhotoes.map(photo =>
+                    {partner.jointProjectsPhotos != null && partner.jointProjectsPhotos.map(photo =>
                         <img src={process.env.REACT_APP_API_URL + photo}/>
                     )}
                 </div>

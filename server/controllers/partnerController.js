@@ -1,20 +1,18 @@
 /* Функции создания и получения данных между сервером и БД. Ссылки, по которым они работают написаны в partnersRouter
 */
 
-const uuid = require("uuid")
-const path = require("path")
 const ApiError = require("../error/ApiError")
-const {Partners} = require("../models/defaultModels/partnerModel");
+const {Partner} = require("../models/defaultModels/partnerModel");
 
 
-class PartnersController {
+class PartnerController {
     async create(req, res, next) {
         try{
             const {name, kind, logo, description, jointProjectsDescription, jointProjectsPhotos} = req.body
             const splitedJointProjectsPhotos = JSON.parse(jointProjectsPhotos)
 
             let values = {name, kind, description, logo, jointProjectsDescription, jointProjectsPhotos: splitedJointProjectsPhotos}
-            const partners = await Partners.create(values)
+            const partners = await Partner.create(values)
 
             return res.json(partners)
         } catch (e) {
@@ -28,7 +26,7 @@ class PartnersController {
             console.log("Controller")
             const splitedJointProjectsPhotos = JSON.parse(jointProjectsPhotos)
 
-            const partner = await Partners.findOne({
+            const partner = await Partner.findOne({
                 where: {id},
             })
             console.log("partner: ", partner)
@@ -45,7 +43,7 @@ class PartnersController {
         console.log(req.params)
         let {id} = req.params
         console.log(id)
-        await Partners.destroy({
+        await Partner.destroy({
             where: {id}
         })
         return res.json(id)
@@ -56,9 +54,9 @@ class PartnersController {
         page = page || 1
         limit = limit || 10000
         let offset = limit * (page - 1)
-        let partners = await Partners.findAndCountAll({limit, offset})
+        let partners = await Partner.findAndCountAll({limit, offset})
         return res.json(partners)
     }
 }
 
-module.exports = new PartnersController
+module.exports = new PartnerController

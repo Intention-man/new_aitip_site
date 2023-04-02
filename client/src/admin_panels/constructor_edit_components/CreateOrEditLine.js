@@ -2,15 +2,14 @@
 
 import React, {useState, useEffect} from 'react';
 import {observer} from "mobx-react-lite";
-import {convertFiles} from "../../http/commonAPI";
-import ExtendedTextEditor from "../lines/ExtendedTextEditor";
-import TextLineEditor from './LineEditors/TextLineEditor';
 import "../../css/component_styles/Editor.css"
 import "../../css/component_styles/CreateLine.css"
-import {selectFile, updateFileUsages} from "../commonPanelsFunctions";
 import {useContext} from "react";
 import {Context} from "../../index";
-import LineDisplay from "../common/LineDisplay";
+import {updateFileUsages, selectFile} from "../../additional_commands/commonPanelsFunctions";
+import TextLineEditor from "./TextLineEditor";
+import ExtendedTextEditor from "../../components/lines/ExtendedTextEditor";
+
 
 
 const CreateOrEditLine = observer(({index, changeLine, currentLine, doUpdateUsages, removedLineIndex}) => {

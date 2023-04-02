@@ -2,8 +2,8 @@ import React, {useEffect, useState} from 'react';
 import {useContext} from "react";
 import {Context} from "../index";
 import {observer} from "mobx-react-lite";
-import BlockContainer from "../components/common/BlockContainer";
-import Block from "../components/common/Block";
+import BlockContainer from "../components/display/BlockContainer";
+import Block from "../components/display/Block"
 
 
 
@@ -14,7 +14,7 @@ const Main = observer(() => {
     let myAddress = ""
 
     useEffect(() => {
-        console.log(block_store.blocks)
+        // console.log(block_store.blocks)
         myAddress = "/" + window.location.href.split("/")[3]
         setMyBlocks(Array.from(block_store.blocks.filter(block => block.pageLink === myAddress).sort((block1, block2) => block1.ordinal - block2.ordinal)))
     }, [block_store.blocks, block_store.lines]);

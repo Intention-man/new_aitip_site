@@ -27,10 +27,10 @@ const Block = observer(({ block, useDatabase }) => {
 
     useEffect(() => {
         if (useDatabase) {
-            console.log(block.id)
-            console.log(block_store.lines)
+            // console.log(block.id)
+            // console.log(block_store.lines)
             setMyLines(block_store.lines.filter(line => line.blockId === block.id).sort((a, b) => a.lineOrdinal - b.lineOrdinal))
-            console.log(block_store.lines.filter(line => line.blockId === block.id).sort((a, b) => a.lineOrdinal - b.lineOrdinal))
+            // console.log(block_store.lines.filter(line => line.blockId === block.id).sort((a, b) => a.lineOrdinal - b.lineOrdinal))
         } else {
             if (block.lines)
                 setMyLines(block.lines);

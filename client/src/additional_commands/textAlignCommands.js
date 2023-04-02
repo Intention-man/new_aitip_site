@@ -1,9 +1,9 @@
 /**
  * Команды для MDEdtior (он внутри компонента ExtendedTextEditor) для выравнивания текста
  */
-import AlignLeftIcon from "../../local_assets/icons/align-left.svg";
-import AlignRightIcon from "../../local_assets/icons/align-right.svg";
-import AlignCenterIcon from "../../local_assets/icons/align-center.svg";
+import AlignLeftIcon from "../local_assets/icons/align-left.svg";
+import AlignRightIcon from "../local_assets/icons/align-right.svg";
+import AlignCenterIcon from "../local_assets/icons/align-center.svg";
 
 /**
  * Внутрення функция для изменения значения выравнивания с помощью HTML-тегов

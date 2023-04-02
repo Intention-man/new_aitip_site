@@ -1,12 +1,12 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {observer} from "mobx-react-lite";
 import CreateOrEditLine from "./CreateOrEditLine";
 import {createBlock, removeBlock, updateBlock} from "../../http/blockAPI";
 import {publicRoutes} from "../../routes";
 import "../../css/component_styles/Editor.css"
-import LineDisplay from "../common/LineDisplay";
-import Block from '../common/Block';
-import {updateFileUsages} from "../commonPanelsFunctions";
+import LineDisplay from "../../components/display/LineDisplay";
+import Block from "../../components/display/Block";
+import {updateFileUsages} from "../../additional_commands/commonPanelsFunctions";
 
 
 const CreateOrEditBlock = observer(({block, mod}) => {

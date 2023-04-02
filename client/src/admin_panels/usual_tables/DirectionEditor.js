@@ -20,8 +20,6 @@ const StaffEditor = observer(() => {
         fetchOneDirectionBachelor(admission_store.selectedDirectionBachelor).then(direction =>
             setChosenDirection(direction)
         )
-        // setChosenDirection(Array.from(admission_store.directionsBachelor.filter(direction => direction.id === admission_store.selectedDirectionBachelor))[0])
-        // setChosenDirection(Array.from(admission_store.directionsBachelor.filter(direction => direction.id === admission_store.selectedDirectionBachelor))[0])
     }, [admission_store.selectedDirectionBachelor]);
 
     useEffect(() => {
@@ -36,7 +34,7 @@ const StaffEditor = observer(() => {
                 admission_store.setSelectedDirectionBachelor(Number(e.target.value))
                 console.log(e.target.value)
             }}>
-                <option value="">Выберите направление, данные которого вы хотите изменить</option>
+                <option value="-1">Выберите направление, данные которого вы хотите изменить</option>
                 {admission_store.directionsBachelor.map(direction => (
                     <option key={direction.id} value={direction.id}>{direction.name}</option>
                 ))}

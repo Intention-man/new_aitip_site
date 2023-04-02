@@ -1,6 +1,6 @@
 // Отрисовка всех сотрудников на странице Персоналии
 
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext} from 'react';
 
 import {Context} from "../../../index";
 import StafferItem from "./StafferItem";

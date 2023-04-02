@@ -2,7 +2,7 @@ import React from 'react';
 import {observer} from "mobx-react-lite";
 import {useContext, useState} from "react";
 import {Context} from "../index";
-import {useLocation, useNavigate, useNavigation} from "react-router";
+import {useNavigate} from "react-router";
 import {registration} from "../http/userAPI";
 import {Button, Card, Container, Form, NavLink, Row} from "react-bootstrap";
 

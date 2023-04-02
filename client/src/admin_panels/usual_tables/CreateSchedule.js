@@ -3,13 +3,10 @@
 import React, {useState} from 'react';
 import {observer} from "mobx-react-lite";
 import {Button} from "react-bootstrap";
-import {createPartner, removePartner, updatePartner} from "../../http/partnersAPI";
 import "../../css/page_styles/AdminPanel.css"
 import {useContext, useEffect} from "react";
 import {Context} from "../../index";
-import {selectFile, updateFileUsages} from "../commonPanelsFunctions";
-import Carusel from "../lines/Carusel";
-import {removeAdditionalProgram} from "../../http/admissionAPI";
+import {updateFileUsages, selectFile} from "../../additional_commands/commonPanelsFunctions";
 import {createSchedule, removeSchedule, updateSchedule} from "../../http/scheduleAPI";
 
 
@@ -18,7 +15,7 @@ const CreateSchedule = observer(({schedule, mode}) => {
     const isEmpty = schedule.hasOwnProperty("fakeParam");
 
     const [name, setName] = useState(isEmpty ? "" : schedule.name)
-    const [kind, setKind] = useState("");
+    const [kind, setKind] = useState(isEmpty ? "" : schedule.kind);
     const [group, setGroup] = useState(isEmpty ? "" : schedule.group);
     const [fileLink, setFileLink] = useState(isEmpty ? "" : schedule.fileLink);
     const [prevFileLink, setPrevFileLink] = useState(isEmpty ? "" : schedule.fileLink);
@@ -62,10 +59,9 @@ const CreateSchedule = observer(({schedule, mode}) => {
                           onChange={e => setName(e.target.value)}/>
             </div>
 
-            <select id="kind" size="1" value={kind} onChange={e => setKind(e.target.value)}>
+            <select id="kind" size="3" value={kind} onChange={e => setKind(e.target.value)}>
                 <option id="Бакалавриат">Бакалавриат</option>
-                <option id="Профессиональная переподготовка">Профессиональная переподготовка</option>
-                <option id="Повышение квалификации">Повышение квалификации</option>
+                <option id="ДПО">ДПО</option>
             </select>
 
             <div>

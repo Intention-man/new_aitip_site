@@ -11,7 +11,7 @@ import "../../css/page_styles/AdminPanel.css"
 import {useContext} from "react";
 import {Context} from "../../index";
 import {useEffect} from "react";
-import {selectFile, updateFileUsages} from "../commonPanelsFunctions";
+import {updateFileUsages, selectFile} from "../../additional_commands/commonPanelsFunctions";
 
 
 const CreateProgram = observer(({program, mode}) => {

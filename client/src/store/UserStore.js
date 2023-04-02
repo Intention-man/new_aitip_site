@@ -1,12 +1,14 @@
 import {makeAutoObservable} from "mobx";
+import {useMemo} from "react";
 
 
 export default class UserStore {
     constructor() {
-        this._isAuth = false
+        this._isAuth = false;
         this._user = {}
         makeAutoObservable(this)
     }
+
     setIsAuth(bool) {
         this._isAuth = bool
     }

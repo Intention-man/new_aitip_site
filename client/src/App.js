@@ -1,22 +1,51 @@
 // BrowserRouter - обертка для запуска всех страниц. На каждой странице будут меню (NavBar), а также компонент-страница (какую страницу запускать решает AppRouter)
 
-import { useContext, useState } from "react";
-import { observer } from "mobx-react-lite";
-import { BrowserRouter } from "react-router-dom";
-import AppRouter from "./components/AppRouter";
-import Menu from "./components/common/Menu";
-import ShowFooter from "./components/common/ShowFooter";
-import SideBar from './components/common/SideBar';
-import LinksPanel from './components/common/LinksPanel';
-import { Context } from "./index";
+
+import {useContext, useEffect, useState} from "react";
+import {observer} from "mobx-react-lite";
+import {BrowserRouter} from "react-router-dom";
+import AppRouter from "./AppRouter";
+import Menu from "./components/permanent/Menu";
+import SideBar from './components/permanent/SideBar';
+import {Context} from "./index";
 import ContentContext from './components/contexts/ContentContext';
-import ProFooter from "./components/common/ProFooter";
+import LinksPanel from "./components/permanent/LinksPanel";
+import {check} from "./http/userAPI";
+import {Spinner} from "react-bootstrap";
+
 
 
 const App = observer(() => {
-    const {user} = useContext(Context);
+    const {user_store} = useContext(Context);
 
+    const [loading, setLoading] = useState(true);
     const [currentContent, setCurrentContent] = useState([]);  // Стейт с текущими блоками страницы (нужны для LinksPanel)
+
+    useEffect(() => {
+        setTimeout(() => {
+            let myAddress = "/" + window.location.href.split("/")[3]
+            try {
+                check().then(response => {
+                    if (response !== undefined && typeof response === "object" && response.hasOwnProperty("email")) {
+                        user_store.setIsAuth(true)
+                        user_store.setUser(response)
+                        // setIsAdmin(true)
+                    } else {
+                        user_store.setIsAuth(false)
+                        // setIsAdmin(false)
+                    }
+                }).finally(() => setLoading(false))
+            } catch (error) {
+                const {response} = error;
+                const {request, ...errorObject} = response; // take everything but 'request'
+                console.log(errorObject);
+            }
+        }, 200)
+    });
+
+    if (loading) {
+        return <Spinner animation={"grow"}/>
+    }
 
     const updateContent = (newContent) => {  /* Это callback, который будет передан в ContentContext.Provider, 
                                                 чтобы внутренние компоненты могли передавать сюда блоки контента */
@@ -32,7 +61,7 @@ const App = observer(() => {
             }
         }
     };
- 
+
     return (
         <BrowserRouter>
             <Menu/>
@@ -48,7 +77,7 @@ const App = observer(() => {
                 <ContentContext.Provider value={updateContent}>
                     <AppRouter/>
                 </ContentContext.Provider>
-                <SideBar 
+                <SideBar
                     alignment='right'
                     isSticky={false}
                 >
@@ -57,6 +86,7 @@ const App = observer(() => {
                     <a href="">ЕОИС</a>
                 </SideBar>
             </div>
+            {/*<ShowFooter/>*/}
         </BrowserRouter>
     )
 })

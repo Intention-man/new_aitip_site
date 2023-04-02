@@ -7,9 +7,8 @@ import {createPartner, removePartner, updatePartner} from "../../http/partnersAP
 import "../../css/page_styles/AdminPanel.css"
 import {useContext, useEffect} from "react";
 import {Context} from "../../index";
-import {selectFile, updateFileUsages} from "../commonPanelsFunctions";
-import Carusel from "../lines/Carusel";
-import {removeAdditionalProgram} from "../../http/admissionAPI";
+import {updateFileUsages, selectFile} from "../../additional_commands/commonPanelsFunctions";
+import Carusel from "../../components/lines/Carusel";
 
 
 const CreatePartner = observer(({partner, mode}) => {

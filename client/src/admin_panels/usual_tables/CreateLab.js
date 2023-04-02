@@ -3,14 +3,12 @@
 import React, {useState} from 'react';
 import {observer} from "mobx-react-lite";
 import {Button} from "react-bootstrap";
-import {createPartner, removePartner, updatePartner} from "../../http/partnersAPI";
 import "../../css/page_styles/AdminPanel.css"
 import {useContext, useEffect} from "react";
 import {Context} from "../../index";
-import {selectFile, updateFileUsages} from "../commonPanelsFunctions";
-import Carusel from "../lines/Carusel";
-import {removeAdditionalProgram} from "../../http/admissionAPI";
+import {updateFileUsages, selectFile} from "../../additional_commands/commonPanelsFunctions";
 import {createLab, removeLab, updateLab} from "../../http/labAPI";
+import Carusel from "../../components/lines/Carusel";
 
 
 const CreateLab = observer(({lab, mode}) => {

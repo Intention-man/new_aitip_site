@@ -6,8 +6,9 @@ import vector1 from "../../local_assets/Vector1.png"
 
 const Carusel = ({photos, addressFileType, getRatio, color}) => {
     if (photos && typeof photos === "string") {photos = [photos]}
-    console.log(photos);
-    const [currentSlideNumber, setCurrentSlideNumber] = useState(0)
+        console.log(photos);
+
+    const [currentSlideNumber, setCurrentSlideNumber] = useState(0);
     const [ratio, setRatio] = useState(getRatio ? getRatio : 1);
     const [dotColor, setDotColor] = useState(color ? color : "blue");
 
@@ -19,7 +20,12 @@ const Carusel = ({photos, addressFileType, getRatio, color}) => {
                 myElement.click()
             }, 5000)
         })
-    }, [])
+    }, []);
+
+    useEffect(() => {  // Проверяем, вдруг изменился размер массива photos, и индекс слайда теперь выходит за пределы массива 
+        if (Array.isArray(photos) && photos.length <= currentSlideNumber)
+            setCurrentSlideNumber(photos.length - 1);  // Просто ставим индекс на последний слайд
+    }, [photos]);
 
 
     return (

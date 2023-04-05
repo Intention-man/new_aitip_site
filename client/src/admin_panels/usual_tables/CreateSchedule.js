@@ -8,6 +8,7 @@ import {useContext, useEffect} from "react";
 import {Context} from "../../index";
 import {updateFileUsages, selectFile} from "../../additional_commands/commonPanelsFunctions";
 import {createSchedule, removeSchedule, updateSchedule} from "../../http/scheduleAPI";
+import FilesPicker from '../FilesPicker';
 
 
 const CreateSchedule = observer(({schedule, mode}) => {
@@ -72,23 +73,13 @@ const CreateSchedule = observer(({schedule, mode}) => {
 
             <div style={{marginBottom: "2%"}}>
                 <label className="mini-info" htmlFor="fileLink">Файл с расписанием</label>
-                <input className="picture-getter" type="file" id="fileLink" required="required"
-                       onChange={e => {
-                           console.log(e.target.files[0])
-                           setFileLink(selectFile(e.target.files[0], block_store))
-                       }}/>
-                <select size="7" onChange={e => {
-                    setFileLink(e.target.value)
-                    console.log(e.target.value)
-                }}>
-                    {block_store.allFiles.map(file =>
-                        <option value={file.fileLink} key={file.id}>
-                            {file.name}
-                        </option>
-                    )}
-                </select>
-                {(typeof fileLink === "string") ? <p>{fileLink}</p> :
-                    <p>{typeof fileLink}</p>}
+                <FilesPicker
+                    pickedFiles={fileLink}
+                    setPickedFiles={setFileLink}
+                    isMultiple={false}
+                    isRequired={true}
+                    isImage={false}
+                />
             </div>
 
 

@@ -12,10 +12,12 @@ import {useContext} from "react";
 import {Context} from "../../index";
 import {useEffect} from "react";
 import {updateFileUsages, selectFile} from "../../additional_commands/commonPanelsFunctions";
+import FilesPicker from '../FilesPicker';
 
 
 const CreateProgram = observer(({program, mode}) => {
-    const {block_store} = useContext(Context)
+
+    const { block_store } = useContext(Context);
     const isEmpty = program.hasOwnProperty("fakeParam");
 
     const [name, setName] = useState(isEmpty ? "" : program.name)
@@ -118,22 +120,13 @@ const CreateProgram = observer(({program, mode}) => {
 
             <div style={{marginBottom: "2%"}}>
                 <label htmlFor="programImg" className="mini-info">Обложка программы</label>
-                <input className="picture-getter" type="file" id="programImg" accept="image/*" onChange={e => {
-                    console.log(e)
-                    setProgramImg(selectFile(e.target.files[0], block_store))
-                }}/>
-                <select size="7" onChange={e => {
-                    setProgramImg(e.target.value)
-                    console.log(e.target.value)
-                }}>
-                    {block_store.allFiles.map(file =>
-                        <option value={file.fileLink}>
-                            {file.name}
-                        </option>
-                    )}
-                </select>
-                {(typeof programImg === "string") ? <img src={process.env.REACT_APP_API_URL + programImg}/> :
-                    <p>{typeof programImg}</p>}
+                <FilesPicker
+                    pickedFiles={programImg}
+                    setPickedFiles={setProgramImg}
+                    isMultiple={false}
+                    isRequired={false}
+                    isImage={true}
+                />
             </div>
 
             <div>
@@ -151,24 +144,14 @@ const CreateProgram = observer(({program, mode}) => {
 
             <div style={{marginBottom: "2%"}}>
                 <label htmlFor="supervisorImg" className="mini-info">Фото руководителя программы</label>
-                <input className="picture-getter" type="file" id="supervisorImg" accept="image/*" onChange={e => {
-                    console.log(e)
-                    setSupervisorImg(selectFile(e.target.files[0], block_store))
-                }}/>
-                <select size="7" onChange={e => {
-                    setSupervisorImg(e.target.value)
-                    console.log(e.target.value)
-                }}>
-                    {block_store.allFiles.map(file =>
-                        <option value={file.fileLink}>
-                            {file.name}
-                        </option>
-                    )}
-                </select>
-                {(typeof supervisorImg === "string") ? <img src={process.env.REACT_APP_API_URL + supervisorImg}/> :
-                    <p>{typeof supervisorImg}</p>}
+                <FilesPicker
+                    pickedFiles={supervisorImg}
+                    setPickedFiles={setSupervisorImg}
+                    isMultiple={false}
+                    isRequired={false}
+                    isImage={true}
+                />
             </div>
-
 
             <Button className="buttom-add" variant="outline-success" onClick={() => {
                 saveProgram().then((bool) => {

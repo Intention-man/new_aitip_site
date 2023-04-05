@@ -1,5 +1,4 @@
-/client/node_modules
-/server/node_modules
-/.idea
-/client/.env
-/server/.env 
+**/node_modules/
+**/.vscode/
+**/.env
+**/.directory

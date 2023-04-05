@@ -7,9 +7,10 @@ import "../../css/component_styles/Editor.css"
 import LineDisplay from "../../components/display/LineDisplay";
 import Block from "../../components/display/Block";
 import {updateFileUsages} from "../../additional_commands/commonPanelsFunctions";
+import {useEffect} from "react";
 
 
-const CreateOrEditBlock = observer(({block, mod}) => {
+const CreateOrEditBlock = observer(({block, mode}) => {
 
     // console.log(block.lines)
     // возвращаемые "наверх" значения
@@ -24,6 +25,13 @@ const CreateOrEditBlock = observer(({block, mod}) => {
 
     const [doUpdateUsages, setDoUpdateUsages] = useState(false);
     const [removedLineIndex, setRemovedLineIndex] = useState(-1);
+
+    useEffect(() => {
+        if (mode === "edit") {
+            document.getElementById('header').value = header
+            document.getElementById('ordinal').value = ordinal
+        }
+    }, [])
 
 
     const addLine = () => {
@@ -86,7 +94,7 @@ const CreateOrEditBlock = observer(({block, mod}) => {
         formData.append("ordinal", `${ordinal}`)
         formData.append("lines", JSON.stringify(lines))
         formData.append("prevLinesIdList", JSON.stringify(prevLinesIdList))
-        mod === "edit" ? updateBlock(formData).then(data => {
+        mode === "edit" ? updateBlock(formData).then(data => {
         }) : createBlock(formData).then(data => {
         })
     };
@@ -102,7 +110,7 @@ const CreateOrEditBlock = observer(({block, mod}) => {
                 <option value="false">Для страницы</option>
             </select>
             <p>Введите заголовок блока</p>
-            <input placeholder={header} onChange={(e) => setHeader(e.target.value)}/>
+            <input id="header" onChange={(e) => setHeader(e.target.value)}/>
             <select id="pageLink" value={pageLink} onChange={e => {
                 setPageLink(e.target.value)
             }}>
@@ -112,13 +120,13 @@ const CreateOrEditBlock = observer(({block, mod}) => {
                 ))}
             </select>
             <p>Введите номер блока на странице</p>
-            <input placeholder={ordinal} onChange={(e) => setOrdinal(Number(e.target.value))}/>
+            <input id="ordinal" onChange={(e) => setOrdinal(Number(e.target.value))}/>
             {lines.length > 0 && lines.map(line => {
                     // console.log(lines)
                     return (
                         <div style={{margin: "10px", padding: "10px", border: "5px solid #8888FF"}}>
                             <CreateOrEditLine key={line.lineOrdinal} changeLine={changeLine} index={line.lineOrdinal}
-                                              line={line} doUpdateUsages={doUpdateUsages}
+                                              currentLine={line} doUpdateUsages={doUpdateUsages}
                                               removedLineIndex={removedLineIndex}/>
                             <LineDisplay line={line}/>
                             {line.lineOrdinal > 0 &&

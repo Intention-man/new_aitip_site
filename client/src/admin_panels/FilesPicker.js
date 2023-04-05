@@ -6,12 +6,31 @@ import { Card } from 'react-bootstrap';
 import '../css/page_styles/AdminPanel.css';
 
 
+/**
+ * Компонент для выбора файлов и картинок.
+ * Поддерживает два поля для выбора: выбор локального файла и выбор из списка доступных на сервере файлов.
+ * Показывает превью выбранных файлов.
+ * Этот компонент можно использовать для выбора одной/нескольких картинок или одного/нескольких файлов.
+ * 
+ * @param {array | string} pickedFiles Текущие выбранные файл/файлы. Если файл один, то следует передавать строку с именем файла, если несколько - массив с именами
+ * @param {function} setPickedFiles Callback сеттера текущих выбранных файлов
+ * @param {boolean} isMultiple Доступен ли выбор нескольких файлов, иначе только одного
+ * @param {boolean} isRequired Обязательно ли заполнение данного поля (т.е. файл необязательно выбирать)
+ * @param {boolean} isImage Выбирается ли изображение, инчае любой файл
+ */
 const FilesPicker = ({ pickedFiles, setPickedFiles, isMultiple, isRequired, isImage }) => {
     
     const { block_store } = useContext(Context);
     const localPickerForm = useRef();
     const serverPickerForm = useRef();
 
+    /**
+     * Функция обработки файлов, выбранных пользователем.
+     * Она асинхронная, так как требует отработки всех асинхронных функций загрузки файлов на сервер.
+     * 
+     * @param {array} rawFiles Простой массив имён выбранных файлов
+     * @returns Массив обработанных сервером файлов, готовых для использования
+     */
     const processFiles = async (rawFiles) => {
         const processedFiles = [];
         for (const file of rawFiles)
@@ -20,22 +39,42 @@ const FilesPicker = ({ pickedFiles, setPickedFiles, isMultiple, isRequired, isIm
         return processedFiles;
     }
 
+    /**
+     * 
+     * @returns Выбрал ли пользователь файл
+     */
     const checkIsAnythingSelected = () => {
         return pickedFiles;
     }
 
+    /**
+     * 
+     * @returns Проверка на режим выбора одного изображения
+     */
     const checkIsSingleImage = () => {
         return checkIsAnythingSelected() && isImage && !isMultiple && (typeof pickedFiles === 'string');
     }
-
+    
+    /**
+     * 
+     * @returns Проверка на режим выбора нескольких изображений
+     */
     const checkIsCarousel = () => {
         return checkIsAnythingSelected() && isImage && isMultiple && Array.isArray(pickedFiles);
     }
 
+    /**
+     * 
+     * @returns Проверка на режим выбора одного файла
+     */
     const checkIsSingleFile = () => {
         return checkIsAnythingSelected() && !isImage && !isMultiple && (typeof pickedFiles === 'string');
     }
     
+    /**
+     * 
+     * @returns Проверка на режим выбора нескольких файлов
+     */
     const checkIsMultipleFiles = () => {
         return checkIsAnythingSelected() && !isImage && isMultiple && Array.isArray(pickedFiles);
     }

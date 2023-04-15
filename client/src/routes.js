@@ -2,7 +2,7 @@
 
 import {
     ADMIN, ADMISSION_APE, ADMISSION_BAC, AUTH, CONTACTS, COUNTERING, DOCUMENTS, EDUCATIONAL_P,
-    EMPLOYERS_P,
+    EMPLOYERS_P,PARTNERS,
     HISTORY, INDUSTRIAL_P, INFO_EDU_ORG, INTERNATIONAL_ACT,
     LEGAL_CLINIC,
     MAIN_ROUTE, PERSONALITIES_PAGE, SCIENCE, SCIENCE_P, STAFF,
@@ -30,9 +30,15 @@ import Students from "./pages/Students/Students";
 import SciencePartners from "./pages/Partners/SciencePartners";
 import Auth from "./pages/Auth";
 import SuperAdminPage from "./pages/SuperAdminPage";
+import Partners from "./pages/Partners/Partners";
 
 
 export const publicRoutes = [
+    {
+        path: PARTNERS,
+        Component: <Partners/>,
+        name: "Партнёры"
+    },
     {
         path: MAIN_ROUTE,
         Component: <Main/>,

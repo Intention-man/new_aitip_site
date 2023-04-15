@@ -11,7 +11,7 @@ const SciencePartners = observer(() => {
         fetchPartners().then(data =>
             setSciencePartners(data.rows.filter(partner => partner.kind === "Научный"))
         )
-    })
+    },[])
 
     return (
         <div>

@@ -11,7 +11,7 @@ const EmployersPartners = observer(() => {
         fetchPartners().then(data =>
             setEmployersPartners(data.rows.filter(partner => partner.kind === "Работодатели"))
         )
-    })
+    },[])
 
     return (
         <div>

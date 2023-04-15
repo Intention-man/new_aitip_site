@@ -8,10 +8,11 @@ const IndustrialPartners = observer(() => {
     const [industrialPartners, setIndustrialPartners] = useState([]);
 
     useEffect(() => {
-        fetchPartners().then(data =>
-            setIndustrialPartners(data.rows.filter(partner => partner.kind === "Индустриальный"))
+        fetchPartners().then(data =>{
+            console.log(data);
+            setIndustrialPartners(data.rows.filter(partner => partner.kind === "Индустриальный"));}
         )
-    })
+    }, [])
 
     return (
         <div>

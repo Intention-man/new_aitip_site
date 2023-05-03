@@ -9,7 +9,7 @@ import {createStaffer, removeStaffer, updateStaffer} from "../../http/staffAPI";
 import "../../css/page_styles/AdminPanel.css";
 import "../../css/component_styles/PersonalitiesFilter.css";
 import {updateFileUsages, selectFile} from "../../additional_commands/commonPanelsFunctions";
-import BigImg from "../../components/lines/BigImg";
+import FilesPicker from '../FilesPicker';
 
 
 
@@ -186,22 +186,13 @@ const CreateStaff = observer(({staffer, mode}) => {
             </div>
             <div>
                 <label htmlFor="img" className="mini-info">Картинка</label>
-                <input className="picture-getter" type="file" id="img" accept="image/*" onChange={e => {
-                    setFile(selectFile(e.target.files[0], block_store))
-                }}/>
-                <select size="7" onChange={e => {
-                    setFile(e.target.value)
-                    console.log(e.target.value)
-                }}>
-                    {block_store.allFiles.map(file =>
-                        <option value={file.fileLink}>
-                            <div>
-                                <p>{file.name}</p>
-                            </div>
-                        </option>
-                    )}
-                </select>
-                {(typeof file === "string") ? <BigImg imgSrc={process.env.REACT_APP_API_URL + file}/> : <p>{typeof file}</p>}
+                <FilesPicker
+                    pickedFiles={file}
+                    setPickedFiles={setFile}
+                    isMultiple={false}
+                    isRequired={false}
+                    isImage={true}
+                />
             </div>
 
 

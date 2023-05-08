@@ -28,10 +28,14 @@ const Carusel = ({photos, addressFileType, ratio, color}) => {
             setCurrentSlideNumber(photos.length - 1);  // Просто ставим индекс на последний слайд
     }, [photos]);
 
+    const borderStyle = {
+        width:`${window.innerWidth*0.5}px`, height: `${ratio * window.innerWidth*0.5}px`
+    }
+
 
     return (
         <div className="carusel">
-            <div className="slideshow-container">
+            <div className="slideshow-container" style={borderStyle}>
                 <a className="prev" onClick={() => setCurrentSlideNumber(prev => (prev > 0 ? prev-1 : photos.length-1))}><img src={vector} style={{margin: "0"}} width="7" height="12"/></a>
                 <div className="mySlides">
                     <img src={addressFileType === "global" ? photos[currentSlideNumber] : process.env.REACT_APP_API_URL + photos[currentSlideNumber]} width={window.innerWidth*0.5} height={ratio*window.innerWidth*0.5}/>

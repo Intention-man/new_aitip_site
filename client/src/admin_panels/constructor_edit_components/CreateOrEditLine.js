@@ -28,11 +28,7 @@ const CreateOrEditLine = observer(({index, changeLine, currentLine, doUpdateUsag
     const [text, setText] = useState(currentLine.text);
     const [filesNames, setFilesNames] = useState(currentLine.filesNames);
     const [addressFileType, setAddressFileType] = useState(currentLine.addressFileType);
-    // const [size, setSize] = useState(1);
-    // const [dotColor, setDotColor] = useState("#000000");
-    // const [docNames, setDocNames] = useState("");
     const [prevFilesNames, setPrevFilesNames] = useState(currentLine.filesNames)
-
     const [line, setLine] = useState({...currentLine});
 
     useEffect(() => {
@@ -90,6 +86,8 @@ const CreateOrEditLine = observer(({index, changeLine, currentLine, doUpdateUsag
                             <select id="kind" value={kind} onChange={e => {
                                 setKind(Number(e.target.value))
                                 changeLine("kind", Number(e.target.value), index)
+                                setParams({})
+                                changeLine("params", {}, index)
                             }}>
                                 <option value="0">Выберите тип элемента</option>
                                 {
@@ -191,7 +189,6 @@ const CreateOrEditLine = observer(({index, changeLine, currentLine, doUpdateUsag
                             }
                         </div>
 
-
                         {kind > 1 && kind !== 7 &&
                             <div style={{margin: "30px 0"}}>
                                 {filesNames.length > 0 ? <div>Выбранный(-е) файл(-ы): {filesNames.map((filesName) => (
@@ -210,7 +207,6 @@ const CreateOrEditLine = observer(({index, changeLine, currentLine, doUpdateUsag
                                             console.log(list)
                                             setFilesNames(Array.from(list));
                                             changeLine("filesNames", list, index)
-
                                             // addFiles(Array.from(e.target.files))
                                         }}/>
                                         <input type="text" id={"global_files" + line.id} onChange={(e) => {
@@ -325,11 +321,6 @@ const CreateOrEditLine = observer(({index, changeLine, currentLine, doUpdateUsag
                                                 </option>
                                             )}
                                         </select>
-
-                                        {/*<label>Введите название документа (которое будут видеть пользователи на сайте)</label>*/}
-                                        {/*<input type="text" onChange={(e) => {*/}
-                                        {/*    setDocNames(e.target.value)*/}
-                                        {/*}}/>*/}
                                     </div>
                                 }
                             </div>}

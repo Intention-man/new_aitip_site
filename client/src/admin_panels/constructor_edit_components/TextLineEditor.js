@@ -6,7 +6,7 @@ import structure from "../../pages/Institute/Structure";
 
 /**
  * Компонент редактора текстовой линии
- * 
+ *
  * Пропы:
  * @param {Object} line Объект линии, которую редактирует в данный момент этот компонент
  * @param {function} changeLine Callback для вызова каждый раз, когда меняется line
@@ -20,7 +20,7 @@ const TextLineEditor = ({ line, changeLine, index }) => {
     const [backgroundColor, setBackgroundColor] = useState(null);
     const [borderColor, setBorderColor] = useState(null);
     const [textList, setTextList] = useState(line.text);
-    
+
     const onColumnTextChange = (columnIndex, newText) => {
         if (columnIndex < textList.length)
             textList[columnIndex] = newText;
@@ -56,7 +56,7 @@ const TextLineEditor = ({ line, changeLine, index }) => {
     const onColorChange = (newBackgroundColor, newBorderColor) => {
         // Так как нельзя выбрать одновременно и цвет фона, и цвет границы, то при изменении одного из них сбрасываем второй
 
-        // Находим, что действительно изменилось 
+        // Находим, что действительно изменилось
         if (newBackgroundColor !== backgroundColor) {
             newBorderColor = null;
             line.params["backgroundColor"] = newBackgroundColor
@@ -71,12 +71,12 @@ const TextLineEditor = ({ line, changeLine, index }) => {
     }
 
     return (
-       <div className="TextLineEditor-rootContainer">
+        <div className="TextLineEditor-rootContainer">
             <div className="TextLineEditor-settingsPanel">
                 <label>
                     Количество колонок:
-                    <input 
-                        type="number" 
+                    <input
+                        type="number"
                         // min={1}
                         // max={3}
                         value={textList.length}
@@ -85,7 +85,7 @@ const TextLineEditor = ({ line, changeLine, index }) => {
                 </label>
                 <label>
                     Цвет фона текста:
-                    <OurColorPicker 
+                    <OurColorPicker
                         type='background'
                         isDisabled={backgroundColor == null && borderColor != null}
                         onColorPick={e => onColorChange(e, borderColor)}
@@ -93,7 +93,7 @@ const TextLineEditor = ({ line, changeLine, index }) => {
                 </label>
                 <label>
                     Цвет рамки вокруг текста:
-                    <OurColorPicker 
+                    <OurColorPicker
                         type='border'
                         isDisabled={backgroundColor != null && borderColor == null}
                         onColorPick={e => onColorChange(backgroundColor, e)}
@@ -117,7 +117,7 @@ const TextLineEditor = ({ line, changeLine, index }) => {
                     )
                 }
             </div>
-       </div> 
+        </div>
     );
 }
 

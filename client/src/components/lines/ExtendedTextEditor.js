@@ -7,7 +7,7 @@ import ColorChangeIcon from '../../local_assets/icons/color-fill.svg';
 import "../../css/component_styles/Editor.css"
 
 
-const ExtendedTextEditor = ({text, setText, }) => {
+const ExtendedTextEditor = ({text, setText, changeLine, index}) => {
 
     return (
         <MDEditor
@@ -55,7 +55,7 @@ const ExtendedTextEditor = ({text, setText, }) => {
             ]}
             onChange={(val) => {
                 setText(val)
-                console.log(val)
+                changeLine("text", val, index)
             }}
         />
     );

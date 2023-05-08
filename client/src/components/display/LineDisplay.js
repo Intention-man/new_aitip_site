@@ -1,4 +1,4 @@
- import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {observer} from "mobx-react-lite";
 import MDEditor from "@uiw/react-md-editor";
 import Card from "../lines/Card";
@@ -6,8 +6,8 @@ import Carusel from "../lines/Carusel";
 import BigImg from "../lines/BigImg";
 import StyledText from '../lines/StyledText';
 import "../../css/component_styles/VideoWrapper.css"
- import YTVideoWrapper from "../lines/YTVideoWrapper";
- import DocumentLine from "../lines/DocumentLine";
+import YTVideoWrapper from "../lines/YTVideoWrapper";
+import DocumentLine from "../lines/DocumentLine";
 
 /**
  * Line display component. Depending on the line kind and other fields' values, draws line
@@ -63,10 +63,10 @@ const LineDisplay = observer(({line}) => {
                     {(line.kind === 6 && (line.filesNames.length > 0)) &&
                         <DocumentLine documentLink={line.addressFileType === "global" ? line.filesNames[0] : process.env.REACT_APP_API_URL + line.filesNames[0]} documentName={getDocumentName()}/>
                     }
-                        {/*// <div>*/}
-                        {/*//     <a href={line.addressFileType === "global" ? line.filesNames[0] : process.env.REACT_APP_API_URL + line.filesNames[0]}*/}
-                        {/*//        download target="_blank">Скачать документ</a>*/}
-                        {/*// </div>*/}
+                    {/*// <div>*/}
+                    {/*//     <a href={line.addressFileType === "global" ? line.filesNames[0] : process.env.REACT_APP_API_URL + line.filesNames[0]}*/}
+                    {/*//        download target="_blank">Скачать документ</a>*/}
+                    {/*// </div>*/}
                 </>
             }
         </>

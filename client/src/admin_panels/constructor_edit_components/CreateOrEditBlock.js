@@ -115,7 +115,7 @@ const CreateOrEditBlock = observer(({block, mode}) => {
             <p>Введите номер блока на странице</p>
             <input id="ordinal" onChange={(e) => setOrdinal(Number(e.target.value))}/>
             {lines.length > 0 && lines.map(line => {
-                // console.log(line.text)
+                    // console.log(line.text)
                     return (
                         <div style={{margin: "10px", padding: "10px", border: "5px solid #8888FF"}}>
                             <CreateOrEditLine key={line.lineOrdinal} changeLine={changeLine} index={line.lineOrdinal}

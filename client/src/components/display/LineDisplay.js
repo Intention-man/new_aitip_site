@@ -29,7 +29,7 @@ const LineDisplay = observer(({line}) => {
     return (
         // TODO: желательно отрефакторить этот код, разнести этот контент в компоненты в самих линий
 
-        <>
+        <div>
             {line.hasOwnProperty("kind") &&
                 <>
                     {(line.kind === 1 && line.text.length > 0 && line.text[0].length > 0) &&
@@ -69,7 +69,7 @@ const LineDisplay = observer(({line}) => {
                     {/*// </div>*/}
                 </>
             }
-        </>
+        </div>
     );
 });
 

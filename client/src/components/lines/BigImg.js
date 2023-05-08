@@ -1,4 +1,5 @@
 import '../../css/component_styles/Block.css';
+import {useState} from "react";
 
 /**
  * Компонент картинки, которая заполняется всю линию и имеет эффект исчезновения сверху и снизу.
@@ -11,6 +12,7 @@ const BigImg = ({ imgSrc , imgType}) => {
         <img
             src={imgSrc}
             className={imgType === "fading" ? 'FadingImg-top-and-bottom BigImg' : "BigImg"}
+            style={{objectFit: "contain"}}
         />
     );
 }

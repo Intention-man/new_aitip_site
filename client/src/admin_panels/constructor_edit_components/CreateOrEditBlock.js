@@ -88,6 +88,7 @@ const CreateOrEditBlock = observer(({block, mode}) => {
         formData.append("ordinal", `${ordinal}`)
         formData.append("lines", JSON.stringify(lines))
         formData.append("prevLinesIdList", JSON.stringify(prevLinesIdList))
+        console.log(lines)
         mode === "edit" ? updateBlock(formData).then(data => {
         }) : createBlock(formData).then(data => {
         })

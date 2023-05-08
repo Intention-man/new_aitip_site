@@ -16,9 +16,11 @@ img{
 .slideshow-container {
     max-width: 1000px;
     position: relative;
-    margin: 0 142px;
-    border: 3px solid black;
-    border-radius: 20px;
+    margin: 0 auto;
+    padding: 10px 0;
+    /*margin: 0 142px;*/
+    /*border: 3px solid black;*/
+    border-radius: 10px;
     box-shadow: 10px 5px 5px gray;
 }
 /*

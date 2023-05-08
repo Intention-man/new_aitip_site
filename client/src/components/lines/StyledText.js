@@ -10,8 +10,6 @@ import "../../css/component_styles/StyledText.css"
  * @returns Компонент линии стилизованного текста
  */
 const StyledText = ({ line }) => {
-    
-    
     const getMarkdownClassname = () => {
         const className = ['StyledText-mdText'];
         
@@ -26,6 +24,8 @@ const StyledText = ({ line }) => {
         return className.join(' ');
     }
 
+    // console.log(line.text)
+
     return (
         <div className="StyledText-container">
             {
@@ -36,7 +36,7 @@ const StyledText = ({ line }) => {
                     >
                         <MDEditor.Markdown 
                             className={getMarkdownClassname()}
-                            sВource={columnText}
+                            source={columnText}
                             style={{whiteSpace: 'pre-wrap'}}
                         />
                     </div>

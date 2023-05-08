@@ -5,6 +5,9 @@ import Card from "../lines/Card";
 import Carusel from "../lines/Carusel";
 import BigImg from "../lines/BigImg";
 import StyledText from '../lines/StyledText';
+import "../../css/component_styles/VideoWrapper.css"
+ import YTVideoWrapper from "../lines/YTVideoWrapper";
+ import DocumentLine from "../lines/DocumentLine";
 
 /**
  * Line display component. Depending on the line kind and other fields' values, draws line
@@ -18,8 +21,8 @@ const LineDisplay = observer(({line}) => {
     // useEffect(() => {
     //     setLine(currentLine)
     // }, []);
-    console.log(line.addressFileType.length + " " + line.filesNames.length)
-    {(line.kind === 4 && (line.filesNames.length > 0) && line.addressFileType.length > 0) && console.log("all right!")}
+    // console.log(line.text)
+    // {(line.kind === 4 && (line.filesNames.length > 0) && line.addressFileType.length > 0) && console.log("all right!")}
 
     return (
         // TODO: желательно отрефакторить этот код, разнести этот контент в компоненты в самих линий
@@ -34,8 +37,8 @@ const LineDisplay = observer(({line}) => {
                     }
 
                     {(line.kind === 2 && (line.filesNames.length > 0)) && (line.addressFileType === "global" ?
-                            <BigImg imgSrc={line.filesNames[0]}/> :
-                            <BigImg imgSrc={process.env.REACT_APP_API_URL + line.filesNames[0]}/>
+                            <BigImg imgSrc={line.filesNames[0]} imgType={line.params.imgType}/> :
+                            <BigImg imgSrc={process.env.REACT_APP_API_URL + line.filesNames[0]} imgType={line.params.imgType}/>
                     )
                     }
 
@@ -53,18 +56,15 @@ const LineDisplay = observer(({line}) => {
                     }
 
                     {(line.kind === 5 && (line.filesNames.length > 0)) &&
-                        <iframe width="560" height="315"
-                                src={"https://www.youtube.com/embed/" + line.filesNames[0].split("/")[3]}
-                                title="YouTube video player" frameBorder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                allowFullScreen></iframe>
+                        <YTVideoWrapper relativeLink={line.filesNames[0]}/>
                     }
                     {(line.kind === 6 && (line.filesNames.length > 0)) &&
-                        <div>
-                            <a href={line.addressFileType === "global" ? line.filesNames[0] : process.env.REACT_APP_API_URL + line.filesNames[0]}
-                               download target="_blank">Скачать документ</a>
-                        </div>
+                        <DocumentLine documentLink={line.addressFileType === "global" ? line.filesNames[0] : process.env.REACT_APP_API_URL + line.filesNames[0]} documentName={line.params.documentName}/>
                     }
+                        {/*// <div>*/}
+                        {/*//     <a href={line.addressFileType === "global" ? line.filesNames[0] : process.env.REACT_APP_API_URL + line.filesNames[0]}*/}
+                        {/*//        download target="_blank">Скачать документ</a>*/}
+                        {/*// </div>*/}
                 </>
             }
         </>

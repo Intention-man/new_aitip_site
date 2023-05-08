@@ -2,6 +2,7 @@ import {useState } from "react";
 import OurColorPicker from "../OurColorPicker";
 import "../../css/component_styles/Editor.css";
 import ExtendedTextEditor from "../../components/lines/ExtendedTextEditor";
+import structure from "../../pages/Institute/Structure";
 
 /**
  * Компонент редактора текстовой линии
@@ -14,39 +15,52 @@ import ExtendedTextEditor from "../../components/lines/ExtendedTextEditor";
  */
 const TextLineEditor = ({ line, changeLine, index }) => {
 
-    const [columnsNumber, setColumnsNumber] = useState(1);
+    // const [columnsNumber, setColumnsNumber] = useState(1);
     const [backgroundColor, setBackgroundColor] = useState(null);
     const [borderColor, setBorderColor] = useState(null);
+    const [textList, setTextList] = useState(line.text);
     
     const onColumnTextChange = (columnIndex, newText) => {
         const newColumnsTexts = line.text;
         if (columnIndex < newColumnsTexts.length)
             newColumnsTexts[columnIndex] = newText;
-        else
-            newColumnsTexts.push(newText);
+        // else if (columnIndex < 3){
+        //     newColumnsTexts.push(newText);
+        // }
         changeLine('text', newColumnsTexts, index);
     };
 
     const onColumnNumberChange = (newColumnsNumber) => {
-        if (newColumnsNumber > columnsNumber) {
-            for (let i = columnsNumber + 1; i <= newColumnsNumber; i++)
-                onColumnTextChange(i, "");
-        } else {
-            const newColumnsTexts = line.text.slice(0, newColumnsNumber);
-            changeLine('text', newColumnsTexts, index);
+        console.log(textList)
+        if (newColumnsNumber > 0 && newColumnsNumber < 4){
+            console.log(newColumnsNumber + " is normal")
+            if (newColumnsNumber > textList.length) {
+                // console.log(newColumnsTexts)
+                const count = newColumnsNumber - textList.length
+                for (let i = 0; i < count; i++) {
+                    textList.push("");
+                }
+                console.log(textList)
+                changeLine('text', textList, index);
+                setTextList((prevState) => textList)
+                // setColumnsNumber(newColumnsTexts.length);
+            } else if (textList.length > 0){
+                console.log(textList.slice(0, newColumnsNumber))
+                changeLine('text', textList.slice(0, newColumnsNumber), index);
+                setTextList((prevState) => textList.slice(0, newColumnsNumber));
+            }
         }
-        setColumnsNumber(newColumnsNumber);
     };
 
     const onColorChange = (newBackgroundColor, newBorderColor) => {
         // Так как нельзя выбрать одновременно и цвет фона, и цвет границы, то при изменении одного из них сбрасываем второй
 
         // Находим, что действительно изменилось 
-        if (newBackgroundColor != backgroundColor) {
+        if (newBackgroundColor !== backgroundColor) {
             newBorderColor = null;
             line.params["backgroundColor"] = newBackgroundColor
         }
-        else if (newBorderColor != borderColor) {
+        else if (newBorderColor !== borderColor) {
             newBackgroundColor = null;
             line.params["borderColor"] = newBorderColor
         }
@@ -62,9 +76,9 @@ const TextLineEditor = ({ line, changeLine, index }) => {
                     Количество колонок:
                     <input 
                         type="number" 
-                        min={1} 
-                        max={3}
-                        value={columnsNumber}
+                        // min={1}
+                        // max={3}
+                        value={textList.length}
                         onChange={e => onColumnNumberChange(e.target.value)}
                     />
                 </label>
@@ -87,15 +101,15 @@ const TextLineEditor = ({ line, changeLine, index }) => {
             </div>
             <div className="TextLineEditor-editorPanel">
                 {
-                    Array.apply(null, { length: columnsNumber }).map((e, i) =>   // Данная конструкция позволяет повторить элемент columnNumber раз, i - индекс текущего перебираемого элемента
+                    Array.apply(null, { length: textList.length }).map((e, i) =>   // Данная конструкция позволяет повторить элемент columnNumber раз, i - индекс текущего перебираемого элемента
                         <div className="TextLineEditor-editorColumn">
                             {
-                                columnsNumber > 1 &&
+                                textList.length > 1 &&
                                 <h3>Столбец {i + 1}</h3>
                             }
                             <ExtendedTextEditor
                                 key={i}
-                                text={line.text[i]}
+                                text={textList[i]}
                                 setText={(t) => onColumnTextChange(i, t)}
                             />
                         </div>

@@ -8,7 +8,11 @@ import LineDisplay from "../../components/display/LineDisplay";
 import Block from "../../components/display/Block";
 import {updateFileUsages} from "../../additional_commands/commonPanelsFunctions";
 import {useEffect} from "react";
-
+import Button from "../../components/Button"
+import text from "../../local_assets/left-align.png"
+import image from "../../local_assets/image.png"
+import imageAdd from "../../local_assets/image-add.png"
+import video from "../../local_assets/video.png"
 
 
 const CreateOrEditBlock = observer(({block, mode}) => {
@@ -25,6 +29,14 @@ const CreateOrEditBlock = observer(({block, mode}) => {
 
     const [doUpdateUsages, setDoUpdateUsages] = useState(false);
     const [removedLineIndex, setRemovedLineIndex] = useState(-1);
+
+    function chooseLineType(event) {
+        const elements = document.querySelectorAll('.line_type');
+        elements.forEach((element) => {
+            element.classList.remove('type_active');
+        });
+        event.currentTarget.classList.add('type_active');
+    }
 
     useEffect(() => {
         if (mode === "edit") {
@@ -96,48 +108,87 @@ const CreateOrEditBlock = observer(({block, mode}) => {
 
     return (
         <div>
-            <select id="isNews" value={isNews} onChange={e => {
-                setIsNews(e.target.value === "true")
-            }}>
-                <option value="">Выберите тип блока</option>
-                <option value="true">Новостной</option>
-                <option value="false">Для страницы</option>
-            </select>
-            <p>Введите заголовок блока</p>
-            <input id="header" onChange={(e) => setHeader(e.target.value)}/>
-            <select id="pageLink" value={pageLink} onChange={e => {
-                setPageLink(e.target.value)
-            }}>
-                <option value="">Введите название страницы</option>
-                {publicRoutes.map((publicRoute) => (
-                    <option key={publicRoute.name} value={publicRoute.path}>{publicRoute.name}</option>
-                ))}
-            </select>
-            <p>Введите номер блока на странице</p>
-            <input id="ordinal" onChange={(e) => setOrdinal(Number(e.target.value))}/>
-            {lines.length > 0 && lines.map(line => {
-                    // console.log(line.text)
-                    return (
-                        <div style={{margin: "10px", padding: "10px", border: "5px solid #8888FF"}}>
-                            <CreateOrEditLine key={line.lineOrdinal} changeLine={changeLine} index={line.lineOrdinal}
-                                              currentLine={line} doUpdateUsages={doUpdateUsages}
-                                              removedLineIndex={removedLineIndex}/>
-                            <LineDisplay line={line}/>
-                            {line.lineOrdinal > 0 &&
-                                <button onClick={() => swapLines(line.lineOrdinal - 1, line.lineOrdinal)}>Передвинуть линию
-                                    на 1 выше</button>}
-                            {(line.lineOrdinal + 1) < lines.length &&
-                                <button onClick={() => swapLines(line.lineOrdinal, line.lineOrdinal + 1)}>Передвинуть линию
-                                    на 1 ниже</button>}
-
-                            <button onClick={() => removeLine(line.lineOrdinal)}>Удалить линию</button>
+            <div className="block_settings">
+                <div>
+                    <p>Выберите страницу</p>
+                    <label className="custom_select">
+                        <select id="pageLink" value={pageLink} onChange={e => {
+                            setPageLink(e.target.value)
+                        }}>
+                            <option value="" disabled="disabled">Выберите страницу</option>
+                            {publicRoutes.map((publicRoute) => (
+                                <option key={publicRoute.name} value={publicRoute.path}>{publicRoute.name}</option>
+                            ))}
+                        </select>
+                        <svg>
+                            <use xlinkHref="#select-arrow-down"></use>
+                        </svg>
+                    </label>
+                </div>
+                <div>
+                    <p>Тип блока</p>
+                    <label className="custom_select">
+                        <select id="isNews" value={isNews} onChange={e => {
+                            setIsNews(e.target.value === "true")
+                        }}>
+                            <option value="" disabled="disabled">Выберите тип блока</option>
+                            <option value="true">Новостной</option>
+                            <option value="false">Для страницы</option>
+                        </select>
+                        <svg>
+                            <use xlinkHref="#select-arrow-down"></use>
+                        </svg>
+                    </label>
+                </div>
+                <div>
+                    <p>Заголовок карточки</p>
+                    <input
+                        placeholder="Введите заголовок, он будет отображаться вверху карточки и на боковой панели содержания"
+                        id="header" onChange={(e) => setHeader(e.target.value)}/>
+                </div>
+            </div>
+            <div className="add_line_container">
+                <p className="add_line_title">Добавить линию</p>
+                <div className="line_type_container">
+                    <div>
+                        <p>Во всю ширину</p>
+                        <div className="line_type" onClick={chooseLineType}>
+                            <img src={text} alt=""/>
+                            Текст
                         </div>
-                    )
-                }
-            )}
+                        <div className="line_type" onClick={chooseLineType}>
+                            <img src={image} alt=""/>
+                            Изображение
+                        </div>
+                        <div className="line_type type_active" onClick={chooseLineType}>
+                            <img src={imageAdd} alt=""/>
+                            Слайдер изображений
+                        </div>
+                        <div className="line_type" onClick={chooseLineType}>
+                            <img src={video} alt=""/>
+                            Видео
+                        </div>
+                    </div>
+                    <div>
+                        <p>В две колонки</p>
+                        <div className="line_type" onClick={chooseLineType}>
+                            <img src={text} alt=""/>+<img src={image} alt=""/>
+                            Текст + изображение
+                        </div>
+                        <div className="line_type" onClick={chooseLineType}>
+                            <img src={text} alt=""/>+<img src={text} alt=""/>
+                            Текст + текст
+                        </div>
+                        <div className="line_type type_active" onClick={chooseLineType}>
+                            <img src={image} alt=""/>+<img src={image} alt=""/>
+                            Изображение + изображение
+                        </div>
+                    </div>
+                </div>
+                <Button buttonName="Добавить новую линию" setChosenValue={addLine}/>
 
-            <button onClick={addLine}>Добавить новую линию</button>
-            <h2>Как выглядит блок</h2>
+            </div>
+            <h2 className="block_look_title">Как выглядит блок</h2>
             {lines.length > 0 &&
                 <Block
                     block={{
@@ -147,14 +198,19 @@ const CreateOrEditBlock = observer(({block, mode}) => {
                     useDatabase={false}
                 />
             }
-            <button onClick={() => {
+            <Button setChosenValue={() => {
                 saveBlock().then(bool => {
                     setDoUpdateUsages(true)
                     alert("Блок успешно обновлен")
                     setTimeout(() => setDoUpdateUsages(false), 2000)
                 })
-            }}>Сохранить блок</button>
-            <button onClick={() => removeBlock(block.id)}>Удалить блок</button>
+            }} buttonName="Сохранить блок"/>
+            {/*<button onClick={() => removeBlock(block.id)}>Удалить блок</button>*/}
+            <svg className="sprites">
+                <symbol id="select-arrow-down" viewBox="0 0 10 6">
+                    <polyline points="1 1 5 5 9 1"></polyline>
+                </symbol>
+            </svg>
         </div>
     )
 });

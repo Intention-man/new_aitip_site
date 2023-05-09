@@ -6,7 +6,7 @@ import {
     HISTORY, INDUSTRIAL_P, INFO_EDU_ORG, INTERNATIONAL_ACT,
     LEGAL_CLINIC,
     MAIN_ROUTE, PERSONALITIES_PAGE, SCIENCE, SCIENCE_P, STAFF,
-    STRUCTURE, STUDENTS, SUPERADMIN
+    STRUCTURE, STUDENTS, SUPERADMIN, TEST
 } from "./consts/pageConsts";
 import Main from "./pages/Main";
 import Contacts from "./pages/Institute/Contacts";
@@ -30,6 +30,7 @@ import Students from "./pages/Students/Students";
 import SciencePartners from "./pages/Partners/SciencePartners";
 import Auth from "./pages/Auth";
 import SuperAdminPage from "./pages/SuperAdminPage";
+import Test from "./pages/Test";
 import Partners from "./pages/Partners/Partners";
 
 
@@ -38,6 +39,11 @@ export const publicRoutes = [
         path: PARTNERS,
         Component: <Partners/>,
         name: "Партнёры"
+    },
+    {
+        path: TEST,
+        Component: <Test/>,
+        name: "Тесты всякие"
     },
     {
         path: MAIN_ROUTE,

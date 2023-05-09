@@ -14,6 +14,7 @@ import "../../css/page_styles/AdminPanel.css"
 import {useContext, useEffect} from "react";
 import {Context} from "../../index";
 import {updateFileUsages, selectFile} from "../../additional_commands/commonPanelsFunctions";
+import FilesPicker from '../FilesPicker';
 
 
 
@@ -133,23 +134,15 @@ const CreateDirection = observer(({direction, mode}) => {
 
             <div style={{marginBottom: "2%"}}>
                 <label className="mini-info" htmlFor="img">Картинка</label>
-                <input className="picture-getter" type="file" id="img" accept="image/*" onChange={e => {
-                    let newFile = selectFile(e.target.files[0], block_store);
-                    console.log(newFile)
-                    setFile(newFile)
-                }}/>
-                <select size="7" onChange={e => {
-                    setFile(e.target.value)
-                    console.log(e.target.value)
-                }}>
-                    {block_store.allFiles.map(file =>
-                        <option value={file.fileLink}>
-                            <p>{file.name}</p>
-                        </option>
-                    )}
-                </select>
-                {(typeof file === "string") ? <img src={process.env.REACT_APP_API_URL + file}/> : <p>{typeof file}</p>}
+                <FilesPicker
+                    pickedFiles={file}
+                    setPickedFiles={setFile}
+                    isMultiple={false}
+                    isRequired={false}
+                    isImage={true}
+                />
             </div>
+            
             <Button className="button-admin" onClick={() => {
                 addTest()
             }}>

@@ -7,11 +7,12 @@ import "../../css/component_styles/Editor.css"
 import LineDisplay from "../../components/display/LineDisplay";
 import Block from "../../components/display/Block";
 import {updateFileUsages} from "../../additional_commands/commonPanelsFunctions";
+import {useEffect} from "react";
 
 
-const CreateOrEditBlock = observer(({block, mod}) => {
 
-    // console.log(block.lines)
+const CreateOrEditBlock = observer(({block, mode}) => {
+
     // возвращаемые "наверх" значения
     const isEmpty = block.hasOwnProperty("fakeParam");
     const prevLinesIdList = isEmpty ? [] : block.lines.map(line => line.id)
@@ -24,6 +25,13 @@ const CreateOrEditBlock = observer(({block, mod}) => {
 
     const [doUpdateUsages, setDoUpdateUsages] = useState(false);
     const [removedLineIndex, setRemovedLineIndex] = useState(-1);
+
+    useEffect(() => {
+        if (mode === "edit") {
+            document.getElementById('header').value = header
+            document.getElementById('ordinal').value = ordinal
+        }
+    }, [])
 
 
     const addLine = () => {
@@ -39,7 +47,8 @@ const CreateOrEditBlock = observer(({block, mod}) => {
 
     const changeLine = (key, value, index) => {
         setLines(lines => lines.map(line => (lines.indexOf(line) === index ? {...line, [key]: value} : line)))
-        console.log(key, value, index)
+        // key === "text" && console.log(value)
+        // console.log(key, value, index)
     }
 
     const swapLines = (index1, index2) => {
@@ -57,18 +66,11 @@ const CreateOrEditBlock = observer(({block, mod}) => {
         }
         newLineList.sort((line1, line2) => line1.lineOrdinal - line2.lineOrdinal)
         setLines(newLineList)
-        // console.log(newLineList)
     }
 
     const removeLine = (number) => {
-        console.log(typeof number)
-        console.log(lines.filter(line => line.lineOrdinal === number))
         let removingLine = Array.from(lines.filter(line => line.lineOrdinal === number))[0];
         (removingLine.filesNames !== null) && removingLine.filesNames.forEach(photo => updateFileUsages(photo, -1));
-        // console.log(lines.filter(line => lines.indexOf(line) !== number).map(line => ({
-        //     ...line,
-        //     ["lineOrdinal"]: lines.indexOf(line)
-        // })))
         setLines(lines.filter(line => lines.indexOf(line) !== number).map(line => ({
             ...line,
             ["lineOrdinal"]: lines.indexOf(line)
@@ -78,7 +80,7 @@ const CreateOrEditBlock = observer(({block, mod}) => {
 
     const saveBlock = async () => {
         const formData = new FormData()
-        console.log(lines)
+        // console.log(lines)
         block.id && formData.append("id", block.id)
         formData.append("isNews", isNews)
         formData.append("header", header)
@@ -86,11 +88,11 @@ const CreateOrEditBlock = observer(({block, mod}) => {
         formData.append("ordinal", `${ordinal}`)
         formData.append("lines", JSON.stringify(lines))
         formData.append("prevLinesIdList", JSON.stringify(prevLinesIdList))
-        mod === "edit" ? updateBlock(formData).then(data => {
+        console.log(lines)
+        mode === "edit" ? updateBlock(formData).then(data => {
         }) : createBlock(formData).then(data => {
         })
     };
-
 
     return (
         <div>
@@ -102,7 +104,7 @@ const CreateOrEditBlock = observer(({block, mod}) => {
                 <option value="false">Для страницы</option>
             </select>
             <p>Введите заголовок блока</p>
-            <input placeholder={header} onChange={(e) => setHeader(e.target.value)}/>
+            <input id="header" onChange={(e) => setHeader(e.target.value)}/>
             <select id="pageLink" value={pageLink} onChange={e => {
                 setPageLink(e.target.value)
             }}>
@@ -112,13 +114,13 @@ const CreateOrEditBlock = observer(({block, mod}) => {
                 ))}
             </select>
             <p>Введите номер блока на странице</p>
-            <input placeholder={ordinal} onChange={(e) => setOrdinal(Number(e.target.value))}/>
+            <input id="ordinal" onChange={(e) => setOrdinal(Number(e.target.value))}/>
             {lines.length > 0 && lines.map(line => {
-                    // console.log(lines)
+                    // console.log(line.text)
                     return (
                         <div style={{margin: "10px", padding: "10px", border: "5px solid #8888FF"}}>
                             <CreateOrEditLine key={line.lineOrdinal} changeLine={changeLine} index={line.lineOrdinal}
-                                              line={line} doUpdateUsages={doUpdateUsages}
+                                              currentLine={line} doUpdateUsages={doUpdateUsages}
                                               removedLineIndex={removedLineIndex}/>
                             <LineDisplay line={line}/>
                             {line.lineOrdinal > 0 &&

@@ -49,7 +49,7 @@ const BlockEditor = observer(() => {
                 : <p>Блоки еще загружаются или на выбранной странице пока нет блоков</p>}
 
             {chosenBlock.hasOwnProperty("lines") &&
-                <CreateOrEditBlock block={chosenBlock} mod="edit"/>
+                <CreateOrEditBlock block={chosenBlock} mode="edit"/>
             }
         </div>
     );

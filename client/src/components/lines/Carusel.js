@@ -4,12 +4,14 @@ import vector from "../../local_assets/Vector.png"
 import vector1 from "../../local_assets/Vector1.png"
 
 
-const Carusel = ({photos, addressFileType, getRatio, color}) => {
+const Carusel = ({photos, addressFileType, ratio, color}) => {
     if (photos && typeof photos === "string") {photos = [photos]}
-    console.log(photos);
+    // console.log(photos);
+    console.log(photos, addressFileType, ratio, color)
     const [currentSlideNumber, setCurrentSlideNumber] = useState(0)
-    const [ratio, setRatio] = useState(getRatio ? getRatio : 1);
-    const [dotColor, setDotColor] = useState(color ? color : "blue");
+    ratio = ratio || 1
+    color = color || "blue"
+    console.log(color)
 
 
     useEffect(() => {
@@ -19,12 +21,21 @@ const Carusel = ({photos, addressFileType, getRatio, color}) => {
                 myElement.click()
             }, 5000)
         })
-    }, [])
+    }, []);
+
+    useEffect(() => {  // Проверяем, вдруг изменился размер массива photos, и индекс слайда теперь выходит за пределы массива 
+        if (Array.isArray(photos) && photos.length <= currentSlideNumber)
+            setCurrentSlideNumber(photos.length - 1);  // Просто ставим индекс на последний слайд
+    }, [photos]);
+
+    const borderStyle = {
+        width:`${window.innerWidth*0.5}px`, height: `${ratio * window.innerWidth*0.5}px`
+    }
 
 
     return (
         <div className="carusel">
-            <div className="slideshow-container">
+            <div className="slideshow-container" style={borderStyle}>
                 <a className="prev" onClick={() => setCurrentSlideNumber(prev => (prev > 0 ? prev-1 : photos.length-1))}><img src={vector} style={{margin: "0"}} width="7" height="12"/></a>
                 <div className="mySlides">
                     <img src={addressFileType === "global" ? photos[currentSlideNumber] : process.env.REACT_APP_API_URL + photos[currentSlideNumber]} width={window.innerWidth*0.5} height={ratio*window.innerWidth*0.5}/>
@@ -36,7 +47,7 @@ const Carusel = ({photos, addressFileType, getRatio, color}) => {
             {photos.length > 0 &&
                 <div id="123" style={{textAlign: "center"}}>
                     {photos.map(photo =>
-                    <span key={photos.indexOf(photo)} className="dot" style={{backgroundColor: (photos.indexOf(photo) === currentSlideNumber ? dotColor : "grey")}} onClick={() => setCurrentSlideNumber(photos.indexOf(photo))}/>)}
+                    <span key={photos.indexOf(photo)} className="dot" style={{backgroundColor: (photos.indexOf(photo) === currentSlideNumber ? color : "grey")}} onClick={() => setCurrentSlideNumber(photos.indexOf(photo))}/>)}
             </div>}
         </div>
     );

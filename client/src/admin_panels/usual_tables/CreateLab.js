@@ -9,6 +9,7 @@ import {Context} from "../../index";
 import {updateFileUsages, selectFile} from "../../additional_commands/commonPanelsFunctions";
 import {createLab, removeLab, updateLab} from "../../http/labAPI";
 import Carusel from "../../components/lines/Carusel";
+import FilesPicker from '../FilesPicker';
 
 
 const CreateLab = observer(({lab, mode}) => {
@@ -122,72 +123,37 @@ const CreateLab = observer(({lab, mode}) => {
 
             <div style={{marginBottom: "2%"}}>
                 <label className="mini-info" htmlFor="cover">Обложка лаборатории</label>
-                <input className="picture-getter" type="file" id="cover" accept="image/*" required="required"
-                       onChange={e => {
-                           console.log(e)
-                           setCover(selectFile(e.target.files[0], block_store))
-                       }}/>
-                <select size="7" onChange={e => {
-                    setCover(e.target.value)
-                    console.log(e.target.value)
-                }}>
-                    {block_store.allFiles.map(file =>
-                        <option value={file.fileLink}>
-                            {file.name}
-                        </option>
-                    )}
-                </select>
-                {(typeof cover === "string") ? <img src={process.env.REACT_APP_API_URL + cover}/> :
-                    <p>{typeof cover}</p>}
+                <FilesPicker
+                    pickedFiles={cover}
+                    setPickedFiles={setCover}
+                    isMultiple={false}
+                    isRequired={false}
+                    isImage={true}
+                />
             </div>
 
             <div style={{marginBottom: "2%"}}>
                 <label className="mini-info" htmlFor="supervisorPhoto">Фото руководителя</label>
-                <input className="picture-getter" type="file" id="supervisorPhoto" accept="image/*" required="required"
-                       onChange={e => {
-                           console.log(e)
-                           setSupervisorPhoto(selectFile(e.target.files[0], block_store))
-                       }}/>
-                <select size="7" onChange={e => {
-                    setSupervisorPhoto(e.target.value)
-                    console.log(e.target.value)
-                }}>
-                    {block_store.allFiles.map(file =>
-                        <option value={file.fileLink}>
-                            {file.name}
-                        </option>
-                    )}
-                </select>
-                {(typeof supervisorPhoto === "string") ? <img src={process.env.REACT_APP_API_URL + supervisorPhoto}/> :
-                    <p>{typeof supervisorPhoto}</p>}
+                <FilesPicker
+                    pickedFiles={supervisorPhoto}
+                    setPickedFiles={setSupervisorPhoto}
+                    isMultiple={false}
+                    isRequired={false}
+                    isImage={true}
+                />
             </div>
 
 
 
             <div>
                 <label className="mini-info" htmlFor="carouselPhotosLinks">Фотографии совместных проектов</label>
-                <input className="picture-getter" type="file" multiple="multiple" accept="image/*" required="required"
-                       id="carouselPhotosLinks" onChange={e => {
-                    let fileList = []
-                    Array.from(e.target.files).forEach(file => fileList.push(selectFile(file, block_store)))
-                    setCarouselPhotosLinks(fileList)
-                }
-                }/>
-                <select size="7" multiple="multiple" onChange={e => {
-                    let fileList = []
-                    fileList = [...e.target.selectedOptions]
-                        .map(option => option.value);
-                    setCarouselPhotosLinks(fileList)
-                    console.log(fileList)
-                }}>
-                    {block_store.allFiles.map(file =>
-                        <option value={file.fileLink}>
-                            {file.name}
-                        </option>
-                    )}
-                </select>
-                {(carouselPhotosLinks.length > 0) ? <Carusel photos={carouselPhotosLinks} addressFileType="local"/> :
-                    <p>{typeof carouselPhotosLinks}</p>}
+                <FilesPicker
+                    pickedFiles={carouselPhotosLinks}
+                    setPickedFiles={setCarouselPhotosLinks}
+                    isMultiple={true}
+                    isRequired={false}
+                    isImage={true}
+                />
             </div>
 
 

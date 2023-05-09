@@ -2,4 +2,8 @@
 /server/node_modules
 /.idea
 /client/.env
-/server/.env 
+/server/.env
+**/node_modules/
+**/.vscode/
+**/.env
+**/.directory

@@ -11,7 +11,6 @@ import TextLineEditor from "./TextLineEditor";
 import ExtendedTextEditor from "../../components/lines/ExtendedTextEditor";
 
 
-
 const CreateOrEditLine = observer(({index, changeLine, currentLine, doUpdateUsages, removedLineIndex}) => {
     const {block_store} = useContext(Context)
 
@@ -24,48 +23,29 @@ const CreateOrEditLine = observer(({index, changeLine, currentLine, doUpdateUsag
         6: "Документ",
     };
 
-
-    const [kind, setKind] = useState(0);
-    const [params, setParams] = useState({});
-    const [text, setText] = useState([""]);
-    const [filesNames, setFilesNames] = useState([])
-    const [addressFileType, setAddressFileType] = useState("");
-    // const [size, setSize] = useState(1);
-    // const [dotColor, setDotColor] = useState("#000000");
-    // const [docNames, setDocNames] = useState("");
-    const [prevFilesNames, setPrevFilesNames] = useState([])
-
-    const [line, setLine] = useState({kind, params, text, filesNames, addressFileType});
-
-
-    // useEffect(() => {
-    //     if (kind === 4) {
-    //         setParams([size, dotColor, docNames])
-    //         changeLine("params", [size, dotColor, docNames], index)
-    //         console.log([size, dotColor, docNames])
-    //     }
-    // }, [size, dotColor, docNames])
+    const [kind, setKind] = useState(currentLine.kind);
+    const [params, setParams] = useState(currentLine.params);
+    const [text, setText] = useState(currentLine.text);
+    const [filesNames, setFilesNames] = useState(currentLine.filesNames);
+    const [addressFileType, setAddressFileType] = useState(currentLine.addressFileType);
+    const [prevFilesNames, setPrevFilesNames] = useState(currentLine.filesNames)
+    const [line, setLine] = useState({...currentLine});
 
     useEffect(() => {
-        console.log("useeffect", line)
-        setKind(line.kind);
-        setParams(line.params);
-        setText(line.text)
-        setFilesNames(line.filesNames)
-        setAddressFileType(line.addressFileType)
-        // setSize(line.kind === 4 ? line.params[0] : 1)
-        // setDotColor(line.kind === 4 ? line.params[1] : "#000000")
-        // setDocNames("")
-    }, [line]);
+        if (document.getElementById('select_ratio' + line.id) !== null) {
+            document.getElementById('select_ratio' + line.id).value = (params !== null && params.hasOwnProperty("ratio")) ? params.ratio : 1
+        }
+        if (document.getElementById('select_color' + line.id) !== null) {
+            document.getElementById('select_color' + line.id).value = (params !== null && params.hasOwnProperty("color")) ? params.color : "#0000FF"
+        }
+        if (document.getElementById('document_name' + line.id) !== null) {
+            document.getElementById('document_name' + line.id).value = (params !== null && params.hasOwnProperty("documentName")) ? params.documentName : ""
+        }
+        if (document.getElementById('global_files' + line.id) !== null && addressFileType === "global") {
+            document.getElementById('global_files' + line.id).value = (filesNames !== null) ? filesNames : ""
+        }
 
-    useEffect(() => {
-        line.kind = kind
-        line.params = params
-        line.text = text
-        line.filesNames = filesNames
-        line.addressFileType = addressFileType
-        console.log(line)
-    }, [kind, params, text, filesNames, addressFileType]);
+    }, [])
 
     useEffect(() => {
         doUpdateUsages && updateUsagesOnSave()
@@ -92,18 +72,6 @@ const CreateOrEditLine = observer(({index, changeLine, currentLine, doUpdateUsag
         setPrevFilesNames(filesNames)
     }
 
-
-    // const addFiles = (files) => {
-    //     const formData = new FormData();
-    //     files.forEach(el => formData.append("files", el));
-    //     console.log(files)
-    //     convertFiles(formData).then(list => {
-    //         setFilesNames(list);
-    //         changeLine("filesNames", list, index)
-    //     });
-    // }
-
-
     return (
         // TODO: желательно отрефакторить этот код, разнести каждый элемент управления по отдельным компонентам
 
@@ -118,6 +86,8 @@ const CreateOrEditLine = observer(({index, changeLine, currentLine, doUpdateUsag
                             <select id="kind" value={kind} onChange={e => {
                                 setKind(Number(e.target.value))
                                 changeLine("kind", Number(e.target.value), index)
+                                setParams({})
+                                changeLine("params", {}, index)
                             }}>
                                 <option value="0">Выберите тип элемента</option>
                                 {
@@ -139,11 +109,13 @@ const CreateOrEditLine = observer(({index, changeLine, currentLine, doUpdateUsag
                             {/*    </p> : <p>Выберите параметры</p>}*/}
 
                             {kind === 2 &&
-                                <select id="params" value={params.imgType} onChange={e => {
-                                    params["imgType"] = e.target.value
-                                    setParams({...params})
-                                    changeLine("params", params, index)
-                                }}>
+                                <select id="params"
+                                        value={params !== null && params.hasOwnProperty("imgType") && params.imgType}
+                                        onChange={e => {
+                                            params["imgType"] = e.target.value
+                                            setParams({...params})
+                                            changeLine("params", params, index)
+                                        }}>
                                     <option value="none">Выберите тип картинки</option>
                                     <option value="fading">С градиентом</option>
                                     <option value="normal">Без градиента</option>
@@ -151,15 +123,17 @@ const CreateOrEditLine = observer(({index, changeLine, currentLine, doUpdateUsag
                             }
 
                             {kind === 3 &&
-                                <select id="params" value={params.imgType + " " + params.side} onChange={e => {
-                                    let val = e.target.value.split(" ")
-                                    params["imgType"] = val[0];
-                                    if (val.length > 1) {
-                                        params["side"] = val[1];
-                                    }
-                                    setParams({...params})
-                                    changeLine("params", params, index)
-                                }}>
+                                <select id="params"
+                                        value={(params !== null && params.hasOwnProperty("imgType") && params.imgType) + " " + (params !== null && params.hasOwnProperty("side") && params.side)}
+                                        onChange={e => {
+                                            let val = e.target.value.split(" ")
+                                            params["imgType"] = val[0];
+                                            if (val.length > 1) {
+                                                params["side"] = val[1];
+                                            }
+                                            setParams({...params})
+                                            changeLine("params", params, index)
+                                        }}>
                                     <option value="none">Выберите тип картинки</option>
                                     <option value="fading left">С градиентом слева</option>
                                     <option value="fading right">С градиентом справа</option>
@@ -173,9 +147,11 @@ const CreateOrEditLine = observer(({index, changeLine, currentLine, doUpdateUsag
                             {kind === 4 &&
                                 <div>
                                     {/*Set the size of an image by inputting a number in the field below*/}
-                                    <label htmlFor="name">Введите соотношение сторон фото:</label>
-                                    <input className="pretty_inputs" type="number" id="name"
-                                           value={params.hasOwnProperty("ratio") ? params.ratio : null}
+                                    <label htmlFor="select_ratio">Введите соотношение сторон фото (высота/ширина) в виде
+                                        целого числа или десятичной дроби с точкой:</label>
+                                    <input className="pretty_inputs" type="number" id={"select_ratio" + line.id}
+                                           pattern="[0-9]+([\.,][0-9]+)?" step="0.1"
+                                           value={params !== null && params.hasOwnProperty("ratio") ? params.ratio : null}
                                            onChange={(e) => {
                                                params["ratio"] = Number(e.target.value)
                                                setParams({...params})
@@ -185,33 +161,33 @@ const CreateOrEditLine = observer(({index, changeLine, currentLine, doUpdateUsag
                                            }/>
 
                                     {/*Set the color of the dots by choosing one of the options below*/}
-                                    <label htmlFor="name">Выберите цвет точек:</label>
-                                    <input className="pretty_inputs" style={{height: "25px"}} type="color" id="name"
-                                           value={params.color} onChange={(e) => {
-                                        params["color"] = e.target.value
-                                        setParams({...params})
-                                        changeLine("params", params, index)
-                                        // setDotColor(e.target.value)
-                                    }}/>
+                                    <label htmlFor="select_color">Выберите цвет точек:</label>
+                                    <input className="pretty_inputs" style={{height: "25px"}} type="color"
+                                           id={"select_color" + line.id}
+                                           value={params !== null && params.hasOwnProperty("color") ? params.color : null}
+                                           onChange={(e) => {
+                                               params["color"] = e.target.value
+                                               setParams({...params})
+                                               changeLine("params", params, index)
+                                               // setDotColor(e.target.value)
+                                           }}/>
                                 </div>
                             }
 
                             {kind === 6 &&
                                 <div>
-                                    <label htmlFor="name">Введите название документа</label>
-                                    <input className="pretty_inputs" type="text" id="name"
-                                           value={params.ratio ? params.ratio : null}
+                                    <label htmlFor="document_name">Введите название документа</label>
+                                    <input className="pretty_inputs" type="text" id={"document_name" + line.id}
+                                           value={params !== null && params.documentName ? params.documentName : null}
                                            onChange={(e) => {
-                                               params["ratio"] = Number(e.target.value)
+                                               params["documentName"] = e.target.value
                                                setParams({...params})
                                                changeLine("params", params, index)
-                                               // setSize(Number(e.target.value))
                                            }
                                            }/>
                                 </div>
                             }
                         </div>
-
 
                         {kind > 1 && kind !== 7 &&
                             <div style={{margin: "30px 0"}}>
@@ -231,10 +207,9 @@ const CreateOrEditLine = observer(({index, changeLine, currentLine, doUpdateUsag
                                             console.log(list)
                                             setFilesNames(Array.from(list));
                                             changeLine("filesNames", list, index)
-
                                             // addFiles(Array.from(e.target.files))
                                         }}/>
-                                        <input type="text" onChange={(e) => {
+                                        <input type="text" id={"global_files" + line.id} onChange={(e) => {
                                             setAddressFileType("global")
                                             changeLine("addressFileType", "global", index)
                                             setFilesNames([e.target.value])
@@ -244,6 +219,8 @@ const CreateOrEditLine = observer(({index, changeLine, currentLine, doUpdateUsag
                                             let fileList = []
                                             fileList = [...e.target.selectedOptions]
                                                 .map(option => option.value);
+                                            setAddressFileType("local")
+                                            changeLine("addressFileType", "local", index)
                                             setFilesNames(fileList)
                                             changeLine("filesNames", fileList, index)
                                             console.log(fileList)
@@ -263,6 +240,7 @@ const CreateOrEditLine = observer(({index, changeLine, currentLine, doUpdateUsag
                                                onChange={async (e) => {
                                                    setAddressFileType("local")
                                                    changeLine("addressFileType", "local", index)
+                                                   console.log("local")
                                                    // try {
                                                    //     const list =selectFile(Array.from(e.target.files), block_store);
                                                    //     setFilesNames(list);
@@ -276,8 +254,7 @@ const CreateOrEditLine = observer(({index, changeLine, currentLine, doUpdateUsag
                                                    console.log(Array.from(e.target.files))
                                                }}/>
                                         <label htmlFor="links">Введите ссылки на картинки: </label>
-                                        <input className="pretty_inputs" style={{marginBottom: "20px"}} type="text"
-                                               id="links"
+                                        <input className="pretty_inputs" style={{marginBottom: "20px"}} type="text" id={"global_files" + line.id}
                                                onChange={(e) => {
                                                    setAddressFileType("global")
                                                    changeLine("addressFileType", "global", index)
@@ -288,6 +265,8 @@ const CreateOrEditLine = observer(({index, changeLine, currentLine, doUpdateUsag
                                             let fileList = []
                                             fileList = [...e.target.selectedOptions]
                                                 .map(option => option.value);
+                                            setAddressFileType("local")
+                                            changeLine("addressFileType", "local", index)
                                             setFilesNames(fileList)
                                             changeLine("filesNames", fileList, index)
                                             console.log(fileList)
@@ -301,7 +280,7 @@ const CreateOrEditLine = observer(({index, changeLine, currentLine, doUpdateUsag
                                     </div>
                                 }
                                 {kind === 5 &&
-                                    <input type="text" onChange={(e) => {
+                                    <input type="text" id={"global_files" + line.id} onChange={(e) => {
                                         setFilesNames([e.target.value])
                                         changeLine("filesNames", [e.target.value], index)
                                     }}
@@ -320,15 +299,18 @@ const CreateOrEditLine = observer(({index, changeLine, currentLine, doUpdateUsag
                                             // addFiles(Array.from(e.target.files))
                                         }}/>
 
-                                        <input type="text" onChange={(e) => {
+                                        <input type="text" id={"global_files" + line.id} onChange={(e) => {
                                             setAddressFileType("global")
                                             changeLine("addressFileType", "global", index)
                                             setFilesNames([e.target.value])
+                                            changeLine("filesNames", [e.target.value], index)
                                         }}/>
                                         <select size="10" onChange={e => {
                                             let fileList = []
                                             fileList = [...e.target.selectedOptions]
                                                 .map(option => option.value);
+                                            setAddressFileType("local")
+                                            changeLine("addressFileType", "local", index)
                                             setFilesNames(fileList)
                                             changeLine("filesNames", fileList, index)
                                             console.log(fileList)
@@ -339,11 +321,6 @@ const CreateOrEditLine = observer(({index, changeLine, currentLine, doUpdateUsag
                                                 </option>
                                             )}
                                         </select>
-
-                                        {/*<label>Введите название документа (которое будут видеть пользователи на сайте)</label>*/}
-                                        {/*<input type="text" onChange={(e) => {*/}
-                                        {/*    setDocNames(e.target.value)*/}
-                                        {/*}}/>*/}
                                     </div>
                                 }
                             </div>}

@@ -124,7 +124,7 @@ const AdmissionBacContent2 = observer(() => {
                             </div>
                             <div className="_1_of_first_2_documents">
                                 <img className="document_icon" src={"../assets/document_icon.png"}
-                                     alt="Чет не пошло как-то с картинкой..."/>
+                                     alt="Изображение"/>
                                 <p>Расписание вступительных испытаний 2022</p>
                             </div>
                         </div>

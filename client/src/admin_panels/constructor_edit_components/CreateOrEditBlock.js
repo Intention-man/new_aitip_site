@@ -36,7 +36,7 @@ const CreateOrEditBlock = observer(({block, mode}) => {
 
     const addLine = () => {
         setLines([...lines, {
-            lineOrdinal: lines.length,
+            lineOrdinal: (lines.length > 0 ? lines.sort((a, b) => a.lineOrdinal - b.lineOrdinal).at(-1).lineOrdinal + 1 : 0),
             kind: 0,
             params: {},
             text: [""],
@@ -46,9 +46,7 @@ const CreateOrEditBlock = observer(({block, mode}) => {
     };
 
     const changeLine = (key, value, index) => {
-        setLines(lines => lines.map(line => (lines.indexOf(line) === index ? {...line, [key]: value} : line)))
-        // key === "text" && console.log(value)
-        // console.log(key, value, index)
+        setLines(lines => lines.map(line => (line.lineOrdinal === index ? {...line, [key]: value} : line)))
     }
 
     const swapLines = (index1, index2) => {
@@ -68,19 +66,20 @@ const CreateOrEditBlock = observer(({block, mode}) => {
         setLines(newLineList)
     }
 
-    const removeLine = (number) => {
-        let removingLine = Array.from(lines.filter(line => line.lineOrdinal === number))[0];
+    const removeLine = (index) => {
+        let removingLine = Array.from(lines.filter(line => line.lineOrdinal === index))[0];
         (removingLine.filesNames !== null) && removingLine.filesNames.forEach(photo => updateFileUsages(photo, -1));
-        setLines(lines.filter(line => lines.indexOf(line) !== number).map(line => ({
+        // setLines(prev => lines.filter(line => line.lineOrdinal !== index))
+        let newLines = lines.filter(line => line.lineOrdinal !== index)
+        setLines((prev) => newLines.map(line => ({
             ...line,
-            ["lineOrdinal"]: lines.indexOf(line)
+            ["lineOrdinal"]: newLines.indexOf(line)
         })))
-        setRemovedLineIndex(number)
+        setRemovedLineIndex(index)
     }
 
     const saveBlock = async () => {
         const formData = new FormData()
-        // console.log(lines)
         block.id && formData.append("id", block.id)
         formData.append("isNews", isNews)
         formData.append("header", header)
@@ -88,11 +87,15 @@ const CreateOrEditBlock = observer(({block, mode}) => {
         formData.append("ordinal", `${ordinal}`)
         formData.append("lines", JSON.stringify(lines))
         formData.append("prevLinesIdList", JSON.stringify(prevLinesIdList))
-        console.log(lines)
         mode === "edit" ? updateBlock(formData).then(data => {
         }) : createBlock(formData).then(data => {
         })
     };
+
+    const getMaxLineOrdinal = () => {
+        const index =  lines.reduce((a, b) => a.lineOrdinal > b.lineOrdinal ? a : b).lineOrdinal;
+        return index
+    }
 
     return (
         <div>
@@ -116,7 +119,6 @@ const CreateOrEditBlock = observer(({block, mode}) => {
             <p>Введите номер блока на странице</p>
             <input id="ordinal" onChange={(e) => setOrdinal(Number(e.target.value))}/>
             {lines.length > 0 && lines.map(line => {
-                    // console.log(line.text)
                     return (
                         <div style={{margin: "10px", padding: "10px", border: "5px solid #8888FF"}}>
                             <CreateOrEditLine key={line.lineOrdinal} changeLine={changeLine} index={line.lineOrdinal}
@@ -126,10 +128,9 @@ const CreateOrEditBlock = observer(({block, mode}) => {
                             {line.lineOrdinal > 0 &&
                                 <button onClick={() => swapLines(line.lineOrdinal - 1, line.lineOrdinal)}>Передвинуть линию
                                     на 1 выше</button>}
-                            {(line.lineOrdinal + 1) < lines.length &&
+                            {line.lineOrdinal < getMaxLineOrdinal() &&
                                 <button onClick={() => swapLines(line.lineOrdinal, line.lineOrdinal + 1)}>Передвинуть линию
                                     на 1 ниже</button>}
-
                             <button onClick={() => removeLine(line.lineOrdinal)}>Удалить линию</button>
                         </div>
                     )

@@ -4,7 +4,6 @@ import {observer} from "mobx-react-lite";
 import "../css/component_styles/ButtonList.css";
 
 
-
 // принимает словарь со значением
 const ButtonList = observer(({buttonList, chosenValue, setChosenValue}) => {
     return (

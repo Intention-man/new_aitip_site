@@ -4,7 +4,6 @@ import {observer} from "mobx-react-lite";
 import "../css/component_styles/Button.css";
 
 
-
 // принимает текст надписи, функцию устанвливаемого значения и устанвливаемое значение(опционально)
 const Button = observer(({buttonName, valueToSet, setChosenValue}) => {
     return (

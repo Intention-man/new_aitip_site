@@ -3,3 +3,55 @@
     height: 80%;
     min-height: 35px;
 }
+
+.line_container{
+    background: #ffffff;
+    padding: 30px 5%;
+}
+
+.line_container > div > p{
+    color: var(--aitip_blue);
+    font-size: calc(var(--font_size_const) * 1.25);
+    font-weight: bold;
+    margin: 0;
+}
+
+.TextLineEditor-settingsPanel > label > div > div, .TextLineEditor-settingsPanel > label > input{
+    background: #f0f0f0;
+    cursor: pointer;
+}
+
+.TextLineEditor-settingsPanel > label > input{
+    width: 70%;
+    background: #f0f0f0;
+    padding: 5px;
+}
+
+label.file_chooser input[type="file"] {
+    position: absolute;
+    top: -1000px;
+}
+
+.file_chooser{
+    background: #f0f0f0;
+    width: 100%;
+    cursor: pointer;
+    border-radius: var(--default_border_radius);
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+.file_chooser > p{
+    text-align: center;
+    margin: 20px;
+    filter: contrast(0);
+}
+
+input[type="text"]{
+    padding: 3px;
+    background: #f0f0f0;
+}
+
+.line_display .video-wrapper{
+    padding-bottom: 32.05%;
+}

@@ -13,6 +13,9 @@ import text from "../../local_assets/left-align.png"
 import image from "../../local_assets/image.png"
 import imageAdd from "../../local_assets/image-add.png"
 import video from "../../local_assets/video.png"
+import doc_pic from "../../local_assets/document-text.png"
+import arrow from "../../local_assets/icons/arrow-up.svg"
+import trash from "../../local_assets/icons/delete.svg"
 
 const CreateOrEditBlock = observer(({block, mode}) => {
 
@@ -28,6 +31,7 @@ const CreateOrEditBlock = observer(({block, mode}) => {
 
     const [doUpdateUsages, setDoUpdateUsages] = useState(false);
     const [removedLineIndex, setRemovedLineIndex] = useState(-1);
+    const [lineKind, setLineKind] = useState(0);
 
     function chooseLineType(event) {
         const elements = document.querySelectorAll('.line_type');
@@ -35,6 +39,7 @@ const CreateOrEditBlock = observer(({block, mode}) => {
             element.classList.remove('type_active');
         });
         event.currentTarget.classList.add('type_active');
+        setLineKind(+event.currentTarget.getAttribute('kind'));
     }
 
     useEffect(() => {
@@ -53,7 +58,7 @@ const CreateOrEditBlock = observer(({block, mode}) => {
     const addLine = () => {
         setLines([...lines, {
             lineOrdinal: (lines.length > 0 ? lines.sort((a, b) => a.lineOrdinal - b.lineOrdinal).at(-1).lineOrdinal + 1 : 0),
-            kind: 0,
+            kind: lineKind,
             params: {},
             text: [""],
             filesNames: [],
@@ -109,7 +114,7 @@ const CreateOrEditBlock = observer(({block, mode}) => {
     };
 
     const getMaxLineOrdinal = () => {
-        const index =  lines.reduce((a, b) => a.lineOrdinal > b.lineOrdinal ? a : b).lineOrdinal;
+        const index = lines.reduce((a, b) => a.lineOrdinal > b.lineOrdinal ? a : b).lineOrdinal;
         return index
     }
 
@@ -157,46 +162,57 @@ const CreateOrEditBlock = observer(({block, mode}) => {
             <div className="add_line_container">
                 <p className="add_line_title">Добавить линию</p>
                 <div className="line_type_container">
-                    <div>
-                        <p>Во всю ширину</p>
-                        <div className="line_type" onClick={chooseLineType}>
-                            <img src={text} alt=""/>
-                            Текст
-                        </div>
-                        <div className="line_type" onClick={chooseLineType}>
-                            <img src={image} alt=""/>
-                            Изображение
-                        </div>
-                        <div className="line_type type_active" onClick={chooseLineType}>
-                            <img src={imageAdd} alt=""/>
-                            Слайдер изображений
-                        </div>
-                        <div className="line_type" onClick={chooseLineType}>
-                            <img src={video} alt=""/>
-                            Видео
-                        </div>
+                    <div className="line_type" onClick={chooseLineType} kind='1'>
+                        <img src={text} alt=""/>
+                        Текст
                     </div>
-                    <div>
-                        <p>В две колонки</p>
-                        <div className="line_type" onClick={chooseLineType}>
-                            <img src={text} alt=""/>+<img src={image} alt=""/>
-                            Текст + изображение
-                        </div>
-                        <div className="line_type" onClick={chooseLineType}>
-                            <img src={text} alt=""/>+<img src={text} alt=""/>
-                            Текст + текст
-                        </div>
-                        <div className="line_type type_active" onClick={chooseLineType}>
-                            <img src={image} alt=""/>+<img src={image} alt=""/>
-                            Изображение + изображение
-                        </div>
+                    <div className="line_type" onClick={chooseLineType} kind='2'>
+                        <img src={image} alt=""/>
+                        Изображение
                     </div>
+                    <div className="line_type" onClick={chooseLineType} kind='4'>
+                        <img src={imageAdd} alt=""/>
+                        Слайдер изображений
+                    </div>
+                    <div className="line_type" onClick={chooseLineType} kind='5'>
+                        <img src={video} alt=""/>
+                        Видео
+                    </div>
+                    <div className="line_type" onClick={chooseLineType} kind='3'>
+                        <img src={text} alt=""/>+<img src={image} alt=""/>
+                        Текст + изображение
+                    </div>
+                    <div className="line_type" onClick={chooseLineType} kind='6'>
+                        <img src={doc_pic} alt=""/>
+                        Документ
+                    </div>
+
                 </div>
                 <Button buttonName="Добавить новую линию" setChosenValue={addLine}/>
 
-            <button onClick={addLine}>Добавить новую линию</button>
-            <h2>Как выглядит блок</h2>
-            {lines !== undefined && lines.length > 0 &&
+            </div>
+            {lines && lines.length > 0 && lines.map(line => {
+                    return (
+                        <div>
+                            <CreateOrEditLine key={line.lineOrdinal} changeLine={changeLine} index={line.lineOrdinal}
+                                              currentLine={line} doUpdateUsages={doUpdateUsages}
+                                              removedLineIndex={removedLineIndex}/>
+                            <div className="line_display">
+                            <LineDisplay line={line}/>
+                            </div>
+                            <div className="line_management_container">
+                                {line.lineOrdinal > 0 &&
+                                    <button onClick={() => swapLines(line.lineOrdinal - 1, line.lineOrdinal)}><img src={arrow} alt=""/></button>}
+                                {line.lineOrdinal < getMaxLineOrdinal() &&
+                                    <button onClick={() => swapLines(line.lineOrdinal, line.lineOrdinal + 1)}><img style={{transform:"rotate(180deg)"}} src={arrow} alt=""/></button>}
+                                <button onClick={() => removeLine(line.lineOrdinal)}><img src={trash} alt=""/></button>
+                            </div>
+                        </div>
+                    )
+                }
+            )}
+            <h2 className="block_look_title">Как выглядит блок</h2>
+            {lines && lines.length > 0 &&
                 <Block
                     block={{
                         header: header,
@@ -205,14 +221,14 @@ const CreateOrEditBlock = observer(({block, mode}) => {
                     useDatabase={false}
                 />
             }
-            <Button setChosenValue={() => {
+            <Button className="add_block" setChosenValue={() => {
                 saveBlock().then(bool => {
                     setDoUpdateUsages(true)
                     alert("Блок успешно обновлен")
                     setTimeout(() => setDoUpdateUsages(false), 2000)
                 })
             }} buttonName="Сохранить блок"/>
-            {/*<button onClick={() => removeBlock(block.id)}>Удалить блок</button>*/}
+            <button onClick={() => removeBlock(block.id)}>Удалить блок</button>
             <svg className="sprites">
                 <symbol id="select-arrow-down" viewBox="0 0 10 6">
                     <polyline points="1 1 5 5 9 1"></polyline>

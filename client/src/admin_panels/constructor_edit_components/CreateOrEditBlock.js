@@ -30,7 +30,7 @@ const CreateOrEditBlock = observer(({block, mode}) => {
         setHeader(block.header)
         setOrdinal(block.ordinal)
         setPageLink(block.pageLink)
-        setLines(block.lines)
+        setLines(block.lines !== undefined ? block.lines : [])
         if (mode === "edit") {
             document.getElementById('header').value = block.header
             document.getElementById('ordinal').value = block.ordinal

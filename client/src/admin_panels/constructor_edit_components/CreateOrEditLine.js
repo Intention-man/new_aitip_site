@@ -1,17 +1,17 @@
 // Линия - составной элемент блока
 
-import React, {useState, useEffect} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {observer} from "mobx-react-lite";
 import "../../css/component_styles/Editor.css"
 import "../../css/component_styles/CreateLine.css"
-import {useContext} from "react";
 import {Context} from "../../index";
-import {updateFileUsages, selectFile} from "../../additional_commands/commonPanelsFunctions";
+import {selectFile, updateFileUsages} from "../../additional_commands/commonPanelsFunctions";
 import TextLineEditor from "./TextLineEditor";
 import ExtendedTextEditor from "../../components/lines/ExtendedTextEditor";
 
 
 const CreateOrEditLine = observer(({index, changeLine, currentLine, doUpdateUsages, removedLineIndex}) => {
+
     const {block_store} = useContext(Context)
 
     const kinds = {
@@ -46,6 +46,14 @@ const CreateOrEditLine = observer(({index, changeLine, currentLine, doUpdateUsag
         }
 
     }, [])
+
+    useEffect(() => {
+        setKind(currentLine.kind)
+        setText(currentLine.text)
+        setFilesNames(currentLine.filesNames)
+        setAddressFileType(currentLine.addressFileType)
+        setPrevFilesNames(currentLine.filesNames)
+    }, [currentLine]);
 
     useEffect(() => {
         doUpdateUsages && updateUsagesOnSave()

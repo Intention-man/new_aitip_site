@@ -10,7 +10,6 @@ import {updateFileUsages} from "../../additional_commands/commonPanelsFunctions"
 import {useEffect} from "react";
 
 
-
 const CreateOrEditBlock = observer(({block, mode}) => {
 
     // возвращаемые "наверх" значения
@@ -27,11 +26,16 @@ const CreateOrEditBlock = observer(({block, mode}) => {
     const [removedLineIndex, setRemovedLineIndex] = useState(-1);
 
     useEffect(() => {
+        setIsNews(block.isNews)
+        setHeader(block.header)
+        setOrdinal(block.ordinal)
+        setPageLink(block.pageLink)
+        setLines(block.lines)
         if (mode === "edit") {
-            document.getElementById('header').value = header
-            document.getElementById('ordinal').value = ordinal
+            document.getElementById('header').value = block.header
+            document.getElementById('ordinal').value = block.ordinal
         }
-    }, [])
+    }, [block])
 
 
     const addLine = () => {
@@ -118,7 +122,7 @@ const CreateOrEditBlock = observer(({block, mode}) => {
             </select>
             <p>Введите номер блока на странице</p>
             <input id="ordinal" onChange={(e) => setOrdinal(Number(e.target.value))}/>
-            {lines.length > 0 && lines.map(line => {
+            {lines !== undefined && lines.hasOwnProperty("length") && lines.map(line => {
                     return (
                         <div style={{margin: "10px", padding: "10px", border: "5px solid #8888FF"}}>
                             <CreateOrEditLine key={line.lineOrdinal} changeLine={changeLine} index={line.lineOrdinal}
@@ -139,7 +143,7 @@ const CreateOrEditBlock = observer(({block, mode}) => {
 
             <button onClick={addLine}>Добавить новую линию</button>
             <h2>Как выглядит блок</h2>
-            {lines.length > 0 &&
+            {lines !== undefined && lines.length > 0 &&
                 <Block
                     block={{
                         header: header,

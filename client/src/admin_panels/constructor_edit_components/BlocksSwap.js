@@ -16,6 +16,9 @@ const BlocksSwap = () => {
 
     useEffect(() => {
         block_store.setSelectedBlocks(Array.from(block_store.blocks.filter(block => block.pageLink === chosenPageLink).sort((block1, block2) => block1.ordinal - block2.ordinal)))
+        for (let i = 0; i < block_store.selectedBlocks.length; i++) {
+            block_store.selectedBlocks[i].ordinal = i
+        }
     }, [block_store.blocks, chosenPageLink]);
 
     useEffect(() => setUpdatedBlocks(block_store.selectedBlocks.sort((block1, block2) => block1.ordinal - block2.ordinal)), [block_store.selectedBlocks, chosenPageLink]);
@@ -61,7 +64,7 @@ const BlocksSwap = () => {
             {updatedBlocks.map(block =>
                 <div style={{border: 'solid grey 5px', margin: "20px" }}>
                     <Block block={block}/>
-                    {block.ordinal > 1 && <button onClick={() => swapBlocks(block.ordinal - 1, block.ordinal)}>Передвинуть блок на 1 выше</button>}
+                    {block.ordinal > 0 && <button onClick={() => swapBlocks(block.ordinal - 1, block.ordinal)}>Передвинуть блок на 1 выше</button>}
                     {block.ordinal < updatedBlocks.length && <button onClick={() => swapBlocks(block.ordinal, block.ordinal + 1)}>Передвинуть блок на 1 ниже</button>}
                 </div>
             )}

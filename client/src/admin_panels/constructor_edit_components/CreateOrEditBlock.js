@@ -14,7 +14,6 @@ import image from "../../local_assets/image.png"
 import imageAdd from "../../local_assets/image-add.png"
 import video from "../../local_assets/video.png"
 
-
 const CreateOrEditBlock = observer(({block, mode}) => {
 
     // возвращаемые "наверх" значения
@@ -39,11 +38,16 @@ const CreateOrEditBlock = observer(({block, mode}) => {
     }
 
     useEffect(() => {
+        setIsNews(block.isNews)
+        setHeader(block.header)
+        setOrdinal(block.ordinal)
+        setPageLink(block.pageLink)
+        setLines(block.lines)
         if (mode === "edit") {
-            document.getElementById('header').value = header
-            document.getElementById('ordinal').value = ordinal
+            document.getElementById('header').value = block.header
+            document.getElementById('ordinal').value = block.ordinal
         }
-    }, [])
+    }, [block])
 
 
     const addLine = () => {
@@ -190,9 +194,9 @@ const CreateOrEditBlock = observer(({block, mode}) => {
                 </div>
                 <Button buttonName="Добавить новую линию" setChosenValue={addLine}/>
 
-            </div>
-            <h2 className="block_look_title">Как выглядит блок</h2>
-            {lines.length > 0 &&
+            <button onClick={addLine}>Добавить новую линию</button>
+            <h2>Как выглядит блок</h2>
+            {lines !== undefined && lines.length > 0 &&
                 <Block
                     block={{
                         header: header,

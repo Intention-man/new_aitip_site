@@ -15,7 +15,7 @@ const CreateOrEditLine = observer(({index, changeLine, currentLine, doUpdateUsag
     const {block_store} = useContext(Context)
 
     const kinds = {
-        1: "Текст/список/подзаголовок",
+        1: "Текст",
         2: "Большая картинка",
         3: "Картинка + текст - в 2 столбика",
         4: "Карусель",

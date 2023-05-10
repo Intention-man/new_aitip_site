@@ -1,4 +1,4 @@
-import {useState } from "react";
+import {useEffect, useState } from "react";
 import OurColorPicker from "../OurColorPicker";
 import "../../css/component_styles/Editor.css";
 import ExtendedTextEditor from "../../components/lines/ExtendedTextEditor";
@@ -20,6 +20,10 @@ const TextLineEditor = ({ line, changeLine, index }) => {
     const [backgroundColor, setBackgroundColor] = useState(null);
     const [borderColor, setBorderColor] = useState(null);
     const [textList, setTextList] = useState(line.text);
+
+    useEffect(() => {
+        setTextList(line.text)
+    }, [line])
 
     const onColumnTextChange = (columnIndex, newText) => {
         if (columnIndex < textList.length)

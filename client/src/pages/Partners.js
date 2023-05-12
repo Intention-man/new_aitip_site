@@ -3,19 +3,19 @@ import {observer} from "mobx-react-lite";
 import {useEffect, useState} from "react";
 import {fetchPartners} from "../../http/partnersAPI";
 
-const SciencePartners = observer(() => {
+const Partners = observer(() => {
 
-    const [sciencePartners, setSciencePartners] = useState([]);
+    const [educationalPartners, setEducationalPartners] = useState([]);
 
     useEffect(() => {
-        fetchPartners().then(data =>
-            setSciencePartners(data.rows.filter(partner => partner.kind === "Научный"))
+        fetchPartners().then(data   =>
+            setEducationalPartners(data.rows.filter(partner => partner.kind === "Образовательный"))
         )
     })
 
     return (
         <div>
-            {sciencePartners.map(partner =>
+            {educationalPartners.map(partner =>
                 <div>
                     <p>{partner.name} {partner.description}</p>
                     <img src={process.env.REACT_APP_API_URL + partner.img}/>
@@ -25,4 +25,4 @@ const SciencePartners = observer(() => {
     );
 });
 
-export default SciencePartners;
+export default Partners;

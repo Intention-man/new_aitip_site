@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
 
-.button-admin{
+.button-admin {
     padding: 1%;
     margin: 1%;
     color: var(--aitip_blue);
@@ -8,11 +8,11 @@
     border-color: var(--aitip_blue);
 }
 
-/*.button-admin:active {*/
+/*.button-admin:active  {*/
 /*    background-color: white;*/
 /*}*/
 
-.mini-info{
+.mini-info {
     color: #076DB1;
     font-family: 'Open Sans';
     font-style: normal;
@@ -21,30 +21,60 @@
     margin-bottom: 1%;
     margin-right: 1%;
 }
-.big-info{
+
+.big-info {
     width: 100%;
     height: 100px;
     border-radius: 5px;
     border: 1px solid white;
 
 }
-.picture-getter{
-    background: white;
-}
 
-.button-buttom{
+
+.button-buttom {
     background: #076DB1;
     text-align: center;
     height: 2%;
 
 }
-.buttom-close{
+
+.buttom-close {
     margin-top:5%;
     margin-right:1%;
     margin-bottom: 5%;
     margin-left: 1%;
 }
-.buttom-add{
+
+.buttom-add {
     margin-top:5%;
     margin-bottom:5%
+}
+
+.picture-getter {
+    background: white;
+    height: min-content;
+    padding: 0;
+}
+
+.picker-forms-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.picker-forms-container form {
+    margin: 0;
+}
+
+.picker-forms-client {
+    flex: 1;
+}
+
+.picker-forms-server {
+    flex: 1;
+}
+
+.single-image-preview {
+    max-width: 100%;
 }

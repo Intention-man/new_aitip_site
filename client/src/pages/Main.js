@@ -6,12 +6,11 @@ import BlockContainer from "../components/display/BlockContainer";
 import Block from "../components/display/Block"
 
 
-
 const Main = observer(() => {
     const {block_store} = useContext(Context);
-
     const [myBlocks, setMyBlocks] = useState([]);
     let myAddress = ""
+
 
     useEffect(() => {
         // console.log(block_store.blocks)

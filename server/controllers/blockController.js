@@ -12,7 +12,7 @@ class BlockController {
         try {
             let {isNews, header, pageLink, ordinal, lines} = req.body
             let values = {isNews, header, pageLink, ordinal}
-            const block = await CustomBlock.create(values)
+            const block = await CustomBlock.create({isNews, header, pageLink, ordinal})
 
             if (lines) {
                 console.log(lines)
@@ -55,6 +55,8 @@ class BlockController {
                     for (let line of lines) {
                         if (line.id === prevId) {
                             isInsideAlready = true
+                            console.log("update: " + line.id)
+                            console.log(line)
                             Line.update({
                                     kind: line.kind,
                                     params: line.params,
@@ -68,6 +70,7 @@ class BlockController {
                         }
                     }
                     if (isInsideAlready === false)  {
+                        console.log("remove: " + prevId)
                         await Line.destroy({
                             where: {
                                 id: prevId
@@ -92,6 +95,8 @@ class BlockController {
                         lineOrdinal: line.lineOrdinal,
                         blockId: block.id
                     })
+                    console.log("create: ")
+                    console.log(line)
                 }
             }
             return res.json(block)

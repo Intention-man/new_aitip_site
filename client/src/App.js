@@ -1,6 +1,5 @@
 // BrowserRouter - обертка для запуска всех страниц. На каждой странице будут меню (NavBar), а также компонент-страница (какую страницу запускать решает AppRouter)
 
-
 import {useContext, useEffect, useState} from "react";
 import {observer} from "mobx-react-lite";
 import {BrowserRouter} from "react-router-dom";
@@ -12,7 +11,9 @@ import ContentContext from './components/contexts/ContentContext';
 import LinksPanel from "./components/permanent/LinksPanel";
 import {check} from "./http/userAPI";
 import {Spinner} from "react-bootstrap";
-
+import "./css/component_styles/SocialMedia.css"
+import Feedback from "./components/permanent/Feedback";
+import Footer from "./components/permanent/Footer";
 
 
 const App = observer(() => {
@@ -82,11 +83,10 @@ const App = observer(() => {
                     isSticky={false}
                 >
                     <h1>Электронные ресурсы</h1>
-                    <a href="">ЭБС</a>
-                    <a href="">ЕОИС</a>
+                    <Feedback/>
                 </SideBar>
             </div>
-            {/*<ShowFooter/>*/}
+            <Footer/>
         </BrowserRouter>
     )
 })

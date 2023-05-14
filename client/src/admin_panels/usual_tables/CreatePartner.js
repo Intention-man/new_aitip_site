@@ -9,6 +9,7 @@ import {useContext, useEffect} from "react";
 import {Context} from "../../index";
 import {updateFileUsages, selectFile} from "../../additional_commands/commonPanelsFunctions";
 import Carusel from "../../components/lines/Carusel";
+import FilesPicker from '../FilesPicker';
 
 
 const CreatePartner = observer(({partner, mode}) => {
@@ -100,23 +101,13 @@ const CreatePartner = observer(({partner, mode}) => {
 
             <div style={{marginBottom: "2%"}}>
                 <label className="mini-info" htmlFor="logo">Логотип/фото</label>
-                <input className="picture-getter" type="file" id="logo" accept="image/*" required="required"
-                       onChange={e => {
-                           console.log(e)
-                           setLogo(selectFile(e.target.files[0], block_store))
-                       }}/>
-                <select size="7" onChange={e => {
-                    setLogo(e.target.value)
-                    console.log(e.target.value)
-                }}>
-                    {block_store.allFiles.map(file =>
-                        <option value={file.fileLink}>
-                            {file.name}
-                        </option>
-                    )}
-                </select>
-                {(typeof logo === "string") ? <img src={process.env.REACT_APP_API_URL + logo}/> :
-                    <p>{typeof logo}</p>}
+                <FilesPicker
+                    pickedFiles={logo}
+                    setPickedFiles={setLogo}
+                    isMultiple={false}
+                    isRequired={false}
+                    isImage={true}
+                />
             </div>
 
             <div>
@@ -127,29 +118,13 @@ const CreatePartner = observer(({partner, mode}) => {
 
             <div>
                 <label className="mini-info" htmlFor="jointProjectsPhotos">Фотографии совместных проектов</label>
-                <input className="picture-getter" type="file" multiple="multiple" accept="image/*" required="required"
-                       id="jointProjectsPhotos" onChange={e => {
-                    let fileList = []
-                    Array.from(e.target.files).forEach(file => fileList.push(selectFile(file, block_store)))
-
-                    setJointProjectsPhotos(fileList)
-                }
-                }/>
-                <select size="7" multiple="multiple" onChange={e => {
-                    let fileList = []
-                    fileList = [...e.target.selectedOptions]
-                        .map(option => option.value);
-                    setJointProjectsPhotos(fileList)
-                    console.log(fileList)
-                }}>
-                    {block_store.allFiles.map(file =>
-                        <option value={file.fileLink}>
-                            {file.name}
-                        </option>
-                    )}
-                </select>
-                {(jointProjectsPhotos.length > 0) ? <Carusel photos={jointProjectsPhotos} addressFileType="local"/> :
-                    <p>{typeof jointProjectsPhotos}</p>}
+                <FilesPicker
+                    pickedFiles={jointProjectsPhotos}
+                    setPickedFiles={setJointProjectsPhotos}
+                    isMultiple={true}
+                    isRequired={false}
+                    isImage={true}
+                />
             </div>
 
 

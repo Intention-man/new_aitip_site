@@ -1,7 +1,7 @@
 import React from 'react';
 import {observer} from "mobx-react-lite";
 import {useEffect, useState} from "react";
-import {fetchPartners} from "../../http/partnersAPI";
+import {fetchPartners} from "../http/partnersAPI";
 
 const Partners = observer(() => {
 

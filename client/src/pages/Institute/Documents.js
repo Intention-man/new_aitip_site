@@ -1,7 +1,5 @@
 import React from 'react';
 import "../../css/component_styles/DocumentList.css"
-import "../../assets/fonts/font-awesome.min.css"
-import doc_pic from "../../local_assets/document-text.png"
 import "../../components/lines/DocumentLine"
 import DocumentLine from "../../components/lines/DocumentLine";
 const Documents = () => {

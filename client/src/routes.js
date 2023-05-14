@@ -1,18 +1,14 @@
 // Сопоставление ссылки на страницу и загружающейся JS страницы (компонента)
 
 import {
-    ADMIN, ADMISSION_APE, ADMISSION_BAC, AUTH, CONTACTS, COUNTERING, DOCUMENTS, EDUCATIONAL_P,
-    EMPLOYERS_P,
-    HISTORY, INDUSTRIAL_P, INFO_EDU_ORG, INTERNATIONAL_ACT,
+    ADMIN, ADMISSION_APE, ADMISSION_BAC, AUTH, CONTACTS, COUNTERING, DOCUMENTS,
+    HISTORY,INFO_EDU_ORG, INTERNATIONAL_ACT,
     LEGAL_CLINIC,
-    MAIN_ROUTE, PERSONALITIES_PAGE, SCIENCE, SCIENCE_P, STAFF,
+    MAIN_ROUTE, PERSONALITIES_PAGE, SCIENCE, PARTNERS, STAFF,
     STRUCTURE, STUDENTS, SUPERADMIN, TEST
 } from "./consts/pageConsts";
 import Main from "./pages/Main";
 import Contacts from "./pages/Institute/Contacts";
-import IndustrialPartners from "./pages/Partners/IndustrialPartners";
-import EducationalPartners from "./pages/Partners/EducationalPartners";
-import EmployersPartners from "./pages/Partners/EmployersPartners";
 import History from "./pages/Institute/History";
 import Structure from "./pages/Institute/Structure";
 import InfoAboutEducationalOrganization from "./pages/Institute/InfoAboutEducationalOrganization";
@@ -20,25 +16,19 @@ import InternationalCooperation from "./pages/Institute/InternationalCooperation
 import Countering from "./pages/Institute/Countering";
 import Admin from "./pages/Admin";
 import PersonalitiesPage from "./pages/Institute/PersonalitiesPage";
-import LegalClinic from "./pages/Partners/LegalClinic";
 import AdmissionBac from "./pages/Admission/AdmissionBac";
 import AdmissionAdd from "./pages/Admission/AdmissionAdd";
 import Documents from "./pages/Institute/Documents";
-import Science from "./pages/Science/Science";
 import Employees from "./pages/Employees/Employees";
 import Students from "./pages/Students/Students";
-import SciencePartners from "./pages/Partners/SciencePartners";
 import Auth from "./pages/Auth";
 import SuperAdminPage from "./pages/SuperAdminPage";
-import Test from "./pages/Test";
+import Partners from "./pages/Partners";
+import LegalClinic from "./pages/LegalClinic";
+import Science from "./pages/Science";
 
 
 export const publicRoutes = [
-    {
-        path: TEST,
-        Component: <Test/>,
-        name: "Тесты всякие"
-    },
     {
         path: MAIN_ROUTE,
         Component: <Main/>,
@@ -49,24 +39,10 @@ export const publicRoutes = [
         Component: <Contacts/>,
         name: "Контакты"
     },
+
     {
-        path: INDUSTRIAL_P,
-        Component: <IndustrialPartners/>,
-        name: "Индустриальные партнёры"
-    },
-    {
-        path: EDUCATIONAL_P ,
-        Component: <EducationalPartners/>,
-        name: "Образовательные партнёры"
-    },
-    {
-        path: EMPLOYERS_P,
-        Component: <EmployersPartners/>,
-        name: "Партнёры-работодатели"
-    },
-    {
-        path: SCIENCE_P,
-        Component: <SciencePartners/>,
+        path: PARTNERS,
+        Component: <Partners/>,
         name: "Научные партнёры"
     },
     {

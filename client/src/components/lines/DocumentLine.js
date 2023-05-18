@@ -1,7 +1,6 @@
 import React from 'react';
 import doc_pic from "../../local_assets/document-text.png"
 import "../../css/component_styles/DocumentList.css"
-import "../../assets/fonts/font-awesome.min.css"
 const DocumentLine = ({documentLink, documentName}) => {
     return (
         <div className="main_list">

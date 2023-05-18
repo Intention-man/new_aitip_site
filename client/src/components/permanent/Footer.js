@@ -7,6 +7,7 @@ import "../../css/component_styles/Footer.css"
 import Feedback from "./Feedback";
 
 const Footer = () => {
+    //FIXME при ширине экрана < 300 ширина подвала меньше ширины экрана //Отклонён, не воспроизводится
     return (
         <footer className="aitip_footer">
             <div>

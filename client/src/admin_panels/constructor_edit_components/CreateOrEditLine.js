@@ -166,7 +166,7 @@ const CreateOrEditLine = observer(({index, changeLine, currentLine, doUpdateUsag
                             {kind === 4 &&
                                 <div>
                                     {/*Set the size of an image by inputting a number in the field below*/}
-                                    <label htmlFor="select_ratio">Введите соотношение сторон фото (высота/ширина) в виде
+                                    <label htmlFor="select_ratio">Введите соотношение сторон фото (ширина/высота) в виде
                                         целого числа или десятичной дроби с точкой:</label>
                                     <input className="pretty_inputs" type="number" id={"select_ratio" + line.id}
                                            pattern="[0-9]+([\.,][0-9]+)?" step="0.1"

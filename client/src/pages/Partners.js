@@ -1,9 +1,9 @@
 import React from 'react';
 import {observer} from "mobx-react-lite";
 import {useEffect, useState} from "react";
-import {fetchPartners} from "../../http/partnersAPI";
+import {fetchPartners} from "../http/partnersAPI";
 
-const EducationalPartners = observer(() => {
+const Partners = observer(() => {
 
     const [educationalPartners, setEducationalPartners] = useState([]);
 
@@ -25,4 +25,4 @@ const EducationalPartners = observer(() => {
     );
 });
 
-export default EducationalPartners;
+export default Partners;

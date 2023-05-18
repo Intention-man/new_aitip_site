@@ -21,6 +21,31 @@
     margin: 5px;
 }
 
+.aitip_footer .feedback a{
+    color: #fff;
+    text-decoration: none;
+    margin: auto;
+}
+
+.aitip_footer .feedback{
+    margin-top: 15px;
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.aitip_footer .feedback > *{
+    margin: 5px auto;
+    flex: 0 1 110px;
+
+}
+
+.aitip_footer .feedback > a{
+    padding: 12px 0;
+}
+
 @media (max-width: 768px){
     .aitip_footer > div {
        width: 100%;

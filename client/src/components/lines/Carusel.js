@@ -38,7 +38,7 @@ const Carusel = ({photos, addressFileType, ratio, color}) => {
     // }
 
     return (
-        <div className="carusel">
+        <div className="carusel" style={{height:window.innerHeight/ratio}}>
             <div className="slideshow-container BigImg">
                 <div className="prev" onClick={() => setCurrentSlideNumber(prev => (prev > 0 ? prev-1 : photos.length-1))}><img src={vector} width="7" height="12"/></div>
                 <div className="mySlides">

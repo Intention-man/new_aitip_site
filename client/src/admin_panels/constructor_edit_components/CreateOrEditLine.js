@@ -164,7 +164,7 @@ const CreateOrEditLine = observer(({index, changeLine, currentLine, doUpdateUsag
                             }
 
                             {kind === 4 &&
-                                <div>
+                                <div className="carusel_params">
                                     {/*Set the size of an image by inputting a number in the field below*/}
                                     <label htmlFor="select_ratio">Введите соотношение сторон фото (ширина/высота) в виде
                                         целого числа или десятичной дроби с точкой:</label>
@@ -252,23 +252,26 @@ const CreateOrEditLine = observer(({index, changeLine, currentLine, doUpdateUsag
 
                                 {kind === 4 &&
                                     <div>
-                                        <input className="pretty_inputs" type="file" multiple accept="image/*"
-                                               onChange={async (e) => {
-                                                   setAddressFileType("local")
-                                                   changeLine("addressFileType", "local", index)
-                                                   console.log("local")
-                                                   // try {
-                                                   //     const list =selectFile(Array.from(e.target.files), block_store);
-                                                   //     setFilesNames(list);
-                                                   // } catch (error) {
-                                                   //     console.error(error);
-                                                   // }
-                                                   let list = selectFile(Array.from(e.target.files), block_store)
-                                                   setFilesNames(list);
-                                                   changeLine("filesNames", list, index)
-                                                   // addFiles(Array.from(e.target.files))
-                                                   console.log(Array.from(e.target.files))
-                                               }}/>
+                                        <label className="file_chooser">
+                                            <input className="pretty_inputs" type="file" multiple accept="image/*"
+                                                   onChange={async (e) => {
+                                                       setAddressFileType("local")
+                                                       changeLine("addressFileType", "local", index)
+                                                       console.log("local")
+                                                       // try {
+                                                       //     const list =selectFile(Array.from(e.target.files), block_store);
+                                                       //     setFilesNames(list);
+                                                       // } catch (error) {
+                                                       //     console.error(error);
+                                                       // }
+                                                       let list = selectFile(Array.from(e.target.files), block_store)
+                                                       setFilesNames(list);
+                                                       changeLine("filesNames", list, index)
+                                                       // addFiles(Array.from(e.target.files))
+                                                       console.log(Array.from(e.target.files))
+                                                   }}/>
+                                            <p><img alt="" src={load}/><br/>Загрузить изображение</p>
+                                        </label>
                                         <label htmlFor="links">Введите ссылки на картинки: </label>
                                         <input className="pretty_inputs" style={{marginBottom: "20px"}} type="text"
                                                id={"global_files" + line.id}
@@ -278,22 +281,24 @@ const CreateOrEditLine = observer(({index, changeLine, currentLine, doUpdateUsag
                                                    setFilesNames(e.target.value.split("; "))
                                                    changeLine("filesNames", e.target.value.split("; "), index)
                                                }}/>
-                                        <select size="10" multiple onChange={e => {
-                                            let fileList = []
-                                            fileList = [...e.target.selectedOptions]
-                                                .map(option => option.value);
-                                            setAddressFileType("local")
-                                            changeLine("addressFileType", "local", index)
-                                            setFilesNames(fileList)
-                                            changeLine("filesNames", fileList, index)
-                                            console.log(fileList)
-                                        }}>
-                                            {block_store.allFiles.map(file =>
-                                                <option value={file.fileLink}>
-                                                    {file.name}
-                                                </option>
-                                            )}
-                                        </select>
+                                        <label className="custom_select multiline_select">
+                                            <select size="10" multiple onChange={e => {
+                                                let fileList = []
+                                                fileList = [...e.target.selectedOptions]
+                                                    .map(option => option.value);
+                                                setAddressFileType("local")
+                                                changeLine("addressFileType", "local", index)
+                                                setFilesNames(fileList)
+                                                changeLine("filesNames", fileList, index)
+                                                console.log(fileList)
+                                            }}>
+                                                {block_store.allFiles.map(file =>
+                                                    <option value={file.fileLink}>
+                                                        {file.name}
+                                                    </option>
+                                                )}
+                                            </select>
+                                        </label>
                                     </div>
                                 }
                                 {kind === 5 &&

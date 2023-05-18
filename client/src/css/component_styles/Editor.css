@@ -57,6 +57,10 @@ alignCenter {
     text-align: center;
 }
 
+input[type="text"]{
+    width: 100%;
+}
+
 .TextLineEditor-editorPanel {
     display:  grid;
     gap: 0 20px;
@@ -171,7 +175,7 @@ alignCenter {
     margin-left: auto;
     position: relative;
     right: -35px;
-    top: -200px;
+    top: -100px;
     pointer-events:none;
     min-height: 130px;
 }
@@ -204,6 +208,16 @@ alignCenter {
     background: #fff;
     max-height: 300px;
     text-align: center;
+}
+
+.carusel_params{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+.carusel_params > *{
+    width: 100%;
 }
 
 

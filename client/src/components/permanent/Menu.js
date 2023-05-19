@@ -120,20 +120,6 @@ const Menu = () => {
                 </a>
 
                 <SearchOutputWindow/>
-                {/*<input className="search-input" type="text" placeholder="Поиск по сайту"/>*/}
-                {/*<div className="button_search" style={{cursor: "default"}}*/}
-                {/*     onClick={() => modal.style.display = "block"}>*/}
-                {/*    <img src={search} width="25" height="25"/>*/}
-                {/*</div>*/}
-
-                {/*<div id="myModal" className="modal">*/}
-
-                {/*<div className="modal-content">*/}
-                {/*    <a href="#" className="modal-line">Page 1</a>*/}
-                {/*    <a href="#" className="modal-line">Page 2</a>*/}
-                {/*    <a href="#" className="modal-line">Page 3</a>*/}
-                {/*</div>*/}
-                {/*</div>*/}
 
                 <button className="blindversion">
                     Версия для слабовидящих

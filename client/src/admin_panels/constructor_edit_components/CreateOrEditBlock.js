@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {observer} from "mobx-react-lite";
 import CreateOrEditLine from "./CreateOrEditLine";
 import {createBlock, removeBlock, updateBlock} from "../../http/blockAPI";
@@ -7,7 +7,6 @@ import "../../css/component_styles/Editor.css"
 import LineDisplay from "../../components/display/LineDisplay";
 import Block from "../../components/display/Block";
 import {updateFileUsages} from "../../additional_commands/commonPanelsFunctions";
-import {useEffect} from "react";
 
 
 const CreateOrEditBlock = observer(({block, mode}) => {
@@ -29,11 +28,11 @@ const CreateOrEditBlock = observer(({block, mode}) => {
         setIsNews(block.isNews)
         setHeader(block.header)
         setOrdinal(block.ordinal)
-        setPageLink(block.pageLink)
+        setPageLink(block.pageLink !== null  ? block.pageLink : "")
         setLines(block.lines !== undefined ? block.lines : [])
         if (mode === "edit") {
             document.getElementById('header').value = block.header
-            document.getElementById('ordinal').value = block.ordinal
+            if (!isNews) document.getElementById('ordinal').value = (block.ordinal !== null ? block.ordinal : -1)
         }
     }, [block])
 
@@ -87,8 +86,8 @@ const CreateOrEditBlock = observer(({block, mode}) => {
         block.id && formData.append("id", block.id)
         formData.append("isNews", isNews)
         formData.append("header", header)
-        formData.append("pageLink", pageLink)
-        formData.append("ordinal", `${ordinal}`)
+        !isNews && formData.append("pageLink", pageLink)
+        !isNews && formData.append("ordinal", `${ordinal}`)
         formData.append("lines", JSON.stringify(lines))
         formData.append("prevLinesIdList", JSON.stringify(prevLinesIdList))
         mode === "edit" ? updateBlock(formData).then(data => {
@@ -97,8 +96,7 @@ const CreateOrEditBlock = observer(({block, mode}) => {
     };
 
     const getMaxLineOrdinal = () => {
-        const index =  lines.reduce((a, b) => a.lineOrdinal > b.lineOrdinal ? a : b).lineOrdinal;
-        return index
+        return lines.reduce((a, b) => a.lineOrdinal > b.lineOrdinal ? a : b).lineOrdinal
     }
 
     return (
@@ -110,18 +108,23 @@ const CreateOrEditBlock = observer(({block, mode}) => {
                 <option value="true">Новостной</option>
                 <option value="false">Для страницы</option>
             </select>
-            <p>Введите заголовок блока</p>
+            <p>{isNews ? "Введите заголовок новости" : "Введите заголовок блока"}</p>
             <input id="header" onChange={(e) => setHeader(e.target.value)}/>
-            <select id="pageLink" value={pageLink} onChange={e => {
-                setPageLink(e.target.value)
-            }}>
-                <option value="">Введите название страницы</option>
-                {publicRoutes.map((publicRoute) => (
-                    <option key={publicRoute.name} value={publicRoute.path}>{publicRoute.name}</option>
-                ))}
-            </select>
-            <p>Введите номер блока на странице</p>
-            <input id="ordinal" onChange={(e) => setOrdinal(Number(e.target.value))}/>
+            {!isNews &&
+                <>
+                    <select id="pageLink" value={pageLink} onChange={e => {
+                        setPageLink(e.target.value)
+                    }}>
+                        <option value="">Введите название страницы</option>
+                        {publicRoutes.map((publicRoute) => (
+                            <option key={publicRoute.name} value={publicRoute.path}>{publicRoute.name}</option>
+                        ))}
+                    </select>
+                    <p>Введите номер блока на странице</p>
+                    <input id="ordinal" onChange={(e) => setOrdinal(Number(e.target.value))}/>
+                </>
+            }
+
             {lines !== undefined && lines.hasOwnProperty("length") && lines.map(line => {
                     return (
                         <div style={{margin: "10px", padding: "10px", border: "5px solid #8888FF"}}>
@@ -142,7 +145,7 @@ const CreateOrEditBlock = observer(({block, mode}) => {
             )}
 
             <button onClick={addLine}>Добавить новую линию</button>
-            <h2>Как выглядит блок</h2>
+            {!isNews && <h2>Как выглядит блок</h2>}
             {lines !== undefined && lines.length > 0 &&
                 <Block
                     block={{
@@ -158,7 +161,8 @@ const CreateOrEditBlock = observer(({block, mode}) => {
                     alert("Блок успешно обновлен")
                     setTimeout(() => setDoUpdateUsages(false), 2000)
                 })
-            }}>Сохранить блок</button>
+            }}>Сохранить блок
+            </button>
             <button onClick={() => removeBlock(block.id)}>Удалить блок</button>
         </div>
     )

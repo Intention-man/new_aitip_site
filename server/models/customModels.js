@@ -8,9 +8,8 @@ const CustomBlock = sequelize.define("block", {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     isNews: {type: DataTypes.BOOLEAN, allowNull: false},
     header: {type: DataTypes.STRING, allowNull: false},
-    pageLink: {type: DataTypes.STRING, allowNull: false},
-    ordinal: {type: DataTypes.INTEGER, allowNull: false},
-
+    pageLink: {type: DataTypes.STRING, allowNull: (inst) => {return inst.getDataValue("isNews")}},
+    ordinal: {type: DataTypes.INTEGER, allowNull: (inst) => {return inst.getDataValue("isNews")}},
 })
 
 

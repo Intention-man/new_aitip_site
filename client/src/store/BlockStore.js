@@ -5,6 +5,7 @@ export default class BlockStore {
     constructor() {
         this._blocks = []
         this._selectedBlocks = []
+        this._news = []
         this._lines = []
         this._allFiles = []
 
@@ -18,6 +19,11 @@ export default class BlockStore {
 
     setSelectedBlocks(selectedBlocks) {
         this._selectedBlocks = selectedBlocks
+    }
+
+    setNews(news) {
+        this._news = news
+        console.log(this._news)
     }
 
     setLines(lines) {
@@ -35,6 +41,11 @@ export default class BlockStore {
 
     get selectedBlocks() {
         return this._selectedBlocks
+    }
+
+    get news() {
+        console.log(this._news)
+        return this._news
     }
 
     get lines() {

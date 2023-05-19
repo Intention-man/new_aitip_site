@@ -1,11 +1,9 @@
-import React, {useEffect, useState} from 'react';
-import {useContext} from "react";
+import React, {useContext, useEffect, useState} from 'react';
 import {Context} from "../../index";
 import {publicRoutes} from "../../routes";
 import {observer} from "mobx-react-lite";
 import {fetchOneBlock} from "../../http/blockAPI";
 import CreateOrEditBlock from "./CreateOrEditBlock";
-
 
 
 const BlockEditor = observer(() => {
@@ -25,7 +23,6 @@ const BlockEditor = observer(() => {
             {/*Выбор страницы*/}
             <select value={chosenPageLink} onChange={e => {
                 setChosenPageLink(e.target.value)
-                console.log(e.target.value)
             }}>
                 <option value="">Выберите страницу, на которой находится блок, который вы хотите изменить</option>
                 {publicRoutes.map((publicRoute) => (

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {observer} from "mobx-react-lite";
 import CreateOrEditLine from "./CreateOrEditLine";
 import {createBlock, removeBlock, updateBlock} from "../../http/blockAPI";
@@ -7,7 +7,6 @@ import "../../css/component_styles/Editor.css"
 import LineDisplay from "../../components/display/LineDisplay";
 import Block from "../../components/display/Block";
 import {updateFileUsages} from "../../additional_commands/commonPanelsFunctions";
-import {useEffect} from "react";
 import Button from "../../components/Button"
 import text from "../../local_assets/left-align.png"
 import image from "../../local_assets/image.png"
@@ -46,11 +45,11 @@ const CreateOrEditBlock = observer(({block, mode}) => {
         setIsNews(block.isNews)
         setHeader(block.header)
         setOrdinal(block.ordinal)
-        setPageLink(block.pageLink)
+        setPageLink(block.pageLink !== null ? block.pageLink : "")
         setLines(block.lines !== undefined ? block.lines : [])
         if (mode === "edit") {
             document.getElementById('header').value = block.header
-            document.getElementById('ordinal').value = block.ordinal
+            if (!isNews) document.getElementById('ordinal').value = (block.ordinal !== null ? block.ordinal : -1)
         }
     }, [block])
 
@@ -103,9 +102,9 @@ const CreateOrEditBlock = observer(({block, mode}) => {
         const formData = new FormData()
         block.id && formData.append("id", block.id)
         formData.append("isNews", isNews)
-        formData.append("header", header)
-        formData.append("pageLink", pageLink)
-        formData.append("ordinal", `${ordinal}`)
+        formData.append("header", header);
+        !isNews ? formData.append("pageLink", pageLink) : formData.append("pageLink", "/news");
+        !isNews && formData.append("ordinal", `${ordinal}`);
         formData.append("lines", JSON.stringify(lines))
         formData.append("prevLinesIdList", JSON.stringify(prevLinesIdList))
         mode === "edit" ? updateBlock(formData).then(data => {
@@ -114,28 +113,32 @@ const CreateOrEditBlock = observer(({block, mode}) => {
     };
 
     const getMaxLineOrdinal = () => {
-        const index = lines.reduce((a, b) => a.lineOrdinal > b.lineOrdinal ? a : b).lineOrdinal;
-        return index
+        return lines.reduce((a, b) => a.lineOrdinal > b.lineOrdinal ? a : b).lineOrdinal
     }
 
     return (
         <div>
             <div className="block_settings">
                 <div>
-                    <p>Выберите страницу</p>
-                    <label className="custom_select">
-                        <select id="pageLink" value={pageLink} onChange={e => {
-                            setPageLink(e.target.value)
-                        }}>
-                            <option value="" disabled="disabled">Выберите страницу</option>
-                            {publicRoutes.map((publicRoute) => (
-                                <option key={publicRoute.name} value={publicRoute.path}>{publicRoute.name}</option>
-                            ))}
-                        </select>
-                        <svg>
-                            <use xlinkHref="#select-arrow-down"></use>
-                        </svg>
-                    </label>
+                    {!isNews &&
+                        <>
+                            <p>Выберите страницу</p>
+                            <label className="custom_select">
+                                <select id="pageLink" value={pageLink} onChange={e => {
+                                    setPageLink(e.target.value)
+                                }}>
+                                    <option value="" disabled="disabled">Выберите страницу</option>
+                                    {publicRoutes.map((publicRoute) => (
+                                        <option key={publicRoute.name}
+                                                value={publicRoute.path}>{publicRoute.name}</option>
+                                    ))}
+                                </select>
+                                <svg>
+                                    <use xlinkHref="#select-arrow-down"></use>
+                                </svg>
+                            </label>
+                        </>
+                    }
                 </div>
                 <div>
                     <p>Тип блока</p>
@@ -155,7 +158,7 @@ const CreateOrEditBlock = observer(({block, mode}) => {
                 <div>
                     <p>Заголовок карточки</p>
                     <input
-                        placeholder="Введите заголовок, он будет отображаться вверху карточки и на боковой панели содержания"
+                        placeholder={!isNews ? "Введите заголовок, он будет отображаться вверху карточки и на боковой панели содержания" : "Введите заголовок новости"}
                         id="header" onChange={(e) => setHeader(e.target.value)}/>
                 </div>
             </div>
@@ -198,20 +201,22 @@ const CreateOrEditBlock = observer(({block, mode}) => {
                                               currentLine={line} doUpdateUsages={doUpdateUsages}
                                               removedLineIndex={removedLineIndex}/>
                             <div className="line_display">
-                            <LineDisplay line={line}/>
+                                <LineDisplay line={line}/>
                             </div>
                             <div className="line_management_container">
                                 {line.lineOrdinal > 0 &&
-                                    <button onClick={() => swapLines(line.lineOrdinal - 1, line.lineOrdinal)}><img src={arrow} alt=""/></button>}
+                                    <button onClick={() => swapLines(line.lineOrdinal - 1, line.lineOrdinal)}><img
+                                        src={arrow} alt=""/></button>}
                                 {line.lineOrdinal < getMaxLineOrdinal() &&
-                                    <button onClick={() => swapLines(line.lineOrdinal, line.lineOrdinal + 1)}><img style={{transform:"rotate(180deg)"}} src={arrow} alt=""/></button>}
+                                    <button onClick={() => swapLines(line.lineOrdinal, line.lineOrdinal + 1)}><img
+                                        style={{transform: "rotate(180deg)"}} src={arrow} alt=""/></button>}
                                 <button onClick={() => removeLine(line.lineOrdinal)}><img src={trash} alt=""/></button>
                             </div>
                         </div>
                     )
                 }
             )}
-            <h2 className="block_look_title">Как выглядит блок</h2>
+            {!isNews && <h2 className="block_look_title">Как выглядит блок</h2>}
             {lines && lines.length > 0 &&
                 <Block
                     block={{

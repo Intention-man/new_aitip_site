@@ -10,42 +10,6 @@ import UserStore from "./store/UserStore";
 import BlockStore from "./store/BlockStore";
 
 
-// const stores = {
-//     staff_store: new StaffStore(),
-//     admission_store: new AdmissionStore(),
-//     block_store: new BlockStore(),
-// };
-
-// export const Context = createContext(null);
-// export const UserContext = createContext(null);
-
-//
-// const Root = () => {
-    // const [isAuth, setIsAuth] = useState(false);
-    // const [user, setUser] = useState({});
-    // const user_store = useMemo(() => new UserStore(), []);
-    // const contextValue = useMemo(() => ({...stores, user_store}), [user_store]);
-    //
-    // return (
-    //     <UserContext.Provider value={{isAuth, setIsAuth, user, setUser}}>
-    //         <Context.Provider value={contextValue}>
-    //             <App/>
-    //         </Context.Provider>
-    //     </UserContext.Provider>
-    // );
-    // const user_store = useMemo(() => new UserStore(), []);
-    // const contextValue = useMemo(() => ({ ...stores, user_store }), [user_store]);
-    //
-    // return (
-    //     <Context.Provider value={contextValue}>
-    //         <App />
-    //     </Context.Provider>
-    // );
-// };
-
-// ReactDOM.render(<Root/>, document.getElementById('root'));
-
-
 export const Context = createContext(null)
 console.log(process.env.REACT_APP_API_URL)
 

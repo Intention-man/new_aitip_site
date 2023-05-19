@@ -16,7 +16,7 @@ import LineDisplay from './LineDisplay';
 import '../../css/component_styles/Block.css';
 
 
-const Block = observer(({ block, useDatabase }) => {
+const Block = observer(({block, useDatabase}) => {
     // TODO: отрефакторить этот код, так как хотелось бы создавать блок необязательно обращаясь к БД.
     // Например, когда мы хотим показать превью блока, ещё не сохранённого пользователем.
     // Нужно убрать проп block, заменив его на важные для блока пропы (header, lines и др.).
@@ -27,10 +27,7 @@ const Block = observer(({ block, useDatabase }) => {
 
     useEffect(() => {
         if (useDatabase) {
-            // console.log(block.id)
-            // console.log(block_store.lines)
             setMyLines(block_store.lines.filter(line => line.blockId === block.id).sort((a, b) => a.lineOrdinal - b.lineOrdinal))
-            // console.log(block_store.lines.filter(line => line.blockId === block.id).sort((a, b) => a.lineOrdinal - b.lineOrdinal))
         } else {
             if (block.lines)
                 setMyLines(block.lines);

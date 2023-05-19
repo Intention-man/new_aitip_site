@@ -2,10 +2,10 @@
 
 import {
     ADMIN, ADMISSION_APE, ADMISSION_BAC, AUTH, CONTACTS, COUNTERING, DOCUMENTS,
-    HISTORY,INFO_EDU_ORG, INTERNATIONAL_ACT,
+    HISTORY, INFO_EDU_ORG, INTERNATIONAL_ACT,
     LEGAL_CLINIC,
     MAIN_ROUTE, PERSONALITIES_PAGE, SCIENCE, PARTNERS, STAFF,
-    STRUCTURE, STUDENTS, SUPERADMIN, TEST
+    STRUCTURE, STUDENTS, SUPERADMIN, NEWS
 } from "./consts/pageConsts";
 import Main from "./pages/Main";
 import Contacts from "./pages/Institute/Contacts";
@@ -26,6 +26,7 @@ import SuperAdminPage from "./pages/SuperAdminPage";
 import Partners from "./pages/Partners";
 import LegalClinic from "./pages/LegalClinic";
 import Science from "./pages/Science";
+import News from "./pages/News";
 
 
 export const publicRoutes = [
@@ -33,6 +34,11 @@ export const publicRoutes = [
         path: MAIN_ROUTE,
         Component: <Main/>,
         name: "Главная"
+    },
+    {
+        path: NEWS,
+        Component: <News/>,
+        name: "Новости"
     },
     {
         path: CONTACTS,

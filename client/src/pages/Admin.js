@@ -25,8 +25,7 @@ import BlocksEditor from "../admin_panels/constructor_edit_components/BlocksEdit
 import ButtonList from "../components/ButtonList";
 import {fetchAllFiles} from "../http/commonAPI";
 import {observer} from "mobx-react-lite";
-
-
+import NewsEditor from "../admin_panels/constructor_edit_components/NewsEditor";
 
 
 const Admin = observer(() => {
@@ -51,6 +50,7 @@ const Admin = observer(() => {
         "Редактировать лабораторию": <LabEditor/>,
 
         "Добавить блок": <CreateOrEditBlock block={{fakeParam: undefined}}/>,
+        "Редактировать новость": <NewsEditor/>,
         "Редактировать блок": <BlocksEditor/>,
         "Изменить порядок блоков на странице": <BlocksSwap/>,
         "Оптимизация": <OptimizationZone/>

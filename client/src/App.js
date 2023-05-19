@@ -15,13 +15,28 @@ import "./css/component_styles/SocialMedia.css"
 import Feedback from "./components/permanent/Feedback";
 import Footer from "./components/permanent/Footer";
 
+import {fetchBlocks, fetchLines} from "./http/blockAPI";
+
 
 const App = observer(() => {
+    const {block_store} = useContext(Context);
     const {user_store} = useContext(Context);
 
     const [loading, setLoading] = useState(true);
     const [currentContent, setCurrentContent] = useState([]);  // Стейт с текущими блоками страницы (нужны для LinksPanel)
 
+    
+    useEffect(() => {
+        fetchLines().then(data => {
+            block_store.setLines(data.rows)
+        })
+        fetchBlocks().then(data => {
+            block_store.setBlocks(data.rows)
+            block_store.setNews(data.rows.filter(block => block.isNews === true))
+            console.log(data.rows.filter(block => block.isNews === true))
+        })
+    }, [])
+    
     useEffect(() => {
         setTimeout(() => {
             let myAddress = "/" + window.location.href.split("/")[3]

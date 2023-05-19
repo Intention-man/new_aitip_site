@@ -17,6 +17,9 @@ export const SCIENCE = "/science"
 export const STAFF = "/staff"
 export const STUDENTS = "/students"
 export const PARTNERS = "/partners"
-export const ADMIN = "/admin"
+export const NEWS = "/news"
+
 export const AUTH = "/athr"
+
+export const ADMIN = "/admin"
 export const SUPERADMIN = "/super_admin"

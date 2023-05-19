@@ -85,13 +85,14 @@ const CreateOrEditBlock = observer(({block, mode}) => {
         const formData = new FormData()
         block.id && formData.append("id", block.id)
         formData.append("isNews", isNews)
-        formData.append("header", header)
-        !isNews && formData.append("pageLink", pageLink)
-        !isNews && formData.append("ordinal", `${ordinal}`)
+        formData.append("header", header);
+        !isNews ? formData.append("pageLink", pageLink) : formData.append("pageLink", "/news");
+        !isNews && formData.append("ordinal", `${ordinal}`);
         formData.append("lines", JSON.stringify(lines))
         formData.append("prevLinesIdList", JSON.stringify(prevLinesIdList))
         mode === "edit" ? updateBlock(formData).then(data => {
         }) : createBlock(formData).then(data => {
+            console.log(data)
         })
     };
 

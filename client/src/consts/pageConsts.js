@@ -18,6 +18,8 @@ export const STAFF = "/staff"
 export const STUDENTS = "/students"
 export const PARTNERS = "/partners"
 export const NEWS = "/news"
-export const ADMIN = "/admin"
+
 export const AUTH = "/athr"
+
+export const ADMIN = "/admin"
 export const SUPERADMIN = "/super_admin"

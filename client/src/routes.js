@@ -5,7 +5,7 @@ import {
     HISTORY, INFO_EDU_ORG, INTERNATIONAL_ACT,
     LEGAL_CLINIC,
     MAIN_ROUTE, PERSONALITIES_PAGE, SCIENCE, PARTNERS, STAFF,
-    STRUCTURE, STUDENTS, SUPERADMIN, TEST, NEWS
+    STRUCTURE, STUDENTS, SUPERADMIN, NEWS
 } from "./consts/pageConsts";
 import Main from "./pages/Main";
 import Contacts from "./pages/Institute/Contacts";

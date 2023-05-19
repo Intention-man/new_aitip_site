@@ -16,7 +16,7 @@ import LineDisplay from './LineDisplay';
 import '../../css/component_styles/Block.css';
 
 
-const Block = observer(({ block, useDatabase }) => {
+const Block = observer(({block, useDatabase}) => {
     // TODO: отрефакторить этот код, так как хотелось бы создавать блок необязательно обращаясь к БД.
     // Например, когда мы хотим показать превью блока, ещё не сохранённого пользователем.
     // Нужно убрать проп block, заменив его на важные для блока пропы (header, lines и др.).

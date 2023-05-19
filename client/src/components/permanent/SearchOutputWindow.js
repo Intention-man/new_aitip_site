@@ -1,5 +1,4 @@
-import React, {useState} from 'react';
-import {useContext} from "react";
+import React, {useContext, useState} from 'react';
 import {Context} from "../../index";
 import {observer} from "mobx-react-lite";
 import {publicRoutes} from "../../routes";
@@ -93,9 +92,6 @@ const SearchOutputWindow = observer(() => {
                     <img src={search} width="25" height="25" onClick={findSuggestions}/>
                 </div>
             </form>
-            {/*<input type="text" style={{width: "200px"}} placeholder="Поиск по сайту"*/}
-            {/*       onChange={(e) => setSearchInput(e.target.value.toLowerCase())}/>*/}
-            {/*<button style={{width: "200px"}} onClick={findSuggestions}>Найти</button>*/}
             <div id="myModal" className="search-output-modal">
                 {suggestions.length > 0 && suggestions.map((suggestion) => (
                     <div className="search-output-modal-content">

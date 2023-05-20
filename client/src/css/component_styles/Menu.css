@@ -242,6 +242,7 @@
     .bottom_menu {
         flex-wrap: wrap;
         margin-right: 0;
+        margin-left: 0;
     }
 }
 

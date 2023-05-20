@@ -1,22 +1,26 @@
-import React from 'react';
+import React, {useState} from 'react';
 import "../../css/component_styles/Menu.css"
 import logo from "../../local_assets/logo-in-round.svg"
-import search from "../../local_assets/search.png"
 import eye from "../../local_assets/eye.png"
 import {
     ADMISSION_APE,
     ADMISSION_BAC,
-    CONTACTS, COUNTERING, DOCUMENTS,
-    HISTORY, INFO_EDU_ORG, INTERNATIONAL_ACT,
+    CONTACTS,
+    COUNTERING,
+    DOCUMENTS,
+    HISTORY,
+    INFO_EDU_ORG,
+    INTERNATIONAL_ACT,
     LEGAL_CLINIC,
     PARTNERS,
     PERSONALITIES_PAGE,
     SCIENCE,
-    STAFF, STRUCTURE,
+    STAFF,
+    STRUCTURE,
     STUDENTS
 } from "../../consts/pageConsts";
 import SearchOutputWindow from "./SearchOutputWindow";
-
+import {useNavigate} from "react-router";
 
 
 function myFunction() {
@@ -110,12 +114,13 @@ const Menu = () => {
             link: LEGAL_CLINIC
         },
     ]
+    const navigate = useNavigate();
 
     return (
         <div>
             <div className="topnav" id="myTopnav">
-                <img className="logo" id="Logo" src={logo}/>
-                <a className="vuz-name" id="vuz-name-id">
+                <img className="logo" id="Logo" src={logo} onClick={() => navigate("/")}/>
+                <a className="vuz-name" id="vuz-name-id" href="/">
                     <p className="heading_color">Алтайский институт труда и права</p>
                 </a>
 

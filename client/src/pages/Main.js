@@ -5,6 +5,7 @@ import {observer} from "mobx-react-lite";
 import BlockContainer from "../components/display/BlockContainer";
 import Block from "../components/display/Block";
 import Carusel from "../components/lines/Carusel";
+
 import book from "../local_assets/book.png";
 import hat from "../local_assets/graduation.png";
 //Выпускники
@@ -13,11 +14,32 @@ import grad1 from "../local_assets/Content_3.png";
 import grad2 from "../local_assets/Content_5.png";
 import grad3 from "../local_assets/Content_6.png";
 import grad4 from "../local_assets/Content_7.png";
+import Default from "../local_assets/logo-in-round.svg";
 
 const Main = observer(() => {
     const {block_store} = useContext(Context);
     const [myBlocks, setMyBlocks] = useState([]);
     let myAddress = ""
+    const [news, setNews] = useState([])
+
+    useEffect(() => {
+        setNews(block_store.news)
+    })
+
+    const getNewsCover = (item) => {
+        console.log(item.header)
+        for (let line of block_store.lines.filter(line => line.blockId === item.id).sort((a, b) => a.lineOrdinal - b.lineOrdinal)) {
+            if ([2, 3, 4].includes(line.kind) && line.filesNames.length > 0) {
+                if (line.addressFileType === "global"){
+                    return line.filesNames[0]
+                } else {
+                    return process.env.REACT_APP_API_URL + line.filesNames[0]
+                }
+
+            }
+        }
+        return Default;
+    }
 
 
     useEffect(() => {
@@ -39,18 +61,11 @@ const Main = observer(() => {
                     </div>
                     <h2 className="block_title">Новости</h2>
                     <div className="news_container" linkName="Новости">
-                        <a href="#"><img src={grad0} alt=""/>
-                            <p>Тестовая новость</p>
-                        </a>
-                        <a><img src={grad0} alt=""/>
-                            <p>Тестовая новость</p>
-                        </a>
-                        <a><img src={grad0} alt=""/>
-                            <p>Тестовая новость</p>
-                        </a>
-                        <a><img src={grad0} alt=""/>
-                            <p>Тестовая новость</p>
-                        </a>
+                        {news && news.slice().sort((e1, e2) => e2.id - e1.id).map(e =>
+                            <a href="#"><img src={getNewsCover(e)} alt=""/>
+                                <p>{e.header}</p>
+                            </a>
+                        )}
                     </div>
                     <div style={{background: "#FFF", paddingLeft: "3%", borderRadius: "5px", paddingBottom: "20px"}}
                          linkName="Ближайшие события">
@@ -71,7 +86,7 @@ const Main = observer(() => {
                     <div style={{marginBottom: "20px"}} linkName="Узнать о нас больше">
                         <h2 className="block_title">Узнать о нас больше</h2>
                         <div className="know_more_about">
-                            <a href="#"><p style={{color: "#929396"}}>Педагоги и научные работники</p></a>
+                            <a href="/personalities"><p style={{color: "#929396"}}>Педагоги и научные работники</p></a>
                             <a href="/partners" style={{gridColumn: "2 / span 2", backgroundColor: "#e6b09f"}}>
                                 <p>Партнёры</p></a>
                             <a href="/admision_bac" className="adm_bac">
@@ -80,8 +95,8 @@ const Main = observer(() => {
                                 образования</p></a>
                             <a href="#" style={{gridColumn: "1 / span 3", backgroundColor: "#9fb7e6"}}>
                                 <p>Поступление</p></a>
-                            <a href="#" className="history"><p style={{color: "#929396"}}>История института</p></a>
-                            <a href="#" className="science"><p>Наука</p></a>
+                            <a href="/history" className="history"><p style={{color: "#929396"}}>История института</p></a>
+                            <a href="/science" className="science"><p>Наука</p></a>
                         </div>
 
                         <div className="Block bachelor" style={{

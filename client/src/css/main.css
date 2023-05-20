@@ -170,6 +170,10 @@ body {
     color: #000;
 }
 
+.news_container > * > img{
+    height: 16vw;
+}
+
 
 /*Some changes to carusel*/
 .carusel{
@@ -238,5 +242,8 @@ body {
 
     .news_container > *{
         width: calc(100% - 20px);
+    }
+    .news_container > * > img{
+        height: 35vw;
     }
 }

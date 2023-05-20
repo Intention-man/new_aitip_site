@@ -2,6 +2,7 @@ import React, {useContext, useEffect, useState} from 'react';
 import {Context} from "../index";
 import { useNavigate } from 'react-router';
 import Block from "../components/display/Block";
+import Default from "../local_assets/logo-in-round.svg";
 
 
 const News = () => {
@@ -25,6 +26,7 @@ const News = () => {
 
             }
         }
+        return Default;
     }
 
     return (

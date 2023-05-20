@@ -20,7 +20,7 @@ const BlockContainer = ({ children }) => {
             for (const block of domNode.children) {
                 const blockDomNode = findDOMNode(block);
                 const blockLinkName = blockDomNode.getAttribute('linkname');
-                newContent.push({
+                blockLinkName && newContent.push({
                     name: blockLinkName,
                     domNode: blockDomNode,
                     id: newContent.length

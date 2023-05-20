@@ -3,8 +3,16 @@ import {useContext} from "react";
 import {Context} from "../index";
 import {observer} from "mobx-react-lite";
 import BlockContainer from "../components/display/BlockContainer";
-import Block from "../components/display/Block"
-
+import Block from "../components/display/Block";
+import Carusel from "../components/lines/Carusel";
+import book from "../local_assets/book.png";
+import hat from "../local_assets/graduation.png";
+//Выпускники
+import grad0 from "../local_assets/Content_2.png";
+import grad1 from "../local_assets/Content_3.png";
+import grad2 from "../local_assets/Content_5.png";
+import grad3 from "../local_assets/Content_6.png";
+import grad4 from "../local_assets/Content_7.png";
 
 const Main = observer(() => {
     const {block_store} = useContext(Context);
@@ -15,6 +23,7 @@ const Main = observer(() => {
     useEffect(() => {
         // console.log(block_store.blocks)
         myAddress = "/" + window.location.href.split("/")[3]
+        console.log(block_store.news);
         setMyBlocks(Array.from(block_store.blocks.filter(block => block.pageLink === myAddress).sort((block1, block2) => block1.ordinal - block2.ordinal)))
     }, [block_store.blocks, block_store.lines]);
 
@@ -22,9 +31,95 @@ const Main = observer(() => {
     return (
         <BlockContainer>
             {
-                myBlocks.map(block =>
-                    <Block key={block.id} block={block} useDatabase={true}/>
-                )
+                <>
+                    <h1 style={{color: "var(--aitip_blue)", fontSize: "calc(var(--normal-font_size) * 1.5)"}}>Алтайский
+                        институт труда и права</h1>
+                    <div style={{background: "#FFF"}}>
+                        <Carusel color="#AD4820" photos={["im57.png"]} ratio={16 / 9}/>
+                    </div>
+                    <h2 className="block_title">Новости</h2>
+                    <div className="news_container" linkName="Новости">
+                        <a href="#"><img src={grad0} alt=""/>
+                            <p>Тестовая новость</p>
+                        </a>
+                        <a><img src={grad0} alt=""/>
+                            <p>Тестовая новость</p>
+                        </a>
+                        <a><img src={grad0} alt=""/>
+                            <p>Тестовая новость</p>
+                        </a>
+                        <a><img src={grad0} alt=""/>
+                            <p>Тестовая новость</p>
+                        </a>
+                    </div>
+                    <div style={{background: "#FFF", paddingLeft: "3%", borderRadius: "5px", paddingBottom: "20px"}}
+                         linkName="Ближайшие события">
+                        <h2 className="in_block_title">Ближайшие события</h2>
+                        {[{date: "20 апр", text: "Начало приёма документов"}, {
+                            date: "20 апр",
+                            text: "Начало приёма документов"
+                        }, {date: "20 апр", text: "Начало приёма документов"}].map((e, indx, arr) => <>
+                            <div className="event_container">
+                                <p className="event_date">{e.date}</p>
+                                <p className="event_text">{e.text}</p>
+                            </div>
+                            {indx !== arr.length - 1 &&
+                                <hr style={{width: "40%", marginLeft: "2%", border: "1px solid #000", opacity: "1"}}/>}
+                        </>)
+                        }
+                    </div>
+                    <div style={{marginBottom: "20px"}} linkName="Узнать о нас больше">
+                        <h2 className="block_title">Узнать о нас больше</h2>
+                        <div className="know_more_about">
+                            <a href="#"><p style={{color: "#929396"}}>Педагоги и научные работники</p></a>
+                            <a href="/partners" style={{gridColumn: "2 / span 2", backgroundColor: "#e6b09f"}}>
+                                <p>Партнёры</p></a>
+                            <a href="/admision_bac" className="adm_bac">
+                                <p>Обучение на бакалавриате</p></a>
+                            <a href="/admision_add" className="adm_add"><p>Программы дополнительного профессионального
+                                образования</p></a>
+                            <a href="#" style={{gridColumn: "1 / span 3", backgroundColor: "#9fb7e6"}}>
+                                <p>Поступление</p></a>
+                            <a href="#" className="history"><p style={{color: "#929396"}}>История института</p></a>
+                            <a href="#" className="science"><p>Наука</p></a>
+                        </div>
+
+                        <div className="Block bachelor" style={{
+                            background: "URL(" + book + ") left bottom no-repeat, URL(" + hat + ") right top no-repeat, white",
+                            backgroundSize: "25% 45%, 40% 65%"
+                        }}>
+                            <h2 className="in_block_title">Поступление на бакалавриате</h2>
+                            <ul>
+                                <li>индивидуальный подход на основе современных методик</li>
+                                <li>преподаватели - ведущие ученые и практики Алтайского края</li>
+                                <li>акцент на качестве и содержании подготовки</li>
+                                <li>диплом о профессиональной переподготовке и удостоверение о повышении квалификации
+                                    (г.Москва)
+                                </li>
+                            </ul>
+                            <ul style={{paddingLeft: "25%"}}>
+                                <li>индивидуальный подход на основе современных методик</li>
+                                <li>преподаватели - ведущие ученые и практики Алтайского края</li>
+                                <li>акцент на качестве и содержании подготовки</li>
+                                <li>диплом о профессиональной переподготовке и удостоверение о повышении квалификации
+                                    (г.Москва)
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div className="Block graduates" linkName="Наши выпускники">
+                        <h2 className="in_block_title" style={{textAlign: 'center'}}>Наши выпускники</h2>
+                        <p>Студентам Алтайского института труда и права, окончившим курс обучения и успешно прошедшим
+                            государственную итоговую аттестацию, выдается диплом государственного образца ОУП
+                            ВО«Академия труда и социальных отношений» (г. Москва). Выпускники Алтайского института труда
+                            И права успешно занимаются организационно-управленческой, консультативной, аналитической,
+                            научно-исследовательской, производственной и педагогической работой в коммерческих и
+                            некоммерческих организациях, а также на государственной и муниципальной службе.</p>
+                        <Carusel color="#AD4820" photos={[grad0, grad1, grad2, grad3, grad4]} addressFileType="global"
+                                 ratio={30 / 9}/>
+                    </div>
+
+                </>
             }
         </BlockContainer>
     );

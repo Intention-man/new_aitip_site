@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useLayoutEffect, useRef, useState} from "react";
 import "../../css/component_styles/Carusel.css"
 import "../../css/component_styles/Block.css"
 import vector from "../../local_assets/Vector.png"
@@ -13,6 +13,9 @@ const Carusel = ({photos, addressFileType, ratio, color}) => {
     ratio = ratio || 1
     color = color || "blue"
     console.log(color)
+    const ref = useRef(null);
+    const [width, setWidth] = useState(0);
+
 
 
     useEffect(() => {
@@ -33,16 +36,20 @@ const Carusel = ({photos, addressFileType, ratio, color}) => {
         width:`${window.innerWidth*0.5}px`, height: `${ratio * window.innerWidth*0.5}px`
     }
 
+    useLayoutEffect(() => {
+        setWidth(ref.current.offsetWidth);
+    }, []);
+
     // let elementWidth = () => {
     //     document.getElementById("myDiv").offsetWidth;
     // }
 
     return (
-        <div className="carusel" style={{height:window.innerHeight/ratio}}>
+        <div className="carusel">
             <div className="slideshow-container BigImg">
                 <div className="prev" onClick={() => setCurrentSlideNumber(prev => (prev > 0 ? prev-1 : photos.length-1))}><img src={vector} width="7" height="12"/></div>
                 <div className="mySlides">
-                    <img src={addressFileType === "global" ? photos[currentSlideNumber] : process.env.REACT_APP_API_URL + photos[currentSlideNumber]}/>
+                    <img ref={ref} style={{height:width/ratio}} src={addressFileType === "global" ? photos[currentSlideNumber] : process.env.REACT_APP_API_URL + photos[currentSlideNumber]}/>
                 </div>
                 <div className="next" onClick={() => setCurrentSlideNumber(prev => (prev < photos.length-1 ? prev+1 : 0))}><img src={vector1} width="7" height="12"/></div>
             </div>

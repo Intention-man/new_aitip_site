@@ -16,6 +16,7 @@ import Feedback from "./components/permanent/Feedback";
 import Footer from "./components/permanent/Footer";
 
 import {fetchBlocks, fetchLines} from "./http/blockAPI";
+import BlockContainer from "./components/display/BlockContainer";
 
 
 const App = observer(() => {
@@ -91,7 +92,9 @@ const App = observer(() => {
                     />
                 </SideBar>
                 <ContentContext.Provider value={updateContent}>
-                    <AppRouter/>
+                    <BlockContainer>
+                        <AppRouter/>
+                    </BlockContainer>
                 </ContentContext.Provider>
                 <SideBar
                     alignment='right'

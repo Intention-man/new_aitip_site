@@ -7,12 +7,12 @@ import Default from "../local_assets/logo-in-round.svg";
 
 const News = () => {
     const {block_store} = useContext(Context);
-    const [news, setNews] = useState([])
+    // const [news, setNews] = useState([])
     const [chosenNews, setChosenNews] = useState({});
 
-    useEffect(() => {
-        setNews(block_store.news)
-    })
+    // useEffect(() => {
+    //     setNews(block_store.news)
+    // })
 
     const getCover = (item) => {
         console.log(item.header)
@@ -31,13 +31,13 @@ const News = () => {
 
     return (
         <div style={{display: "grid", gridTemplateColumns: "1fr 1fr"}}>
-            {news.length > 0 && news.map(item =>
+            {block_store.news.length > 0 && block_store.news.map(item =>
                 <div style={{border: "solid green 3px"}} onClick={() => setChosenNews(item)}>
                     <img src={getCover(item)} style={{width: '100%'}}/>
                     <p>{item.header}</p>
                 </div>
             )}
-            <Block key={chosenNews.id} block={chosenNews} useDatabase={true}/>
+            <Block key={chosenNews.id} block={chosenNews}/>
         </div>
     );
 };

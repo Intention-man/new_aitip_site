@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import {observer} from "mobx-react-lite";
 import CreateOrEditLine from "./CreateOrEditLine";
 import {createBlock, removeBlock, updateBlock} from "../../http/blockAPI";
@@ -15,8 +15,11 @@ import video from "../../local_assets/video.png"
 import doc_pic from "../../local_assets/document-text.png"
 import arrow from "../../local_assets/icons/arrow-up.svg"
 import trash from "../../local_assets/icons/delete.svg"
+import { Context } from '../..';
 
 const CreateOrEditBlock = observer(({block, mode}) => {
+
+    const { block_store } = useContext(Context);
 
     // возвращаемые "наверх" значения
     const isEmpty = block.hasOwnProperty("fakeParam");
@@ -200,9 +203,11 @@ const CreateOrEditBlock = observer(({block, mode}) => {
                             <CreateOrEditLine key={line.lineOrdinal} changeLine={changeLine} index={line.lineOrdinal}
                                               currentLine={line} doUpdateUsages={doUpdateUsages}
                                               removedLineIndex={removedLineIndex}/>
-                            <div className="line_display">
-                                <LineDisplay line={line}/>
-                            </div>
+                            {/* <div className="line_display">  // Нужно ли нам превью линии сразу после редактора линии,
+                                <LineDisplay line={line}/>      // если всё и так отображается в превью блока?
+                                                                // Если нужно, то раскомментить, и поправить стили класса
+                                                                // .line_display, так как оно зачем-то центрирует всё
+                            </div> */}
                             <div className="line_management_container">
                                 {line.lineOrdinal > 0 &&
                                     <button onClick={() => swapLines(line.lineOrdinal - 1, line.lineOrdinal)}><img
@@ -223,7 +228,6 @@ const CreateOrEditBlock = observer(({block, mode}) => {
                         header: header,
                         lines: lines
                     }} // FIXME: ох, это ужасный костыль
-                    useDatabase={false}
                 />
             }
             <Button className="add_block" setChosenValue={() => {

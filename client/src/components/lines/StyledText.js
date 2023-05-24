@@ -24,23 +24,21 @@ const StyledText = ({ line }) => {
         return className.join(' ');
     }
 
-    // console.log(line.text)
-
     return (
         <div className="StyledText-container">
             {
-                // line.text.map((columnText, i) =>
-                //     <div
-                //         key={i}
-                //         className="StyledText-column"
-                //     >
-                //         <MDEditor.Markdown
-                //             className={getMarkdownClassname()}
-                //             source={columnText}
-                //             style={{whiteSpace: 'pre-wrap'}}
-                //         />
-                //     </div>
-                // )
+                line.text.map((columnText, i) =>
+                    <div
+                        key={i}
+                        className="StyledText-column"
+                    >
+                        <MDEditor.Markdown
+                            className={getMarkdownClassname()}
+                            source={columnText}
+                            style={{whiteSpace: 'pre-wrap'}}
+                        />
+                    </div>
+                )
             }
         </div>
     );

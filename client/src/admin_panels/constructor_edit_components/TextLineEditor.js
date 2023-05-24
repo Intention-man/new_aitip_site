@@ -116,6 +116,7 @@ const TextLineEditor = ({ line, changeLine, index }) => {
                                 key={i}
                                 text={textList[i]}
                                 setText={(t) => onColumnTextChange(i, t)}
+                                changeLine={changeLine}
                             />
                         </div>
                     )

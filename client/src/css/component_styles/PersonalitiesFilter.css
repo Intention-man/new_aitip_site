@@ -18,8 +18,8 @@
     margin-left: 5px;
     margin-right: 5px;
     margin-bottom: 10px;
-    width: 20px;
-    height: 20px;
+    /*width: 20px;*/
+    /*height: 20px;*/
     vertical-align: top;
     position: relative;
     display: flex;
@@ -145,8 +145,6 @@
     font-size: calc(var(--font_size_const)*0.8);
     margin-top: 1px;
     text-align: left;
-    min-width: 1000%;
-    margin-bottom: 100px;
 }
 
 .down{
@@ -155,11 +153,23 @@
 .undo_filters{
     background: #FFFFFF;
     font-weight: bold;
-    margin-top: 55px;
+    margin: 0;
     border: 3px solid var(--aitip_blue);
     border-radius: 7px;
 }
 
 .undo_filters:hover{
     box-shadow: black 0px 0px 5px;
+}
+
+
+
+
+
+
+@media(max-width: 800px){
+    .external_filter_block{
+        margin-left: 0;
+        width: 100%;
+    }
 }

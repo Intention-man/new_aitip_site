@@ -107,7 +107,14 @@ const CreateOrEditBlock = observer(({block, mode}) => {
         formData.append("isNews", isNews)
         formData.append("header", header);
         !isNews ? formData.append("pageLink", pageLink) : formData.append("pageLink", "/news");
-        !isNews && formData.append("ordinal", `${ordinal}`);
+        if(!isNews) {
+            if (ordinal) {
+                formData.append("ordinal", `${ordinal}`);
+            }
+            else {
+                formData.append("ordinal", `${block_store.blocks.length + 1}`)
+            }
+        }
         formData.append("lines", JSON.stringify(lines))
         formData.append("prevLinesIdList", JSON.stringify(prevLinesIdList))
         mode === "edit" ? updateBlock(formData).then(data => {
@@ -146,10 +153,13 @@ const CreateOrEditBlock = observer(({block, mode}) => {
                 <div>
                     <p>Тип блока</p>
                     <label className="custom_select">
-                        <select id="isNews" value={isNews} onChange={e => {
-                            setIsNews(e.target.value === "true")
+                        <select id="isNews" value={isNews == undefined ? "" : isNews} onChange={e => {
+                            if (e.target.value === "")
+                                setIsNews(undefined)
+                            else
+                                setIsNews(e.target.value === "true")
                         }}>
-                            <option value="" disabled="disabled">Выберите тип блока</option>
+                            <option value="">Выберите тип блока</option>
                             <option value="true">Новостной</option>
                             <option value="false">Для страницы</option>
                         </select>
@@ -226,7 +236,7 @@ const CreateOrEditBlock = observer(({block, mode}) => {
                 <Block
                     block={{
                         header: header,
-                        lines: lines
+                        lines: lines,
                     }} // FIXME: ох, это ужасный костыль
                 />
             }

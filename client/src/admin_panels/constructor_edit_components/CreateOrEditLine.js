@@ -66,7 +66,6 @@ const CreateOrEditLine = observer(({index, changeLine, currentLine, doUpdateUsag
         }
     }, [removedLineIndex]);
 
-
     const updateUsagesOnSave = () => {
         console.log(line)
         let concatPhotosList = prevFilesNames.length > 0 ? filesNames.concat(prevFilesNames.filter((item) => filesNames.indexOf(item) < 0)) : [...filesNames];

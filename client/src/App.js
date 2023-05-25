@@ -14,8 +14,9 @@ import {Spinner} from "react-bootstrap";
 import "./css/component_styles/SocialMedia.css"
 import Feedback from "./components/permanent/Feedback";
 import Footer from "./components/permanent/Footer";
+import { refetchBlocks } from "./additional_commands/commonPanelsFunctions";
 
-import {fetchBlocks, fetchLines} from "./http/blockAPI";
+import { fetchLines } from "./http/blockAPI";
 import BlockContainer from "./components/display/BlockContainer";
 
 
@@ -31,11 +32,7 @@ const App = observer(() => {
         fetchLines().then(data => {
             block_store.setLines(data.rows)
         })
-        fetchBlocks().then(data => {
-            block_store.setBlocks(data.rows)
-            block_store.setNews(data.rows.filter(block => block.isNews === true))
-            console.log(data.rows.filter(block => block.isNews === true))
-        })
+        refetchBlocks(block_store);
     }, [])
     
     useEffect(() => {

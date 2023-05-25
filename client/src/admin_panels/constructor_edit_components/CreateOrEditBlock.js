@@ -1,7 +1,7 @@
 import React, {useEffect, useState, useContext} from 'react';
 import {observer} from "mobx-react-lite";
 import CreateOrEditLine from "./CreateOrEditLine";
-import {createBlock, removeBlock, updateBlock} from "../../http/blockAPI";
+import {createBlock, fetchBlocks, removeBlock, updateBlock} from "../../http/blockAPI";
 import {publicRoutes} from "../../routes";
 import "../../css/component_styles/Editor.css"
 import LineDisplay from "../../components/display/LineDisplay";
@@ -16,6 +16,8 @@ import doc_pic from "../../local_assets/document-text.png"
 import arrow from "../../local_assets/icons/arrow-up.svg"
 import trash from "../../local_assets/icons/delete.svg"
 import { Context } from '../..';
+import { refetchBlocks } from '../../additional_commands/commonPanelsFunctions';
+
 
 const CreateOrEditBlock = observer(({block, mode}) => {
 
@@ -52,7 +54,6 @@ const CreateOrEditBlock = observer(({block, mode}) => {
         setLines(block.lines !== undefined ? block.lines : [])
         if (mode === "edit") {
             document.getElementById('header').value = block.header
-            if (!isNews) document.getElementById('ordinal').value = (block.ordinal !== null ? block.ordinal : -1)
         }
     }, [block])
 
@@ -112,18 +113,24 @@ const CreateOrEditBlock = observer(({block, mode}) => {
                 formData.append("ordinal", `${ordinal}`);
             }
             else {
-                formData.append("ordinal", `${block_store.blocks.length + 1}`)
+                const blocksOnPage = getPageBlocksNumber();
+                formData.append("ordinal", `${blocksOnPage + 1}`)
             }
         }
         formData.append("lines", JSON.stringify(lines))
         formData.append("prevLinesIdList", JSON.stringify(prevLinesIdList))
-        mode === "edit" ? updateBlock(formData).then(data => {
-        }) : createBlock(formData).then(data => {
-        })
+        mode === "edit" ? 
+            updateBlock(formData).then(data => refetchBlocks(block_store)) 
+        : 
+            createBlock(formData).then(data => refetchBlocks(block_store));
     };
 
     const getMaxLineOrdinal = () => {
         return lines.reduce((a, b) => a.lineOrdinal > b.lineOrdinal ? a : b).lineOrdinal
+    }
+
+    const getPageBlocksNumber = () => {
+        return block_store.blocks.filter(block => block.pageLink == pageLink).length;
     }
 
     return (

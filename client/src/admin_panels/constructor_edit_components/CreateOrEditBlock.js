@@ -49,8 +49,9 @@ const CreateOrEditBlock = observer(({block, mode}) => {
         setLines(block.lines !== undefined ? block.lines : [])
         if (mode === "edit") {
             document.getElementById('header').value = block.header
-            if (!isNews) document.getElementById('ordinal').value = (block.ordinal !== null ? block.ordinal : -1)
+            if (!isNews && document.getElementById('ordinal')) document.getElementById('ordinal').value = (block.ordinal !== null ? block.ordinal : -1)
         }
+        console.log(block);
     }, [block])
 
 

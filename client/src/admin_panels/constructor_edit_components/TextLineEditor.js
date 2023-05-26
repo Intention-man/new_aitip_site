@@ -83,7 +83,7 @@ const TextLineEditor = ({ line, changeLine, index }) => {
                         type="number"
                         // min={1}
                         // max={3}
-                        value={textList.length}
+                        value={textList ? textList.length : 0}
                         onChange={e => onColumnNumberChange(e.target.value)}
                     />
                 </label>

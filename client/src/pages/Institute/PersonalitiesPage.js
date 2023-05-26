@@ -66,7 +66,7 @@ const PersonalitiesPage = observer(() => {
 
 
         return (
-            <Container className="mt-md-5" style={{display: "flex", width: "100vw"}}>
+            <Container className="mt-md-5" style={{display: "flex", width: "100vw", maxWidth:"100vw"}}>
                 <Row>
                     <Col lg={3} style={{display: "inline-block", right: 0}}>
                         <PersonalitiesFilterBar filteredDirections={filteredDirections} setFilteredDirections={setFilteredDirections} filteredPrograms={filteredPrograms} setFilteredPrograms={setFilteredPrograms}/>

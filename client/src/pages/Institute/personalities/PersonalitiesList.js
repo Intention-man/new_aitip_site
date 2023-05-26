@@ -1,6 +1,6 @@
 // Отрисовка всех сотрудников на странице Персоналии
 
-import React, {useContext} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 
 import {Context} from "../../../index";
 import StafferItem from "./StafferItem";
@@ -8,11 +8,14 @@ import {observer} from "mobx-react-lite";
 import "../../../css/page_styles/PersonalityList.css"
 import {Row} from "react-bootstrap";
 import SmallStafferItem from "./SmallStafferItem";
+import {fetchStaff} from "../../../http/staffAPI";
+import {fetchAdditionalPrograms, fetchDirectionsBachelor} from "../../../http/admissionAPI";
 
 
 const PersonalitiesList = observer(params => {
     const {staff_store} = useContext(Context)
     const {admission_store} = useContext(Context)
+    const [size, setSize] = useState([0, 0]);
 
 
     function changeChosenStaffer(clickedId) {
@@ -23,12 +26,21 @@ const PersonalitiesList = observer(params => {
         }
     }
 
+    function updateSize() {
+        setSize([window.innerWidth, window.innerHeight]);
+    }
+
+    useEffect(() => {
+        updateSize();
+        window.addEventListener('resize', updateSize);
+    }, [])
+
     return (
         <div>
             {(staff_store.staff.length !== 0) ?
                 (() => {
                     let rows = []
-                    const lenGroup = window.innerWidth > 800 ? 2 : 1
+                    const lenGroup = size[0] > 800 ? 2 : 1
                     const count = Math.ceil(params.filteredStaff.length / lenGroup) * lenGroup
                     // console.log(staff_store.staff[0])
                     // console.log(staff_store.staff[1])

@@ -6,7 +6,7 @@ import test from "../../../local_assets/logo-noincome.png"
 
 const SmallStafferItem = observer(({staffer}) => {
     return (
-            <div className="block_content" style={{minWidth: "300px"}}>
+            <div className="block_content" style={{minWidth: "250px"}}>
                 <RoundedImg imgSrc={test} style={{width: "90px", backgroundPosition: "center"}}
                      className="ava_img"/>
                 <div>

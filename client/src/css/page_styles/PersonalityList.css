@@ -161,6 +161,12 @@
     }
 }
 
+@media (max-width: 300px){
+    .data_part{
+        grid-column: span 2;
+    }
+}
+
 
 @media screen and (min-width: 1501px) {
     .description_block {
@@ -183,9 +189,6 @@
 }
 
 @media screen and (max-width: 1500px) and (min-width: 601px) {
-    .description_block {
-        min-width: 660px;
-    }
 
     .text_block_active {
         width: 660px;

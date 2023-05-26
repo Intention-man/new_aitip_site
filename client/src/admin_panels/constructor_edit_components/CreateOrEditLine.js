@@ -9,6 +9,7 @@ import {selectFile, updateFileUsages} from "../../additional_commands/commonPane
 import TextLineEditor from "./TextLineEditor";
 import ExtendedTextEditor from "../../components/lines/ExtendedTextEditor";
 import load from "../../local_assets/icons/directbox-receive.svg"
+import OurColorPicker from '../OurColorPicker';
 
 
 const CreateOrEditLine = observer(({index, changeLine, currentLine, doUpdateUsages, removedLineIndex}) => {
@@ -180,15 +181,14 @@ const CreateOrEditLine = observer(({index, changeLine, currentLine, doUpdateUsag
 
                                     {/*Set the color of the dots by choosing one of the options below*/}
                                     <label htmlFor="select_color">Выберите цвет точек:</label>
-                                    <input className="pretty_inputs" style={{height: "25px"}} type="color"
-                                           id={"select_color" + line.id}
-                                           value={params !== null && params.hasOwnProperty("color") ? params.color : null}
-                                           onChange={(e) => {
-                                               params["color"] = e.target.value
-                                               setParams({...params})
-                                               changeLine("params", params, index)
-                                               // setDotColor(e.target.value)
-                                           }}/>
+                                    <OurColorPicker
+                                        type='dots'
+                                        onColorPick={(newColor) => {
+                                            params["color"] = newColor
+                                            setParams({...params})
+                                            changeLine("params", params, index)
+                                        }}
+                                    />
                                 </div>
                             }
 

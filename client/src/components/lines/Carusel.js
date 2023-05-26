@@ -57,7 +57,11 @@ const Carusel = ({photos, addressFileType, ratio, color}) => {
             {photos.length > 0 &&
                 <div id="123" style={{textAlign: "center"}}>
                     {photos.map(photo =>
-                    <span key={photos.indexOf(photo)} className="dot" style={{backgroundColor: (photos.indexOf(photo) === currentSlideNumber ? color : "grey")}} onClick={() => setCurrentSlideNumber(photos.indexOf(photo))}/>)}
+                    <span 
+                        key={photos.indexOf(photo)}
+                        className="dot"
+                        style={{backgroundColor: (photos.indexOf(photo) === currentSlideNumber ? `var(--aitip_${color})` : "grey")}}
+                        onClick={() => setCurrentSlideNumber(photos.indexOf(photo))}/>)}
             </div>}
         </div>
     );

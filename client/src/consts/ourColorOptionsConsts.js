@@ -14,8 +14,8 @@ import ColorBlackIcon from "../local_assets/icons/color-black.svg";
  */
 export const ourColorsOptions = [
     {value: null, label: 'Отсутствует', icon: ColorGreyIcon, types: ['background', 'border']},  // FIXME: загрузить иконку для отсутствия цвета
-    {value: 'blue', label: 'Синий', icon: ColorBlueIcon, types: ['text', 'border']},
-    {value: 'red', label: 'Красный', icon: ColorRedIcon, types: ['text', 'border']},
+    {value: 'blue', label: 'Синий', icon: ColorBlueIcon, types: ['text', 'border', 'dots']},
+    {value: 'red', label: 'Красный', icon: ColorRedIcon, types: ['text', 'border', 'dots']},
     {value: 'grey', label: 'Серый', icon: ColorGreyIcon, types: ['text', 'background', 'border']},
-    {value: 'black', label: 'Чёрный', icon: ColorBlackIcon, types: ['text']},
+    {value: 'black', label: 'Чёрный', icon: ColorBlackIcon, types: ['text', 'dots']},
 ];

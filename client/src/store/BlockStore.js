@@ -23,7 +23,6 @@ export default class BlockStore {
 
     setNews(news) {
         this._news = news
-        console.log(this._news)
     }
 
     setLines(lines) {
@@ -44,7 +43,6 @@ export default class BlockStore {
     }
 
     get news() {
-        console.log(this._news)
         return this._news
     }
 

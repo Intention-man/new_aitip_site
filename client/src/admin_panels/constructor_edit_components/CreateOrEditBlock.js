@@ -136,27 +136,25 @@ const CreateOrEditBlock = observer(({block, mode}) => {
     return (
         <div>
             <div className="block_settings">
-                <div>
-                    {!isNews &&
-                        <>
-                            <p>Выберите страницу</p>
-                            <label className="custom_select">
-                                <select id="pageLink" value={pageLink} onChange={e => {
-                                    setPageLink(e.target.value)
-                                }}>
-                                    <option value="" disabled="disabled">Выберите страницу</option>
-                                    {publicRoutes.map((publicRoute) => (
-                                        <option key={publicRoute.name}
-                                                value={publicRoute.path}>{publicRoute.name}</option>
-                                    ))}
-                                </select>
-                                <svg>
-                                    <use xlinkHref="#select-arrow-down"></use>
-                                </svg>
-                            </label>
-                        </>
-                    }
-                </div>
+                {!isNews &&
+                    <div>
+                        <p>Выберите страницу</p>
+                        <label className="custom_select">
+                            <select id="pageLink" value={pageLink} onChange={e => {
+                                setPageLink(e.target.value)
+                            }}>
+                                <option value="" disabled="disabled">Выберите страницу</option>
+                                {publicRoutes.map((publicRoute) => (
+                                    <option key={publicRoute.name}
+                                            value={publicRoute.path}>{publicRoute.name}</option>
+                                ))}
+                            </select>
+                            <svg>
+                                <use xlinkHref="#select-arrow-down"></use>
+                            </svg>
+                        </label>
+                    </div>
+                }
                 <div>
                     <p>Тип блока</p>
                     <label className="custom_select">

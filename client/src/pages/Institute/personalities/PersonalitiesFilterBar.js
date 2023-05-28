@@ -61,7 +61,7 @@ const PersonalitiesFilterBar = observer(({filteredDirections, setFilteredDirecti
                 <p className="filter_name">По программам ДПО:</p>
 
                 {(admission_store.additionalPrograms && admission_store.additionalPrograms.length !== 0) && admission_store.additionalPrograms.map(program =>
-                <div className="squaredOne down">
+                <div className="squaredOne">
                     <input type="checkbox" id={program.id+10} className="small_box" onChange={
                         () => {
                             filteredPrograms.includes(program)

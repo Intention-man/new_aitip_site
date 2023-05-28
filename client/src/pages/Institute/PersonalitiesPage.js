@@ -66,12 +66,12 @@ const PersonalitiesPage = observer(() => {
 
 
         return (
-            <Container className="mt-5" style={{display: "flex", width: "100vw"}}>
-                <Row style={{width: "100%", left: 0}}>
-                    <Col md={3} style={{display: "inline-block", right: 0}}>
+            <Container className="mt-md-5" style={{display: "flex", width: "100vw"}}>
+                <Row>
+                    <Col lg={3} style={{display: "inline-block", right: 0}}>
                         <PersonalitiesFilterBar filteredDirections={filteredDirections} setFilteredDirections={setFilteredDirections} filteredPrograms={filteredPrograms} setFilteredPrograms={setFilteredPrograms}/>
                     </Col>
-                    <Col md={9} style={{display: "inline-block", left: 0}}>
+                    <Col lg={9} className="mt-2 mt-lg-0" style={{display: "inline-block", left: 0}}>
                         <PersonalitiesList chosenStaffer={chosenStaffer} setChosenStaffer={setChosenStaffer} filteredStaff={filteredStaff} setFilteredStaff={setFilteredStaff}/>
                     </Col>
                 </Row>

@@ -68,7 +68,7 @@ body {
 
 .know_more_about{
     display: grid;
-    grid-template-columns: repeat(7, minmax(100px, 200px));
+    grid-template-columns: repeat(7, 1fr);
     grid-template-rows: auto auto;
     gap: 10px;
 }
@@ -200,7 +200,7 @@ body {
     .sideBar {
         width: 18%;
     }
-    
+
     .content {
         width: calc(100% - 18%*2);
     }
@@ -210,7 +210,7 @@ body {
     .sideBar {
         display: none;
     }
-    
+
     .content {
         width: 100%;
         padding: 30px 2%;
@@ -224,7 +224,7 @@ body {
     }
 
     .know_more_about{
-        grid-template-columns: repeat(3, minmax(100px, 200px));
+        grid-template-columns: repeat(3, 1fr);
     }
 
     .history{

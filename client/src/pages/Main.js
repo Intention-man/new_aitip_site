@@ -131,14 +131,17 @@ const Main = observer(() => {
         3: <UpcomingEventsBlock/>,
         4: <LearnMoreAboutUsBlock/>
     });
+    const handMadeBlocksCount = 3
     const myAddress = "/" + window.location.href.split("/")[3]
 
 
     useEffect(() => {
         console.log(block_store.news);
         let pageConstructorBlocks = Array.from(block_store.blocks.filter(block => block.pageLink === myAddress).sort((block1, block2) => block1.ordinal - block2.ordinal))
+        const count = pageConstructorBlocks.length + handMadeBlocksCount
+        console.log(pageConstructorBlocks)
 
-        for (let i = 1; pageConstructorBlocks.length > 0; i++) {
+        for (let i = 1; (i <= count && pageConstructorBlocks.length > 0); i++) {
             if (!blockList.hasOwnProperty(i)) {
                 // shift() - удаляет 0-ой элемент из массива и возвращает его
                 const first = pageConstructorBlocks.shift()
@@ -157,7 +160,7 @@ const Main = observer(() => {
         <>
             {Object.values(blockList).map((block, index) => {
                 if (block.hasOwnProperty("id")) {
-                    return <Block key={index} block={block}/>
+                    return <Block key={index} block={block} header={block.header}/>
                 } else {
                     return <>{block}</>
                 }

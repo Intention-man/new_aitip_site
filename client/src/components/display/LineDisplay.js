@@ -16,7 +16,7 @@ import DocumentLine from "../lines/DocumentLine";
  */
 
 const LineDisplay = observer(({line}) => {
-    console.log(line)
+    // console.log(line)
 
     const getDocumentName = () => {
         return line.params !== null && line.params.hasOwnProperty("documentName") && line.params.documentName

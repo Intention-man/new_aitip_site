@@ -19,51 +19,51 @@ import Default from "../local_assets/logo-in-round.svg";
 
 // hand components
 
-// const NewsBlock = () => {
-//     const {block_store} = useContext(Context);
-//     const [news, setNews] = useState([])
-//     // useEffect(() => {
-//     //     setNews(block_store.news)
-//     //
-//     // }, [block_store.news])
-//
-//     const getNewsCover = (item) => {
-//         console.log(item.header)
-//         for (let line of block_store.lines.filter(line => line.blockId === item.id).sort((a, b) => a.lineOrdinal - b.lineOrdinal)) {
-//             if ([2, 3, 4].includes(line.kind) && line.filesNames.length > 0) {
-//                 if (line.addressFileType === "global") {
-//                     return line.filesNames[0]
-//                 } else {
-//                     return process.env.REACT_APP_API_URL + line.filesNames[0]
-//                 }
-//             }
-//         }
-//         return Default;
-//     }
-//
-//     return (
-//         // <Block header="Новости">
-//         //     <div className="news_container">
-//         //         {news && news.slice().sort((e1, e2) => e2.id - e1.id).map(e =>
-//         //             <a href="#"><img src={getNewsCover(e)} alt=""/>
-//         //                 <p>{e.header}</p>
-//         //             </a>
-//         //         )}
-//         //     </div>
-//         // </Block>
-//         <Block header="Новости">
-//             <div className="news_container">
-//                 {block_store.news && block_store.news.sort((e1, e2) => e2.id - e1.id).map(e =>
-//                     <a href="#">
-//                         <img src={getNewsCover(e)} alt=""/>
-//                         <p>{e.header}</p>
-//                     </a>
-//                 )}
-//             </div>
-//         </Block>
-//
-//     )
-// }
+const NewsBlock = () => {
+    const {block_store} = useContext(Context);
+    // const [news, setNews] = useState([])
+    // useEffect(() => {
+    //     setNews(block_store.news)
+    //
+    // }, [block_store.news])
+
+    const getNewsCover = (item) => {
+        console.log(item.header)
+        for (let line of block_store.lines.filter(line => line.blockId === item.id).sort((a, b) => a.lineOrdinal - b.lineOrdinal)) {
+            if ([2, 3, 4].includes(line.kind) && line.filesNames.length > 0) {
+                if (line.addressFileType === "global") {
+                    return line.filesNames[0]
+                } else {
+                    return process.env.REACT_APP_API_URL + line.filesNames[0]
+                }
+            }
+        }
+        return Default;
+    }
+
+    return (
+        // <Block header="Новости">
+        //     <div className="news_container">
+        //         {news && news.slice().sort((e1, e2) => e2.id - e1.id).map(e =>
+        //             <a href="#"><img src={getNewsCover(e)} alt=""/>
+        //                 <p>{e.header}</p>
+        //             </a>
+        //         )}
+        //     </div>
+        // </Block>
+        <Block header="Новости">
+            <div className="news_container">
+                {block_store.news && block_store.news.sort((e1, e2) => e2.id - e1.id).map(e =>
+                    <a href="#">
+                        <img src={getNewsCover(e)} alt=""/>
+                        <p>{e.header}</p>
+                    </a>
+                )}
+            </div>
+        </Block>
+
+    )
+}
 
 const UpcomingEventsBlock = () => {
     return (<Block style={{background: "#FFF", paddingLeft: "3%", borderRadius: "5px", paddingBottom: "20px"}}
@@ -89,9 +89,9 @@ const LearnMoreAboutUsBlock = () => {
             <a href="/personalities"><p style={{color: "#929396"}}>Педагоги и научные работники</p></a>
             <a href="/partners" style={{gridColumn: "2 / span 2", backgroundColor: "#e6b09f"}}>
                 <p>Партнёры</p></a>
-            <a href="/admision_bac" className="adm_bac">
+            <a href="/admission_bac" className="adm_bac">
                 <p>Обучение на бакалавриате</p></a>
-            <a href="/admision_add" className="adm_add"><p>Программы дополнительного профессионального
+            <a href="/admission_add" className="adm_add"><p>Программы дополнительного профессионального
                 образования</p></a>
             <a href="#" style={{gridColumn: "1 / span 3", backgroundColor: "#9fb7e6"}}>
                 <p>Поступление</p></a>
@@ -127,24 +127,25 @@ const LearnMoreAboutUsBlock = () => {
 const Main = observer(() => {
     const {block_store} = useContext(Context);
     const [blockList, setBlockList] = useState({
-        // 2: <NewsBlock/>,
+        2: <NewsBlock/>,
         3: <UpcomingEventsBlock/>,
         4: <LearnMoreAboutUsBlock/>
     });
-    let myAddress = ""
+    const myAddress = "/" + window.location.href.split("/")[3]
 
 
     useEffect(() => {
-        // console.log(block_store.blocks)
-        myAddress = "/" + window.location.href.split("/")[3]
         console.log(block_store.news);
         let pageConstructorBlocks = Array.from(block_store.blocks.filter(block => block.pageLink === myAddress).sort((block1, block2) => block1.ordinal - block2.ordinal))
-    
+
         for (let i = 1; pageConstructorBlocks.length > 0; i++) {
             if (!blockList.hasOwnProperty(i)) {
                 // shift() - удаляет 0-ой элемент из массива и возвращает его
-                setBlockList(prev => ({...prev, [i]: pageConstructorBlocks.shift()}))
+                const first = pageConstructorBlocks.shift()
+                setBlockList(prev => ({...prev, [i]: first}))
                 // blockList[i] = pageConstructorBlocks.shift()
+            } else {
+                console.log(blockList[i])
             }
         }
         // console.log(blockList)
@@ -153,25 +154,24 @@ const Main = observer(() => {
 
     console.log(blockList)
     return (
-        <p>Чет прикольное</p>
-        // <BlockContainer>
-        //     {Object.values(blockList).map((block, index) => {
-        //         if (block.hasOwnProperty("id")) {
-        //             return <Block key={index} block={block}/>
-        //         } else {
-        //             return <>{block}</>
-        //         }
-        //     })}
-        
+        <>
+            {Object.values(blockList).map((block, index) => {
+                if (block.hasOwnProperty("id")) {
+                    return <Block key={index} block={block}/>
+                } else {
+                    return <>{block}</>
+                }
+            })}
+        </>
 
-            /* {<Block className="news_container" linkName="Новости">
-                {news && news.slice().sort((e1, e2) => e2.id - e1.id).map(e =>
-                    <a href="#"><img src={getNewsCover(e)} alt=""/>
-                        <p>{e.header}</p>
-                    </a>
-                )}
-            </Block>} */
-
+           // // {/* /* {<Block className="news_container" linkName="Новости">
+           //      {news && news.slice().sort((e1, e2) => e2.id - e1.id).map(e =>
+           //          <a href="#"><img src={getNewsCover(e)} alt=""/>
+           //              <p>{e.header}</p>
+           //          </a>
+           //      )}
+           //  </Block>} */
+/*{ 
 
             /* {<h1 style={{color: "var(--aitip_blue)", fontSize: "calc(var(--normal-font_size) * 1.5)"}}>Алтайский
                 институт труда и права</h1>
@@ -250,9 +250,8 @@ const Main = observer(() => {
                     научно-исследовательской, производственной и педагогической работой в коммерческих и
                     некоммерческих организациях, а также на государственной и муниципальной службе.</p>
                 <Carusel color="#AD4820" photos={[grad0, grad1, grad2, grad3, grad4]} addressFileType="global"
-                            ratio={30 / 9}/>
-            </div>} */
-        // </BlockContainer>
+                            ratio={30 / 9}/> }*/
+            // {/* </div> */}
     );
 });
 

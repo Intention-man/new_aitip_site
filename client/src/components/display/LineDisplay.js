@@ -23,13 +23,16 @@ const LineDisplay = observer(({line}) => {
     }
 
     const getImgType = () => {
-        return line.params !== null && line.params.hasOwnProperty("imgType") && line.params.imgType
+        if (line.params !== null && line.params.imgType)
+            return line.params.imgType;
+        else
+            return 'normal';
     }
 
     return (
         // TODO: желательно отрефакторить этот код, разнести этот контент в компоненты в самих линий
 
-        <div>
+        <>
             {line.hasOwnProperty("kind") &&
                 <>
                     {(line.kind === 1 && line.text.length > 0 && line.text[0].length > 0) &&
@@ -39,8 +42,8 @@ const LineDisplay = observer(({line}) => {
                     }
 
                     {(line.kind === 2 && (line.filesNames.length > 0)) && (line.addressFileType === "global" ?
-                            <BigImg imgSrc={line.filesNames[0]} imgType={getImgType()}/> :
-                            <BigImg imgSrc={process.env.REACT_APP_API_URL + line.filesNames[0]} imgType={getImgType()}/>
+                        <BigImg imgSrc={line.filesNames[0]} imgType={getImgType()}/> :
+                        <BigImg imgSrc={process.env.REACT_APP_API_URL + line.filesNames[0]} imgType={getImgType()}/>
                     )
                     }
 
@@ -72,7 +75,7 @@ const LineDisplay = observer(({line}) => {
                     {/*// </div>*/}
                 </>
             }
-        </div>
+        </>
     );
 });
 

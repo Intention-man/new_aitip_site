@@ -95,11 +95,6 @@
     mask-image: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,1) 60%);
 }
 
-.FadingImg-top-and-bottom:only-child {
-    -webkit-mask-image: none;
-    mask-image: none;
-}
-
 .FadingImg-right {
     /* Случай, когда картинка - первая линия. Тогда эффект исчезновения только снизу */
     -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,1) 60%);

@@ -44,11 +44,13 @@ const Block = observer(({block, header, children}) => {
             :
                 <>
                     <h1>{block.header}</h1>
-                    {
-                        myLines && myLines.map(line =>
-                            <LineDisplay key={line.id} line={line}/>
-                        )
-                    }
+                    <div>
+                        {
+                            myLines && myLines.map(line =>
+                                <LineDisplay key={line.id} line={line}/>
+                            )
+                        }
+                    </div>
                 </>
         }
         </div>

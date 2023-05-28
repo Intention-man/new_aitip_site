@@ -16,35 +16,41 @@ import LineDisplay from './LineDisplay';
 import '../../css/component_styles/Block.css';
 
 
-const Block = observer(({block, useDatabase}) => {
+const Block = observer(({block, header, children}) => {
     // TODO: отрефакторить этот код, так как хотелось бы создавать блок необязательно обращаясь к БД.
     // Например, когда мы хотим показать превью блока, ещё не сохранённого пользователем.
     // Нужно убрать проп block, заменив его на важные для блока пропы (header, lines и др.).
-    // console.log('Block:', block)
+    
     const {block_store} = useContext(Context);
 
     const [myLines, setMyLines] = useState([]);
 
     useEffect(() => {
-        if (useDatabase) {
-            setMyLines(block_store.lines.filter(line => line.blockId === block.id).sort((a, b) => a.lineOrdinal - b.lineOrdinal))
-        } else {
-            if (block.lines)
-                setMyLines(block.lines);
-            else
-                setMyLines([]);
-        }
-    },[block]);
+        if (block == undefined)
+            return;
+
+        if (block.hasOwnProperty('id'))  // Поле id имеют блоки ТОЛЬКО ИЗ БД (следовательно, можем загружать их из BlockStore, где хранятся подгруженные линии из БД)
+            setMyLines(block_store.lines.filter(line => line.blockId === block.id).sort((a, b) => a.lineOrdinal - b.lineOrdinal));
+        else
+            setMyLines(block.lines);
+    }, [block]);
 
     // FIXME: ставить проп в аттрибут элемента - это костыль ;(
     return (
-        <div className="Block" linkname={block.header}>
-            <h1>{block.header}</h1>
-            {
-                myLines.length > 0 && myLines.map(line =>
-                    <LineDisplay key={line.id} line={line}/>
-                )
-            }
+        <div className="Block" linkname={block == undefined ? header : block.header}>
+        {
+            (block == undefined) ?
+                <div>{children}</div>
+            :
+                <>
+                    <h1>{block.header}</h1>
+                    {
+                        myLines && myLines.map(line =>
+                            <LineDisplay key={line.id} line={line}/>
+                        )
+                    }
+                </>
+        }
         </div>
     );
 })

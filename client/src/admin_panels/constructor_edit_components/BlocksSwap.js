@@ -25,7 +25,6 @@ const BlocksSwap = () => {
 
 
     const swapBlocks = (index1, index2) => {
-        console.log(updatedBlocks);
         let newBlockList = []
         for (let block of updatedBlocks) {
             if (block.ordinal !== index1 && block.ordinal !== index2) {
@@ -66,7 +65,7 @@ const BlocksSwap = () => {
                 <div style={{border: 'solid grey 5px', margin: "20px" }}>
                     <Block block={block}/>
                     {block.ordinal > 0 && <button onClick={() => swapBlocks(block.ordinal - 1, block.ordinal)}>Передвинуть блок на 1 выше</button>}
-                    {block.ordinal < updatedBlocks.length-1 && <button onClick={() => swapBlocks(block.ordinal, block.ordinal + 1)}>Передвинуть блок на 1 ниже</button>}
+                    {block.ordinal < updatedBlocks.length - 1 && <button onClick={() => swapBlocks(block.ordinal, block.ordinal + 1)}>Передвинуть блок на 1 ниже</button>}
                 </div>
             )}
             <button onClick={saveBlocksOrder}>Сохранить текущий порядок блоков</button>

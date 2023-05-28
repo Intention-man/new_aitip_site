@@ -66,7 +66,6 @@ const CreateOrEditLine = observer(({index, changeLine, currentLine, doUpdateUsag
         }
     }, [removedLineIndex]);
 
-
     const updateUsagesOnSave = () => {
         console.log(line)
         let concatPhotosList = prevFilesNames.length > 0 ? filesNames.concat(prevFilesNames.filter((item) => filesNames.indexOf(item) < 0)) : [...filesNames];
@@ -368,8 +367,12 @@ const CreateOrEditLine = observer(({index, changeLine, currentLine, doUpdateUsag
 
                     {/* Появление зоны редактирования текста*/}
                     {kind === 3 &&
-                        <ExtendedTextEditor text={text[0]} setText={(t) => setText([t])} changeLine={changeLine}
-                                            index={index}/>
+                        <ExtendedTextEditor 
+                            text={text} 
+                            setText={(t) => setText([t])}
+                            changeLine={changeLine}
+                            index={index}      
+                        />
                     }
 
                     {kind === 1 &&

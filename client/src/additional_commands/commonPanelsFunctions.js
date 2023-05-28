@@ -1,4 +1,5 @@
 import {convertFiles, fetchAllFiles, updateFileUsagesAPI} from "../http/commonAPI";
+import { fetchBlocks } from "../http/blockAPI";
 // const addFiles = (files) => {
 //     const formData = new FormData();
 //     files.forEach(el => formData.append("files", el));
@@ -41,4 +42,11 @@ export const updateFileUsages = (fileLink, delta) => {
         console.log(newCountUsages)
         return newCountUsages
     })
+}
+
+export const refetchBlocks = (blockStore) => {
+    fetchBlocks().then(data => {
+        blockStore.setBlocks(data.rows);
+        blockStore.setNews(data.rows.filter(block => block.isNews === true));
+    });
 }

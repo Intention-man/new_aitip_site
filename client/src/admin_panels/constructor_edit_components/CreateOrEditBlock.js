@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import {observer} from "mobx-react-lite";
 import CreateOrEditLine from "./CreateOrEditLine";
-import {createBlock, removeBlock, updateBlock} from "../../http/blockAPI";
+import {createBlock, fetchBlocks, removeBlock, updateBlock} from "../../http/blockAPI";
 import {publicRoutes} from "../../routes";
 import "../../css/component_styles/Editor.css"
 import LineDisplay from "../../components/display/LineDisplay";
@@ -15,8 +15,13 @@ import video from "../../local_assets/video.png"
 import doc_pic from "../../local_assets/document-text.png"
 import arrow from "../../local_assets/icons/arrow-up.svg"
 import trash from "../../local_assets/icons/delete.svg"
+import { Context } from '../..';
+import { refetchBlocks } from '../../additional_commands/commonPanelsFunctions';
+
 
 const CreateOrEditBlock = observer(({block, mode}) => {
+
+    const { block_store } = useContext(Context);
 
     // возвращаемые "наверх" значения
     const isEmpty = block.hasOwnProperty("fakeParam");
@@ -49,9 +54,7 @@ const CreateOrEditBlock = observer(({block, mode}) => {
         setLines(block.lines !== undefined ? block.lines : [])
         if (mode === "edit") {
             document.getElementById('header').value = block.header
-            if (!isNews && document.getElementById('ordinal')) document.getElementById('ordinal').value = (block.ordinal !== null ? block.ordinal : -1)
         }
-        console.log(block);
     }, [block])
 
 
@@ -105,16 +108,29 @@ const CreateOrEditBlock = observer(({block, mode}) => {
         formData.append("isNews", isNews)
         formData.append("header", header);
         !isNews ? formData.append("pageLink", pageLink) : formData.append("pageLink", "/news");
-        !isNews && formData.append("ordinal", `${ordinal}`);
+        if(!isNews) {
+            if (ordinal) {
+                formData.append("ordinal", `${ordinal}`);
+            }
+            else {
+                const blocksOnPage = getPageBlocksNumber();
+                formData.append("ordinal", `${blocksOnPage + 1}`)
+            }
+        }
         formData.append("lines", JSON.stringify(lines))
         formData.append("prevLinesIdList", JSON.stringify(prevLinesIdList))
-        mode === "edit" ? updateBlock(formData).then(data => {
-        }) : createBlock(formData).then(data => {
-        })
+        mode === "edit" ?
+            updateBlock(formData).then(data => refetchBlocks(block_store))
+        :
+            createBlock(formData).then(data => refetchBlocks(block_store));
     };
 
     const getMaxLineOrdinal = () => {
         return lines.reduce((a, b) => a.lineOrdinal > b.lineOrdinal ? a : b).lineOrdinal
+    }
+
+    const getPageBlocksNumber = () => {
+        return block_store.blocks.filter(block => block.pageLink == pageLink).length;
     }
 
     return (
@@ -142,10 +158,13 @@ const CreateOrEditBlock = observer(({block, mode}) => {
                 <div>
                     <p>Тип блока</p>
                     <label className="custom_select">
-                        <select id="isNews" value={isNews} onChange={e => {
-                            setIsNews(e.target.value === "true")
+                        <select id="isNews" value={isNews == undefined ? "" : isNews} onChange={e => {
+                            if (e.target.value === "")
+                                setIsNews(undefined)
+                            else
+                                setIsNews(e.target.value === "true")
                         }}>
-                            <option value="" disabled="disabled">Выберите тип блока</option>
+                            <option value="">Выберите тип блока</option>
                             <option value="true">Новостной</option>
                             <option value="false">Для страницы</option>
                         </select>
@@ -199,9 +218,11 @@ const CreateOrEditBlock = observer(({block, mode}) => {
                             <CreateOrEditLine key={line.lineOrdinal} changeLine={changeLine} index={line.lineOrdinal}
                                               currentLine={line} doUpdateUsages={doUpdateUsages}
                                               removedLineIndex={removedLineIndex}/>
-                            <div className="line_display">
-                                <LineDisplay line={line}/>
-                            </div>
+                            {/* <div className="line_display">  // Нужно ли нам превью линии сразу после редактора линии,
+                                <LineDisplay line={line}/>      // если всё и так отображается в превью блока?
+                                                                // Если нужно, то раскомментить, и поправить стили класса
+                                                                // .line_display, так как оно зачем-то центрирует всё
+                            </div> */}
                             <div className="line_management_container">
                                 {line.lineOrdinal > 0 &&
                                     <button onClick={() => swapLines(line.lineOrdinal - 1, line.lineOrdinal)}><img
@@ -220,9 +241,8 @@ const CreateOrEditBlock = observer(({block, mode}) => {
                 <Block
                     block={{
                         header: header,
-                        lines: lines
+                        lines: lines,
                     }} // FIXME: ох, это ужасный костыль
-                    useDatabase={false}
                 />
             }
             <Button className="add_block" setChosenValue={() => {

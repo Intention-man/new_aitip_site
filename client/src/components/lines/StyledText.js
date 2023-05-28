@@ -24,8 +24,6 @@ const StyledText = ({ line }) => {
         return className.join(' ');
     }
 
-    // console.log(line.text)
-
     return (
         <div className="StyledText-container">
             {

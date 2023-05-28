@@ -48,8 +48,11 @@ const LineDisplay = observer(({line}) => {
                         <Card
                             imgType={getImgType()}
                             imgSrc={line.addressFileType === "global" ? line.filesNames[0] : process.env.REACT_APP_API_URL + line.filesNames[0]}
-                            imgPos={line.params.side}>
-                            <MDEditor.Markdown source={line.text} style={{whiteSpace: 'pre-wrap'}}/>
+                            imgPos={line.params.side}
+                        >
+                            <StyledText
+                                line={line}
+                            />
                         </Card>
                     }
 

@@ -1,5 +1,5 @@
 import {convertFiles, fetchAllFiles, updateFileUsagesAPI} from "../http/commonAPI";
-import { fetchBlocks } from "../http/blockAPI";
+import { fetchBlocks, fetchLines } from "../http/blockAPI";
 // const addFiles = (files) => {
 //     const formData = new FormData();
 //     files.forEach(el => formData.append("files", el));
@@ -44,9 +44,15 @@ export const updateFileUsages = (fileLink, delta) => {
     })
 }
 
-export const refetchBlocks = (blockStore) => {
+/**
+ * Функция, вызывающая переполучение всего контента (блоков и линий) из БД
+ */
+export const refetchAllContent = (blockStore) => {
     fetchBlocks().then(data => {
         blockStore.setBlocks(data.rows);
         blockStore.setNews(data.rows.filter(block => block.isNews === true));
+    });
+    fetchLines().then(data => {
+        blockStore.setLines(data.rows);
     });
 }

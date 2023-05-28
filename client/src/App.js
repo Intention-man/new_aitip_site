@@ -14,7 +14,7 @@ import {Spinner} from "react-bootstrap";
 import "./css/component_styles/SocialMedia.css"
 import Feedback from "./components/permanent/Feedback";
 import Footer from "./components/permanent/Footer";
-import { refetchBlocks } from "./additional_commands/commonPanelsFunctions";
+import { refetchAllContent } from "./additional_commands/commonPanelsFunctions";
 
 import { fetchLines } from "./http/blockAPI";
 import BlockContainer from "./components/display/BlockContainer";
@@ -32,7 +32,7 @@ const App = observer(() => {
         fetchLines().then(data => {
             block_store.setLines(data.rows)
         })
-        refetchBlocks(block_store);
+        refetchAllContent(block_store);
     }, [])
     
     useEffect(() => {

@@ -16,12 +16,12 @@ import doc_pic from "../../local_assets/document-text.png"
 import arrow from "../../local_assets/icons/arrow-up.svg"
 import trash from "../../local_assets/icons/delete.svg"
 import { Context } from '../..';
-import { refetchBlocks } from '../../additional_commands/commonPanelsFunctions';
+import { refetchAllContent } from '../../additional_commands/commonPanelsFunctions';
 
 
 const CreateOrEditBlock = observer(({block, mode}) => {
 
-    const { block_store } = useContext(Context);
+    const { block_store,  } = useContext(Context);
 
     // возвращаемые "наверх" значения
     const isEmpty = block.hasOwnProperty("fakeParam");
@@ -120,9 +120,9 @@ const CreateOrEditBlock = observer(({block, mode}) => {
         formData.append("lines", JSON.stringify(lines))
         formData.append("prevLinesIdList", JSON.stringify(prevLinesIdList))
         mode === "edit" ? 
-            updateBlock(formData).then(data => refetchBlocks(block_store)) 
+            updateBlock(formData).then(data => refetchAllContent(block_store)) 
         : 
-            createBlock(formData).then(data => refetchBlocks(block_store));
+            createBlock(formData).then(data => refetchAllContent(block_store));
     };
 
     const getMaxLineOrdinal = () => {

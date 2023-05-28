@@ -369,7 +369,7 @@ const CreateOrEditLine = observer(({index, changeLine, currentLine, doUpdateUsag
                     {kind === 3 &&
                         <ExtendedTextEditor 
                             text={text} 
-                            setText={(t) => setText([t])}
+                            setText={(t) => setText(t)}
                             changeLine={changeLine}
                             index={index}      
                         />

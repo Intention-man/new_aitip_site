@@ -48,7 +48,7 @@ const StafferItem = observer(({staffer, closeStaffer}) => {
 
                 <div className="description_block">
                     <img src={process.env.REACT_APP_API_URL + staffer.img}
-                         className="big_avatar"
+                         className="big_avatar m-auto m-md-0"
                          alt="картинка чет не загрузилась"/>
                     <div>
                         {/*<div className="top_block_row">*/}

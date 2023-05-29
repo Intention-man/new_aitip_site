@@ -76,7 +76,7 @@ const PersonalitiesList = observer(params => {
                             )}
                         </Row>)
                         rows.push(params.chosenStaffer && list.map(e => e.id).includes(params.chosenStaffer.id) &&
-                            <StafferItem key={params.chosenStaffer.id} staffer={params.chosenStaffer}/>)
+                            <StafferItem key={params.chosenStaffer.id} staffer={params.chosenStaffer} closeStaffer={changeChosenStaffer}/>)
                     }
                     return rows
                 })() : <div>Загрузка...</div>

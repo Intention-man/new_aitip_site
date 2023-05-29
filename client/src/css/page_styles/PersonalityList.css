@@ -172,9 +172,6 @@
 }
 
 @media screen and (min-width: 1501px) {
-    .description_block {
-        min-width: 740px;
-    }
 
     .button_row {
         margin-left: 370px;

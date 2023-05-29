@@ -55,6 +55,9 @@ const CreateOrEditBlock = observer(({block, mode}) => {
         if (mode === "edit") {
             document.getElementById('header').value = block.header
         }
+        if (checkSameLineOrdinal()) {
+            setLines(lines.map(line => ({...line, "lineOrdinal": lines.indexOf(line)})))  
+        }
     }, [block])
 
 
@@ -132,6 +135,21 @@ const CreateOrEditBlock = observer(({block, mode}) => {
     const getPageBlocksNumber = () => {
         return block_store.blocks.filter(block => block.pageLink == pageLink).length;
     }
+
+    const checkSameLineOrdinal = () => {
+        const set = new Set();
+        for (let i = 0; i < lines.length; i++) {
+          const value = lines[i]["lineOrdinal"];
+          if (set.has(value)) {
+            // Найдено дублирующееся значение
+            return true;
+          }
+          set.add(value);
+        }
+        // Нет дублирующихся значений
+        return false;
+      }
+
 
     return (
         <div>

@@ -16,7 +16,6 @@ import DocumentLine from "../lines/DocumentLine";
  */
 
 const LineDisplay = observer(({line}) => {
-    // console.log(line)
 
     const getDocumentName = () => {
         return line.params !== null && line.params.hasOwnProperty("documentName") && line.params.documentName
@@ -63,10 +62,6 @@ const LineDisplay = observer(({line}) => {
                     {(line.kind === 6 && (line.filesNames.length > 0)) &&
                         <DocumentLine documentLink={line.addressFileType === "global" ? line.filesNames[0] : process.env.REACT_APP_API_URL + line.filesNames[0]} documentName={getDocumentName()}/>
                     }
-                    {/*// <div>*/}
-                    {/*//     <a href={line.addressFileType === "global" ? line.filesNames[0] : process.env.REACT_APP_API_URL + line.filesNames[0]}*/}
-                    {/*//        download target="_blank">Скачать документ</a>*/}
-                    {/*// </div>*/}
                 </>
             }
         </div>

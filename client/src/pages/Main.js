@@ -146,13 +146,10 @@ const Main = observer(() => {
                 // shift() - удаляет 0-ой элемент из массива и возвращает его
                 const first = pageConstructorBlocks.shift()
                 setBlockList(prev => ({...prev, [i]: first}))
-                // blockList[i] = pageConstructorBlocks.shift()
             } else {
                 console.log(blockList[i])
             }
         }
-        // console.log(blockList)
-        // setBlockList(prev => blockList)
     }, [block_store.blocks, block_store.lines]);
 
     console.log(blockList)

@@ -14,7 +14,6 @@ import {fetchAdditionalPrograms, fetchDirectionsBachelor} from "../../../http/ad
 
 const PersonalitiesList = observer(params => {
     const {staff_store} = useContext(Context)
-    const {admission_store} = useContext(Context)
     const [size, setSize] = useState([0, 0]);
 
 

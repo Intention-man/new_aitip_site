@@ -2,41 +2,71 @@ import {$authHost, $host} from "./index";
 
 
 export const createBlock = async (blockData) => {
-    const {data} = await $authHost.post("api/block/", blockData)
+    try {
+        const {data} = await $authHost.post("api/block/", blockData)
     console.log(data)
     return data
+    } catch (e) {
+        return null
+    }
 }
 
 export const updateBlock = async (blockData) => {
-    const {data} = await $authHost.post("api/block/update", blockData)
-    console.log(data)
-    return data
+    try {
+        const {data} = await $authHost.post("api/block/update", blockData)
+        return data
+    } catch (e) {
+        return null
+    }
+
 }
 
 export const moveBlocks = async (blocks) => {
-    const {data} = await $authHost.post("api/block/move", blocks)
-    console.log(data)
-    return data
+    try {
+        const {data} = await $authHost.post("api/block/move", blocks)
+        console.log(data)
+        return data
+    } catch (e) {
+        return null
+    } 
 }
 
 export const removeBlock = async (id) => {
-    const {data} = await $authHost.post("api/block/remove/" + id)
-    console.log(typeof id)
-    return data
+    try {
+        const {data} = await $authHost.post("api/block/remove/" + id)
+        console.log(typeof id)
+        return data
+    } catch (e) {
+        return null
+    }   
 }
 
 
 export const fetchBlocks = async () => {
-    const {data} = await $host.get("api/block/")
+    try {
+        const {data} = await $host.get("api/block/")
     return data
+    } catch (e) {
+        return null
+    }   
 }
 
 export const fetchLines = async () => {
-    const {data} = await $host.get("api/block/lines")
+    try {
+        const {data} = await $host.get("api/block/lines")
     return data
+    } catch (e) {
+        return null
+    }
+    
 }
 
 export const fetchOneBlock = async (id) => {
-    const {data} = await $host.get("api/block/" + id)
+    try {
+        const {data} = await $host.get("api/block/" + id)
     return data
+    } catch (e) {
+        return null
+    }
+    
 }

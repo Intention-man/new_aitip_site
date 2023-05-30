@@ -48,7 +48,7 @@ const LineDisplay = observer(({line}) => {
                             imgType={getImgType()}
                             imgSrc={line.addressFileType === "global" ? line.filesNames[0] : process.env.REACT_APP_API_URL + line.filesNames[0]}
                             imgPos={line.params.side}>
-                            <MDEditor.Markdown source={line.text} style={{whiteSpace: 'pre-wrap'}}/>
+                            <MDEditor.Markdown source={Array.isArray(line.text) ? line.text[0] : line.text} style={{whiteSpace: 'pre-wrap'}}/>
                         </Card>
                     }
 

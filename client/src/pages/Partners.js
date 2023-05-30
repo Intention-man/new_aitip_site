@@ -4,19 +4,17 @@ import {useEffect, useState} from "react";
 import {fetchPartners} from "../http/partnersAPI";
 
 const Partners = observer(() => {
-
-    const [educationalPartners, setEducationalPartners] = useState([]);
+    const [partners, setPartners] = useState([]);
 
     useEffect(() => {
-        fetchPartners().then(data   =>
-            setEducationalPartners(data.rows.filter(partner => partner.kind === "Образовательный"))
-        )
+        fetchPartners().then(data =>
+            setPartners(data.rows))
     },[])
 
     return (
         <div>
-            {educationalPartners.map(partner =>
-                <div>
+            {partners.map(partner =>
+                <div key={partner.id}>
                     <p>{partner.name} {partner.description}</p>
                     <img src={process.env.REACT_APP_API_URL + partner.img}/>
                 </div>

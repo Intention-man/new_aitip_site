@@ -22,7 +22,7 @@ class BlockController {
                         Line.create({
                             kind: line.kind,
                             params: line.params,
-                            text: line.text,
+                            text: Array.isArray(line.text) ? line.text : [line.text],
                             filesNames: line.filesNames !== undefined ? line.filesNames : [],
                             addressFileType: line.addressFileType,
                             lineOrdinal: line.lineOrdinal,
@@ -60,7 +60,7 @@ class BlockController {
                             Line.update({
                                     kind: line.kind,
                                     params: line.params,
-                                    text: line.text,
+                                    text: Array.isArray(line.text) ? line.text : [line.text],
                                     filesNames: line.filesNames !== undefined ? line.filesNames : [],
                                     addressFileType: line.addressFileType,
                                     lineOrdinal: line.lineOrdinal,

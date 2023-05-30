@@ -21,11 +21,6 @@ import Default from "../local_assets/logo-in-round.svg";
 
 const NewsBlock = () => {
     const {block_store} = useContext(Context);
-    // const [news, setNews] = useState([])
-    // useEffect(() => {
-    //     setNews(block_store.news)
-    //
-    // }, [block_store.news])
 
     const getNewsCover = (item) => {
         console.log(item.header)
@@ -42,15 +37,6 @@ const NewsBlock = () => {
     }
 
     return (
-        // <Block header="Новости">
-        //     <div className="news_container">
-        //         {news && news.slice().sort((e1, e2) => e2.id - e1.id).map(e =>
-        //             <a href="#"><img src={getNewsCover(e)} alt=""/>
-        //                 <p>{e.header}</p>
-        //             </a>
-        //         )}
-        //     </div>
-        // </Block>
         <Block header="Новости">
             <div className="news_container">
                 {block_store.news && block_store.news.sort((e1, e2) => e2.id - e1.id).map(e =>
@@ -136,7 +122,6 @@ const Main = observer(() => {
 
 
     useEffect(() => {
-        console.log(block_store.news);
         let pageConstructorBlocks = Array.from(block_store.blocks.filter(block => block.pageLink === myAddress).sort((block1, block2) => block1.ordinal - block2.ordinal))
         const count = pageConstructorBlocks.length + handMadeBlocksCount
         console.log(pageConstructorBlocks)
@@ -150,7 +135,7 @@ const Main = observer(() => {
                 console.log(blockList[i])
             }
         }
-    }, [block_store.blocks, block_store.lines]);
+    }, [block_store.blocks, block_store.lines, handMadeBlocksCount]);
 
     console.log(blockList)
     return (

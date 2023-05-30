@@ -8,7 +8,9 @@ import Carusel from "../components/lines/Carusel";
 
 import book from "../local_assets/book.png";
 import hat from "../local_assets/graduation.png";
+
 //Выпускники
+
 import grad0 from "../local_assets/Content_2.png";
 import grad1 from "../local_assets/Content_3.png";
 import grad2 from "../local_assets/Content_5.png";
@@ -47,7 +49,6 @@ const NewsBlock = () => {
                 )}
             </div>
         </Block>
-
     )
 }
 
@@ -117,6 +118,7 @@ const Main = observer(() => {
         3: <UpcomingEventsBlock/>,
         4: <LearnMoreAboutUsBlock/>
     });
+    const n = <NewsBlock/>
     const handMadeBlocksCount = 3
     const myAddress = "/" + window.location.href.split("/")[3]
 

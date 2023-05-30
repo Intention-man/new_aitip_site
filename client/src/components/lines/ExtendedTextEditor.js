@@ -54,7 +54,8 @@ const ExtendedTextEditor = ({text, setText, changeLine, index}) => {
                 commands.fullscreen
             ]}
             onChange={(val) => {
-                setText(val)
+                if (setText)
+                    setText(val);
                 changeLine("text", val, index)
             }}
         />

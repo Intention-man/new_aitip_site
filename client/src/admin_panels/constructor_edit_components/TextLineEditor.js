@@ -28,9 +28,6 @@ const TextLineEditor = ({ line, changeLine, index }) => {
     const onColumnTextChange = (columnIndex, newText) => {
         if (columnIndex < textList.length)
             textList[columnIndex] = newText;
-        // else if (columnIndex < 3){
-        //     newColumnsTexts.push(newText);
-        // }
         changeLine('text', textList, index);
     };
 

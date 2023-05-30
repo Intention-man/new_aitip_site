@@ -24,13 +24,12 @@ const CreateOrEditLine = observer(({index, changeLine, currentLine, doUpdateUsag
         6: "Документ",
     };
 
-    const [kind, setKind] = useState(currentLine.kind);
-    const [params, setParams] = useState(currentLine.params);
-    const [text, setText] = useState(currentLine.text);
-    const [filesNames, setFilesNames] = useState(currentLine.filesNames);
-    const [addressFileType, setAddressFileType] = useState(currentLine.addressFileType);
+    const kind = currentLine.kind
+    const params = currentLine.params
+    const text = currentLine.text
+    const filesNames = currentLine.filesNames
+    const addressFileType = currentLine.addressFileType
     const [prevFilesNames, setPrevFilesNames] = useState(currentLine.filesNames)
-    // const [currentLine, setLine] = useState({...currentLine});
 
     useEffect(() => {
         if (document.getElementById('select_ratio' + currentLine.id) !== null) {
@@ -48,13 +47,6 @@ const CreateOrEditLine = observer(({index, changeLine, currentLine, doUpdateUsag
 
     }, [])
 
-    useEffect(() => {
-        setKind(currentLine.kind)
-        setText(currentLine.text)
-        setFilesNames(currentLine.filesNames)
-        setAddressFileType(currentLine.addressFileType)
-        setPrevFilesNames(currentLine.filesNames)
-    }, [currentLine]);
 
     useEffect(() => {
         doUpdateUsages && updateUsagesOnSave()
@@ -84,37 +76,14 @@ const CreateOrEditLine = observer(({index, changeLine, currentLine, doUpdateUsag
         // TODO: желательно отрефакторить этот код, разнести каждый элемент управления по отдельным компонентам
 
         <div className="line_container">
-            {currentLine !== undefined && currentLine.hasOwnProperty("kind") &&
+            {currentLine.hasOwnProperty("kind") &&
                 <>
                     <div>
                         {/*Выбор вида линии*/}
-                        {/*<div>*/}
                         {kind > 0 ? <p>{kinds[kind]}</p> : <p>Выберите тип элемента</p>}
-
-                        {/*<select id="kind" value={kind} onChange={e => {
-                                setKind(Number(e.target.value))
-                                changeLine("kind", Number(e.target.value), index)
-                                setParams({})
-                                changeLine("params", {}, index)
-                            }}>
-                                <option value="0">Выберите тип элемента</option>
-                                {
-                                    Object.entries(kinds).map(entry =>
-                                        <option key={parseInt(entry[0])} value={entry[0]}>{entry[1]}</option>
-                                    )
-                                }
-                            </select>*/}
-                        {/*</div>*/}
 
                         {/*Выбор параметров*/}
                         <div>
-                            {/* {params.length > 0 ?
-                                <p>Выбранный(-е) параметр(-ы): {params.length > 0 && params.map((param) => (
-                                    <p>
-                                        {param}
-                                    </p>
-                                ))}
-                                </p> : <p>Выберите параметры</p>}*/}
 
                             {kind === 2 &&
                                 <label className="custom_select">
@@ -122,7 +91,6 @@ const CreateOrEditLine = observer(({index, changeLine, currentLine, doUpdateUsag
                                             value={params !== null && params.hasOwnProperty("imgType") && params.imgType}
                                             onChange={e => {
                                                 params["imgType"] = e.target.value
-                                                setParams({...params})
                                                 changeLine("params", params, index)
                                             }}>
                                         <option value="none" disabled="disabled" selected>Выберите тип картинки</option>
@@ -145,7 +113,6 @@ const CreateOrEditLine = observer(({index, changeLine, currentLine, doUpdateUsag
                                                 if (val.length > 1) {
                                                     params["side"] = val[1];
                                                 }
-                                                setParams({...params})
                                                 changeLine("params", params, index)
                                             }}>
                                         <option value="none">Выберите тип картинки</option>
@@ -172,9 +139,7 @@ const CreateOrEditLine = observer(({index, changeLine, currentLine, doUpdateUsag
                                            value={params !== null && params.hasOwnProperty("ratio") ? params.ratio : null}
                                            onChange={(e) => {
                                                params["ratio"] = Number(e.target.value)
-                                               setParams({...params})
                                                changeLine("params", params, index)
-                                               // setSize(Number(e.target.value))
                                            }
                                            }/>
 
@@ -185,9 +150,7 @@ const CreateOrEditLine = observer(({index, changeLine, currentLine, doUpdateUsag
                                            value={params !== null && params.hasOwnProperty("color") ? params.color : null}
                                            onChange={(e) => {
                                                params["color"] = e.target.value
-                                               setParams({...params})
                                                changeLine("params", params, index)
-                                               // setDotColor(e.target.value)
                                            }}/>
                                 </div>
                             }
@@ -201,41 +164,24 @@ const CreateOrEditLine = observer(({index, changeLine, currentLine, doUpdateUsag
 
                         {kind > 1 && kind !== 7 &&
                             <div style={{margin: "15px 0"}}>
-                                {/*{filesNames.length > 0 ? <div>Выбранный(-е) файл(-ы): {filesNames.map((filesName) => (*/}
-                                {/*        <p>*/}
-                                {/*            {filesName}*/}
-                                {/*        </p>*/}
-                                {/*    ))}</div> :*/}
-                                {/*    <p>Выберите файл(-ы)</p>}*/}
                                 {(kind === 3 || kind === 2) &&
                                     <div>
                                         <label className="file_chooser">
                                             <input type="file" accept="image/*" onChange={async (e) => {
-                                                setAddressFileType("local")
                                                 changeLine("addressFileType", "local", index)
                                                 let array = Array.from(e.target.files)
                                                 let list = selectFile(array, block_store)
                                                 console.log(list)
-                                                setFilesNames(Array.from(list));
                                                 changeLine("filesNames", list, index)
-                                                // addFiles(Array.from(e.target.files))
                                             }}/>
                                             <p><img alt="" src={load}/><br/>Загрузить изображение</p>
                                         </label>
-                                        {/* <input type="text" id={"global_files" + currentLine.id} onChange={(e) => {
-                                            setAddressFileType("global")
-                                            changeLine("addressFileType", "global", index)
-                                            setFilesNames([e.target.value])
-                                            changeLine("filesNames", [e.target.value], index)
-                                        }}/>*/}
                                         <label className="custom_select multiline_select">
                                             <select size="5" onChange={e => {
                                                 let fileList = []
                                                 fileList = [...e.target.selectedOptions]
                                                     .map(option => option.value);
-                                                setAddressFileType("local")
                                                 changeLine("addressFileType", "local", index)
-                                                setFilesNames(fileList)
                                                 changeLine("filesNames", fileList, index)
                                                 console.log(fileList)
                                             }}>
@@ -254,19 +200,10 @@ const CreateOrEditLine = observer(({index, changeLine, currentLine, doUpdateUsag
                                         <label className="file_chooser">
                                             <input className="pretty_inputs" type="file" multiple accept="image/*"
                                                    onChange={async (e) => {
-                                                       setAddressFileType("local")
                                                        changeLine("addressFileType", "local", index)
                                                        console.log("local")
-                                                       // try {
-                                                       //     const list =selectFile(Array.from(e.target.files), block_store);
-                                                       //     setFilesNames(list);
-                                                       // } catch (error) {
-                                                       //     console.error(error);
-                                                       // }
                                                        let list = selectFile(Array.from(e.target.files), block_store)
-                                                       setFilesNames(list);
                                                        changeLine("filesNames", list, index)
-                                                       // addFiles(Array.from(e.target.files))
                                                        console.log(Array.from(e.target.files))
                                                    }}/>
                                             <p><img alt="" src={load}/><br/>Загрузить изображение</p>
@@ -275,19 +212,14 @@ const CreateOrEditLine = observer(({index, changeLine, currentLine, doUpdateUsag
                                         <input className="pretty_inputs" style={{marginBottom: "20px"}} type="text"
                                                id={"global_files" + currentLine.id}
                                                onChange={(e) => {
-                                                   setAddressFileType("global")
                                                    changeLine("addressFileType", "global", index)
-                                                   setFilesNames(e.target.value.split("; "))
                                                    changeLine("filesNames", e.target.value.split("; "), index)
                                                }}/>
                                         <label className="custom_select multiline_select">
                                             <select size="10" multiple onChange={e => {
-                                                let fileList = []
-                                                fileList = [...e.target.selectedOptions]
+                                                let fileList = [...e.target.selectedOptions]
                                                     .map(option => option.value);
-                                                setAddressFileType("local")
                                                 changeLine("addressFileType", "local", index)
-                                                setFilesNames(fileList)
                                                 changeLine("filesNames", fileList, index)
                                                 console.log(fileList)
                                             }}>
@@ -303,7 +235,6 @@ const CreateOrEditLine = observer(({index, changeLine, currentLine, doUpdateUsag
                                 {kind === 5 &&
                                     <input placeholder="Введите ссылку" type="text" id={"global_files" + currentLine.id}
                                            onChange={(e) => {
-                                               setFilesNames([e.target.value])
                                                changeLine("filesNames", [e.target.value], index)
                                            }}
                                     />
@@ -315,27 +246,21 @@ const CreateOrEditLine = observer(({index, changeLine, currentLine, doUpdateUsag
                                            value={params !== null && params.documentName ? params.documentName : null}
                                            onChange={(e) => {
                                                params["documentName"] = e.target.value
-                                               setParams({...params})
                                                changeLine("params", params, index)
                                            }
                                            }/>
                                     <label className="file_chooser">
                                         <input type="file" onChange={(e) => {
                                             console.log(e.target.files[0])
-                                            setAddressFileType("local")
                                             changeLine("addressFileType", "local", index)
                                             const list = selectFile(Array.from(e.target.files), block_store)
-                                            setFilesNames(list);
                                             changeLine("filesNames", list, index)
-                                            // addFiles(Array.from(e.target.files))
                                         }}/>
                                         <p><img alt="" src={load}/><br/>Загрузить файл</p>
                                     </label>
                                     <input style={{marginBottom: "20px"}} type="text" id={"global_files" + currentLine.id}
                                            onChange={(e) => {
-                                               setAddressFileType("global")
                                                changeLine("addressFileType", "global", index)
-                                               setFilesNames([e.target.value])
                                                changeLine("filesNames", [e.target.value], index)
                                            }}/>
 
@@ -344,9 +269,7 @@ const CreateOrEditLine = observer(({index, changeLine, currentLine, doUpdateUsag
                                             let fileList = []
                                             fileList = [...e.target.selectedOptions]
                                                 .map(option => option.value);
-                                            setAddressFileType("local")
                                             changeLine("addressFileType", "local", index)
-                                            setFilesNames(fileList)
                                             changeLine("filesNames", fileList, index)
                                             console.log(fileList)
                                         }}>
@@ -368,8 +291,7 @@ const CreateOrEditLine = observer(({index, changeLine, currentLine, doUpdateUsag
                     {/* Появление зоны редактирования текста*/}
                     {kind === 3 &&
                         <ExtendedTextEditor 
-                            text={text} 
-                            setText={(t) => setText([t])}
+                            text={text}
                             changeLine={changeLine}
                             index={index}      
                         />

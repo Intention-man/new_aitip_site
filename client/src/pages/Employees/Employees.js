@@ -15,7 +15,10 @@ const Employees = () => {
 
 
     return (
-        <></>
+        <>
+            <ContestsBlock contests={electionsAndContests.filter(e => e.kind === "Конкурс")}/>
+            <ElectionsBlock elections={electionsAndContests.filter(e => e.kind === "Выборы")}/>
+        </>
     );
 };
 

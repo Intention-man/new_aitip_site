@@ -30,7 +30,7 @@
     margin: 30px;
 }
 .button_list > button{
-    background-color: #d9d9d9;
+    background-color: var(--aitip_bg_grey);
     font-weight: bold;
 }
 .button_list > button:focus{

@@ -1,10 +1,11 @@
 * {
+    --aitip_white: #FFF;
+    --aitip_bg_grey: #F5F5F5;
     --bgcolor: #EEEEEE;
     --aitip_grey: #999999;
     --aitip_black: #292D32;
     --aitip_blue: #076DB1;
     --aitip_red: #AD4820;
-    --aitip_bg_grey: #F5F5F5;
     --main_part_width: 100%;
     --document_icon_size: 40px;
     --normal-font_size: 20px;

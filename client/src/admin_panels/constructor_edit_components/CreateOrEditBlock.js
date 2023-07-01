@@ -68,7 +68,7 @@ const CreateOrEditBlock = observer(({block, mode}) => {
             filesNames: [],
             addressFileType: ""
         }])
-        setLineKind(0)
+        // setLineKind(0)
         }   
     };
 
@@ -116,7 +116,7 @@ const CreateOrEditBlock = observer(({block, mode}) => {
                 if (ordinal) {
                     formData.append("ordinal", `${ordinal}`);
                 } else {
-                    formData.append("ordinal", `${getNewOrdinal() + 1}`)
+                    formData.append("ordinal", `${getNewOrdinal()}`)
                 }
             }
             formData.append("lines", JSON.stringify(lines))
@@ -133,6 +133,7 @@ const CreateOrEditBlock = observer(({block, mode}) => {
                 })
                 :
                 createBlock(formData).then(data => {
+                    console.log(0)
                     if (data && data.hasOwnProperty("id")){
                         refetchBlocks(block_store) 
                         setDoUpdateUsages(true)
@@ -150,7 +151,8 @@ const CreateOrEditBlock = observer(({block, mode}) => {
     }
 
     const getNewOrdinal = () => {
-        return block_store.blocks.filter(block => block.pageLink === pageLink).sort((a, b) => a.ordinal - b.ordinal).at(-1).ordinal + 1;
+        let obj = block_store.blocks.filter(block => block.pageLink === pageLink).sort((a, b) => a.ordinal - b.ordinal).at(-1)
+        return obj ? obj.ordinal + 1 : 1;
     }
 
     const chooseLineType = (event) => {
@@ -303,6 +305,7 @@ const CreateOrEditBlock = observer(({block, mode}) => {
                         if (data && data.hasOwnProperty("id")){
                            setSaveMessage("Успешно удалено") 
                         } 
+                        window.location.reload();
                     }
                         )
                 } else {
@@ -311,6 +314,7 @@ const CreateOrEditBlock = observer(({block, mode}) => {
                         if (data && data.hasOwnProperty("id")){
                            setSaveMessage("Успешно удалено") 
                         } 
+                        window.location.reload();
                     }
                         )
                 }

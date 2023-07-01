@@ -1,6 +1,6 @@
 .button_list{
     text-align: center;
-    background-color: #fafafa;
+    background-color: var(--aitip_white);
     margin: 0 -5.6%;
     padding: 20px 5%;
     display: flex;
@@ -10,7 +10,7 @@
 
 .button_list > button {
     width: calc(50% - 20px);
-    background: #f5f5f5;
+    background: var(--aitip_bg_grey);
     display: inline-block;
     height: 90px;
     padding: 0 8px;

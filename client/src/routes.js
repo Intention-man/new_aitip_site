@@ -19,7 +19,7 @@ import PersonalitiesPage from "./pages/Institute/PersonalitiesPage";
 import AdmissionBac from "./pages/Admission/AdmissionBac";
 import AdmissionAdd from "./pages/Admission/AdmissionAdd";
 import Documents from "./pages/Institute/Documents";
-import Employees from "./pages/Employees/Employees";
+import Employees from "./pages/Employees";
 import Students from "./pages/Students/Students";
 import Auth from "./pages/Auth";
 import SuperAdminPage from "./pages/SuperAdminPage";

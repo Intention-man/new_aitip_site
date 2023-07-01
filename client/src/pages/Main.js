@@ -118,7 +118,6 @@ const Main = observer(() => {
         3: <UpcomingEventsBlock/>,
         4: <LearnMoreAboutUsBlock/>
     });
-    const n = <NewsBlock/>
     const handMadeBlocksCount = 3
     const myAddress = "/" + window.location.href.split("/")[3]
 

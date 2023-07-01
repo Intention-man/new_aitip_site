@@ -40,10 +40,13 @@ const Block = observer(({block, header, children}) => {
         <div className="Block" linkname={block == undefined ? header : block.header}>
         {
             (block == undefined) ?
-                <div>{children}</div>
+                <div>
+                    <h1 style={{textAlign: "center"}}>{header}</h1>
+                    {children}
+                </div>
             :
                 <>
-                    <h1>{block.header}</h1>
+                    <h1 style={{textAlign: "center"}}>{block.header}</h1>
                     {
                         myLines && myLines.map(line =>
                             <LineDisplay key={line.id} line={line}/>

@@ -26,7 +26,7 @@ const Auth = observer(() => {
 
 
         } catch (e) {
-            alert(e)
+            alert("Ошибка: " + e)
         }
     }
 

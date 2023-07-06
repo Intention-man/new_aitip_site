@@ -4,7 +4,7 @@
     padding: 1%;
     margin: 1%;
     color: var(--aitip_blue);
-    background-color: #EEEEEE;
+    background-color: var(--aitip_bg_grey);
     border-color: var(--aitip_blue);
 }
 

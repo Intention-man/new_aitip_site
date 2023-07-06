@@ -140,14 +140,14 @@ const Menu = () => {
             <div className="bottom_menu" id="myMenu">
                 {menuList.map(listPoint => {
                     return (
-                        <div className="dropdown">
+                        <div className="dropdown" key={listPoint.name}>
                             {(listPoint.hasOwnProperty("children")) &&
                                 <div>
                                     <a className="dropdown-button">{listPoint.name}</a>
                                     <ul className="dropdown-content">
                                         {listPoint.children.map(child => {
                                             return (
-                                                <li><a href={child.link}>{child.name}</a></li>
+                                                <li key={child.name}><a href={child.link}>{child.name}</a></li>
                                             )
                                         })}
                                     </ul>

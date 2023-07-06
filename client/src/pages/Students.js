@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import {fetchSchedules} from "../../http/scheduleAPI";
-import ButtonList from "../../components/ButtonList";
-import "../../css/page_styles/Students.css";
-import {fetchLabs} from "../../http/labAPI";
-import Card from "../../components/lines/Card";
-import Carusel from "../../components/lines/Carusel";
+import {fetchSchedules} from "../http/scheduleAPI";
+import ButtonList from "../components/ButtonList";
+import "../css/page_styles/Students.css";
+import {fetchLabs} from "../http/labAPI";
+import Card from "../components/lines/Card";
+import Carusel from "../components/lines/Carusel";
 
 const Students = () => {
     const [allSchedules, setAllSchedules] = useState([]);

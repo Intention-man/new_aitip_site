@@ -1,8 +1,7 @@
-import {useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 import OurColorPicker from "../OurColorPicker";
 import "../../css/component_styles/Editor.css";
 import ExtendedTextEditor from "../../components/lines/ExtendedTextEditor";
-import structure from "../../pages/Institute/Structure";
 
 /**
  * Компонент редактора текстовой линии
@@ -28,9 +27,6 @@ const TextLineEditor = ({ line, changeLine, index }) => {
     const onColumnTextChange = (columnIndex, newText) => {
         if (columnIndex < textList.length)
             textList[columnIndex] = newText;
-        // else if (columnIndex < 3){
-        //     newColumnsTexts.push(newText);
-        // }
         changeLine('text', textList, index);
     };
 

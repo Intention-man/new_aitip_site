@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+
+.headingBlock{
+    grid-column: 1/13;
+    text-align: center;
+}
+.headingText{
+    font-size: 200%;
+    color: #292D32;
+}
+.zipAdv{
+    text-align: center;
+    font-size: 25px;
+    color: #292D32;
+    padding-bottom: 1%;
+}
+.buttonsSearch{
+    width: 100%;
+}
+.textInButtonSearch{
+    border-radius: 10%;
+    background: #F5F5F5;
+    color: #292D32;
+    width: 100%;
+    margin-left: 2%;
+    padding-bottom: 1%;
+    padding-top: 1%;
+
+}
+
+.modifDate{
+    color: var(--aitip_blue);
+    font-weight: bold;
+}
+
+.postPerson{
+    box-sizing: border-box;
+    border: 1px solid var(--aitip_blue);
+    border-radius: 10px;
+    padding: 1% 2% 1% 2%;
+    width: 100%;
+
+}
+.admissionDates{
+    margin-top: 3%;
+    font-weight: bold;
+}
+.dateAndAddress{
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    text-align: center;
+}
+.card-advertisement{
+    background: #FFFFFF;
+    border-radius: 10px;
+    margin-bottom: 2%;
+}
+
+.tracks {
+    display: grid;
+    width: 105%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+    grid-template-columns: 1fr 1fr;
+    background: #F5F5F580;
+    border-radius: 10px;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    margin-left: -2.5%;
+}
+
+.Card-body-none {
+    padding: 20px 30px 20px 30px;
+}
+.documentation-card{
+    text-align: justify;
+    background:
+            /*url("../../assets/img/small-logos/document-text.jpg") no-repeat 0% */
+    center ;
+    background-size: 4%;
+    padding-left: 6%;
+    margin-bottom: 3%;
+}
+.nameUniversity{
+    text-align: justify;
+    margin-bottom: 3%;
+}
+.requirementsForDocuments{
+    text-align: justify;
+    margin-bottom: 3%;
+}
+.requirementsForThePosition{
+    width: 104%;
+    text-align: justify;
+    background: #F5F5F5;
+    padding: 3% 2%;
+    margin-bottom: 3%;
+    border-radius: 10px;
+    margin-left: -2%;
+}
+.link-document-section{
+    text-align: right;
+    color: #999999
+}
+
+.important-documentation-card{
+    text-align: justify;
+    background:
+            /*url("../../assets/img/small-logos/document-text.jpg") no-repeat 0% */
+    center ;
+    background-size: 4%;
+    padding-left: 6%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    color: #292D32;
+    padding-top: 1%;
+    padding-bottom: 1%;
+}
+.card-with-imp-info{
+    padding: 2%;
+    margin-bottom: 5%;
+    background: var(--aitip_white);
+}

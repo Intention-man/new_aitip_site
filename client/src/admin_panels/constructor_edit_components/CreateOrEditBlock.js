@@ -16,18 +16,18 @@ import doc_pic from "../../local_assets/document-text.png"
 import arrow from "../../local_assets/icons/arrow-up.svg"
 import trash from "../../local_assets/icons/delete.svg"
 import { Context } from '../..';
-import { refetchAllContent } from '../../additional_commands/commonPanelsFunctions';
+import { refetchBlocks } from '../../additional_commands/commonPanelsFunctions';
 
 
 const CreateOrEditBlock = observer(({block, mode}) => {
 
-    const { block_store,  } = useContext(Context);
+    const { block_store } = useContext(Context);
 
     // возвращаемые "наверх" значения
     const isEmpty = block.hasOwnProperty("fakeParam");
     const prevLinesIdList = isEmpty ? [] : block.lines.map(line => line.id)
 
-    const [isNews, setIsNews] = useState(isEmpty ? false : block.isNews);
+    const [isNews, setIsNews] = useState(isEmpty ? null : block.isNews);
     const [header, setHeader] = useState(isEmpty ? "" : block.header);
     const [pageLink, setPageLink] = useState(isEmpty ? "" : block.pageLink);
     const [ordinal, setOrdinal] = useState(isEmpty ? -1 : block.ordinal);
@@ -36,15 +36,8 @@ const CreateOrEditBlock = observer(({block, mode}) => {
     const [doUpdateUsages, setDoUpdateUsages] = useState(false);
     const [removedLineIndex, setRemovedLineIndex] = useState(-1);
     const [lineKind, setLineKind] = useState(0);
+    const [saveMessage, setSaveMessage] = useState("");
 
-    function chooseLineType(event) {
-        const elements = document.querySelectorAll('.line_type');
-        elements.forEach((element) => {
-            element.classList.remove('type_active');
-        });
-        event.currentTarget.classList.add('type_active');
-        setLineKind(+event.currentTarget.getAttribute('kind'));
-    }
 
     useEffect(() => {
         setIsNews(block.isNews)
@@ -55,11 +48,19 @@ const CreateOrEditBlock = observer(({block, mode}) => {
         if (mode === "edit") {
             document.getElementById('header').value = block.header
         }
+        if (checkSameLineOrdinal()) {
+            setLines(lines.map(line => ({...line, "lineOrdinal": lines.indexOf(line)})))
+        }
     }, [block])
+
+    useEffect(() => {
+        saveMessage.length > 0 && alert(saveMessage)
+    }, [saveMessage])
 
 
     const addLine = () => {
-        setLines([...lines, {
+        if (lineKind > 0) {
+            setLines([...lines, {
             lineOrdinal: (lines.length > 0 ? lines.sort((a, b) => a.lineOrdinal - b.lineOrdinal).at(-1).lineOrdinal + 1 : 0),
             kind: lineKind,
             params: {},
@@ -103,64 +104,110 @@ const CreateOrEditBlock = observer(({block, mode}) => {
     }
 
     const saveBlock = async () => {
-        const formData = new FormData()
-        block.id && formData.append("id", block.id)
-        formData.append("isNews", isNews)
-        formData.append("header", header);
-        !isNews ? formData.append("pageLink", pageLink) : formData.append("pageLink", "/news");
-        if(!isNews) {
-            if (ordinal) {
-                formData.append("ordinal", `${ordinal}`);
+        if (isDataValid()) {
+            const formData = new FormData()
+            block.id && formData.append("id", block.id)
+            formData.append("isNews", isNews)
+            formData.append("header", header);
+            !isNews ? formData.append("pageLink", pageLink) : formData.append("pageLink", "/news");
+            if (!isNews) {
+                if (ordinal) {
+                    formData.append("ordinal", `${ordinal}`);
+                } else {
+                    formData.append("ordinal", `${getNewOrdinal()}`)
+                }
             }
-            else {
-                const blocksOnPage = getPageBlocksNumber();
-                formData.append("ordinal", `${blocksOnPage + 1}`)
-            }
+            formData.append("lines", JSON.stringify(lines))
+            formData.append("prevLinesIdList", JSON.stringify(prevLinesIdList))
+
+            mode === "edit" ?
+                updateBlock(formData).then(data => {
+                    if (data && data.hasOwnProperty("id")){
+                        refetchBlocks(block_store)
+                        setDoUpdateUsages(true)
+                        setSaveMessage("Блок успешно обновлен")
+                        setTimeout(() => setDoUpdateUsages(false), 2000)
+                    } else {setSaveMessage("Произошла ошибка на сервере")}
+                })
+                :
+                createBlock(formData).then(data => {
+                    console.log(0)
+                    if (data && data.hasOwnProperty("id")){
+                        refetchBlocks(block_store)
+                        setDoUpdateUsages(true)
+                        setSaveMessage("Блок успешно обновлен")
+                        setTimeout(() => setDoUpdateUsages(false), 2000)
+                    } else {setSaveMessage("Произошла ошибка на сервере")}
+                });
+        } else {
+           setSaveMessage("Заполнены не все обязательные поля")
         }
-        formData.append("lines", JSON.stringify(lines))
-        formData.append("prevLinesIdList", JSON.stringify(prevLinesIdList))
-        mode === "edit" ? 
-            updateBlock(formData).then(data => refetchAllContent(block_store)) 
-        : 
-            createBlock(formData).then(data => refetchAllContent(block_store));
     };
 
     const getMaxLineOrdinal = () => {
         return lines.reduce((a, b) => a.lineOrdinal > b.lineOrdinal ? a : b).lineOrdinal
     }
 
-    const getPageBlocksNumber = () => {
-        return block_store.blocks.filter(block => block.pageLink == pageLink).length;
+    const getNewOrdinal = () => {
+        let obj = block_store.blocks.filter(block => block.pageLink === pageLink).sort((a, b) => a.ordinal - b.ordinal).at(-1)
+        return obj ? obj.ordinal + 1 : 1;
     }
+
+    const chooseLineType = (event) => {
+        const elements = document.querySelectorAll('.line_type');
+        elements.forEach((element) => {
+            element.classList.remove('type_active');
+        });
+        event.currentTarget.classList.add('type_active');
+        setLineKind(+event.currentTarget.getAttribute('kind'));
+    }
+
+    const checkSameLineOrdinal = () => {
+        const set = new Set();
+        for (let i = 0; i < lines.length; i++) {
+            const value = lines[i]["lineOrdinal"];
+            if (set.has(value)) {
+                // Найдено дублирующееся значение
+                return true;
+            }
+            set.add(value);
+        }
+        // Нет дублирующихся значений
+        return false;
+    }
+
+    const isDataValid = () => {
+        console.log(lines.length > 0, lines)
+        return (isNews !== null && pageLink && header && lines && pageLink.length > 0 && header.trim().length > 0 && lines.length > 0)
+    }
+
 
     return (
         <div>
             <div className="block_settings">
-                <div>
-                    {!isNews &&
-                        <>
-                            <p>Выберите страницу</p>
-                            <label className="custom_select">
-                                <select id="pageLink" value={pageLink} onChange={e => {
-                                    setPageLink(e.target.value)
-                                }}>
-                                    <option value="" disabled="disabled">Выберите страницу</option>
-                                    {publicRoutes.map((publicRoute) => (
-                                        <option key={publicRoute.name}
-                                                value={publicRoute.path}>{publicRoute.name}</option>
-                                    ))}
-                                </select>
-                                <svg>
-                                    <use xlinkHref="#select-arrow-down"></use>
-                                </svg>
-                            </label>
-                        </>
-                    }
-                </div>
+                {!isNews &&
+                    <div>
+                        <p>Выберите страницу</p>
+                        <label className="custom_select">
+                            <select id="pageLink" value={pageLink} onChange={e => {
+                                setPageLink(e.target.value)
+                            }}>
+                                <option value="" disabled="disabled">Выберите страницу</option>
+                                {publicRoutes.map((publicRoute) => (
+                                    <option key={publicRoute.name}
+                                            value={publicRoute.path}>{publicRoute.name}</option>
+                                ))}
+                            </select>
+                            <svg>
+                                <use xlinkHref="#select-arrow-down"></use>
+                            </svg>
+                        </label>
+                    </div>
+                }
                 <div>
                     <p>Тип блока</p>
                     <label className="custom_select">
-                        <select id="isNews" value={isNews == undefined ? "" : isNews} onChange={e => {
+                        <select id="isNews" value={isNews === undefined ? "" : isNews} onChange={e => {
                             if (e.target.value === "")
                                 setIsNews(undefined)
                             else
@@ -248,13 +295,28 @@ const CreateOrEditBlock = observer(({block, mode}) => {
                 />
             }
             <Button className="add_block" setChosenValue={() => {
-                saveBlock().then(bool => {
-                    setDoUpdateUsages(true)
-                    alert("Блок успешно обновлен")
-                    setTimeout(() => setDoUpdateUsages(false), 2000)
-                })
+                saveBlock()
             }} buttonName="Сохранить блок"/>
-            <button onClick={() => removeBlock(block.id)}>Удалить блок</button>
+            <button onClick={() => {
+                if (block.id) {
+                    removeBlock(block.id).then(data => {
+                        if (data && data.hasOwnProperty("id")){
+                           setSaveMessage("Успешно удалено")
+                        }
+                        window.location.reload();
+                    }
+                        )
+                } else {
+                    refetchBlocks(block_store)
+                    removeBlock(block_store.blocks.sort((a, b) => a.id - b.id).at(-1).id).then(data => {
+                        if (data && data.hasOwnProperty("id")){
+                           setSaveMessage("Успешно удалено")
+                        }
+                        window.location.reload();
+                    }
+                        )
+                }
+            }}>Удалить блок</button>
             <svg className="sprites">
                 <symbol id="select-arrow-down" viewBox="0 0 10 6">
                     <polyline points="1 1 5 5 9 1"></polyline>

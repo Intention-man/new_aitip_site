@@ -5,9 +5,9 @@ import "../css/component_styles/ButtonList.css";
 
 
 // принимает словарь со значением
-const ButtonList = observer(({buttonList, chosenValue, setChosenValue}) => {
+const ButtonList = observer(({className, buttonList, chosenValue, setChosenValue}) => {
     return (
-        <ul className="button_list">
+        <ul className={"button_list "+(className !== undefined ? className : "")}>
             {(Array.isArray(buttonList)?buttonList:Object.keys(buttonList)).map(key =>
                 <button className="button-admin" key={key} onClick={() => setChosenValue(key)}>
                     {key}

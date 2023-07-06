@@ -13,8 +13,8 @@ const BlockEditor = observer(() => {
     const [chosenBlock, setChosenBlock] = useState({});
 
     useEffect(() => {
-        setPageBlocks(Array.from(block_store.blocks.filter(block => block.pageLink === chosenPageLink)))
-        console.log(Array.from(block_store.blocks.filter(block => block.pageLink === chosenPageLink)))
+        setPageBlocks(Array.from(block_store.blocks.filter(block => block.pageLink === chosenPageLink).sort((a, b) => a.ordinal - b.ordinal)))
+        console.log(Array.from(block_store.blocks.filter(block => block.pageLink === chosenPageLink).sort((a, b) => a.ordinal - b.ordinal)))
     }, [block_store.blocks, chosenPageLink]);
 
 

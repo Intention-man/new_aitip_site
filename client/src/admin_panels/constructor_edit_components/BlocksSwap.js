@@ -65,7 +65,7 @@ const BlocksSwap = () => {
                 <div style={{border: 'solid grey 5px', margin: "20px" }}>
                     <Block block={block}/>
                     {block.ordinal > 0 && <button onClick={() => swapBlocks(block.ordinal - 1, block.ordinal)}>Передвинуть блок на 1 выше</button>}
-                    {block.ordinal < updatedBlocks.length && <button onClick={() => swapBlocks(block.ordinal, block.ordinal + 1)}>Передвинуть блок на 1 ниже</button>}
+                    {block.ordinal < updatedBlocks.length - 1 && <button onClick={() => swapBlocks(block.ordinal, block.ordinal + 1)}>Передвинуть блок на 1 ниже</button>}
                 </div>
             )}
             <button onClick={saveBlocksOrder}>Сохранить текущий порядок блоков</button>

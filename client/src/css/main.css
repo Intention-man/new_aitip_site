@@ -1,10 +1,11 @@
 * {
+    --aitip_white: #FFF;
+    --aitip_bg_grey: #F5F5F5;
     --bgcolor: #EEEEEE;
     --aitip_grey: #999999;
     --aitip_black: #292D32;
     --aitip_blue: #076DB1;
     --aitip_red: #AD4820;
-    --aitip_bg_grey: #F5F5F5;
     --main_part_width: 100%;
     --document_icon_size: 40px;
     --normal-font_size: 20px;
@@ -68,7 +69,7 @@ body {
 
 .know_more_about{
     display: grid;
-    grid-template-columns: repeat(7, minmax(100px, 200px));
+    grid-template-columns: repeat(7, 1fr);
     grid-template-rows: auto auto;
     gap: 10px;
 }
@@ -200,7 +201,7 @@ body {
     .sideBar {
         width: 18%;
     }
-    
+
     .content {
         width: calc(100% - 18%*2);
     }
@@ -210,7 +211,7 @@ body {
     .sideBar {
         display: none;
     }
-    
+
     .content {
         width: 100%;
         padding: 30px 2%;
@@ -224,7 +225,7 @@ body {
     }
 
     .know_more_about{
-        grid-template-columns: repeat(3, minmax(100px, 200px));
+        grid-template-columns: repeat(3, 1fr);
     }
 
     .history{

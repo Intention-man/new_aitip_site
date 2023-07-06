@@ -16,23 +16,19 @@ import DocumentLine from "../lines/DocumentLine";
  */
 
 const LineDisplay = observer(({line}) => {
-    console.log(line)
 
     const getDocumentName = () => {
         return line.params !== null && line.params.hasOwnProperty("documentName") && line.params.documentName
     }
 
     const getImgType = () => {
-        if (line.params !== null && line.params.imgType)
-            return line.params.imgType;
-        else
-            return 'normal';
+        return line.params !== null && line.params.hasOwnProperty("imgType") && line.params.imgType
     }
 
     return (
         // TODO: желательно отрефакторить этот код, разнести этот контент в компоненты в самих линий
 
-        <>
+        <div>
             {line.hasOwnProperty("kind") &&
                 <>
                     {(line.kind === 1 && line.text.length > 0 && line.text[0].length > 0) &&
@@ -42,8 +38,8 @@ const LineDisplay = observer(({line}) => {
                     }
 
                     {(line.kind === 2 && (line.filesNames.length > 0)) && (line.addressFileType === "global" ?
-                        <BigImg imgSrc={line.filesNames[0]} imgType={getImgType()}/> :
-                        <BigImg imgSrc={process.env.REACT_APP_API_URL + line.filesNames[0]} imgType={getImgType()}/>
+                            <BigImg imgSrc={line.filesNames[0]} imgType={getImgType()}/> :
+                            <BigImg imgSrc={process.env.REACT_APP_API_URL + line.filesNames[0]} imgType={getImgType()}/>
                     )
                     }
 
@@ -51,11 +47,8 @@ const LineDisplay = observer(({line}) => {
                         <Card
                             imgType={getImgType()}
                             imgSrc={line.addressFileType === "global" ? line.filesNames[0] : process.env.REACT_APP_API_URL + line.filesNames[0]}
-                            imgPos={line.params.side}
-                        >
-                            <StyledText
-                                line={line}
-                            />
+                            imgPos={line.params.side}>
+                            <MDEditor.Markdown source={Array.isArray(line.text) ? line.text[0] : line.text} style={{whiteSpace: 'pre-wrap'}}/>
                         </Card>
                     }
 
@@ -69,13 +62,9 @@ const LineDisplay = observer(({line}) => {
                     {(line.kind === 6 && (line.filesNames.length > 0)) &&
                         <DocumentLine documentLink={line.addressFileType === "global" ? line.filesNames[0] : process.env.REACT_APP_API_URL + line.filesNames[0]} documentName={getDocumentName()}/>
                     }
-                    {/*// <div>*/}
-                    {/*//     <a href={line.addressFileType === "global" ? line.filesNames[0] : process.env.REACT_APP_API_URL + line.filesNames[0]}*/}
-                    {/*//        download target="_blank">Скачать документ</a>*/}
-                    {/*// </div>*/}
                 </>
             }
-        </>
+        </div>
     );
 });
 

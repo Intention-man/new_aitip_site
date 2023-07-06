@@ -11,7 +11,6 @@ const ExtendedTextEditor = ({text, setText, changeLine, index}) => {
 
     return (
         <MDEditor
-            highlightEnable={false}
             value={text}
             preview="edit"
             commands={[
@@ -55,8 +54,9 @@ const ExtendedTextEditor = ({text, setText, changeLine, index}) => {
                 commands.fullscreen
             ]}
             onChange={(val) => {
-                setText(val)
-                changeLine("text", [val], index)
+                if (setText)
+                    setText(val);
+                changeLine("text", val, index)
             }}
         />
     );

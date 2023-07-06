@@ -1,14 +1,6 @@
 import {convertFiles, fetchAllFiles, updateFileUsagesAPI} from "../http/commonAPI";
-import { fetchBlocks } from "../http/blockAPI";
-// const addFiles = (files) => {
-//     const formData = new FormData();
-//     files.forEach(el => formData.append("files", el));
-//     console.log(files)
-//     convertFiles(formData).then(list => {
-//         setFilesNames(list);
-//         changeLine("filesNames", list, index)
-//     });
-// }
+import {fetchBlocks} from "../http/blockAPI";
+
 
 export async function selectFile(files, block_store) {
     const formData = new FormData();
@@ -49,4 +41,20 @@ export const refetchBlocks = (blockStore) => {
         blockStore.setBlocks(data.rows);
         blockStore.setNews(data.rows.filter(block => block.isNews === true));
     });
+}
+
+export const addConstructorBlocks = (myAddress, handMadeBlocksCount, block_store, blockList, setBlockList) => {
+    let pageConstructorBlocks = Array.from(block_store.blocks.filter(block => block.pageLink === myAddress).sort((block1, block2) => block1.ordinal - block2.ordinal))
+    const count = pageConstructorBlocks.length + handMadeBlocksCount
+    console.log(pageConstructorBlocks)
+
+    for (let i = 1; (i <= count && pageConstructorBlocks.length > 0); i++) {
+        if (!blockList.hasOwnProperty(i)) {
+            // shift() - удаляет 0-ой элемент из массива и возвращает его
+            const first = pageConstructorBlocks.shift()
+            setBlockList(prev => ({...prev, [i]: first}))
+        } else {
+            console.log(blockList[i])
+        }
+    }
 }

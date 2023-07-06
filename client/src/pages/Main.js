@@ -1,22 +1,14 @@
-import React, {useEffect, useState} from 'react';
-import {useContext} from "react";
+import React, {useContext, useEffect, useState} from 'react';
 import {Context} from "../index";
 import {observer} from "mobx-react-lite";
-import BlockContainer from "../components/display/BlockContainer";
 import Block from "../components/display/Block";
-import Carusel from "../components/lines/Carusel";
 
 import book from "../local_assets/book.png";
 import hat from "../local_assets/graduation.png";
 
 //Выпускники
-
-import grad0 from "../local_assets/Content_2.png";
-import grad1 from "../local_assets/Content_3.png";
-import grad2 from "../local_assets/Content_5.png";
-import grad3 from "../local_assets/Content_6.png";
-import grad4 from "../local_assets/Content_7.png";
 import Default from "../local_assets/logo-in-round.svg";
+import {addConstructorBlocks} from "../additional_commands/commonPanelsFunctions";
 
 
 // hand components
@@ -123,19 +115,7 @@ const Main = observer(() => {
 
 
     useEffect(() => {
-        let pageConstructorBlocks = Array.from(block_store.blocks.filter(block => block.pageLink === myAddress).sort((block1, block2) => block1.ordinal - block2.ordinal))
-        const count = pageConstructorBlocks.length + handMadeBlocksCount
-        console.log(pageConstructorBlocks)
-
-        for (let i = 1; (i <= count && pageConstructorBlocks.length > 0); i++) {
-            if (!blockList.hasOwnProperty(i)) {
-                // shift() - удаляет 0-ой элемент из массива и возвращает его
-                const first = pageConstructorBlocks.shift()
-                setBlockList(prev => ({...prev, [i]: first}))
-            } else {
-                console.log(blockList[i])
-            }
-        }
+        addConstructorBlocks(myAddress, handMadeBlocksCount, block_store, blockList, setBlockList)
     }, [block_store.blocks, block_store.lines, handMadeBlocksCount]);
 
     console.log(blockList)

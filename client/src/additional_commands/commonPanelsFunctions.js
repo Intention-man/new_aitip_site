@@ -1,5 +1,5 @@
 import {convertFiles, fetchAllFiles, updateFileUsagesAPI} from "../http/commonAPI";
-import {fetchBlocks} from "../http/blockAPI";
+import {fetchBlocks, fetchLines} from "../http/blockAPI";
 
 
 export async function selectFile(files, block_store) {

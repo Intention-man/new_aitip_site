@@ -1,12 +1,11 @@
-import React, {useEffect, useState, useContext} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {observer} from "mobx-react-lite";
 import CreateOrEditLine from "./CreateOrEditLine";
-import {createBlock, fetchBlocks, removeBlock, updateBlock} from "../../http/blockAPI";
+import {createBlock, removeBlock, updateBlock} from "../../http/blockAPI";
 import {publicRoutes} from "../../routes";
 import "../../css/component_styles/Editor.css"
-import LineDisplay from "../../components/display/LineDisplay";
 import Block from "../../components/display/Block";
-import {updateFileUsages} from "../../additional_commands/commonPanelsFunctions";
+import {refetchAllContent, updateFileUsages} from "../../additional_commands/commonPanelsFunctions";
 import Button from "../../components/Button"
 import text from "../../local_assets/left-align.png"
 import image from "../../local_assets/image.png"
@@ -15,8 +14,7 @@ import video from "../../local_assets/video.png"
 import doc_pic from "../../local_assets/document-text.png"
 import arrow from "../../local_assets/icons/arrow-up.svg"
 import trash from "../../local_assets/icons/delete.svg"
-import { Context } from '../..';
-import { refetchBlocks } from '../../additional_commands/commonPanelsFunctions';
+import {Context} from '../..';
 
 
 const CreateOrEditBlock = observer(({block, mode}) => {
@@ -68,7 +66,7 @@ const CreateOrEditBlock = observer(({block, mode}) => {
             filesNames: [],
             addressFileType: ""
         }])
-    };
+    }}
 
     const changeLine = (key, value, index) => {
         setLines(lines => lines.map(line => (line.lineOrdinal === index ? {...line, [key]: value} : line)))
@@ -123,7 +121,7 @@ const CreateOrEditBlock = observer(({block, mode}) => {
             mode === "edit" ?
                 updateBlock(formData).then(data => {
                     if (data && data.hasOwnProperty("id")){
-                        refetchBlocks(block_store)
+                        refetchAllContent(block_store)
                         setDoUpdateUsages(true)
                         setSaveMessage("Блок успешно обновлен")
                         setTimeout(() => setDoUpdateUsages(false), 2000)
@@ -133,7 +131,7 @@ const CreateOrEditBlock = observer(({block, mode}) => {
                 createBlock(formData).then(data => {
                     console.log(0)
                     if (data && data.hasOwnProperty("id")){
-                        refetchBlocks(block_store)
+                        refetchAllContent(block_store)
                         setDoUpdateUsages(true)
                         setSaveMessage("Блок успешно обновлен")
                         setTimeout(() => setDoUpdateUsages(false), 2000)
@@ -307,7 +305,7 @@ const CreateOrEditBlock = observer(({block, mode}) => {
                     }
                         )
                 } else {
-                    refetchBlocks(block_store)
+                    refetchAllContent(block_store)
                     removeBlock(block_store.blocks.sort((a, b) => a.id - b.id).at(-1).id).then(data => {
                         if (data && data.hasOwnProperty("id")){
                            setSaveMessage("Успешно удалено")

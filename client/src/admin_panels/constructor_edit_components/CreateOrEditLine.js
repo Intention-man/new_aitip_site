@@ -146,13 +146,14 @@ const CreateOrEditLine = observer(({index, changeLine, currentLine, doUpdateUsag
 
                                     {/*Set the color of the dots by choosing one of the options below*/}
                                     <label htmlFor="select_color">Выберите цвет точек:</label>
-                                    <input className="pretty_inputs" style={{height: "25px"}} type="color"
-                                           id={"select_color" + currentLine.id}
-                                           value={params !== null && params.hasOwnProperty("color") ? params.color : null}
-                                           onChange={(e) => {
-                                               params["color"] = e.target.value
-                                               changeLine("params", params, index)
-                                           }}/>
+                                    <OurColorPicker
+                                        type='dots'
+                                        onColorPick={(newColor) => {
+                                            params["color"] = newColor
+                                            // setParams({...params})
+                                            changeLine("params", params, index)
+                                        }}
+                                    />
                                 </div>
                             }
 

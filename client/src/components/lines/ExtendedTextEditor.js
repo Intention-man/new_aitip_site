@@ -11,6 +11,7 @@ const ExtendedTextEditor = ({text, setText, changeLine, index}) => {
 
     return (
         <MDEditor
+            highlightEnable={false}
             value={text}
             preview="edit"
             commands={[

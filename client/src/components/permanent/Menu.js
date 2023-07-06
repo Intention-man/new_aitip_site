@@ -119,7 +119,10 @@ const Menu = () => {
     return (
         <div>
             <div className="topnav" id="myTopnav">
-                <img className="logo" id="Logo" src={logo} onClick={() => navigate("/")}/>
+                <img className="logo" id="Logo" src={logo} onClick={() => {
+                    navigate("/")
+                    navigate(0)
+                }}/>
                 <a className="vuz-name" id="vuz-name-id" href="/">
                     <p className="heading_color">Алтайский институт труда и права</p>
                 </a>

@@ -22,7 +22,10 @@ const LineDisplay = observer(({line}) => {
     }
 
     const getImgType = () => {
-        return line.params !== null && line.params.hasOwnProperty("imgType") && line.params.imgType
+        if (line.params !== null && line.params.imgType)
+            return line.params.imgType;
+        else
+            return 'normal';
     }
 
     return (

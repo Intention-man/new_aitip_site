@@ -81,15 +81,29 @@ const SearchOutputWindow = observer(() => {
         return (Array.from(publicRoutes.filter(route => route.name === pageName))[0]).path
     }
 
+    const showSearchResult = () => {
+        findSuggestions();
+        modal.style.display = "block";
+    }
 
     return (
         <div className="search-form">
             <form style={{height: "100%"}}>
-                <input className="search-input" type="text" placeholder="Поиск по сайту"
-                       onChange={(e) => setSearchInput(e.target.value.toLowerCase())}/>
+                <input 
+                    className="search-input"
+                    type="text"
+                    placeholder="Поиск по сайту"
+                    onChange={(e) => setSearchInput(e.target.value.toLowerCase())}
+                    onKeyDown={(e) => {
+                        if (e.key == 'Enter') {
+                            e.preventDefault();
+                            showSearchResult();
+                        }
+                    }}
+                />
                 <div className="button_search" style={{cursor: "default"}}
-                     onClick={() => modal.style.display = "block"}>
-                    <img src={search} width="25" height="25" onClick={findSuggestions}/>
+                     onClick={showSearchResult}>
+                    <img src={search} width="25" height="25"/>
                 </div>
             </form>
             <div id="myModal" className="search-output-modal">

@@ -1,21 +1,21 @@
 // Sequelize (="DB object") definition by server/.env data
 
-import pg from 'pg';
+// import pg from 'pg';
+//
+// const { Pool } = pg;
 
-const { Pool } = pg;
-
-const pool = new Pool({
-    connectionString: process.env.POSTGRES_URL + "?sslmode=require",
-})
-
-module.exports = pool
+// const pool = new Pool({
+//     connectionString: process.env.POSTGRES_URL + "?sslmode=require",
+// })
+//
+// module.exports = pool
 
 const {Sequelize} = require("sequelize");
 
 module.exports = new Sequelize(
-    process.env.POSTGRES_DATABASE,
-    process.env.POSTGRES_USER,
-    process.env.POSTGRES_PASSWORD,
+    process.env.PGDATABASE,
+    process.env.PGUSER,
+    process.env.PGPASSWORD,
     {
         dialect: "postgres",
         dialectOptions: {
@@ -24,9 +24,9 @@ module.exports = new Sequelize(
                 rejectUnauthorized: false
             }
         },
-        host: process.env.POSTGRES_HOST,
+        host: process.env.PGHOST,
         port: 5432,
-        password: process.env.POSTGRES_PASSWORD
+        password: process.env.PGPASSWORD
     }
 );
 

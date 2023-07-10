@@ -14,9 +14,9 @@ import {Spinner} from "react-bootstrap";
 import "./css/component_styles/SocialMedia.css"
 import Feedback from "./components/permanent/Feedback";
 import Footer from "./components/permanent/Footer";
-import { refetchBlocks } from "./additional_commands/commonPanelsFunctions";
+import {refetchBlocks} from "./additional_commands/commonPanelsFunctions";
 
-import { fetchLines } from "./http/blockAPI";
+import {fetchLines} from "./http/blockAPI";
 import BlockContainer from "./components/display/BlockContainer";
 
 

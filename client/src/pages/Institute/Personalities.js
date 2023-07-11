@@ -13,19 +13,17 @@ import address from "../../local_assets/location (1).png";
 import ButtonList from "../../components/ButtonList";
 
 
-
 const SmallStafferItem = observer(({staffer}) => {
     return (
-        <div className="block_content" style={{minWidth: "300px"}}>
-            <RoundedImg imgSrc={test} style={{width: "90px", backgroundPosition: "center"}}
+        <div className="block_content" style={{minWidth: "250px"}}>
+            <RoundedImg imgSrc={process.env.REACT_APP_API_URL + staffer.img || test}
+                        style={{width: "90px", backgroundPosition: "center"}}
                         className="ava_img"/>
             <div>
                 <div> {staffer.name} </div>
                 <div> {staffer.post} </div>
             </div>
         </div>
-
-
     );
 });
 
@@ -53,10 +51,13 @@ const StafferItem = observer(({staffer, closeStaffer}) => {
                 display: "flex",
                 flexWrap: "wrap"
             }}
+                // onClick={() => viewDiv(staffer.id)}
             >
+
+
                 <div className="description_block">
                     <img src={process.env.REACT_APP_API_URL + staffer.img}
-                         className="big_avatar"
+                         className="big_avatar m-auto m-md-0"
                          alt="картинка чет не загрузилась"/>
                     <div>
                         {/*<div className="top_block_row">*/}
@@ -66,6 +67,8 @@ const StafferItem = observer(({staffer, closeStaffer}) => {
                                 onClick={() => closeStaffer(staffer.id)}>
                             Х
                         </button>
+                        {/*    </div>*/}
+                        {/*</div>*/}
 
                         <div className="general_desc"> {staffer.post} </div>
                         <div className="general_desc"> {staffer.academic_degree} {staffer.title}</div>
@@ -83,6 +86,8 @@ const StafferItem = observer(({staffer, closeStaffer}) => {
                                 <div>{staffer.adress}</div>
                             </div>
                         </div>
+
+
                     </div>
 
                 </div>
@@ -100,6 +105,12 @@ const StafferItem = observer(({staffer, closeStaffer}) => {
 
 const PersonalitiesList = observer(params => {
     const {staff_store} = useContext(Context)
+    const [size, setSize] = useState([0, 0]);
+
+    useEffect(() => {
+        updateSize();
+        window.addEventListener('resize', updateSize);
+    }, [])
 
     function changeChosenStaffer(clickedId) {
         if (params.chosenStaffer && params.chosenStaffer.id === clickedId) {
@@ -109,20 +120,35 @@ const PersonalitiesList = observer(params => {
         }
     }
 
+
+    function updateSize() {
+        setSize([window.innerWidth, window.innerHeight]);
+    }
+
+
     return (
         <div>
             {(staff_store.staff.length !== 0) ?
                 (() => {
                     let rows = []
-                    const lenGroup = window.innerWidth > 800 ? 2 : 1
+                    const lenGroup = size[0] > 800 ? 2 : 1
                     const count = Math.ceil(params.filteredStaff.length / lenGroup) * lenGroup
-
+                    // console.log(staff_store.staff[0])
+                    // console.log(staff_store.staff[1])
+                    // console.log(staff_store.staff[2])
                     for (let i = 0; i < count; i += lenGroup) {
                         let staffers = []
                         for(let l = 0; l < lenGroup; l++) {
                             staffers.push((params.filteredStaff.length > i + l ? staff_store.staff[i + l] : undefined))
 
                         }
+                        // const staffer1 = (params.filteredStaff.length > i ? staff_store.staff[i] : undefined)
+                        // const staffer2 = (params.filteredStaff.length > (i + 1) ? staff_store.staff[i + 1] : undefined)
+                        // const staffer3 = (params.filteredStaff.length > (i + 2) ? staff_store.staff[i + 2] : undefined)
+                        // if (staffer1 !== undefined) {lastThreeStaffId.push(staffer1.id)}
+                        // if (staffer2 !== undefined) lastThreeStaffId.push(staffer2.id)
+                        // if (staffer3 !== undefined) lastThreeStaffId.push(staffer3.id)
+
                         let list = staffers.filter(i => i !== undefined)
 
                         rows.push(<Row style={{display: "grid", gridTemplateColumns: "1fr ".repeat(lenGroup)}}>
@@ -141,7 +167,7 @@ const PersonalitiesList = observer(params => {
                             )}
                         </Row>)
                         rows.push(params.chosenStaffer && list.map(e => e.id).includes(params.chosenStaffer.id) &&
-                            <StafferItem key={params.chosenStaffer.id} staffer={params.chosenStaffer}/>)
+                            <StafferItem key={params.chosenStaffer.id} staffer={params.chosenStaffer} closeStaffer={changeChosenStaffer}/>)
                     }
                     return rows
                 })() : <div>Загрузка...</div>
@@ -151,7 +177,12 @@ const PersonalitiesList = observer(params => {
 });
 
 
-const PersonalitiesFilterBar = observer(({filteredDirections, setFilteredDirections, filteredPrograms, setFilteredPrograms}) => {
+const PersonalitiesFilterBar = observer(({
+                                             filteredDirections,
+                                             setFilteredDirections,
+                                             filteredPrograms,
+                                             setFilteredPrograms
+                                         }) => {
     const {admission_store} = useContext(Context)
 
     return (

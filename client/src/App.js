@@ -29,10 +29,10 @@ const App = observer(() => {
 
     
     useEffect(() => {
+        refetchAllContent(block_store);
         fetchLines().then(data => {
             block_store.setLines(data.rows)
         })
-        refetchAllContent(block_store);
     }, [])
     
     useEffect(() => {

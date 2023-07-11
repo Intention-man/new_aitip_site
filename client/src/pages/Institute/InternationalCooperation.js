@@ -19,7 +19,7 @@ const InternationalCooperation = () => {
     return (
         <>
             <h1 className="page_title">Международное сотрудничество</h1>
-            <h2 className="block_title">Общие данные</h2>
+            {/*<h2 className="block_title">Общие данные</h2>*/}
             <Block header="Общие данные">
                 <Card imgType="fading" imgSrc={city} className="international_info">
                     <p className="card_title">Международное сотрудничество в <span
@@ -40,7 +40,7 @@ const InternationalCooperation = () => {
                         src={globus} alt="" height="27" style={{marginRight: "5px"}}></img>https://atiso.ru/sveden/inter/</a>
                 </Card>
             </Block>
-            <h2 className="block_title">Иностранные студенты и выпускники</h2>
+            {/*<h2 className="block_title">Иностранные студенты и выпускники</h2>*/}
             <Block header="Иностранные студенты и выпускники">
                 <div style={{background: "url(" + germany + ")  left top no-repeat", backgroundSize: "350px"}}
                      className="card_no_background">
@@ -60,7 +60,7 @@ const InternationalCooperation = () => {
                     </Card>
                 </div>
             </Block>
-            <h2 className="block_title">Иностранные педагоги и научные работники</h2>
+            {/*<h2 className="block_title">Иностранные педагоги и научные работники</h2>*/}
             <Block header="Иностранные педагоги и научные работники">
                 <div style={{background: "url(" + germany2 + ")  right top no-repeat", backgroundSize: "350px", paddingBottom: "1px"}}
                      className="card_no_background">

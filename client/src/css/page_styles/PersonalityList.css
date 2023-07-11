@@ -2,6 +2,7 @@
     margin-bottom: 10px;
     border-radius: 10px;
     background: white;
+    height: calc(100% - 10px);
 }
 
 .block_content {
@@ -161,11 +162,16 @@
     }
 }
 
+@media (max-width: 370px){
+    .small_button_list > button{
+        max-width: 100%;
+    }
+    .data_part{
+        grid-column: span 2;
+    }
+}
 
 @media screen and (min-width: 1501px) {
-    .description_block {
-        min-width: 740px;
-    }
 
     .button_row {
         margin-left: 370px;
@@ -183,9 +189,6 @@
 }
 
 @media screen and (max-width: 1500px) and (min-width: 601px) {
-    .description_block {
-        min-width: 660px;
-    }
 
     .text_block_active {
         width: 660px;
@@ -199,7 +202,6 @@
 }
 
 
-/*TODO Сделать версию для телефонов с нормальным блоком описания*/
 @media screen and (max-width: 600px) {
     .description_block {
         min-width: 200px;

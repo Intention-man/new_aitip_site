@@ -6,6 +6,7 @@ import {observer} from "mobx-react-lite";
 import {fetchAdditionalPrograms, fetchDirectionsBachelor} from "../../http/admissionAPI";
 import RoundedImg from "../../components/lines/RoundedImg";
 import "../../css/component_styles/PersonalitiesFilter.css"
+import "../../css/page_styles/PersonalityList.css"
 import test from "../../local_assets/logo-noincome.png"
 import email from "../../local_assets/sms (1).png";
 import phone from "../../local_assets/Vector (2).png";
@@ -299,7 +300,7 @@ const Personalities = observer(() => {
 
 
         return (
-            <Container className="mt-md-5" style={{display: "flex", width: "100vw"}}>
+            <Container className="mt-md-5" style={{display: "flex"}}>
                 <Row>
                     <Col lg={3} style={{display: "inline-block", right: 0}}>
                         <PersonalitiesFilterBar filteredDirections={filteredDirections}

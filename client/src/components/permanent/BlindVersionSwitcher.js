@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import EyeIcon from "../../local_assets/eye.png"
 import "../../css/component_styles/Menu.css"
 
@@ -15,8 +15,25 @@ const BlindVersionSwitcher = () => {
                                                                         помещён в стейт, так как его желательно
                                                                         подгружать из CSS-константы */
 
+    useEffect(() => {  // При загрузке компонента вызываем необходимые функции
+        restoreSavedState();
+    }, []);
+
     /**
-     * Обработчик переключения версии для слабовидящих
+     * Восстановление сохранённого стейта `isBlindVersionActive`.
+     * 
+     * Нужно для того, чтобы сохранять в память, была ли включена версия для слабовидящих.
+     * Это позволяет сохранять включённую пользователем версию после перезагрузки страницы
+     * или при переходе на другие.
+     */
+    const restoreSavedState = () => {
+        const savedState = localStorage.getItem('isBlindVersionActive');
+        if (savedState == 'true')
+            toggleBlindVersion();
+    }
+
+    /**
+     * Обработчик переключения версии для слабовидящих.
      */
     const toggleBlindVersion = () => {
         const root = document.documentElement;  // Селектор элемента :root
@@ -29,6 +46,7 @@ const BlindVersionSwitcher = () => {
             setDefaultFontSize(root.style.getPropertyValue('--font_size_const'));
         }
         root.style.setProperty('--font_size_const', newValue);  // Обновляем размер шрифта
+        localStorage.setItem('isBlindVersionActive', !isBlindVersionActive);
         setIsBlindVersionActive(!isBlindVersionActive);
     };
 

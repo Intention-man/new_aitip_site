@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import "../../css/component_styles/Menu.css"
 import logo from "../../local_assets/logo-in-round.svg"
-import eye from "../../local_assets/eye.png"
 import {
     ADMISSION_APE,
     ADMISSION_BAC,
@@ -21,6 +20,7 @@ import {
 } from "../../consts/pageConsts";
 import SearchOutputWindow from "./SearchOutputWindow";
 import {useNavigate} from "react-router";
+import BlindVersionSwitcher from './BlindVersionSwitcher';
 
 
 function myFunction() {
@@ -126,13 +126,8 @@ const Menu = () => {
                 <a className="vuz-name" id="vuz-name-id" href="/">
                     <p className="heading_color">Алтайский институт труда и права</p>
                 </a>
-
                 <SearchOutputWindow/>
-
-                <button className="blindversion">
-                    Версия для слабовидящих
-                    <img src={eye} style={{color: "white", paddingLeft: "10px", paddingTop: "12px"}}/>
-                </button>
+                <BlindVersionSwitcher/>
                 <a className="icon" onClick={() => myFunction()}>
                     <i className="fa fa-bars"/>
                 </a>

@@ -25,7 +25,10 @@ const BlindVersionSwitcher = () => {
 
     return (
         <button 
-            className="blindversion"
+            className={
+                "blindversion " + 
+                (isBlindVersionActive ? "blindversion-active" : "blindversion-inactive")
+            }
             onClick={toggleBlindVersion}
         >
             Версия для слабовидящих

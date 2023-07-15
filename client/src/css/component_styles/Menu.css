@@ -109,7 +109,7 @@
     text-decoration: none;
 }
 
-.blindversion{
+.blindversion {
     position: relative;
     display: flex;
     max-width: 250px;
@@ -118,13 +118,19 @@
     /*text-align: center;*/
     /*text-decoration: none;*/
     /*text-justify: auto;*/
-    background: var(--aitip_blue);
     color: #f2f2f2;
     border: none;
     cursor: pointer;
+    background: var(--aitip_blue);
 }
 
+.blindversion-inactive {
+    filter: brightness(100%);
+}
 
+.blindversion-active {
+    filter: brightness(80%);
+}
 
 .bottom_menu {
     position: relative;

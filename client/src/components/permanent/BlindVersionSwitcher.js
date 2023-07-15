@@ -3,30 +3,39 @@ import EyeIcon from "../../local_assets/eye.png"
 import "../../css/component_styles/Menu.css"
 
 
+/**
+ * Компонент переключателя версии для слабовидящих.
+ */
 const BlindVersionSwitcher = () => {
 
-    const BLIND_VERSION_FONT_SIZE = '25px';
+    const BLIND_VERSION_FONT_SIZE = '25px';  // Размер шрифта в версии для слабовидящих
 
     const [isBlindVersionActive, setIsBlindVersionActive] = useState(false);
-    const [defaultFontSize, setDefaultFontSize] = useState('20px');
+    const [defaultFontSize, setDefaultFontSize] = useState('20px');  /* Размер шрифта в обычной версии,
+                                                                        помещён в стейт, так как его желательно
+                                                                        подгружать из CSS-константы */
 
+    /**
+     * Обработчик переключения версии для слабовидящих
+     */
     const toggleBlindVersion = () => {
-        const root = document.documentElement;
-        let newValue;
+        const root = document.documentElement;  // Селектор элемента :root
+        let newValue;  
         if (isBlindVersionActive) {
-            newValue = defaultFontSize;
+            newValue = defaultFontSize;  // Если был режим для слабовидящих - возвращаем стандартный шрифт
         } else {
-            newValue = BLIND_VERSION_FONT_SIZE;
+            newValue = BLIND_VERSION_FONT_SIZE;  // Если был стандартный режим - устанавливаем увеличенный шрифт
+            // Далее твик, чтобы подгрузить значение константы --font_size_const в defaultFontSize
             setDefaultFontSize(root.style.getPropertyValue('--font_size_const'));
         }
-        root.style.setProperty('--font_size_const', newValue);
+        root.style.setProperty('--font_size_const', newValue);  // Обновляем размер шрифта
         setIsBlindVersionActive(!isBlindVersionActive);
     };
 
     return (
         <button 
-            className={
-                "blindversion " + 
+            className={  // В зависимости от isBlindVersionActive выбираем доп. CSS-класс 
+                "blindversion " +
                 (isBlindVersionActive ? "blindversion-active" : "blindversion-inactive")
             }
             onClick={toggleBlindVersion}

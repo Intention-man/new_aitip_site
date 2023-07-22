@@ -42,7 +42,7 @@ export const updateFileUsages = (fileLink, delta) => {
 export const refetchAllContent = (blockStore) => {
     fetchBlocks().then(data => {
         blockStore.setBlocks(data.rows);
-        blockStore.setNews(data.rows.filter(block => block.isNews === true));
+        blockStore.setNews(data.rows.filter(block => block.isNews === true).sort((e1, e2) => e2.id - e1.id));
     });
     fetchLines().then(data => {
         blockStore.setLines(data.rows);

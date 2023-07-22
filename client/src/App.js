@@ -37,7 +37,6 @@ const App = observer(() => {
     
     useEffect(() => {
         setTimeout(() => {
-            let myAddress = "/" + window.location.href.split("/")[3]
             try {
                 check().then(response => {
                     if (response !== undefined && typeof response === "object" && response.hasOwnProperty("email")) {

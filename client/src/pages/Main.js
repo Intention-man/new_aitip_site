@@ -13,7 +13,7 @@ import {addConstructorBlocks} from "../additional_commands/commonPanelsFunctions
 
 // hand components
 
-const NewsBlock = () => {
+const NewsBlock = observer(() => {
     const {block_store} = useContext(Context);
 
     const getNewsCover = (item) => {
@@ -33,7 +33,7 @@ const NewsBlock = () => {
     return (
         <Block header="Новости">
             <div className="news_container">
-                {block_store.news && block_store.news.sort((e1, e2) => e2.id - e1.id).map(e =>
+                {block_store.news && block_store.news.map(e =>
                     <a href="#">
                         <img src={getNewsCover(e)} alt=""/>
                         <p>{e.header}</p>
@@ -42,9 +42,9 @@ const NewsBlock = () => {
             </div>
         </Block>
     )
-}
+})
 
-const UpcomingEventsBlock = () => {
+const UpcomingEventsBlock = observer(() => {
     return (<Block style={{background: "#FFF", paddingLeft: "3%", borderRadius: "5px", paddingBottom: "20px"}}
                    header="Ближайшие события">
         {[{date: "20 апр", text: "Начало приёма документов"}, {
@@ -60,9 +60,9 @@ const UpcomingEventsBlock = () => {
         </>)
         }
     </Block>)
-}
+})
 
-const LearnMoreAboutUsBlock = () => {
+const LearnMoreAboutUsBlock = observer(() => {
     return (<Block header="Узнать о нас больше">
         <div className="know_more_about">
             <a href="/personalities"><p style={{color: "#929396"}}>Педагоги и научные работники</p></a>
@@ -101,7 +101,7 @@ const LearnMoreAboutUsBlock = () => {
             </ul>
         </div>
     </Block>)
-}
+})
 
 const Main = observer(() => {
     const {block_store} = useContext(Context);

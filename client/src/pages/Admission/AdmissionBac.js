@@ -35,10 +35,6 @@ const AdmissionBacContent2 = observer(() => {
         })
     }, []);
 
-    // useEffect(() => {
-    //     admission_store.directionsBachelor.forEach(direction => setButtonList([...buttonList, {name: direction.name, value: direction.id}]))
-    //     admission_store.directionsBachelor && admission_store.directionsBachelor[0] && setChosenDirectionName(admission_store.directionsBachelor[0].name)
-    // }, [admission_store.directionsBachelor]);
 
     return (
         <Block header="Направления">

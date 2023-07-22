@@ -55,22 +55,20 @@
 
 .Card-image-left, .Card-image-right {
     width: 50%;
-    height: 100%;
 }
 
 .Card-body {
+    justify-content: center;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
 }
 
 .Card-body-left {
-    height: 100%;
     width: 50%;
 }
 
 .Card-body-right {
-    height: 100%;
     width: 50%;
 }
 

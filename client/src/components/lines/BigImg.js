@@ -12,7 +12,7 @@ const BigImg = ({ imgSrc , imgType}) => {
         <img
             src={imgSrc}
             className={imgType === "fading" ? 'FadingImg-top-and-bottom BigImg' : "BigImg"}
-            style={{objectFit: "contain"}}
+            style={{objectFit: "cover"}}
         />
     );
 }

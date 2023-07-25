@@ -65,14 +65,6 @@
     min-width: 240px;
 }
 
-.Card{
-    margin: 0;
-}
-
-.Card p{
-    margin: 0 25px;
-}
-
 .Card img{
     border-radius: 0;
 }

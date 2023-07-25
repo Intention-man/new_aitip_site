@@ -46,7 +46,7 @@ class Card extends React.Component {
                 className={`Card Card-${this.props.imgPos} ${this.props.className}`} 
                 style={{...this.props.style}}
             >
-                <div className={`Card-image Card-image-${this.props.imgPos}`}> 
+                <div className={`Card-image Card-image-${this.props.imgPos}` + (this.props.imgType === 'rounded' ? ' Card-image-rounded' : "")}>
                 {
                     {
                         'fading':   <FadingImg

@@ -17,6 +17,7 @@
     border-style: solid;
     border-color: rgba(0, 0, 0, 0);
     border-radius: var(--default_border_radius);
+    font-size: var(--font_size_const);
 }
 
 .StyledText-column:first-child > .StyledText-mdText:not(.StyledText-mdText-bg-grey) {

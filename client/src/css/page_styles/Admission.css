@@ -44,16 +44,6 @@
     background-color: var(--bgcolor);
 }
 
-.admission-bac-content2 .Card-image{
-    height: auto;
-}
-
-.direction_inner_card{
-    margin: 0 -6% 0 0;
-    width: 105.6%;
-    padding: 0;
-}
-
 .direction_inner_card .Card-body-right, .direction_inner_card .Card-body{
     margin: 0;
     padding: 0;
@@ -80,7 +70,7 @@ h1, h3{
 .extended_description {
     -ms-hyphens: auto;
     display: flex;
-    margin: 30px 0;
+    margin: 30px clamp(20px, 100vw / 24, 80px);
     padding: 5px 20px;
     border-radius: 10px;
     background: var(--bgcolor);
@@ -90,9 +80,9 @@ h1, h3{
     font-size: var(--font_size_const);
 }
 
-.admission-bac-content2 .Card-body .title_who_can_you_become{
+.title_who_can_you_become{
     display: flex;
-    margin: 5px 0 0 33px;
+    margin: 0 clamp(20px, 100vw / 24, 80px);
     justify-content: left;
     font-weight: 600;
     font-size: var(--font_size_const);
@@ -106,6 +96,7 @@ h1, h3{
     padding: 0 0 8px 30px;
     gap: 0 40px;
     background: white;
+    margin: 0 clamp(20px, 100vw / 24, 80px);
 }
 
 .specialty {
@@ -167,9 +158,13 @@ h1, h3{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     margin: 10px 0 20px 0;
+}
+
+.cost_price {
+    text-align: center;
 }
 
 .Card-body .cost{
@@ -190,7 +185,7 @@ h1, h3{
 
 .direction_block .last_document_of_content_2{
     display: flex;
-    margin: 0;
+    margin: 0 2.5%;
     padding: 0;
     flex-direction: row;
     align-items: center;

@@ -3,7 +3,7 @@
 import {
     ADMIN,
     ADMISSION_APE,
-    ADMISSION_BAC,
+    ADMISSION_BAC, ARTICLE,
     AUTH,
     AVAILABLE_ENVIRONMENT,
     CONTACTS,
@@ -40,8 +40,9 @@ import Students from "./pages/Students";
 import Auth from "./pages/Auth";
 import SuperAdminPage from "./pages/SuperAdminPage";
 import Partners from "./pages/Partners";
-import News from "./pages/News";
+import NewsPage from "./pages/NewsPage";
 import UsualPage from "./pages/UsualPage";
+import DefinedNews from "./pages/DefinedNews";
 
 
 export const publicRoutes = [
@@ -67,10 +68,14 @@ export const publicRoutes = [
     },
     {
         path: NEWS,
-        Component: <News/>,
+        Component: <NewsPage/>,
         name: "Новости"
     },
-
+    {
+        path: ARTICLE + "/:id",
+        Component: <DefinedNews/>,
+        name: "Конкретная новость"
+    },
     {
         path: PARTNERS,
         Component: <Partners/>,

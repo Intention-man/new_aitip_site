@@ -9,12 +9,14 @@ import hat from "../local_assets/graduation.png";
 //Выпускники
 import Default from "../local_assets/logo-in-round.svg";
 import {addConstructorBlocks} from "../additional_commands/commonPanelsFunctions";
+import {useNavigate} from "react-router";
 
 
 // hand components
 
 const NewsBlock = observer(() => {
     const {block_store} = useContext(Context);
+    const navigate = useNavigate();
 
     const getNewsCover = (item) => {
         console.log(item.header)
@@ -34,7 +36,7 @@ const NewsBlock = observer(() => {
         <Block header="Новости">
             <div className="news_container">
                 {block_store.news && block_store.news.map(e =>
-                    <a href="#">
+                    <a onClick={() => navigate("/article/" + e.id)}>
                         <img src={getNewsCover(e)} alt=""/>
                         <p>{e.header}</p>
                     </a>
@@ -107,10 +109,10 @@ const Main = observer(() => {
     const {block_store} = useContext(Context);
     const [blockList, setBlockList] = useState({
         2: <NewsBlock/>,
-        3: <UpcomingEventsBlock/>,
+        // 3: <UpcomingEventsBlock/>,
         4: <LearnMoreAboutUsBlock/>
     });
-    const handMadeBlocksCount = 3
+    const handMadeBlocksCount = 2
     const myAddress = "/" + window.location.href.split("/")[3]
 
 

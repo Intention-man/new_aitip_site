@@ -9,9 +9,9 @@
  * @returns Компонент блока для размещения в BlockContainer
  */
 
-import { observer } from 'mobx-react-lite';
-import { useContext, useState, useEffect } from 'react';
-import { Context } from '../../index';
+import {observer} from 'mobx-react-lite';
+import {useContext} from 'react';
+import {Context} from '../../index';
 import LineDisplay from './LineDisplay';
 import '../../css/component_styles/Block.css';
 
@@ -22,18 +22,6 @@ const Block = observer(({block, header, children}) => {
     // Нужно убрать проп block, заменив его на важные для блока пропы (header, lines и др.).
     console.log(block)
     const {block_store} = useContext(Context);
-
-    // const [myLines, setMyLines] = useState([]);
-    //
-    // useEffect(() => {
-    //     if (block === undefined)
-    //         return;
-    //
-    //     if (block.hasOwnProperty('id'))  // Поле id имеют блоки ТОЛЬКО ИЗ БД (следовательно, можем загружать их из BlockStore, где хранятся подгруженные линии из БД)
-    //         setMyLines(block_store.lines.filter(line => line.blockId === block.id).sort((a, b) => a.lineOrdinal - b.lineOrdinal));
-    //     else
-    //         setMyLines(block.lines);
-    // }, [block]);
 
     // FIXME: ставить проп в аттрибут элемента - это костыль ;(
     return (

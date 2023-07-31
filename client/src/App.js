@@ -18,6 +18,7 @@ import { refetchAllContent } from "./additional_commands/commonPanelsFunctions";
 
 import { fetchLines } from "./http/blockAPI";
 import BlockContainer from "./components/display/BlockContainer";
+import {DotLoader} from "react-spinners";
 
 
 const App = observer(() => {
@@ -53,11 +54,12 @@ const App = observer(() => {
                 const {request, ...errorObject} = response; // take everything but 'request'
                 console.log(errorObject);
             }
-        }, 200)
+        }, 1000)
     });
 
     if (loading) {
-        return <Spinner animation={"grow"}/>
+        return <DotLoader color="#497AD8" size={200} cssOverride={{marginTop: "20%", marginLeft: "40%"}}/>
+        // <Spinner animation={"grow"}/>
     }
 
     const updateContent = (newContent) => {  /* Это callback, который будет передан в ContentContext.Provider, 

@@ -5,10 +5,14 @@ import Default from "../local_assets/logo-in-round.svg";
 import {useEffect} from "react";
 import {refetchAllContent} from "../additional_commands/commonPanelsFunctions";
 import {fetchBlocks} from "../http/blockAPI";
+import {useNavigate} from "react-router";
+import { useHistory } from "react-router-dom";
+import { observer } from 'mobx-react-lite';
 
 
-const News = () => {
+const NewsPage = observer(() => {
     const {block_store} = useContext(Context);
+    const navigate = useNavigate();
     const [chosenNews, setChosenNews] = useState({});
 
     useEffect(() => {
@@ -36,8 +40,8 @@ const News = () => {
     return (
         <Block header="Новости">
             <div className="news_container">
-                {block_store.news && block_store.news.sort((e1, e2) => e2.id - e1.id).map(e =>
-                    <a href="#">
+                {block_store.news && Array.from(block_store.news).sort((e1, e2) => e2.id - e1.id).map(e =>
+                    <a onClick={() => navigate("/article/" + e.id)}>
                         <img src={getCover(e)} alt=""/>
                         <p>{e.header}</p>
                     </a>
@@ -45,6 +49,6 @@ const News = () => {
             </div>
         </Block>
     );
-};
+});
 
-export default News;
+export default NewsPage;

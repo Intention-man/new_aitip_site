@@ -33,7 +33,7 @@
 }
 
 .StyledText-mdText p {
-    word-break: break-all;
+    /*word-break: break-all;*/
 }
 
 .StyledText-mdText-bg {

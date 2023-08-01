@@ -12,7 +12,7 @@ const DefinedNews = observer(() => {
     const navigate = useNavigate();
     return (
         <>
-            {/* <div onClick={() => navigate(-1)}>Назад</div> */}
+            <div onClick={() => navigate(-1)}>Назад</div>
             <Block key={newsBlock.id} block={newsBlock} header={newsBlock.header}/>
         </>
 

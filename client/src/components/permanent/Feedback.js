@@ -3,9 +3,9 @@ import React from 'react';
 const Feedback = () => {
     return (
         <div className="feedback">
-            <a href="">ЭБС</a>
-            <a href="">ЕОИС</a>
-            <a href="https://forms.yandex.ru/u/6454a54373cee729558eca46/">Вопрос/Ответ</a>
+            <a href="" style={{color: "#999999"}}>ЭБС</a>
+            <a href="" style={{color: "#999999"}}>ЕОИС</a>
+            <a href="https://forms.yandex.ru/u/6454a54373cee729558eca46/" style={{color: "#999999"}}>Вопрос/Ответ</a>
             <div className="social vk">
                 <a href="https://vk.com/aitip" target="_blank">
                     <svg role="img" viewBox="0 0 576 512">

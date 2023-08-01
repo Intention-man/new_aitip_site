@@ -9,6 +9,6 @@
 }
 
 .feedback a{
-    color: var(--aitip_grey);
+    /*color: var(--aitip_grey);*/
     margin: 5px;
 }

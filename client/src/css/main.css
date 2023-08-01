@@ -4,7 +4,7 @@
     --bgcolor: #EEEEEE;
     --aitip_grey: #999999;
     --aitip_black: #292D32;
-    --aitip_blue: #076DB1;
+    --aitip_blue: #497AD8;
     --aitip_red: #AD4820;
     --main_part_width: 100%;
     --document_icon_size: 40px;
@@ -14,7 +14,7 @@
 }
 
 :root {
-    --font_size_const: 20px;
+    --font_size_const: 19px;
     font-size: var(--font_size_const);
 }
 

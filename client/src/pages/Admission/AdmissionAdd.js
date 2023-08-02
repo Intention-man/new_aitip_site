@@ -7,6 +7,7 @@ import ButtonList from "../../components/ButtonList";
 import Block from "../../components/display/Block";
 import {addConstructorBlocks} from "../../additional_commands/commonPanelsFunctions";
 import "../../css/page_styles/Admission.css";
+import CommonBlocksDisplay from "../../components/display/CommonBlocksDisplay";
 
 
 
@@ -194,7 +195,6 @@ const AdmissionAddContent3 = observer(() => {
 
 const AdmissionAdd = observer(() => {
     const {admission_store} = useContext(Context)
-    const {block_store} = useContext(Context);
 
     const [blockList, setBlockList] = useState({
         2: <AdmissionAddContent2/>,
@@ -202,8 +202,6 @@ const AdmissionAdd = observer(() => {
     });
 
     const handMadeBlocksCount = 2
-    const myAddress = "/" + window.location.href.split("/")[3]
-    addConstructorBlocks(myAddress, handMadeBlocksCount, block_store, blockList, setBlockList)
 
     useEffect(() => {
         fetchAdditionalPrograms().then(data => {
@@ -212,20 +210,9 @@ const AdmissionAdd = observer(() => {
         })
     }, [])
 
-    useEffect(() => {
-        addConstructorBlocks(myAddress, handMadeBlocksCount, block_store, blockList, setBlockList)
-    }, [block_store.blocks, block_store.lines]);
 
     return (
-        <>
-            {Object.values(blockList).map((block, index) => {
-                if (block.hasOwnProperty("id")) {
-                    return <Block key={index} block={block} header={block.header}/>
-                } else {
-                    return <>{block}</>
-                }
-            })}
-        </>
+        <CommonBlocksDisplay blockList={blockList} setBlockList={setBlockList} handMadeBlocksCount={handMadeBlocksCount}/>
     );
 });
 

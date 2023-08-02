@@ -8,6 +8,7 @@ import "../../css/main.css"
 import "../../css/page_styles/Admission.css";
 import Card from "../../components/lines/Card";
 import {addConstructorBlocks} from "../../additional_commands/commonPanelsFunctions";
+import CommonBlocksDisplay from "../../components/display/CommonBlocksDisplay";
 
 
 const AdmissionBacContent2 = observer(() => {
@@ -128,32 +129,14 @@ const AdmissionBacContent2 = observer(() => {
 
 
 const AdmissionBac = observer(() => {
-    const {block_store} = useContext(Context);
-
     const [blockList, setBlockList] = useState({
         2: <AdmissionBacContent2/>
     });
 
     const handMadeBlocksCount = 1
-    const myAddress = "/" + window.location.href.split("/")[3]
-    addConstructorBlocks(myAddress, handMadeBlocksCount, block_store, blockList, setBlockList)
-
-
-    useEffect(() => {
-        addConstructorBlocks(myAddress, handMadeBlocksCount, block_store, blockList, setBlockList)
-    }, [block_store.blocks, block_store.lines]);
-
 
     return (
-        <>
-            {Object.values(blockList).map((block, index) => {
-                if (block.hasOwnProperty("id")) {
-                    return <Block key={index} block={block} header={block.header}/>
-                } else {
-                    return <>{block}</>
-                }
-            })}
-        </>
+        <CommonBlocksDisplay blockList={blockList} setBlockList={setBlockList} handMadeBlocksCount={handMadeBlocksCount}/>
 
     );
 })

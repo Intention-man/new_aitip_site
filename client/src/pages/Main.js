@@ -10,6 +10,7 @@ import hat from "../local_assets/graduation.png";
 import Default from "../local_assets/logo-in-round.svg";
 import {addConstructorBlocks} from "../additional_commands/commonPanelsFunctions";
 import {useNavigate} from "react-router";
+import CommonBlocksDisplay from "../components/display/CommonBlocksDisplay";
 
 
 // hand components
@@ -106,32 +107,14 @@ const LearnMoreAboutUsBlock = observer(() => {
 })
 
 const Main = observer(() => {
-    const {block_store} = useContext(Context);
     const [blockList, setBlockList] = useState({
         2: <NewsBlock/>,
         // 3: <UpcomingEventsBlock/>,
         4: <LearnMoreAboutUsBlock/>
     });
     const handMadeBlocksCount = 2
-    const myAddress = "/" + window.location.href.split("/")[3]
-
-    addConstructorBlocks(myAddress, handMadeBlocksCount, block_store, blockList, setBlockList)
-
-    useEffect(() => {
-        addConstructorBlocks(myAddress, handMadeBlocksCount, block_store, blockList, setBlockList)
-    }, [block_store.blocks, block_store.lines, handMadeBlocksCount]);
-
-    console.log(blockList)
     return (
-        <>
-            {Object.values(blockList).map((block, index) => {
-                if (block.hasOwnProperty("id")) {
-                    return <Block key={index} block={block} header={block.header}/>
-                } else {
-                    return <>{block}</>
-                }
-            })}
-        </>
+        <CommonBlocksDisplay blockList={blockList} setBlockList={setBlockList} handMadeBlocksCount={handMadeBlocksCount}/>
     );
 });
 

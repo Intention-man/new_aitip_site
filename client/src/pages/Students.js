@@ -8,6 +8,7 @@ import Carusel from "../components/lines/Carusel";
 import Block from "../components/display/Block";
 import {Context} from "../index";
 import {addConstructorBlocks} from "../additional_commands/commonPanelsFunctions";
+import CommonBlocksDisplay from "../components/display/CommonBlocksDisplay";
 
 
 const Schedule = () => {
@@ -97,30 +98,14 @@ const Laboratories = () => {
 
 
 const Students = () => {
-    const {block_store} = useContext(Context);
     const [blockList, setBlockList] = useState({
         1: <Schedule/>,
         2: <Laboratories/>
     });
     const handMadeBlocksCount = 2
-    const myAddress = "/" + window.location.href.split("/")[3]
-    addConstructorBlocks(myAddress, handMadeBlocksCount, block_store, blockList, setBlockList)
 
-    useEffect(() => {
-        addConstructorBlocks(myAddress, handMadeBlocksCount, block_store, blockList, setBlockList)
-    }, [block_store.blocks, block_store.lines, handMadeBlocksCount]);
-
-    console.log(blockList)
     return (
-        <>
-            {Object.values(blockList).map((block, index) => {
-                if (block.hasOwnProperty("id")) {
-                    return <Block key={index} block={block} header={block.header}/>
-                } else {
-                    return <>{block}</>
-                }
-            })}
-        </>
+        <CommonBlocksDisplay blockList={blockList} setBlockList={setBlockList} handMadeBlocksCount={handMadeBlocksCount}/>
     )
 };
 

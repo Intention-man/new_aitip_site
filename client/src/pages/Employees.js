@@ -6,6 +6,7 @@ import {fetchElectionsAndContests} from "../http/electionsAndContestsAPI";
 import Block from "../components/display/Block";
 import ButtonList from "../components/ButtonList";
 import {addConstructorBlocks} from "../additional_commands/commonPanelsFunctions";
+import CommonBlocksDisplay from "../components/display/CommonBlocksDisplay";
 
 
 const EmployeesAdCurrentList = observer(({adList, header}) => {
@@ -130,8 +131,6 @@ const EmployeesArchive = observer(() => {
 
 const Employees = observer(() => {
 
-    const {block_store} = useContext(Context);
-
     const [blockList, setBlockList] = useState({
         2: <EmployeesAdCurrentList header="Актуальные выборы заведующих кафедрами"/>,
         3: <EmployeesAdCurrentList header="Актуальные конкурсы на замещение вакантных должностей"/>,
@@ -139,11 +138,9 @@ const Employees = observer(() => {
     });
 
     const handMadeBlocksCount = 3
-    const myAddress = "/" + window.location.href.split("/")[3]
     const date = new Date().getFullYear()
     const day = new Date().getDate();
     const month = new Date().getMonth() + 1;
-    addConstructorBlocks(myAddress, handMadeBlocksCount, block_store, blockList, setBlockList)
 
     useEffect(() => {
         fetchElectionsAndContests().then(data => {
@@ -166,21 +163,9 @@ const Employees = observer(() => {
         })
     }, [])
 
-    useEffect(() => {
-        addConstructorBlocks(myAddress, handMadeBlocksCount, block_store, blockList, setBlockList)
-    }, [block_store.blocks, block_store.lines]);
-
 
     return (
-        <>
-            {Object.values(blockList).map((block, index) => {
-                if (block.hasOwnProperty("id")) {
-                    return <Block key={index} block={block} header={block.header}/>
-                } else {
-                    return <>{block}</>
-                }
-            })}
-        </>
+        <CommonBlocksDisplay blockList={blockList} setBlockList={setBlockList} handMadeBlocksCount={handMadeBlocksCount}/>
     );
 });
 

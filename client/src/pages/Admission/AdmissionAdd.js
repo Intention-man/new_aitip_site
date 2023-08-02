@@ -203,6 +203,7 @@ const AdmissionAdd = observer(() => {
 
     const handMadeBlocksCount = 2
     const myAddress = "/" + window.location.href.split("/")[3]
+    addConstructorBlocks(myAddress, handMadeBlocksCount, block_store, blockList, setBlockList)
 
     useEffect(() => {
         fetchAdditionalPrograms().then(data => {

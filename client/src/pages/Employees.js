@@ -143,6 +143,7 @@ const Employees = observer(() => {
     const date = new Date().getFullYear()
     const day = new Date().getDate();
     const month = new Date().getMonth() + 1;
+    addConstructorBlocks(myAddress, handMadeBlocksCount, block_store, blockList, setBlockList)
 
     useEffect(() => {
         fetchElectionsAndContests().then(data => {

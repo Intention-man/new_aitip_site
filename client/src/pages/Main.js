@@ -115,6 +115,7 @@ const Main = observer(() => {
     const handMadeBlocksCount = 2
     const myAddress = "/" + window.location.href.split("/")[3]
 
+    addConstructorBlocks(myAddress, handMadeBlocksCount, block_store, blockList, setBlockList)
 
     useEffect(() => {
         addConstructorBlocks(myAddress, handMadeBlocksCount, block_store, blockList, setBlockList)

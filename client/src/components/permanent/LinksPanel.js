@@ -53,7 +53,7 @@ class LinksPanel extends React.Component {
                     if (offsetTop < activeBlocksOffsetTop) {
                         newActiveBlocks = [i];
                         activeBlocksOffsetTop = offsetTop;
-                    } else if (offsetTop == activeBlocksOffsetTop) {
+                    } else if (offsetTop === activeBlocksOffsetTop) {
                         newActiveBlocks.push(i);
                     }
                 }

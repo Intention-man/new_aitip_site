@@ -1,7 +1,6 @@
 import {observer} from "mobx-react-lite";
 import React, {useContext, useEffect, useState} from "react";
 import {Context} from "../index";
-import {fetchAdditionalPrograms} from "../http/admissionAPI";
 import {addConstructorBlocks} from "../additional_commands/commonPanelsFunctions";
 import Block from "../components/display/Block";
 
@@ -12,6 +11,7 @@ const UsualPage = observer(() => {
 
     const handMadeBlocksCount = 0
     const myAddress = "/" + window.location.href.split("/")[3]
+    addConstructorBlocks(myAddress, handMadeBlocksCount, block_store, blockList, setBlockList)
 
 
     useEffect(() => {

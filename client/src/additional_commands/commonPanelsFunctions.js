@@ -58,9 +58,12 @@ export const addConstructorBlocks = (myAddress, handMadeBlocksCount, block_store
         if (!blockList.hasOwnProperty(i)) {
             // shift() - удаляет 0-ой элемент из массива и возвращает его
             const first = pageConstructorBlocks.shift()
-            setBlockList(prev => ({...prev, [i]: first}))
+            blockList[i] = first;
+
+            // setBlockList(prev => ({...prev, [i]: first}))
         } else {
             console.log(blockList[i])
         }
     }
+    setBlockList(prev => blockList);
 }

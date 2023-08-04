@@ -11,9 +11,10 @@ const CommonBlocksDisplay = ({blockList, setBlockList, handMadeBlocksCount}) => 
 
     useEffect(() => {
         addConstructorBlocks(myAddress, handMadeBlocksCount, block_store, blockList, setBlockList)
-    }, [block_store.blocks, block_store.lines, handMadeBlocksCount]);
+    }, [block_store.blocks, block_store.lines, handMadeBlocksCount, myAddress]);
 
     console.log(blockList)
+
     return (
         <>
             {Object.values(blockList).map((block, index) => {

@@ -1,6 +1,6 @@
 import '../../css/component_styles/Block.css';
 import ContentContext from '../contexts/ContentContext';
-import { useContext } from 'react';
+import {useContext, useEffect} from 'react';
 import { findDOMNode } from 'react-dom';
 
 /**
@@ -12,6 +12,11 @@ import { findDOMNode } from 'react-dom';
  */
 const BlockContainer = ({ children }) => {    
     const updateLinksPanel = useContext(ContentContext);  // Получаем callback из ContentContext для передачи текущих активных блоков
+
+    useEffect(() => {
+
+    })
+
 
     const setBlocksLinks = (element) => {
         const domNode = findDOMNode(element);

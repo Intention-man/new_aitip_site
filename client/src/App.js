@@ -10,13 +10,12 @@ import {Context} from "./index";
 import ContentContext from './components/contexts/ContentContext';
 import LinksPanel from "./components/permanent/LinksPanel";
 import {check} from "./http/userAPI";
-import {Spinner} from "react-bootstrap";
 import "./css/component_styles/SocialMedia.css"
 import Feedback from "./components/permanent/Feedback";
 import Footer from "./components/permanent/Footer";
-import { refetchAllContent } from "./additional_commands/commonPanelsFunctions";
+import {refetchAllContent} from "./additional_commands/commonPanelsFunctions";
 
-import { fetchLines } from "./http/blockAPI";
+import {fetchLines} from "./http/blockAPI";
 import BlockContainer from "./components/display/BlockContainer";
 import {DotLoader} from "react-spinners";
 
@@ -43,10 +42,8 @@ const App = observer(() => {
                     if (response !== undefined && typeof response === "object" && response.hasOwnProperty("email")) {
                         user_store.setIsAuth(true)
                         user_store.setUser(response)
-                        // setIsAdmin(true)
                     } else {
                         user_store.setIsAuth(false)
-                        // setIsAdmin(false)
                     }
                 }).finally(() => setLoading(false))
             } catch (error) {
@@ -59,7 +56,6 @@ const App = observer(() => {
 
     if (loading) {
         return <DotLoader color="#497AD8" size={200} cssOverride={{marginTop: "20%", marginLeft: "40%"}}/>
-        // <Spinner animation={"grow"}/>
     }
 
     const updateContent = (newContent) => {  /* Это callback, который будет передан в ContentContext.Provider, 

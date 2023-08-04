@@ -1,8 +1,5 @@
 import {observer} from "mobx-react-lite";
-import React, {useContext, useEffect, useState} from "react";
-import {Context} from "../index";
-import {addConstructorBlocks} from "../additional_commands/commonPanelsFunctions";
-import Block from "../components/display/Block";
+import React, {useState} from "react";
 import CommonBlocksDisplay from "../components/display/CommonBlocksDisplay";
 
 const UsualPage = observer(() => {
@@ -11,7 +8,9 @@ const UsualPage = observer(() => {
     const handMadeBlocksCount = 0
 
     return (
-        <CommonBlocksDisplay blockList={blockList} setBlockList={setBlockList} handMadeBlocksCount={handMadeBlocksCount}/>
+        <>
+            <CommonBlocksDisplay blockList={blockList} setBlockList={setBlockList} handMadeBlocksCount={handMadeBlocksCount}/>
+        </>
     );
 });
 

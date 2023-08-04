@@ -221,7 +221,7 @@ const CreateOrEditBlock = observer(({block, mode}) => {
                     </label>
                 </div>
                 <div>
-                    <p>Заголовок карточки</p>
+                    <p>Заголовок блока</p>
                     <input
                         placeholder={!isNews ? "Введите заголовок, он будет отображаться вверху карточки и на боковой панели содержания" : "Введите заголовок новости"}
                         id="header" onChange={(e) => setHeader(e.target.value)}/>

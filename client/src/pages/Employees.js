@@ -9,7 +9,6 @@ import CommonPagesDisplay from "../components/display/CommonPagesDisplay";
 
 const EmployeesAdCurrentList = observer(({adList, header}) => {
     const monthList = ["", "января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря"]
-    // const [list, setList] = useState(adList);
 
     useEffect(() => {
         console.log(adList)
@@ -129,11 +128,11 @@ const EmployeesArchive = observer(() => {
 
 const Employees = observer(() => {
 
-    const [blockList, setBlockList] = useState({
+    let blockList = {
         2: <EmployeesAdCurrentList header="Актуальные выборы заведующих кафедрами"/>,
         3: <EmployeesAdCurrentList header="Актуальные конкурсы на замещение вакантных должностей"/>,
         5: <EmployeesArchive/>
-    });
+    }
 
     const handMadeBlocksCount = 3
     const date = new Date().getFullYear()
@@ -152,18 +151,18 @@ const Employees = observer(() => {
                 ((ad.kind === "Выборы") && ((date - Number(ad.eventDate.slice(0, 4))) < 0)) ||
                 ((ad.kind === "Выборы") && ((date - Number(ad.eventDate.slice(0, 4))) === 0) && (month - Number(ad.eventDate.slice(5, 7)) < 0))
             )
-            setBlockList(prev => ({
-                ...prev,
-                [2]: <EmployeesAdCurrentList adList={electionsList} header="Актуальные выборы заведующих кафедрами"/>,
-                [3]: <EmployeesAdCurrentList adList={contestsList}
-                                             header="Актуальные конкурсы на замещение вакантных должностей"/>,
-            }))
+
+            blockList[2] =
+                <EmployeesAdCurrentList adList={electionsList} header="Актуальные выборы заведующих кафедрами"/>
+            blockList[3] = <EmployeesAdCurrentList adList={contestsList}
+                                                   header="Актуальные конкурсы на замещение вакантных должностей"/>
+
         })
     }, [])
 
 
     return (
-        <CommonPagesDisplay blockList={blockList} setBlockList={setBlockList} handMadeBlocksCount={handMadeBlocksCount}/>
+        <CommonPagesDisplay blockList={blockList} handMadeBlocksCount={handMadeBlocksCount}/>
     );
 });
 

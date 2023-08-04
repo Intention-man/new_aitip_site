@@ -194,10 +194,10 @@ const AdmissionAddContent3 = observer(() => {
 const AdmissionAdd = observer(() => {
     const {admission_store} = useContext(Context)
 
-    const [blockList, setBlockList] = useState({
+    let blockList = {
         2: <AdmissionAddContent2/>,
         3: <AdmissionAddContent3/>
-    });
+    }
 
     const handMadeBlocksCount = 2
 
@@ -210,7 +210,7 @@ const AdmissionAdd = observer(() => {
 
 
     return (
-        <CommonPagesDisplay blockList={blockList} setBlockList={setBlockList} handMadeBlocksCount={handMadeBlocksCount}/>
+        <CommonPagesDisplay blockList={blockList} handMadeBlocksCount={handMadeBlocksCount}/>
     );
 });
 

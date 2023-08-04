@@ -12,14 +12,14 @@ import {Context} from "../../index";
  * @constructor
  */
 
-const CommonPagesDisplay = ({blockList, setBlockList, handMadeBlocksCount}) => {
+const CommonPagesDisplay = ({blockList, handMadeBlocksCount}) => {
     const {block_store} = useContext(Context);
     const myAddress = "/" + window.location.href.split("/")[3]
 
-    addConstructorBlocks(myAddress, handMadeBlocksCount, block_store, blockList, setBlockList)
+    blockList = addConstructorBlocks(myAddress, handMadeBlocksCount, block_store, blockList)
 
     useEffect(() => {
-        addConstructorBlocks(myAddress, handMadeBlocksCount, block_store, blockList, setBlockList)
+        addConstructorBlocks(myAddress, handMadeBlocksCount, block_store, blockList)
     }, [block_store.blocks, block_store.lines, handMadeBlocksCount, myAddress]);
 
     console.log(blockList)

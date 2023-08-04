@@ -29,14 +29,14 @@ const Schedule = () => {
         <div className="schedules">
             {allSchedules && allSchedules.filter(e => e.kind === forms[chosenSchedule]).map(schedule =>
                 <a href={process.env.REACT_APP_API_URL + schedule.fileLink}
-                   download target="_blank">
+                   download target="_blank" key={schedule.id}>
                     <div>
                         <img className="document_icon" src={"../assets/document_icon.png"}
                              alt="Чет не пошло как-то с картинкой..."/>
                         <div>
                             {/*<p>{schedule.name}</p>*/}
                             <p className="group">{schedule.group}</p>
-                            <p>расписание занятий</p>
+                            <p>{schedule.name}</p>
                         </div>
                     </div>
                     <p className="updated_at">Изменено: {new Date(schedule.updatedAt).toLocaleDateString()+" "+new Date(schedule.updatedAt).toLocaleTimeString().match(/\d+:\d+/)[0]}</p>
@@ -96,14 +96,14 @@ const Laboratories = () => {
 
 
 const Students = () => {
-    const [blockList, setBlockList] = useState({
+    let blockList = {
         1: <Schedule/>,
         2: <Laboratories/>
-    });
+    }
     const handMadeBlocksCount = 2
 
     return (
-        <CommonPagesDisplay blockList={blockList} setBlockList={setBlockList} handMadeBlocksCount={handMadeBlocksCount}/>
+        <CommonPagesDisplay blockList={blockList} handMadeBlocksCount={handMadeBlocksCount}/>
     )
 };
 

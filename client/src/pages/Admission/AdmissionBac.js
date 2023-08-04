@@ -128,14 +128,14 @@ const AdmissionBacContent2 = observer(() => {
 
 
 const AdmissionBac = observer(() => {
-    const [blockList, setBlockList] = useState({
+    let blockList = {
         2: <AdmissionBacContent2/>
-    });
+    }
 
     const handMadeBlocksCount = 1
 
     return (
-        <CommonPagesDisplay blockList={blockList} setBlockList={setBlockList} handMadeBlocksCount={handMadeBlocksCount}/>
+        <CommonPagesDisplay blockList={blockList} handMadeBlocksCount={handMadeBlocksCount}/>
 
     );
 })

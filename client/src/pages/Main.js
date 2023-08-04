@@ -106,14 +106,14 @@ const LearnMoreAboutUsBlock = observer(() => {
 })
 
 const Main = observer(() => {
-    const [blockList, setBlockList] = useState({
+    let blockList = {
         2: <NewsBlock/>,
         // 3: <UpcomingEventsBlock/>,
         4: <LearnMoreAboutUsBlock/>
-    });
+    }
     const handMadeBlocksCount = 2
     return (
-        <CommonPagesDisplay blockList={blockList} setBlockList={setBlockList} handMadeBlocksCount={handMadeBlocksCount}/>
+        <CommonPagesDisplay blockList={blockList} handMadeBlocksCount={handMadeBlocksCount}/>
     );
 });
 

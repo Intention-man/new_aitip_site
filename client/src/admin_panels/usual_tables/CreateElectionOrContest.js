@@ -1,16 +1,14 @@
 // Окно для добавления выборов и конкурсов и функции, изменяющие состояния(установлено в модальном окне определенное значение или нет).
 
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {observer} from "mobx-react-lite";
-import {Button, Modal} from "react-bootstrap";
+import {Button} from "react-bootstrap";
 import {
     createElectionsAndContests,
     removeElectionsAndContests,
     updateElectionsAndContests
 } from "../../http/electionsAndContestsAPI";
 import "../../css/page_styles/AdminPanel.css"
-import {useEffect} from "react";
-
 
 
 const CreateElectionOrContest = observer(({eAC, mode}) => {

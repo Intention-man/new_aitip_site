@@ -1,6 +1,5 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {observer} from "mobx-react-lite";
-import {useEffect, useState} from "react";
 import {fetchPartners} from "../http/partnersAPI";
 import ButtonList from "../components/ButtonList";
 import "../css/page_styles/Partners.css"

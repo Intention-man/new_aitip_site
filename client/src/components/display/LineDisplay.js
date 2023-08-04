@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {observer} from "mobx-react-lite";
 import MDEditor from "@uiw/react-md-editor";
 import Card from "../lines/Card";

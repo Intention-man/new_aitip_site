@@ -3,7 +3,16 @@ import Block from "./Block";
 import {addConstructorBlocks} from "../../additional_commands/commonPanelsFunctions";
 import {Context} from "../../index";
 
-const CommonBlocksDisplay = ({blockList, setBlockList, handMadeBlocksCount}) => {
+/** Компонент используется всеми компонентами страниц, которые содержат конструкторские блоки. Содержит весь повторяющийся код
+ *
+ * @param blockList
+ * @param setBlockList
+ * @param handMadeBlocksCount
+ * @returns {JSX.Element}
+ * @constructor
+ */
+
+const CommonPagesDisplay = ({blockList, setBlockList, handMadeBlocksCount}) => {
     const {block_store} = useContext(Context);
     const myAddress = "/" + window.location.href.split("/")[3]
 
@@ -28,4 +37,4 @@ const CommonBlocksDisplay = ({blockList, setBlockList, handMadeBlocksCount}) => 
     );
 };
 
-export default CommonBlocksDisplay;
+export default CommonPagesDisplay;

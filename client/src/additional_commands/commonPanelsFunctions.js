@@ -25,6 +25,10 @@ export async function selectFile(files, block_store) {
     }
 }
 
+/**
+ * Обновляет количество использования файла
+ */
+
 export const updateFileUsages = (fileLink, delta) => {
     const formData = new FormData();
     formData.append("fileLink", fileLink)
@@ -48,6 +52,13 @@ export const refetchAllContent = (blockStore) => {
         blockStore.setLines(data.rows);
     });
 }
+
+
+/**
+ * Получает адрес страницы, количество ручных блоков, ссылку на глобальный класс, и 2 элемента состояния, хранящего блоки страницы.
+ * Изначально в последнем только ссылки на компоненты-ручные блоки.
+ * Метод добавляет в blockList все конструкторские блоки данной страницы
+ */
 
 export const addConstructorBlocks = (myAddress, handMadeBlocksCount, block_store, blockList, setBlockList) => {
     let pageConstructorBlocks = Array.from(block_store.blocks.filter(block => block.pageLink === myAddress).sort((block1, block2) => block1.ordinal - block2.ordinal))

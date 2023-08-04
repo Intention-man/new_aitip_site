@@ -1,5 +1,4 @@
 import '../../css/component_styles/Block.css';
-import {useState} from "react";
 
 /**
  * Компонент картинки, которая заполняется всю линию и имеет эффект исчезновения сверху и снизу.

@@ -1,9 +1,6 @@
-import React, {useEffect} from 'react';
-
-import {useState} from "react";
-import {useContext} from "react";
+import React, {useContext, useEffect, useState} from 'react';
 import {Context} from "../../index";
-import {moveBlocks, updateBlock} from "../../http/blockAPI";
+import {moveBlocks} from "../../http/blockAPI";
 import {publicRoutes} from "../../routes";
 import Block from "../../components/display/Block";
 

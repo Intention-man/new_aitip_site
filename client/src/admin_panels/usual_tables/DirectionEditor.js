@@ -1,6 +1,5 @@
-import React from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {observer} from "mobx-react-lite";
-import {useContext, useEffect, useState} from "react";
 import {Context} from "../../index";
 import {fetchDirectionsBachelor, fetchOneDirectionBachelor} from "../../http/admissionAPI";
 import CreateDirection from "./CreateDirection";

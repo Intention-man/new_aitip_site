@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import "../../css/component_styles/Menu.css"
 import logo from "../../local_assets/logo-in-round.svg"
 import {

@@ -1,12 +1,10 @@
-import React, {useContext, useEffect, useState} from 'react';
-import {Context} from "../index";
+import React, {useEffect, useState} from 'react';
 import {observer} from "mobx-react-lite";
 import "../css/page_styles/Employees.css"
 import {fetchElectionsAndContests} from "../http/electionsAndContestsAPI";
 import Block from "../components/display/Block";
 import ButtonList from "../components/ButtonList";
-import {addConstructorBlocks} from "../additional_commands/commonPanelsFunctions";
-import CommonBlocksDisplay from "../components/display/CommonBlocksDisplay";
+import CommonPagesDisplay from "../components/display/CommonPagesDisplay";
 
 
 const EmployeesAdCurrentList = observer(({adList, header}) => {
@@ -165,7 +163,7 @@ const Employees = observer(() => {
 
 
     return (
-        <CommonBlocksDisplay blockList={blockList} setBlockList={setBlockList} handMadeBlocksCount={handMadeBlocksCount}/>
+        <CommonPagesDisplay blockList={blockList} setBlockList={setBlockList} handMadeBlocksCount={handMadeBlocksCount}/>
     );
 });
 

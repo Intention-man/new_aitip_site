@@ -2,12 +2,12 @@
  * Команды для MDEdtior (он внутри компонента ExtendedTextEditor) для изменения цвета текста
  */
 import React from "react";
-import { ourColorsOptions } from "../consts/ourColorOptionsConsts";
+import {ourColorsOptions} from "../consts/ourColorOptionsConsts";
 
 const ourTextColorsOptions = ourColorsOptions.filter(color => color.types.includes('text'));
 
 /**
- * Внутренняя ункция, меняющяя цвет текста из выделенной области с помощью HTML-тегов
+ * Внутренняя функция, меняющая цвет текста из выделенной области с помощью HTML-тегов
  */
 const changeColor = (state, api, color) => {
     if (state.selectedText) {

@@ -1,6 +1,10 @@
 import {observer} from "mobx-react-lite";
 import React, {useState} from "react";
-import CommonBlocksDisplay from "../components/display/CommonBlocksDisplay";
+import CommonPagesDisplay from "../components/display/CommonPagesDisplay";
+
+/**
+ * Единый компонент страницы для всех страниц, содержащих только конструкторские блоки
+ */
 
 const UsualPage = observer(() => {
     const [blockList, setBlockList] = useState({});
@@ -9,7 +13,7 @@ const UsualPage = observer(() => {
 
     return (
         <>
-            <CommonBlocksDisplay blockList={blockList} setBlockList={setBlockList} handMadeBlocksCount={handMadeBlocksCount}/>
+            <CommonPagesDisplay blockList={blockList} setBlockList={setBlockList} handMadeBlocksCount={handMadeBlocksCount}/>
         </>
     );
 });

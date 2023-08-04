@@ -1,17 +1,13 @@
 // Frontend модального окна для добавления направления и функции, изменяющие состояния(установлено в модальном окне определенное значение или нет). Возможно, не будет использоваться.
 
 
-import React, {useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {observer} from "mobx-react-lite";
-import {
-    createAdditionalProgram, removeAdditionalProgram, updateAdditionalProgram
-} from "../../http/admissionAPI";
+import {createAdditionalProgram, removeAdditionalProgram, updateAdditionalProgram} from "../../http/admissionAPI";
 import {Button} from "react-bootstrap";
 import "../../css/page_styles/AdminPanel.css"
-import {useContext} from "react";
 import {Context} from "../../index";
-import {useEffect} from "react";
-import {updateFileUsages, selectFile} from "../../additional_commands/commonPanelsFunctions";
+import {updateFileUsages} from "../../additional_commands/commonPanelsFunctions";
 import FilesPicker from '../FilesPicker';
 
 

@@ -1,14 +1,12 @@
 // Окно для добавления лабораторий и функции, изменяющие состояния(установлено в модальном окне определенное значение или нет).
 
-import React, {useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {observer} from "mobx-react-lite";
 import {Button} from "react-bootstrap";
 import "../../css/page_styles/AdminPanel.css"
-import {useContext, useEffect} from "react";
 import {Context} from "../../index";
-import {updateFileUsages, selectFile} from "../../additional_commands/commonPanelsFunctions";
+import {updateFileUsages} from "../../additional_commands/commonPanelsFunctions";
 import {createLab, removeLab, updateLab} from "../../http/labAPI";
-import Carusel from "../../components/lines/Carusel";
 import FilesPicker from '../FilesPicker';
 
 

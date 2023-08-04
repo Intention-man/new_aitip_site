@@ -1,6 +1,5 @@
-import React from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {observer} from "mobx-react-lite";
-import {useContext, useEffect, useState} from "react";
 import {Context} from "../../index";
 import CreateStaff from "./CreateStaff";
 import {fetchStaff} from "../../http/staffAPI";

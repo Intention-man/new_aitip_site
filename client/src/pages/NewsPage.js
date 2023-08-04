@@ -1,13 +1,11 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Context} from "../index";
 import Block from "../components/display/Block";
 import Default from "../local_assets/logo-in-round.svg";
-import {useEffect} from "react";
 import {refetchAllContent} from "../additional_commands/commonPanelsFunctions";
 import {fetchBlocks} from "../http/blockAPI";
 import {useNavigate} from "react-router";
-import { useHistory } from "react-router-dom";
-import { observer } from 'mobx-react-lite';
+import {observer} from 'mobx-react-lite';
 
 
 const NewsPage = observer(() => {

@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {fetchSchedules} from "../http/scheduleAPI";
 import ButtonList from "../components/ButtonList";
 import "../css/page_styles/Students.css";
@@ -6,9 +6,7 @@ import {fetchLabs} from "../http/labAPI";
 import Card from "../components/lines/Card";
 import Carusel from "../components/lines/Carusel";
 import Block from "../components/display/Block";
-import {Context} from "../index";
-import {addConstructorBlocks} from "../additional_commands/commonPanelsFunctions";
-import CommonBlocksDisplay from "../components/display/CommonBlocksDisplay";
+import CommonPagesDisplay from "../components/display/CommonPagesDisplay";
 
 
 const Schedule = () => {
@@ -105,7 +103,7 @@ const Students = () => {
     const handMadeBlocksCount = 2
 
     return (
-        <CommonBlocksDisplay blockList={blockList} setBlockList={setBlockList} handMadeBlocksCount={handMadeBlocksCount}/>
+        <CommonPagesDisplay blockList={blockList} setBlockList={setBlockList} handMadeBlocksCount={handMadeBlocksCount}/>
     )
 };
 

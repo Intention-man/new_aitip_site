@@ -1,9 +1,7 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {observer} from "mobx-react-lite";
-import {useEffect, useState} from "react";
 import CreateSchedule from "./CreateSchedule";
 import {fetchSchedules} from "../../http/scheduleAPI";
-
 
 
 const ScheduleEditor = observer(() => {

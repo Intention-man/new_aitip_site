@@ -5,10 +5,8 @@ import {observer} from "mobx-react-lite";
 import Card from "../../components/lines/Card";
 import ButtonList from "../../components/ButtonList";
 import Block from "../../components/display/Block";
-import {addConstructorBlocks} from "../../additional_commands/commonPanelsFunctions";
 import "../../css/page_styles/Admission.css";
-import CommonBlocksDisplay from "../../components/display/CommonBlocksDisplay";
-
+import CommonPagesDisplay from "../../components/display/CommonPagesDisplay";
 
 
 const AdmissionAddContent2 = observer(() => {
@@ -212,7 +210,7 @@ const AdmissionAdd = observer(() => {
 
 
     return (
-        <CommonBlocksDisplay blockList={blockList} setBlockList={setBlockList} handMadeBlocksCount={handMadeBlocksCount}/>
+        <CommonPagesDisplay blockList={blockList} setBlockList={setBlockList} handMadeBlocksCount={handMadeBlocksCount}/>
     );
 });
 

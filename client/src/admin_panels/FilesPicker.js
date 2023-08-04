@@ -1,8 +1,8 @@
-import { useContext, useRef } from 'react';
-import { selectFile } from '../additional_commands/commonPanelsFunctions';
-import { Context } from "../index";
+import {useContext, useRef} from 'react';
+import {selectFile} from '../additional_commands/commonPanelsFunctions';
+import {Context} from "../index";
 import Carusel from '../components/lines/Carusel';
-import { Card } from 'react-bootstrap';
+import {Card} from 'react-bootstrap';
 import '../css/page_styles/AdminPanel.css';
 
 

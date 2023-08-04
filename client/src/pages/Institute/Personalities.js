@@ -61,15 +61,12 @@ const StafferItem = observer(({staffer, closeStaffer}) => {
                          className="big_avatar m-auto m-md-0"
                          alt="картинка чет не загрузилась"/>
                     <div>
-                        {/*<div className="top_block_row">*/}
-                        {/*    <div className="top_content">*/}
                         <div className="staffer_name"> {staffer.name} </div>
                         <button className="close-btn"
                                 onClick={() => closeStaffer(staffer.id)}>
                             Х
                         </button>
-                        {/*    </div>*/}
-                        {/*</div>*/}
+
 
                         <div className="general_desc"> {staffer.post} </div>
                         <div className="general_desc"> {staffer.academic_degree} {staffer.title}</div>
@@ -134,21 +131,12 @@ const PersonalitiesList = observer(params => {
                     let rows = []
                     const lenGroup = size[0] > 800 ? 2 : 1
                     const count = Math.ceil(params.filteredStaff.length / lenGroup) * lenGroup
-                    // console.log(staff_store.staff[0])
-                    // console.log(staff_store.staff[1])
-                    // console.log(staff_store.staff[2])
                     for (let i = 0; i < count; i += lenGroup) {
                         let staffers = []
                         for(let l = 0; l < lenGroup; l++) {
                             staffers.push((params.filteredStaff.length > i + l ? staff_store.staff[i + l] : undefined))
 
                         }
-                        // const staffer1 = (params.filteredStaff.length > i ? staff_store.staff[i] : undefined)
-                        // const staffer2 = (params.filteredStaff.length > (i + 1) ? staff_store.staff[i + 1] : undefined)
-                        // const staffer3 = (params.filteredStaff.length > (i + 2) ? staff_store.staff[i + 2] : undefined)
-                        // if (staffer1 !== undefined) {lastThreeStaffId.push(staffer1.id)}
-                        // if (staffer2 !== undefined) lastThreeStaffId.push(staffer2.id)
-                        // if (staffer3 !== undefined) lastThreeStaffId.push(staffer3.id)
 
                         let list = staffers.filter(i => i !== undefined)
 

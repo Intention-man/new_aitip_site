@@ -2,7 +2,6 @@ import React, {useContext, useState} from 'react';
 import {Context} from "../../index";
 import {observer} from "mobx-react-lite";
 import {publicRoutes} from "../../routes";
-import search from "../../local_assets/search.png";
 import "../../css/component_styles/Menu.css"
 
 

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import location from "../../local_assets/location.png";
 import internet from "../../local_assets/global.png";
 import phone from "../../local_assets/icons/svg white/Phone.svg";

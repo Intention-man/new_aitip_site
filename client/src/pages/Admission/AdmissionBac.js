@@ -7,8 +7,7 @@ import ButtonList from "../../components/ButtonList";
 import "../../css/main.css"
 import "../../css/page_styles/Admission.css";
 import Card from "../../components/lines/Card";
-import {addConstructorBlocks} from "../../additional_commands/commonPanelsFunctions";
-import CommonBlocksDisplay from "../../components/display/CommonBlocksDisplay";
+import CommonPagesDisplay from "../../components/display/CommonPagesDisplay";
 
 
 const AdmissionBacContent2 = observer(() => {
@@ -136,7 +135,7 @@ const AdmissionBac = observer(() => {
     const handMadeBlocksCount = 1
 
     return (
-        <CommonBlocksDisplay blockList={blockList} setBlockList={setBlockList} handMadeBlocksCount={handMadeBlocksCount}/>
+        <CommonPagesDisplay blockList={blockList} setBlockList={setBlockList} handMadeBlocksCount={handMadeBlocksCount}/>
 
     );
 })

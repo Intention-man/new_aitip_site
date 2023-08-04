@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {Context} from "../index";
 import {observer} from "mobx-react-lite";
 import Block from "../components/display/Block";
@@ -8,9 +8,8 @@ import hat from "../local_assets/graduation.png";
 
 //Выпускники
 import Default from "../local_assets/logo-in-round.svg";
-import {addConstructorBlocks} from "../additional_commands/commonPanelsFunctions";
 import {useNavigate} from "react-router";
-import CommonBlocksDisplay from "../components/display/CommonBlocksDisplay";
+import CommonPagesDisplay from "../components/display/CommonPagesDisplay";
 
 
 // hand components
@@ -114,7 +113,7 @@ const Main = observer(() => {
     });
     const handMadeBlocksCount = 2
     return (
-        <CommonBlocksDisplay blockList={blockList} setBlockList={setBlockList} handMadeBlocksCount={handMadeBlocksCount}/>
+        <CommonPagesDisplay blockList={blockList} setBlockList={setBlockList} handMadeBlocksCount={handMadeBlocksCount}/>
     );
 });
 

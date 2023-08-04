@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import {useEffect, useState} from "react"
 import EyeIcon from "../../local_assets/eye.png"
 import "../../css/component_styles/Menu.css"
 

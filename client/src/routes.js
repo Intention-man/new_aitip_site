@@ -60,7 +60,7 @@ export const publicRoutes = [
     {
         path: ADMISSION_APE,
         Component: <AdmissionAdd/>,
-        name: "Поступление - ДПО"
+        name: "Поступление - Дополнительное профессиональное образование"
     },
     {
         path: INTERNATIONAL_ACT ,
@@ -75,12 +75,12 @@ export const publicRoutes = [
     {
         path: ARTICLE + "/:id",
         Component: <DefinedNews/>,
-        name: "Конкретная новость"
+        name: "Новость"
     },
     {
         path: PARTNERS,
         Component: <Partners/>,
-        name: "Научные партнёры"
+        name: "Партнёры"
     },
     {
         path: PERSONALITIES_PAGE,

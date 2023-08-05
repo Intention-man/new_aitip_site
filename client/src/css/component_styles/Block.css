@@ -148,7 +148,7 @@
 
 .BigImg {
     /*height: 100%;*/
-    width: 100%;
+    width: calc(100% - 60px);
     min-height: 50%;
     min-width: 50%;
     object-fit: contain;

@@ -53,7 +53,6 @@
 .Card-right {
     flex-direction: row-reverse;
     margin-left: clamp(20px, 100vw / 19.2, 100px);
-
 }
 
 .Card-image img {

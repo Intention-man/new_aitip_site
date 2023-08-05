@@ -19,7 +19,7 @@ const CommonPagesDisplay = ({blockList, handMadeBlocksCount}) => {
     blockList = addConstructorBlocks(myAddress, handMadeBlocksCount, block_store, blockList)
 
     useEffect(() => {
-        addConstructorBlocks(myAddress, handMadeBlocksCount, block_store, blockList)
+        blockList = addConstructorBlocks(myAddress, handMadeBlocksCount, block_store, blockList)
     }, [block_store.blocks, block_store.lines, handMadeBlocksCount, myAddress]);
 
     console.log(blockList)

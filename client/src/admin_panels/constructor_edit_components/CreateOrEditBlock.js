@@ -25,7 +25,7 @@ const CreateOrEditBlock = observer(({block, mode}) => {
     const isEmpty = block.hasOwnProperty("fakeParam");
     const prevLinesIdList = isEmpty ? [] : block.lines.map(line => line.id)
 
-    const [isNews, setIsNews] = useState(isEmpty ? null : block.isNews);
+    const [isNews, setIsNews] = useState(isEmpty ? false : block.isNews);
     const [header, setHeader] = useState(isEmpty ? "" : block.header);
     const [pageLink, setPageLink] = useState(isEmpty ? "" : block.pageLink);
     const [ordinal, setOrdinal] = useState(isEmpty ? -1 : block.ordinal);
@@ -205,7 +205,7 @@ const CreateOrEditBlock = observer(({block, mode}) => {
                 <div>
                     <p>Тип блока</p>
                     <label className="custom_select">
-                        <select id="isNews" value={isNews === undefined ? "" : isNews} onChange={e => {
+                        <select id="isNews" value={isNews} onChange={e => {
                             if (e.target.value === "")
                                 setIsNews(undefined)
                             else

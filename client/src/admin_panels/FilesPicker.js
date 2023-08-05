@@ -100,6 +100,7 @@ const FilesPicker = ({ pickedFiles, setPickedFiles, isMultiple, isRequired, isIm
                             processFiles(e.target.files).then(files => {
                                 setPickedFiles(isMultiple ? files : files[0]);
                             });
+                            e.preventDefault();
                         }} 
                     />
                 </form>

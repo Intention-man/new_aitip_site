@@ -25,6 +25,7 @@ const EmployeesAdCurrentList = observer(({adList, header}) => {
             day = '0' + day;
         return day + "." + month + "." + year
     }
+    console.log(adList, header)
 
     return (
         <Block header={header} key={header}>
@@ -127,10 +128,12 @@ const EmployeesArchive = observer(() => {
 });
 
 const Employees = observer(() => {
+    let contestsList=[]
+    let electionsList=[]
 
     let blockList = {
-        2: <EmployeesAdCurrentList header="Актуальные выборы заведующих кафедрами"/>,
-        3: <EmployeesAdCurrentList header="Актуальные конкурсы на замещение вакантных должностей"/>,
+        2: <EmployeesAdCurrentList adList={electionsList} header="Актуальные выборы заведующих кафедрами"/>,
+        3: <EmployeesAdCurrentList adList={contestsList} header="Актуальные конкурсы на замещение вакантных должностей"/>,
         5: <EmployeesArchive/>
     }
 
@@ -139,26 +142,34 @@ const Employees = observer(() => {
     const day = new Date().getDate();
     const month = new Date().getMonth() + 1;
 
+
+    fetchElectionsAndContests().then(data => {
+        contestsList = data.rows.filter(ad =>
+            ((ad.kind === "Конкурс") && ((date - Number(ad.eventDate.slice(0, 4))) === 0) && ((month - Number(ad.eventDate.slice(5, 7))) === 0) && ((day - Number(ad.eventDate.slice(8, 10))) <= 0))
+            ||
+            ((ad.kind === "Конкурс") && ((date - Number(ad.eventDate.slice(0, 4))) < 0))
+            ||
+            ((ad.kind === "Конкурс") && ((date - Number(ad.eventDate.slice(0, 4))) === 0) && (month - Number(ad.eventDate.slice(5, 7)) < 0))
+        );
+        electionsList = data.rows.filter(ad =>
+            ((ad.kind === "Выборы") && ((date - Number(ad.eventDate.slice(0, 4))) === 0) && ((month - Number(ad.eventDate.slice(5, 7))) === 0) && ((day - Number(ad.eventDate.slice(8, 10))) <= 0))
+            ||
+            ((ad.kind === "Выборы") && ((date - Number(ad.eventDate.slice(0, 4))) < 0))
+            ||
+            ((ad.kind === "Выборы") && ((date - Number(ad.eventDate.slice(0, 4))) === 0) && (month - Number(ad.eventDate.slice(5, 7)) < 0))
+        )
+        console.log(contestsList)
+        console.log(electionsList)
+
+        blockList = {
+            2: <EmployeesAdCurrentList adList={electionsList} header="Актуальные выборы заведующих кафедрами"/>,
+            3: <EmployeesAdCurrentList adList={contestsList} header="Актуальные конкурсы на замещение вакантных должностей"/>,
+            5: <EmployeesArchive/>
+        }
+    })
     useEffect(() => {
-        fetchElectionsAndContests().then(data => {
-            const contestsList = data.rows.filter(ad =>
-                ((ad.kind === "Конкурс") && ((date - Number(ad.eventDate.slice(0, 4))) === 0) && ((month - Number(ad.eventDate.slice(5, 7))) === 0) && ((day - Number(ad.eventDate.slice(8, 10))) <= 0)) ||
-                ((ad.kind === "Конкурс") && ((date - Number(ad.eventDate.slice(0, 4))) < 0)) ||
-                ((ad.kind === "Конкурс") && ((date - Number(ad.eventDate.slice(0, 4))) === 0) && (month - Number(ad.eventDate.slice(5, 7)) < 0))
-            );
-            const electionsList = data.rows.filter(ad =>
-                ((ad.kind === "Выборы") && ((date - Number(ad.eventDate.slice(0, 4))) === 0) && ((month - Number(ad.eventDate.slice(5, 7))) === 0) && ((day - Number(ad.eventDate.slice(8, 10))) <= 0)) ||
-                ((ad.kind === "Выборы") && ((date - Number(ad.eventDate.slice(0, 4))) < 0)) ||
-                ((ad.kind === "Выборы") && ((date - Number(ad.eventDate.slice(0, 4))) === 0) && (month - Number(ad.eventDate.slice(5, 7)) < 0))
-            )
-
-            blockList[2] =
-                <EmployeesAdCurrentList adList={electionsList} header="Актуальные выборы заведующих кафедрами"/>
-            blockList[3] = <EmployeesAdCurrentList adList={contestsList}
-                                                   header="Актуальные конкурсы на замещение вакантных должностей"/>
-
-        })
-    }, [])
+        console.log("")
+    }, [electionsList, contestsList]);
 
 
     return (

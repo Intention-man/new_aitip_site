@@ -23,6 +23,10 @@
     padding-bottom: clamp(10px, 100vh / 12, 60px);
 }
 
+.StyledText-mdText h1  {
+    font-size: var(--heading_font_size);
+}
+
 .StyledText-mdText h2, .StyledText-mdText h3  {
     font-size: var(--subheading_font_size);
 }

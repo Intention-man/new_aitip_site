@@ -10,8 +10,6 @@
 }
 
 .topnav > a, .topnav > div {
-    float: left;
-    display: block;
     justify-content: center;
     color: #f2f2f2;
     text-align: center;
@@ -40,14 +38,15 @@
 }
 
 .heading_color{
-    font-size: var(--default_font_size);
     color: white;
     margin: auto;
+    white-space: nowrap;
 }
 
 .search-form {
     position: relative;
-    margin: 0 auto;
+    margin
+    : 0 auto;
     width: 30%;
     height: 40px;
     min-width: 100px;
@@ -62,6 +61,25 @@
     border-radius: 5px;
     outline: none;
     color: black;
+}
+
+.Search {
+    width: 12%;
+}
+
+.Search > form {
+    display: flex;
+}
+
+.Search-input {
+    flex: 3;
+    width: 100%;
+    min-width: 50px;
+}
+
+.Search-submit {
+    flex: 1;
+    width: 100%;
 }
 
 .button_search {
@@ -216,7 +234,7 @@
 
 
 
-@media screen and (min-width: 900px){
+@media screen and (min-width: 950px){
 
     .topnav {
         max-height: 100px;
@@ -239,6 +257,10 @@
 }
 
 @media screen and (max-width: 1250px){
+    .Search {
+        display: none;
+    }
+
     .bottom_menu {
         flex-wrap: wrap;
     }
@@ -252,14 +274,25 @@
     }
 }
 
-@media screen and (max-width: 900px){
+@media screen and (max-width: 950px){
     .search-form{
         width: 90%;
+    }
+
+    .Search {
+        width: 80%;
     }
 
     .topnav {
         height: 100%;
         display: block;
+    }
+
+    .topnav.responsive {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
     .bottom_menu {
@@ -326,5 +359,9 @@
         margin-left: 0;
         float: left;
         /*font-size: 16px;*/
+    }
+
+    .heading_color {
+        white-space: normal;
     }
 }

@@ -124,7 +124,7 @@ const Menu = () => {
                     navigate(0)
                 }}/>
                 <a className="vuz-name" id="vuz-name-id" href="/">
-                    <p className="heading_color">Алтайский институт труда и права</p>
+                    <h1 className="heading_color">Алтайский институт труда и права</h1>
                 </a>
                 <SearchOutputWindow/>
                 <BlindVersionSwitcher/>

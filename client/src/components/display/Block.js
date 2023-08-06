@@ -29,12 +29,12 @@ const Block = observer(({block, header, children}) => {
         {
             (block === undefined) ?
                 <div>
-                    <p style={{textAlign: "center", margin: "0 clamp(20px, 100vw / 19.2, 100px)", paddingTop: "clamp(10px, 100vh / 18, 40px)", fontSize: 30, fontWeight: 700}}>{header}</p>
+                    <h1 className="Block-header">{header}</h1>
                     {children}
                 </div>
             :
                 <>
-                    <p style={{textAlign: "center", margin: "0 clamp(20px, 100vw / 19.2, 100px)", paddingTop: "clamp(10px, 100vh / 18, 40px)", fontSize: 30, fontWeight: 700}}>{block.header}</p>
+                    <h1 className="Block-header">{block.header}</h1>
                     {block.hasOwnProperty('id') ?
                              block_store.lines.filter(line => line.blockId === block.id).sort((a, b) => a.lineOrdinal - b.lineOrdinal).map(line =>
                                 <LineDisplay key={line.id} line={line}/>

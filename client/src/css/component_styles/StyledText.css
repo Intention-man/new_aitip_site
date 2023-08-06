@@ -31,6 +31,10 @@
     font-size: var(--subheading_font_size);
 }
 
+.StyledText-mdText strong {
+    font-weight: 700;
+}
+
 .StyledText-mdText-bg {
     padding: 10px 20px;
 }

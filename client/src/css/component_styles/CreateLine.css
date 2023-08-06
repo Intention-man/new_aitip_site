@@ -11,7 +11,7 @@
 
 .line_container > div > p{
     color: var(--aitip_blue);
-    font-size: calc(var(--font_size_const) * 1.25);
+    font-size: calc(var(--default_font_size) * 1.25);
     font-weight: bold;
     margin: 0;
 }

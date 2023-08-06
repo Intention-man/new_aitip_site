@@ -42,10 +42,10 @@ const BlindVersionSwitcher = () => {
             newValue = defaultFontSize;  // Если был режим для слабовидящих - возвращаем стандартный шрифт
         } else {
             newValue = BLIND_VERSION_FONT_SIZE;  // Если был стандартный режим - устанавливаем увеличенный шрифт
-            // Далее твик, чтобы подгрузить значение константы --font_size_const в defaultFontSize
-            setDefaultFontSize(root.style.getPropertyValue('--font_size_const'));
+            // Далее твик, чтобы подгрузить значение константы --default_font_size в defaultFontSize
+            setDefaultFontSize(root.style.getPropertyValue('--default_font_size'));
         }
-        root.style.setProperty('--font_size_const', newValue);  // Обновляем размер шрифта
+        root.style.setProperty('--default_font_size', newValue);  // Обновляем размер шрифта
         localStorage.setItem('isBlindVersionActive', !isBlindVersionActive);
         setIsBlindVersionActive(!isBlindVersionActive);
     };

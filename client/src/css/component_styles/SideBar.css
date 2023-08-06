@@ -37,7 +37,7 @@
 
 .SideBar-content h1, .SideBar-content a {
     color: var(--aitip_grey);
-    font-size: var(--font_size_const);
+    font-size: var(--default_font_size);
     text-align: right;
 }
 

@@ -41,8 +41,8 @@ const LineDisplay = observer(({line}) => {
                     }
 
                     {(line.kind === 2 && (line.filesNames.length > 0)) && (line.addressFileType === "global" ?
-                            <BigImg imgSrc={line.filesNames[0]} imgType={getImgType()}/> :
-                            <BigImg imgSrc={process.env.REACT_APP_API_URL + line.filesNames[0]} imgType={getImgType()}/>
+                        <BigImg imgSrc={line.filesNames[0]} imgType={getImgType()}/> :
+                        <BigImg imgSrc={process.env.REACT_APP_API_URL + line.filesNames[0]} imgType={getImgType()}/>
                     )
                     }
 
@@ -50,8 +50,11 @@ const LineDisplay = observer(({line}) => {
                         <Card
                             imgType={getImgType()}
                             imgSrc={line.addressFileType === "global" ? line.filesNames[0] : process.env.REACT_APP_API_URL + line.filesNames[0]}
-                            imgPos={line.params.side}>
-                            <MDEditor.Markdown source={Array.isArray(line.text) ? line.text[0] : line.text} style={{whiteSpace: 'pre-wrap'}}/>
+                            imgPos={line.params.side}
+                        >
+                            <StyledText
+                                line={line}
+                            />
                         </Card>
                     }
 

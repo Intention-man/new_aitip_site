@@ -20,6 +20,10 @@
     box-sizing: border-box;
 }
 
+.Block > .StyledText-container {  /* Стили для дочерних линий текста в блоке  */
+    margin: clamp(10px, 100vh / 18, 40px) clamp(10px, 100vw / 19.2 - 10px, 80px) 0 clamp(10px, 100vw / 19.2 - 10px, 80px);
+}
+
 .Block:not(:last-child) {
     margin: 0 0 30px 0;
 }

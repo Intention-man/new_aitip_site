@@ -35,7 +35,10 @@ const StyledText = ({ line }) => {
                         <MDEditor.Markdown
                             className={getMarkdownClassname()}
                             source={columnText}
-                            style={{whiteSpace: 'pre-wrap'}}
+                            style={{
+                                whiteSpace: 'pre-wrap',
+                                fontSize: 'var(--default_font_size)',
+                            }}
                         />
                     </div>
                 )

@@ -6,7 +6,7 @@
     justify-content: space-evenly;
     background-color: var(--aitip_blue);
     margin-top: 3%;
-    font-size: var(--font_size_const);
+    font-size: var(--default_font_size);
 }
 
 .topnav > a, .topnav > div {
@@ -40,7 +40,7 @@
 }
 
 .heading_color{
-    font-size: var(--font_size_const);
+    font-size: var(--default_font_size);
     color: white;
     margin: auto;
 }
@@ -140,7 +140,7 @@
     justify-content: space-evenly;
     margin: 0 20% 0 20%;
     background-color: var(--bgcolor);
-    font-size: var(--font_size_const);
+    font-size: var(--default_font_size);
 }
 
 .bottom_menu a {
@@ -229,7 +229,7 @@
 
     .vuz-name{
         margin-left: 15%;
-        /*font-size: calc(var(--font_size_const) * 1.25);*/
+        /*font-size: calc(var(--default_font_size) * 1.25);*/
     }
 
     .logo{

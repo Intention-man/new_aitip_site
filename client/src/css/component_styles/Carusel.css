@@ -1,14 +1,10 @@
-/** {box-sizing: border-box}*/
-/*body {font-family: Verdana, sans-serif; margin:0}*/
-
-
 .carusel{
     /*box-sizing: border-box;*/
     font-family: Verdana, sans-serif;
-    margin: 30px 0 0 0;
+    margin: 30px 0;
     width: 100%;
-    height: 50%;
-    padding-bottom: 50px;
+    height: 70vh;
+    padding-bottom: 70px;
 }
 
 
@@ -16,29 +12,33 @@
 .slideshow-container {
     display: flex;
     height: 100%;
+    width: 100%;
     margin: 0;
-    padding: 10px 0;
-    /*margin: 0 142px;*/
-    /*border: 3px solid black;*/
+    padding: 0;
     border-radius: 10px;
     justify-content: space-between;
     flex-flow: row nowrap;
+
 }
 
 .mySlides {
     padding: 0;
-    margin: 0;
-    display: inline-block;
-    width: 90%;
-    height: 100%;
+    display: flex;
+    /*height: 100%;*/
+    align-items: center;
+    justify-content: center;
+    margin: 0 -5%;
+    width: 100%;
+    max-height: 80vh;
 }
 
 .mySlides > img{
-    height: 100%;
-    width: 100%;
+    /*height: 100%;*/
+    /*width: 100%;*/
+    max-height: 100%;
     max-width: 100%;
-    margin: 0;
-    padding: 0;
+    /*margin: auto;*/
+    /*padding: auto;*/
 }
 
 /* Next & previous buttons */
@@ -53,6 +53,7 @@
     font-size: 18px;
     transition: 0.6s ease;
     border-radius: 0 3px 3px 0;
+    position: relative;
 }
 .prev:hover, .next:hover {
     background-color: whitesmoke;

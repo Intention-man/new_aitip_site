@@ -50,6 +50,19 @@
     font-size: var(--default_font_size);
 }
 
+.joint_projects_description {
+    -ms-hyphens: auto;
+    display: flex;
+    margin: 30px 7%;
+    padding: 5px 20px;
+    border-radius: 10px;
+    /*background: var(--bgcolor);*/
+    justify-content: center;
+    align-items: center;
+    text-align: justify;
+    font-size: var(--font_size_const);
+}
+
 
 @media (max-width: 760px) {
     .logos{

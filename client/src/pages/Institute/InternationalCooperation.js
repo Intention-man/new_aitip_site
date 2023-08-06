@@ -2,6 +2,7 @@ import React from 'react';
 import Block from "../../components/display/Block";
 import Card from "../../components/lines/Card";
 import "../../css/page_styles/internationalCooperation.css"
+
 //Картинки
 import city from "../../local_assets/international-city.png";
 import city2 from "../../local_assets/international-city2.png";
@@ -18,7 +19,7 @@ const InternationalCooperation = () => {
 
     return (
         <>
-            <h1 className="page_title">Международное сотрудничество</h1>
+            <p className="blue_page_title">Международное сотрудничество</p>
             {/*<h2 className="block_title">Общие данные</h2>*/}
             <Block header="Общие данные">
                 <Card imgType="fading" imgSrc={city} className="international_info">

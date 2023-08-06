@@ -48,6 +48,20 @@ body {
     padding: 30px 0; 
 }
 
+.blue_page_title{
+    color: var(--aitip_blue);
+    font-size: var(--h1-font-size);
+    font-weight: 700;
+    margin-left: 3%;
+}
+
+.blue_section_title{
+    color: var(--aitip_blue);
+    font-size: var(--h2-font-size);
+    font-weight: 700;
+    margin-left: 3%;
+}
+
 .small_grey_link_to_block{
     border: none;
     background-color: white;
@@ -189,21 +203,6 @@ body {
     height: 16vw;
 }
 
-
-/*Some changes to carusel*/
-.carusel{
-    padding-bottom: 20px;
-}
-.mySlides{
-    margin: 0 -5%;
-    width: 100%;
-}
-.prev, .next {
-    position: relative;
-}
-.slideshow-container{
-    padding: 0;
-}
 /*------------------------*/
 
 @media (max-width: 1600px) {

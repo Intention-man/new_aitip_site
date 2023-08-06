@@ -31,6 +31,7 @@ const StyledText = ({ line }) => {
                     <div
                         key={i}
                         className="StyledText-column"
+                        data-color-mode="light"  /* Выключение установки тёмной темы MDEditor'ом */
                     >
                         <MDEditor.Markdown
                             className={getMarkdownClassname()}

@@ -37,7 +37,6 @@ const StyledText = ({ line }) => {
                             className={getMarkdownClassname()}
                             source={columnText}
                             style={{
-                                whiteSpace: 'pre-wrap',
                                 fontSize: 'var(--default_font_size)',
                             }}
                         />

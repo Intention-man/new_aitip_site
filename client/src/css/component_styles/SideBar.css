@@ -55,7 +55,7 @@
 }
 
 .LinksPanel-linksContainer a:not(:last-child) {
-    margin-bottom: 30px;
+    margin-bottom: 10px;
 }
 
 /* Костыль, исправляющий момент, когда выделенная жирным ссылка двигает другой контент */

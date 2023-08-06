@@ -15,7 +15,12 @@
 
 :root {
     --default_font_size: 19px;
+    --subheading_font_size: 23px;
     font-size: var(--default_font_size);
+}
+
+h2, h3 {
+    font-size: var(--subheading_font_size);
 }
 
 body {

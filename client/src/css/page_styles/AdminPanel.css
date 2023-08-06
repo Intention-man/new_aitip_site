@@ -58,21 +58,21 @@
 
 .picker-forms-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
     justify-content: space-between;
 }
 
-.picker-forms-container form {
-    margin: 0;
-}
-
-.picker-forms-client {
+.picker-forms-client, .picker-forms-server, .picker-forms-url {
     flex: 1;
 }
 
-.picker-forms-server {
-    flex: 1;
+.picker-forms-container > *:not(:last-child){
+    margin-bottom: 20px;
+}
+
+.picker-forms-url > label{
+    width: 100%;
 }
 
 .single-image-preview {

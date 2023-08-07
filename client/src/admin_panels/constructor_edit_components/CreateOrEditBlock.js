@@ -315,11 +315,6 @@ const CreateOrEditBlock = observer(({block, mode}) => {
                         )
                 }
             }}>Удалить блок</button>
-            <svg className="sprites">
-                <symbol id="select-arrow-down" viewBox="0 0 10 6">
-                    <polyline points="1 1 5 5 9 1"></polyline>
-                </symbol>
-            </svg>
         </div>
     )
 });

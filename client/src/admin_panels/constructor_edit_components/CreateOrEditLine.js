@@ -32,7 +32,7 @@ const CreateOrEditLine = observer(({index, changeLine, currentLine, doUpdateUsag
         const filesNames = currentLine.filesNames
         const addressFileType = currentLine.addressFileType
         const [prevFilesNames, setPrevFilesNames] = useState(currentLine.filesNames)
-        const [chosenFiles, setChosenFilesNames] = useState(currentLine.filesNames)
+        const [chosenFiles, setChosenFilesNames] = useState(kind === 2 || kind === 3 || kind === 6 ? currentLine.filesNames[0] : currentLine.filesNames)//Для корректного предпросмотра
 
         useEffect(() => {
             if (document.getElementById('select_ratio' + currentLine.id) !== null) {
@@ -183,7 +183,6 @@ const CreateOrEditLine = observer(({index, changeLine, currentLine, doUpdateUsag
                                     {(kind === 3 || kind === 2) &&
                                         <FilesPicker isMultiple={false} isImage={true} isRequired={true}
                                                      setPickedFiles={setChosenFilesNames} pickedFiles={chosenFiles}/>
-
                                     }
 
                                     {kind === 4 &&

@@ -21,33 +21,46 @@ const BlockEditor = observer(() => {
     return (
         <div>
             {/*Выбор страницы*/}
-            <select value={chosenPageLink} onChange={e => {
-                setChosenPageLink(e.target.value)
-            }}>
-                <option value="">Выберите страницу, на которой находится блок, который вы хотите изменить</option>
-                {publicRoutes.map((publicRoute) => (
-                    <option key={publicRoute.name} value={publicRoute.path}>{publicRoute.name}</option>
-                ))}
-            </select>
+            <label style={{marginTop: "20px"}} className="custom_select">
+                <select style={{background:"white"}} value={chosenPageLink} onChange={e => {
+                    setChosenPageLink(e.target.value)
+                }}>
+                    <option value="" disabled="disabled" selected="selected">Выберите страницу, на которой находится
+                        блок, который вы хотите изменить
+                    </option>
+                    {publicRoutes.map((publicRoute) => (
+                        <option key={publicRoute.name} value={publicRoute.path}>{publicRoute.name}</option>
+                    ))}
+                </select>
+                <svg><use xlinkHref="#select-arrow-down"></use></svg>
+            </label>
 
             {/*Выбор блока*/}
             {pageBlocks.length > 0 ?
-                <select value={chosenBlock.header} onChange={e => {
-                    fetchOneBlock(e.target.value).then(data => {
-                        setChosenBlock(data)
-                        console.log(data)
-                    })
-                }}>
-                    <option value="">Выберите блок, который хотите изменить</option>
-                    {pageBlocks.map((block) => (
-                        <option key={block.id} value={block.id}>{block.header}</option>
-                    ))}
-                </select>
+                <label style={{margin: "20px 0"}} className="custom_select">
+                    <select style={{background:"white"}} value={chosenBlock.header} onChange={e => {
+                        fetchOneBlock(e.target.value).then(data => {
+                            setChosenBlock(data)
+                            console.log(data)
+                        })
+                    }}>
+                        <option value="" disabled="disabled" selected="selected">Выберите блок, который хотите изменить</option>
+                        {pageBlocks.map((block) => (
+                            <option key={block.id} value={block.id}>{block.header}</option>
+                        ))}
+                    </select>
+                    <svg><use xlinkHref="#select-arrow-down"></use></svg>
+                </label>
                 : <p>Блоки еще загружаются или на выбранной странице пока нет блоков</p>}
 
             {pageBlocks.length > 0 && chosenBlock.hasOwnProperty("lines") && chosenBlock.lines.length > 0 &&
                 <CreateOrEditBlock block={chosenBlock} mode="edit"/>
             }
+            <svg className="sprites">
+                <symbol id="select-arrow-down" viewBox="0 0 10 6">
+                    <polyline points="1 1 5 5 9 1"></polyline>
+                </symbol>
+            </svg>
         </div>
     );
 });

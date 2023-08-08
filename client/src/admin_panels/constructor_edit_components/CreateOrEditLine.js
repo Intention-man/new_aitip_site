@@ -36,7 +36,7 @@ const CreateOrEditLine = observer(({index, changeLine, currentLine, doUpdateUsag
 
         useEffect(() => {
             if (document.getElementById('select_ratio' + currentLine.id) !== null) {
-                document.getElementById('select_ratio' + currentLine.id).value = (params !== null && params.hasOwnProperty("ratio")) ? params.ratio : 16/9
+                document.getElementById('select_ratio' + currentLine.id).value = (params !== null && params.hasOwnProperty("ratio")) ? params.ratio : 16 / 9
             }
             if (document.getElementById('select_color' + currentLine.id) !== null) {
                 document.getElementById('select_color' + currentLine.id).value = (params !== null && params.hasOwnProperty("color")) ? params.color : "#0000FF"
@@ -198,8 +198,18 @@ const CreateOrEditLine = observer(({index, changeLine, currentLine, doUpdateUsag
                                     }
 
                                     {kind === 6 &&
-                                        <FilesPicker isMultiple={false} isImage={false} isRequired={true}
-                                                     setPickedFiles={setChosenFilesNames} pickedFiles={chosenFiles}/>
+                                        <>
+                                            <input placeholder="Введите название документа" className="pretty_inputs"
+                                                   type="text" id={"document_name" + currentLine.id}
+                                                   value={(params !== null && params.documentName) ? params.documentName : ""}
+                                                   onChange={(e) => {
+                                                       params["documentName"] = e.target.value
+                                                       changeLine("params", params, index)
+                                                   }
+                                                   }/>
+                                            <FilesPicker isMultiple={false} isImage={false} isRequired={true}
+                                                         setPickedFiles={setChosenFilesNames} pickedFiles={chosenFiles}/>
+                                        </>
                                     }
                                 </div>}
                         </div>

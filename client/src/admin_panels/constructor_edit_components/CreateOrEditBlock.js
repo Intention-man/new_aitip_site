@@ -15,6 +15,7 @@ import doc_pic from "../../local_assets/document-text.png"
 import arrow from "../../local_assets/icons/arrow-up.svg"
 import trash from "../../local_assets/icons/delete.svg"
 import {Context} from '../..';
+import LineDisplay from "../../components/display/LineDisplay";
 
 
 const CreateOrEditBlock = observer(({block, mode}) => {
@@ -174,6 +175,10 @@ const CreateOrEditBlock = observer(({block, mode}) => {
         return false;
     }
 
+    useEffect(() => {
+        console.log(header);
+    }, [header])
+
     const isDataValid = () => {
         console.log(lines.length > 0, lines)
         return (isNews !== null && pageLink && header && lines && pageLink.length > 0 && header.trim().length > 0 && lines.length > 0)
@@ -286,10 +291,8 @@ const CreateOrEditBlock = observer(({block, mode}) => {
             {!isNews && <h2 className="block_look_title">Как выглядит блок</h2>}
             {lines && lines.length > 0 &&
                 <Block
-                    block={{
-                        header: header,
-                        lines: lines,
-                    }} // FIXME: ох, это ужасный костыль
+                    header={header}
+                    children={lines.map(e => <LineDisplay line={e} key={e.id}/>)}// FIXME: ох, это ужасный костыль
                 />
             }
             <Button className="add_block" setChosenValue={() => {

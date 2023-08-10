@@ -17,6 +17,7 @@
     border-color: rgba(0, 0, 0, 0);
     border-radius: var(--default_border_radius);
     font-size: var(--default_font_size);
+    word-break: break-all;
 }
 
 .StyledText-container:last-child {

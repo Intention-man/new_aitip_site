@@ -61,7 +61,8 @@
 
 .Card-image-left, .Card-image-right {
     max-width: 50%;
-    width: auto;
+    width: 100%;
+    display: flex;
 }
 
 .Card-body {
@@ -69,6 +70,10 @@
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
+}
+
+.Card-body-left .StyledText-container {
+    margin-left: clamp(20px, 100vw / 100, 100px);
 }
 
 .Card-body-left, .Card-body-right {

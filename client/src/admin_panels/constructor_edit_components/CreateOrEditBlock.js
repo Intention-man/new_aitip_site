@@ -15,6 +15,7 @@ import doc_pic from "../../local_assets/document-text.png"
 import arrow from "../../local_assets/icons/arrow-up.svg"
 import trash from "../../local_assets/icons/delete.svg"
 import {Context} from '../..';
+import LineDisplay from "../../components/display/LineDisplay";
 
 
 const CreateOrEditBlock = observer(({block, mode}) => {
@@ -186,6 +187,10 @@ const CreateOrEditBlock = observer(({block, mode}) => {
         return false;
     }
 
+    useEffect(() => {
+        console.log(header);
+    }, [header])
+
     const isDataValid = () => {
         console.log(lines.length > 0, lines)
         return (isNews !== null && pageLink && header && lines && pageLink.length > 0 && header.trim().length > 0 && lines.length > 0)
@@ -203,7 +208,7 @@ const CreateOrEditBlock = observer(({block, mode}) => {
                                 setPageLink(e.target.value)
                             }}>
                                 <option value="" disabled="disabled">Выберите страницу</option>
-                                {publicRoutes.map((publicRoute) => (
+                                {publicRoutes.sort((a,b) => (a.name.toLowerCase() < b.name.toLowerCase()) ? -1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? 1 : 0)).map((publicRoute) => (
                                     <option key={publicRoute.name}
                                             value={publicRoute.path}>{publicRoute.name}</option>
                                 ))}

@@ -37,7 +37,7 @@ const BlockEditor = observer(() => {
                     <option value="" disabled="disabled" selected="selected">Выберите страницу, на которой находится
                         блок, который вы хотите изменить
                     </option>
-                    {publicRoutes.map((publicRoute) => (
+                    {publicRoutes.sort((a,b) => (a.name.toLowerCase() < b.name.toLowerCase()) ? -1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? 1 : 0)).map((publicRoute) => (
                         <option key={publicRoute.name} value={publicRoute.path}>{publicRoute.name}</option>
                     ))}
                 </select>

@@ -1,7 +1,7 @@
 // Frontend модального окна для добавления направления и функции, изменяющие состояния(установлено в модальном окне определенное значение или нет). Возможно, не будет использоваться.
 
 
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {observer} from "mobx-react-lite";
 import {
     createDirectionBachelor,
@@ -11,7 +11,6 @@ import {
 } from "../../http/admissionAPI";
 import {Button, Col, Dropdown, FormControl, Row} from "react-bootstrap";
 import "../../css/page_styles/AdminPanel.css"
-import {Context} from "../../index";
 import {updateFileUsages} from "../../additional_commands/commonPanelsFunctions";
 import FilesPicker from '../FilesPicker';
 

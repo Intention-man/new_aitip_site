@@ -50,14 +50,14 @@ body {
 
 .blue_page_title{
     color: var(--aitip_blue);
-    font-size: var(--h1-font-size);
+    font-size: var(--heading_font_size);
     font-weight: 700;
     margin-left: 3%;
 }
 
 .blue_section_title{
     color: var(--aitip_blue);
-    font-size: var(--h2-font-size);
+    font-size: var(--subheading_font_size);
     font-weight: 700;
     margin-left: 3%;
 }

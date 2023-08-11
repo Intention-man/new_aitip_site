@@ -13,7 +13,7 @@ const StyledText = ({ line }) => {
     // console.log(line.text)
     const getMarkdownClassname = () => {
         const className = ['StyledText-mdText'];
-        
+
         const backgroundColor = line.params !== null && line.params.backgroundColor;
         if (backgroundColor != null)
             className.push('StyledText-mdText-bg', `StyledText-mdText-bg-${backgroundColor}`)
@@ -21,8 +21,12 @@ const StyledText = ({ line }) => {
         const borderColor = line.params !== null && line.params.borderColor;
         if (borderColor != null)
             className.push('StyledText-mdText-border', `StyledText-mdText-border-${borderColor}`);
-        
+
         return className.join(' ');
+    }
+
+    if (typeof line.text == 'string') {  // Проверка на всякий случай: если нам поступилв в line.text голая строка - обернём как надо
+        line.text = [line.text]
     }
 
     return (

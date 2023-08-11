@@ -71,10 +71,10 @@ const Admin = observer(() => {
 
 
     return (
-        <Container className="d-flex flex-column">
+        <div className="d-flex flex-column">
             <ButtonList buttonList={forms} setChosenValue={setWindowVisible}/>
             {windowVisible && forms[windowVisible]}
-        </Container>
+        </div>
     );
 });
 

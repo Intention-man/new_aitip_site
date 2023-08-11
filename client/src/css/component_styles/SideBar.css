@@ -49,6 +49,19 @@
     text-align: left;
 }
 
+.SideBar-content .feedback {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.SideBar-content .feedback .social-block {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+}
+
 .LinksPanel-linksContainer {
     border-right: 2px solid var(--aitip_grey);
     padding: 0 25px 0;

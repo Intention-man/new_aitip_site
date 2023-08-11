@@ -17,6 +17,7 @@
     border-color: rgba(0, 0, 0, 0);
     border-radius: var(--default_border_radius);
     font-size: var(--default_font_size);
+    word-break: break-all;
 }
 
 .StyledText-container:last-child {
@@ -25,6 +26,8 @@
 
 .StyledText-mdText h1  {
     font-size: var(--heading_font_size);
+    border-bottom: none;
+    font-weight: 700;
 }
 
 .StyledText-mdText h2, .StyledText-mdText h3  {

@@ -73,7 +73,7 @@
 }
 
 .Card-body-left .StyledText-container {
-    margin-left: clamp(20px, 100vw / 100, 100px);
+    margin-left: clamp(20px, 100vw / 30, 100px);
 }
 
 .Card-body-left, .Card-body-right {

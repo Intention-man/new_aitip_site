@@ -10,6 +10,7 @@ import "../../css/component_styles/StyledText.css"
  * @returns Компонент линии стилизованного текста
  */
 const StyledText = ({ line }) => {
+    // console.log(line.text)
     const getMarkdownClassname = () => {
         const className = ['StyledText-mdText'];
         

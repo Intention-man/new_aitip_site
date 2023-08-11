@@ -49,7 +49,7 @@ const Admin = observer(() => {
         "Создать лабораторию": <CreateLab lab={{fakeParam: undefined}}/>,
         "Редактировать лабораторию": <LabEditor/>,
 
-        "Добавить блок": <CreateOrEditBlock block={{fakeParam: undefined}}/>,
+        "Добавить блок": <CreateOrEditBlock block={{fakeParam: undefined}} mode="create"/>,
         "Редактировать новость": <NewsEditor/>,
         "Редактировать блок": <BlocksEditor/>,
         "Изменить порядок блоков на странице": <BlocksSwap/>,

@@ -293,8 +293,9 @@ const CreateOrEditLine = observer(({index, changeLine, currentLine, doUpdateUsag
                     {/* Появление зоны редактирования текста*/}
                     {kind === 3 &&
                         <ExtendedTextEditor 
-                            text={text}
-                            changeLine={changeLine}
+                            text={text[0]}
+                            setText={(val) => changeLine("text", [val], index)}
+                            // changeLine={changeLine}
                             index={index}      
                         />
                     }

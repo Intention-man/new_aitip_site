@@ -11,6 +11,7 @@ const BlockEditor = observer(() => {
     const [chosenPageLink, setChosenPageLink] = useState("");
     const [pageBlocks, setPageBlocks] = useState([]);
     const [chosenBlock, setChosenBlock] = useState({});
+    const [mode, setMode] = useState("edit");
 
     useEffect(() => {
         setPageBlocks(Array.from(block_store.blocks.filter(block => block.pageLink === chosenPageLink).sort((a, b) => a.ordinal - b.ordinal)))
@@ -20,6 +21,14 @@ const BlockEditor = observer(() => {
 
     return (
         <div>
+            {/*Выбор режима*/}
+            <select value={mode} onChange={e => {
+                setMode(e.target.value)
+            }}>
+                <option value="edit">Редактировать блок</option>
+                <option value="useAsPattern">Использовать блок как шаблон для нового блока</option>
+            </select>
+
             {/*Выбор страницы*/}
             <select value={chosenPageLink} onChange={e => {
                 setChosenPageLink(e.target.value)
@@ -46,7 +55,7 @@ const BlockEditor = observer(() => {
                 : <p>Блоки еще загружаются или на выбранной странице пока нет блоков</p>}
 
             {pageBlocks.length > 0 && chosenBlock.hasOwnProperty("lines") && chosenBlock.lines.length > 0 &&
-                <CreateOrEditBlock block={chosenBlock} mode="edit"/>
+                <CreateOrEditBlock block={chosenBlock} mode={mode}/>
             }
         </div>
     );

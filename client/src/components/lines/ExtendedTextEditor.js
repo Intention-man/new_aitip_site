@@ -57,7 +57,7 @@ const ExtendedTextEditor = ({text, setText, changeLine, index}) => {
             onChange={(val) => {
                 if (setText)
                     setText(val);
-                changeLine("text", val, index)
+                // changeLine("text", val, index)
             }}
         />
     );

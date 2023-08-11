@@ -18,7 +18,6 @@ import {Context} from '../..';
 
 
 const CreateOrEditBlock = observer(({block, mode}) => {
-    console.log(mode)
 
     const {block_store} = useContext(Context);
 
@@ -299,10 +298,8 @@ const CreateOrEditBlock = observer(({block, mode}) => {
             {!isNews && <h2 className="block_look_title">Как выглядит блок</h2>}
             {lines && lines.length > 0 &&
                 <Block
-                    block={{
-                        header: header,
-                        lines: lines,
-                    }} // FIXME: ох, это ужасный костыль
+                    header={header}
+                    children={lines.map(e => <LineDisplay line={e} key={e.id}/>)}// FIXME: ох, это ужасный костыль
                 />
             }
             <Button className="add_block" setChosenValue={() => {

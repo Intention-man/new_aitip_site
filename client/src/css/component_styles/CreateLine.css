@@ -29,7 +29,7 @@
 
 label.file_chooser input[type="file"] {
     position: absolute;
-    top: -1000px;
+    top: -100000px;
 }
 
 .file_chooser{
@@ -38,7 +38,6 @@ label.file_chooser input[type="file"] {
     cursor: pointer;
     border-radius: var(--default_border_radius);
     display: inline-block;
-    margin-bottom: 20px;
 }
 
 .file_chooser > p{

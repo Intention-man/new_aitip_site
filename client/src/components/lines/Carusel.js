@@ -10,7 +10,7 @@ const Carusel = ({photos, addressFileType, ratio, color}) => {
     // console.log(photos);
     console.log(photos, addressFileType, ratio, color)
     const [currentSlideNumber, setCurrentSlideNumber] = useState(0)
-    ratio = ratio || 1
+    ratio = ratio || 16/9
     color = color || "blue"
     console.log(color)
     const ref = useRef(null);

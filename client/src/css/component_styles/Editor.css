@@ -253,7 +253,7 @@ input[type="text"]{
 }
 .custom_select select {
     -webkit-appearance: none;
-    padding: 7px 40px 7px 12px;
+    padding: 7px 0 7px 12px;
     width: 100%;
     border: 1px solid #e8eaed;
     border-radius: 5px;

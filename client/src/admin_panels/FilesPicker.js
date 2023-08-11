@@ -18,11 +18,12 @@ import '../css/page_styles/AdminPanel.css';
  * @param {boolean} isRequired Обязательно ли заполнение данного поля (т.е. файл необязательно выбирать)
  * @param {boolean} isImage Выбирается ли изображение, инчае любой файл
  */
-const FilesPicker = ({ pickedFiles, setPickedFiles, isMultiple, isRequired, isImage }) => {
-    
-    const { block_store } = useContext(Context);
+const FilesPicker = ({pickedFiles, setPickedFiles, isMultiple, isRequired, isImage}) => {
+
+    const {block_store} = useContext(Context);
     const localPickerForm = useRef();
     const serverPickerForm = useRef();
+    const urlPickerForm = useRef();
 
     /**
      * Функция обработки файлов, выбранных пользователем.
@@ -78,31 +79,37 @@ const FilesPicker = ({ pickedFiles, setPickedFiles, isMultiple, isRequired, isIm
     const checkIsMultipleFiles = () => {
         return checkIsAnythingSelected() && !isImage && isMultiple && Array.isArray(pickedFiles);
     }
-    
+
+    const isFilesAreLinks = () => {
+        const file = (Array.isArray(pickedFiles) ? pickedFiles[0] : pickedFiles);
+        return file && file.includes("/");
+    }
+
     return (
-        <Card 
-            style={{border: 'none', borderRadius: 'var(--default_border_radius)', padding: '20px'}}  // FIXME: костыль, чтобы переопределить навязанные Bootstrap'ом стили
-        >
+        <>
             <div className='picker-forms-container'>
-                <form 
+                <form
                     ref={localPickerForm}
                     className='picker-forms-client'
                 >  {/* Используем <form>, так как этот элемент обладает методом reset(), позволяющий очищать все дочерние <input> */}
                     <h5>Загрузить {isMultiple ? 'новые файлы' : 'новый файл'}</h5>
-                    <input 
-                        className="picture-getter"
-                        type="file"
-                        accept={isImage ? "image/*" : undefined}
-                        multiple={isMultiple}
-                        required={isRequired}
-                        onChange={e => {
-                            serverPickerForm.current.reset();  // Вызываем reset над формой ниже, чтобы очистить выбранный файл
-                            processFiles(e.target.files).then(files => {
-                                setPickedFiles(isMultiple ? files : files[0]);
-                            });
-                            e.preventDefault();
-                        }} 
-                    />
+                    <label className="file_chooser">
+                        <input
+                            className="picture-getter"
+                            type="file"
+                            accept={isImage ? "image/*" : undefined}
+                            multiple={isMultiple}
+                            required={isRequired}
+                            onChange={e => {
+                                serverPickerForm.current.reset();  // Вызываем reset над формой ниже, чтобы очистить выбранный файл
+                                urlPickerForm.current.reset();
+                                processFiles(e.target.files).then(files => {
+                                    setPickedFiles(isMultiple ? files : files[0]);
+                                });
+                            }}
+                        />
+                        <p><img alt="" src={load}/><br/>{"Загрузить " + (isImage ? "изображение" : "файл")}</p>
+                    </label>
                 </form>
                 
                 <form 
@@ -110,26 +117,47 @@ const FilesPicker = ({ pickedFiles, setPickedFiles, isMultiple, isRequired, isIm
                     className='picker-forms-server'
                 >
                     <h5>Выбрать {isMultiple ? 'файлы' : 'файл'} с сервера</h5>
-                    <select 
-                        size="7"    
-                        multiple={isMultiple}
-                        onChange={e => {
-                            localPickerForm.current.reset();  // Вызываем reset над формой выше, чтобы очистить выбранный файл 
-                            const files = Array.from(e.target.selectedOptions).map(option => option.value);
-                            setPickedFiles(isMultiple ? files : files[0]);
-                        }}
-                    >
-                        {
-                            block_store.allFiles.map((file, index) =>
-                                <option 
-                                    key={index}
-                                    value={file.fileLink}
-                                >
-                                    {file.name}
-                                </option>
-                            )
-                        }
-                    </select>
+                    <label className="custom_select multiline_select">
+                        <select
+                            size="10"
+                            multiple={isMultiple}
+                            onChange={e => {
+                                localPickerForm.current.reset();  // Вызываем reset над формой выше, чтобы очистить выбранный файл '
+                                urlPickerForm.current.reset();
+                                const files = Array.from(e.target.selectedOptions).map(option => option.value);
+                                setPickedFiles(isMultiple ? files : files[0]);
+                            }}
+                        >
+                            {
+                                block_store.allFiles.map((file, index) =>
+                                    <option
+                                        key={index}
+                                        value={file.fileLink}
+                                    >
+                                        {file.name}
+                                    </option>
+                                )
+                            }
+                        </select>
+                    </label>
+                </form>
+
+                <form
+                    ref={urlPickerForm}
+                    className="picker-forms-url"
+                >
+                    <label>
+                        <h5>Загрузить по ссылке</h5>
+                        <input className="pretty_inputs" type="text"
+                               placeholder={isMultiple ? "Введите одну или несколько ссылок разделённых \";\"" : "Введите ссылку на файл"}
+                               value={isFilesAreLinks() ? isMultiple ? pickedFiles.join(";") : pickedFiles : ""}
+                               onChange={(e) => {
+                                   serverPickerForm.current.reset();
+                                   localPickerForm.current.reset();
+                                   const files = e.target.value.split(";").map(e => e.trim());
+                                   setPickedFiles(isMultiple ? files : files[0])
+                               }}/>
+                    </label>
                 </form>
             </div>
 
@@ -139,15 +167,15 @@ const FilesPicker = ({ pickedFiles, setPickedFiles, isMultiple, isRequired, isIm
                 <h5>Выбранные файлы</h5>
             }
             {
-                checkIsSingleImage() && 
-                <img 
-                    src={process.env.REACT_APP_API_URL + pickedFiles} 
+                checkIsSingleImage() &&
+                <img
+                    src={isFilesAreLinks() ? pickedFiles : process.env.REACT_APP_API_URL + pickedFiles}
                     className='single-image-preview'
-                /> 
+                />
             }
             {
                 checkIsCarousel() &&
-                <Carusel photos={pickedFiles} addressFileType="local"/>
+                <Carusel photos={pickedFiles} addressFileType={isFilesAreLinks() ? "global" : "local"}/>
             }
             {
                 checkIsSingleFile() &&
@@ -157,7 +185,7 @@ const FilesPicker = ({ pickedFiles, setPickedFiles, isMultiple, isRequired, isIm
                 checkIsMultipleFiles() &&
                 pickedFiles.map((file, index) => <p key={index}>{file}</p>)  // TODO: сделать красивое отображение списка документов, а не просто в <p> 
             }
-        </Card>
+        </>
     );
 }
 

@@ -29,7 +29,7 @@
 
 label.file_chooser input[type="file"] {
     position: absolute;
-    top: -100000px;
+    left: -100000px;
 }
 
 .file_chooser{

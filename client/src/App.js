@@ -35,9 +35,7 @@ const App = observer(() => {
     }, [])
 
     useEffect(() => {
-        setTimeout(() => {
-            setLoading(false)
-        }, 1000)
+        setLoading(false)
     });
 
     if (loading) {
@@ -72,9 +70,7 @@ const App = observer(() => {
                     />
                 </SideBar>
                 <ContentContext.Provider value={updateContent}>
-                    <BlockContainer>
-                        <AppRouter/>
-                    </BlockContainer>
+                    <AppRouter/>
                 </ContentContext.Provider>
                 <SideBar
                     alignment='right'

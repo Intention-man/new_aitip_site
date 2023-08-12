@@ -83,10 +83,6 @@ class LinksPanel extends React.Component {
         this.updateActiveBlocks();
     }
 
-    // componentDidUpdate(prevProps, prevState, snapshot) {
-    //     this.updateActiveBlocks();
-    // }
-
     componentWillUnmount() {
         window.removeEventListener('resize', this.updateActiveBlocks);
         window.removeEventListener('scroll', this.updateActiveBlocks);

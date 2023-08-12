@@ -14,11 +14,6 @@ import {observer} from "mobx-react-lite";
 const BlockContainer = observer(({ children }) => {
     const updateLinksPanel = useContext(ContentContext);  // Получаем callback из ContentContext для передачи текущих активных блоков
 
-    useEffect(() => {
-
-    })
-
-
     const setBlocksLinks = (element) => {
         const domNode = findDOMNode(element);
         if (domNode && domNode.children) {
@@ -37,7 +32,7 @@ const BlockContainer = observer(({ children }) => {
     };
     
     return (
-        <div className="BlockContainer content" ref={setBlocksLinks}>
+        <div id='test' className="BlockContainer content" ref={setBlocksLinks}>
             { children }
         </div>
     );

@@ -129,7 +129,7 @@ const FilesPicker = ({pickedFiles, setPickedFiles, isMultiple, isRequired, isIma
                             }}
                         >
                             {
-                                block_store.allFiles.map((file, index) =>
+                                block_store.allFiles.sort((a,b) => (a.name.toLowerCase() < b.name.toLowerCase()) ? -1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? 1 : 0)).map((file, index) =>
                                     <option
                                         key={index}
                                         value={file.fileLink}

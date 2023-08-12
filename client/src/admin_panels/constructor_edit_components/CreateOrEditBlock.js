@@ -59,7 +59,8 @@ const CreateOrEditBlock = observer(({block, mode}) => {
 
     useEffect(() => {
         if (pageLink !== "" && ordinal === -1){
-            setOrdinal(Array.from(block_store.blocks.filter(block => block.pageLink === pageLink).sort((block1, block2) => block2.ordinal - block1.ordinal))[0].ordinal + 1)
+            const array = Array.from(block_store.blocks.filter(block => block.pageLink === pageLink).sort((block1, block2) => block2.ordinal - block1.ordinal))
+            setOrdinal(array.length > 0 ? array[0].ordinal + 1 : 1)
         }
     }, [pageLink])
 

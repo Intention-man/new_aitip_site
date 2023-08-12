@@ -16,7 +16,6 @@ import Footer from "./components/permanent/Footer";
 import {refetchAllContent} from "./additional_commands/commonPanelsFunctions";
 
 import {fetchLines} from "./http/blockAPI";
-import BlockContainer from "./components/display/BlockContainer";
 import {DotLoader} from "react-spinners";
 
 
@@ -35,7 +34,9 @@ const App = observer(() => {
     }, [])
 
     useEffect(() => {
-        setLoading(false)
+        setTimeout(() => {
+            setLoading(false)
+        }, 500)
     });
 
     if (loading) {

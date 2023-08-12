@@ -2,6 +2,7 @@ import '../../css/component_styles/Block.css';
 import ContentContext from '../contexts/ContentContext';
 import {useContext, useEffect} from 'react';
 import { findDOMNode } from 'react-dom';
+import {observer} from "mobx-react-lite";
 
 /**
  * Контейнер для всех блоков текущей страницы. Все блоки должны помещаться в этот контейнер. 
@@ -10,7 +11,7 @@ import { findDOMNode } from 'react-dom';
  * @param {array} children Массив из компонентов Block
  * @returns Компонент списка блоков
  */
-const BlockContainer = ({ children }) => {    
+const BlockContainer = observer(({ children }) => {
     const updateLinksPanel = useContext(ContentContext);  // Получаем callback из ContentContext для передачи текущих активных блоков
 
     useEffect(() => {
@@ -40,6 +41,6 @@ const BlockContainer = ({ children }) => {
             { children }
         </div>
     );
-}
+})
 
 export default BlockContainer;

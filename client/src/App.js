@@ -22,35 +22,21 @@ import {DotLoader} from "react-spinners";
 
 const App = observer(() => {
     const {block_store} = useContext(Context);
-    const {user_store} = useContext(Context);
 
     const [loading, setLoading] = useState(true);
     const [currentContent, setCurrentContent] = useState([]);  // Стейт с текущими блоками страницы (нужны для LinksPanel)
 
-    
+
     useEffect(() => {
         refetchAllContent(block_store);
         fetchLines().then(data => {
             block_store.setLines(data.rows)
         })
     }, [])
-    
+
     useEffect(() => {
         setTimeout(() => {
-            try {
-                check().then(response => {
-                    if (response !== undefined && typeof response === "object" && response.hasOwnProperty("email")) {
-                        user_store.setIsAuth(true)
-                        user_store.setUser(response)
-                    } else {
-                        user_store.setIsAuth(false)
-                    }
-                }).finally(() => setLoading(false))
-            } catch (error) {
-                const {response} = error;
-                const {request, ...errorObject} = response; // take everything but 'request'
-                console.log(errorObject);
-            }
+            setLoading(false)
         }, 1000)
     });
 

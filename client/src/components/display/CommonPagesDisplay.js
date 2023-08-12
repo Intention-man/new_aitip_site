@@ -3,6 +3,7 @@ import Block from "./Block";
 import {addConstructorBlocks} from "../../additional_commands/commonPanelsFunctions";
 import {Context} from "../../index";
 import {publicRoutes} from "../../routes";
+import {observer} from "mobx-react-lite";
 
 /** Компонент используется всеми компонентами страниц, которые содержат конструкторские блоки. Содержит весь повторяющийся код
  *
@@ -13,7 +14,7 @@ import {publicRoutes} from "../../routes";
  * @constructor
  */
 
-const CommonPagesDisplay = ({blockList, handMadeBlocksCount}) => {
+const CommonPagesDisplay = observer(({blockList, handMadeBlocksCount}) => {
     const {block_store} = useContext(Context);
     const myAddress = "/" + window.location.href.split("/")[3]
 
@@ -40,6 +41,6 @@ const CommonPagesDisplay = ({blockList, handMadeBlocksCount}) => {
             })}
         </>
     );
-};
+});
 
 export default CommonPagesDisplay;

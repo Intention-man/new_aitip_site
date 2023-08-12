@@ -49,7 +49,7 @@
   "scripts": {
     "start": "react-scripts start",
     "debug": "react-scripts debug",
-    "build": "react-scripts build 05.08",
+    "build": "react-scripts build 12.08 05.08",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

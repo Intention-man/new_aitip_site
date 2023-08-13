@@ -10,13 +10,12 @@ import {Context} from "../../index";
 import {updateFileUsages, selectFile} from "../../additional_commands/commonPanelsFunctions";
 import Carusel from "../../components/lines/Carusel";
 import FilesPicker from '../FilesPicker';
-import {useNavigate} from "react-router";
+
 
 
 const CreatePartner = observer(({partner, mode}) => {
     const {block_store} = useContext(Context)
     const isEmpty = partner.hasOwnProperty("fakeParam");
-    const navigate = useNavigate();
 
     const [name, setName] = useState(isEmpty ? "" : partner.name)
     const [kind, setKind] = useState(isEmpty ? "" : partner.kind);
@@ -137,7 +136,7 @@ const CreatePartner = observer(({partner, mode}) => {
             }}>
                 Сохранить партнера
             </Button>
-            <Button className="buttom-close" variant="outline-warning" onClick={() => navigate("/admin")}>
+            <Button className="buttom-close" variant="outline-warning" onClick={() => document.location.reload()}>
                 Выйти без сохранения
             </Button>
 
@@ -149,7 +148,7 @@ const CreatePartner = observer(({partner, mode}) => {
                                 if (!isNaN(parseInt(data))){
                                     (prevLogo !== null) && updateFileUsages(prevLogo, -1);
                                     (prevJointProjectsPhotos !== null) && prevJointProjectsPhotos.forEach(photo => updateFileUsages(photo, -1));
-                                    navigate("/admin")
+                                    document.location.reload()
                                 } else {
                                     alert("Что-то пошло не так...");
                                 }

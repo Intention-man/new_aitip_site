@@ -10,12 +10,10 @@ import "../../css/page_styles/AdminPanel.css";
 import "../../css/component_styles/PersonalitiesFilter.css";
 import {updateFileUsages} from "../../additional_commands/commonPanelsFunctions";
 import FilesPicker from '../FilesPicker';
-import {useNavigate} from "react-router";
 
 
 const CreateStaff = observer(({staffer, mode}) => {
     const {admission_store} = useContext(Context)
-    const navigate = useNavigate();
 
     const isEmpty = staffer.hasOwnProperty("fakeParam");
 
@@ -53,29 +51,28 @@ const CreateStaff = observer(({staffer, mode}) => {
     }, [])
 
     useEffect(() => {
-        console.log(directionsBac)
-        console.log(programsAdd)
+        // console.log(directionsBac)
+        // console.log(programsAdd)
     }, [directionsBac, programsAdd]);
 
 
     const addDirection = (directionName) => {
         setDirectionsBac([...directionsBac, directionName])
-        console.log(directionsBac)
     }
 
     const removeDirection = (directionName) => {
         setDirectionsBac(directionsBac.filter(i => i !== directionName))
-        console.log(directionsBac)
+
     }
 
     const addProgram = (programName) => {
         setProgramsAdd([...programsAdd, programName])
-        console.log(programsAdd)
+
     }
 
     const removeProgram = (programName) => {
         setProgramsAdd(programsAdd.filter(i => i !== programName))
-        console.log(programsAdd)
+
     }
 
     const saveStaffer = async () => {
@@ -206,7 +203,7 @@ const CreateStaff = observer(({staffer, mode}) => {
             }}>
                 Сохранить сотрудника
             </Button>
-            <Button className="buttom-close" variant="outline-warning" onClick={() => window.location.reload()}>
+            <Button className="buttom-close" variant="outline-warning" onClick={() => document.location.reload()}>
                 Выйти без сохранения
             </Button>
             {mode === "edit" &&
@@ -214,7 +211,7 @@ const CreateStaff = observer(({staffer, mode}) => {
                     removeStaffer(staffer.id).then((data) => {
                         if (!isNaN(parseInt(data))){
                             (prevFile !== null) && updateFileUsages(prevFile, -1);
-                            navigate("/admin")
+                            document.location.reload()
                         } else {
                             alert("Что-то пошло не так...");
                         }

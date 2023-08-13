@@ -20,7 +20,6 @@ const NewsBlock = observer(() => {
     const navigate = useNavigate();
 
     const getNewsCover = (item) => {
-        console.log(item.header)
         for (let line of block_store.lines.filter(line => line.blockId === item.id).sort((a, b) => a.lineOrdinal - b.lineOrdinal)) {
             if ([2, 3, 4].includes(line.kind) && line.filesNames.length > 0) {
                 if (line.addressFileType === "global") {
@@ -34,7 +33,6 @@ const NewsBlock = observer(() => {
     }
 
     if (!block_store.news || (block_store.news && block_store.news.length === 0)) {
-        console.log(block_store.news && block_store.news.length > 0)
         return (
             <></>
         )

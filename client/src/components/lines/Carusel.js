@@ -7,12 +7,10 @@ import vector1 from "../../local_assets/Vector1.png"
 
 const Carusel = ({photos, addressFileType, ratio, color}) => {
     if (photos && typeof photos === "string") {photos = [photos]}
-    // console.log(photos);
-    console.log(photos, addressFileType, ratio, color)
+
     const [currentSlideNumber, setCurrentSlideNumber] = useState(0)
     ratio = ratio || 16/9
     color = color || "blue"
-    console.log(color)
     const ref = useRef(null);
     const [width, setWidth] = useState(window.innerWidth);
 

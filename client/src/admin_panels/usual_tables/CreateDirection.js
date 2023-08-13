@@ -13,14 +13,11 @@ import {Button, Col, Dropdown, FormControl, Row} from "react-bootstrap";
 import "../../css/page_styles/AdminPanel.css"
 import {updateFileUsages} from "../../additional_commands/commonPanelsFunctions";
 import FilesPicker from '../FilesPicker';
-import {useNavigate} from "react-router";
 
 
 const CreateDirection = observer(({direction, mode}) => {
 
     const isEmpty = direction.hasOwnProperty("fakeParam");
-    // console.log(direction.tests)
-    const navigate = useNavigate();
 
     const [name, setName] = useState(isEmpty ? "" : direction.name)
     const [code, setCode] = useState(isEmpty ? "" : direction.code)
@@ -66,9 +63,6 @@ const CreateDirection = observer(({direction, mode}) => {
 
     const saveDirection = async () => {
         const formData = new FormData()
-        console.log(typeof tests)
-        console.log(tests)
-        console.log(mode)
         direction.id && formData.append("id", direction.id)
         formData.append("name", name)
         formData.append("code", code)
@@ -199,7 +193,7 @@ const CreateDirection = observer(({direction, mode}) => {
             }}>
                 Сохранить направление
             </Button>
-            <Button className="buttom-close" variant="outline-warning" onClick={() => navigate("/admin")}>
+            <Button className="buttom-close" variant="outline-warning" onClick={() => document.location.reload()}>
                 Выйти без сохранения
             </Button>
             {mode === "edit" &&
@@ -208,7 +202,7 @@ const CreateDirection = observer(({direction, mode}) => {
                             if (!isNaN(parseInt(data))){
                                 alert("Успешно удалено");
                                 (prevFile !== null) && updateFileUsages(prevFile, -1)
-                                navigate("/admin")
+                                document.location.reload()
                             } else {
                                 alert("Что-то пошло не так...");
                             }

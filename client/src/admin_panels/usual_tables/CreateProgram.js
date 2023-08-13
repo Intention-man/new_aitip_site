@@ -1,20 +1,17 @@
 // Frontend модального окна для добавления направления и функции, изменяющие состояния(установлено в модальном окне определенное значение или нет). Возможно, не будет использоваться.
 
 
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {observer} from "mobx-react-lite";
 import {createAdditionalProgram, removeAdditionalProgram, updateAdditionalProgram} from "../../http/admissionAPI";
 import {Button} from "react-bootstrap";
 import "../../css/page_styles/AdminPanel.css"
-import {Context} from "../../index";
 import {updateFileUsages} from "../../additional_commands/commonPanelsFunctions";
 import FilesPicker from '../FilesPicker';
-import {useNavigate} from "react-router";
 
 
 const CreateProgram = observer(({program, mode}) => {
     const isEmpty = program.hasOwnProperty("fakeParam");
-    const navigate = useNavigate();
 
     const [name, setName] = useState(isEmpty ? "" : program.name)
     const [kind, setKind] = useState(isEmpty ? "" : program.kind);
@@ -166,7 +163,7 @@ const CreateProgram = observer(({program, mode}) => {
             }}>
                 Сохранить программу
             </Button>
-            <Button className="buttom-close" variant="outline-warning" onClick={() => navigate("/admin")}>
+            <Button className="buttom-close" variant="outline-warning" onClick={() => document.location.reload()}>
                 Выйти без сохранения
             </Button>
             {mode === "edit" &&
@@ -177,7 +174,7 @@ const CreateProgram = observer(({program, mode}) => {
                                 if (!isNaN(parseInt(data))){
                                     (prevProgramImg !== null) && updateFileUsages(prevProgramImg, -1);
                                     (prevSupervisorImg !== null) && updateFileUsages(prevSupervisorImg, -1);
-                                    navigate("/admin")
+                                    document.location.reload()
                                 } else {
                                     alert("Что-то пошло не так...");
                                 }

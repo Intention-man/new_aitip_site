@@ -1,6 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Container} from "react-bootstrap";
 
 import {fetchAdditionalPrograms, fetchDirectionsBachelor} from "../http/admissionAPI";
 import {Context} from "../index";
@@ -26,14 +25,13 @@ import ButtonList from "../components/ButtonList";
 import {fetchAllFiles} from "../http/commonAPI";
 import {observer} from "mobx-react-lite";
 import NewsEditor from "../admin_panels/constructor_edit_components/NewsEditor";
-import {check, login} from "../http/userAPI";
-import {ADMIN} from "../consts/pageConsts";
 
 
 const Admin = observer(() => {
     const {user_store} = useContext(Context)
     const {admission_store} = useContext(Context)
     const {block_store} = useContext(Context)
+    console.log(user_store.isAuth)
 
     const [windowVisible, setWindowVisible] = useState("")
     const forms = {
@@ -71,19 +69,6 @@ const Admin = observer(() => {
             block_store.setAllFiles(data.rows)
         )
     }, [])
-
-    useEffect(() => {
-        check().then(response => {
-            if (response !== undefined && typeof response === "object" && response.hasOwnProperty("email")) {
-                user_store.setIsAuth(true)
-                user_store.setUser(response)
-                // setIsAdmin(true)
-            } else {
-                user_store.setIsAuth(false)
-                // setIsAdmin(false)
-            }
-        });
-    });
 
 
     return (

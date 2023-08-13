@@ -8,13 +8,11 @@ import {Context} from "../../index";
 import {updateFileUsages} from "../../additional_commands/commonPanelsFunctions";
 import {createLab, removeLab, updateLab} from "../../http/labAPI";
 import FilesPicker from '../FilesPicker';
-import {useNavigate} from "react-router";
 
 
 const CreateLab = observer(({lab, mode}) => {
     const {block_store} = useContext(Context)
     const isEmpty = lab.hasOwnProperty("fakeParam");
-    const navigate = useNavigate();
 
     const [name, setName] = useState(isEmpty ? "" : lab.name)
     const [text1, setText1] = useState(isEmpty ? "" : lab.text1)
@@ -81,7 +79,7 @@ const CreateLab = observer(({lab, mode}) => {
         formData.append("text2", text2)
         formData.append("text3", text3)
         formData.append("carousel_photos_links", JSON.stringify(carouselPhotosLinks));
-        (mode === "edit") ? updateLab(formData).then(() => alert("Успешно обновлено")): createLab(formData).then(() => {
+        (mode === "edit") ? updateLab(formData).then(() => alert("Успешно обновлено")) : createLab(formData).then(() => {
             alert("Успешно добавлено")
             mode = "edit"
         })
@@ -144,7 +142,6 @@ const CreateLab = observer(({lab, mode}) => {
             </div>
 
 
-
             <div>
                 <label className="mini-info" htmlFor="carouselPhotosLinks">Фотографии совместных проектов</label>
                 <FilesPicker
@@ -164,7 +161,7 @@ const CreateLab = observer(({lab, mode}) => {
             }}>
                 Сохранить лабораторию
             </Button>
-            <Button className="buttom-close" variant="outline-warning" onClick={() => navigate("/admin")}>
+            <Button className="buttom-close" variant="outline-warning" onClick={() => document.location.reload()}>
                 Выйти без сохранения
             </Button>
 
@@ -173,11 +170,11 @@ const CreateLab = observer(({lab, mode}) => {
                         onClick={() => {
 
                             removeLab(lab.id).then((data) => {
-                                if (!isNaN(parseInt(data))){
+                                if (!isNaN(parseInt(data))) {
                                     (prevCover !== null) && updateFileUsages(prevCover, -1);
                                     (prevSupervisorPhoto !== null) && updateFileUsages(prevSupervisorPhoto, -1);
                                     (prevCarouselPhotosLinks !== null) && prevCarouselPhotosLinks.forEach(photo => updateFileUsages(photo, -1));
-                                    navigate("/admin")
+                                    document.location.reload()
                                 } else {
                                     alert("Что-то пошло не так...");
                                 }

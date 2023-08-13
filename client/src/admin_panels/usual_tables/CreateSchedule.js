@@ -8,12 +8,11 @@ import {Context} from "../../index";
 import {updateFileUsages} from "../../additional_commands/commonPanelsFunctions";
 import {createSchedule, removeSchedule, updateSchedule} from "../../http/scheduleAPI";
 import FilesPicker from '../FilesPicker';
-import {useNavigate} from "react-router";
 
 
 const CreateSchedule = observer(({schedule, mode}) => {
     const isEmpty = schedule.hasOwnProperty("fakeParam");
-    const navigate = useNavigate();
+
 
     const [name, setName] = useState(isEmpty ? "" : schedule.name)
     const [kind, setKind] = useState(isEmpty ? "" : schedule.kind);

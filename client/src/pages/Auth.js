@@ -15,10 +15,7 @@ const Auth = observer(() => {
 
     const letsAuth = async () => {
         try {
-            console.log(email, password)
             await login(email, password).then(user => {
-                console.log(user)
-                console.log(user.email)
                 user_store.setUser(user)
                 user_store.setIsAuth(true)
                 navigate(ADMIN)

@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import "../../css/component_styles/Menu.css"
 import logo from "../../local_assets/logo-in-round.svg"
 import {
+    ADMIN,
     ADMISSION_APE,
     ADMISSION_BAC,
     CONTACTS,
@@ -21,9 +22,12 @@ import {
 import SearchOutputWindow from "./SearchOutputWindow";
 import {useNavigate} from "react-router";
 import BlindVersionSwitcher from './BlindVersionSwitcher';
+import {Context} from "../../index";
+
 
 
 function myFunction() {
+
     const x = document.getElementById("myTopnav");
     const y = document.getElementById("myMenu");
     const l = document.getElementById("Logo");
@@ -42,7 +46,9 @@ function myFunction() {
 }
 
 const Menu = () => {
-    const menuList = [
+    const {user_store} = useContext(Context);
+
+    let menuList = [
         {
             name: "Об институте",
             children: [
@@ -114,6 +120,14 @@ const Menu = () => {
             link: LEGAL_CLINIC
         },
     ]
+
+    if (user_store.isAuth || sessionStorage.getItem("token") !== null) {
+        menuList.push({
+            name: "Админ",
+            link: ADMIN
+        },)
+    }
+
     const navigate = useNavigate();
 
     return (

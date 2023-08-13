@@ -12,13 +12,14 @@ import denis from "../../local_assets/international-denis.png";
 import eduard from "../../local_assets/international-eduard.png";
 import germany from "../../local_assets/background-germany.png";
 import germany2 from "../../local_assets/background-germany2.png";
+import BlockContainer from '../../components/display/BlockContainer';
 
 const InternationalCooperation = () => {
     const internationalStudents = 3;
     const internationalTeachers = 1;
 
     return (
-        <>
+        <BlockContainer>
             <p className="blue_page_title">Международное сотрудничество</p>
             {/*<h2 className="block_title">Общие данные</h2>*/}
             <Block header="Общие данные">
@@ -87,7 +88,7 @@ const InternationalCooperation = () => {
                     </p>
                 </div>
             </Block>
-        </>
+        </BlockContainer>
     );
 };
 

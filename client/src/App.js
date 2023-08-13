@@ -16,7 +16,6 @@ import Footer from "./components/permanent/Footer";
 import {refetchAllContent} from "./additional_commands/commonPanelsFunctions";
 
 import {fetchLines} from "./http/blockAPI";
-import BlockContainer from "./components/display/BlockContainer";
 import {DotLoader} from "react-spinners";
 
 
@@ -37,7 +36,7 @@ const App = observer(() => {
     useEffect(() => {
         setTimeout(() => {
             setLoading(false)
-        }, 1000)
+        }, 500)
     });
 
     if (loading) {
@@ -72,9 +71,7 @@ const App = observer(() => {
                     />
                 </SideBar>
                 <ContentContext.Provider value={updateContent}>
-                    <BlockContainer>
-                        <AppRouter/>
-                    </BlockContainer>
+                    <AppRouter/>
                 </ContentContext.Provider>
                 <SideBar
                     alignment='right'

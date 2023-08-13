@@ -8,11 +8,12 @@ import {Context} from "../../index";
 import {updateFileUsages} from "../../additional_commands/commonPanelsFunctions";
 import {createSchedule, removeSchedule, updateSchedule} from "../../http/scheduleAPI";
 import FilesPicker from '../FilesPicker';
+import {useNavigate} from "react-router";
 
 
 const CreateSchedule = observer(({schedule, mode}) => {
-    const {block_store} = useContext(Context)
     const isEmpty = schedule.hasOwnProperty("fakeParam");
+    const navigate = useNavigate();
 
     const [name, setName] = useState(isEmpty ? "" : schedule.name)
     const [kind, setKind] = useState(isEmpty ? "" : schedule.kind);
@@ -96,8 +97,14 @@ const CreateSchedule = observer(({schedule, mode}) => {
             {mode === "edit" &&
                 <Button className="buttom-close" variant="outline-danger"
                         onClick={() => {
-                            (prevFileLink !== null) && updateFileUsages(prevFileLink, -1);
-                            removeSchedule(schedule.id).then(() => alert("Успешно удалено"))
+                            removeSchedule(schedule.id).then((data) => {
+                                if (!isNaN(parseInt(data))){
+                                    alert("Успешно удалено");
+                                    (prevFileLink !== null) && updateFileUsages(prevFileLink, -1);
+                                } else {
+                                    alert("Что-то пошло не так...");
+                                }
+                            })
                         }}>
                     Удалить расписание
                 </Button>

@@ -8,11 +8,13 @@ import {Context} from "../../index";
 import {updateFileUsages} from "../../additional_commands/commonPanelsFunctions";
 import {createLab, removeLab, updateLab} from "../../http/labAPI";
 import FilesPicker from '../FilesPicker';
+import {useNavigate} from "react-router";
 
 
 const CreateLab = observer(({lab, mode}) => {
     const {block_store} = useContext(Context)
     const isEmpty = lab.hasOwnProperty("fakeParam");
+    const navigate = useNavigate();
 
     const [name, setName] = useState(isEmpty ? "" : lab.name)
     const [text1, setText1] = useState(isEmpty ? "" : lab.text1)
@@ -162,19 +164,24 @@ const CreateLab = observer(({lab, mode}) => {
             }}>
                 Сохранить лабораторию
             </Button>
-            <Button className="buttom-close" variant="outline-warning" onClick={() => window.location.reload()}>
+            <Button className="buttom-close" variant="outline-warning" onClick={() => navigate("/admin")}>
                 Выйти без сохранения
             </Button>
 
             {mode === "edit" &&
                 <Button className="buttom-close" variant="outline-danger"
                         onClick={() => {
-                            // (prevLogo !== null) && updateFileUsages(prevLogo, -1);
-                            // (prevSupervisorImg !== null) && updateFileUsages(prevSupervisorImg, -1);
-                            (prevCover !== null) && updateFileUsages(prevCover, -1);
-                            (prevSupervisorPhoto !== null) && updateFileUsages(prevSupervisorPhoto, -1);
-                            (prevCarouselPhotosLinks !== null) && prevCarouselPhotosLinks.forEach(photo => updateFileUsages(photo, -1));
-                            removeLab(lab.id).then(() => alert("Успешно удалено"))
+
+                            removeLab(lab.id).then((data) => {
+                                if (!isNaN(parseInt(data))){
+                                    (prevCover !== null) && updateFileUsages(prevCover, -1);
+                                    (prevSupervisorPhoto !== null) && updateFileUsages(prevSupervisorPhoto, -1);
+                                    (prevCarouselPhotosLinks !== null) && prevCarouselPhotosLinks.forEach(photo => updateFileUsages(photo, -1));
+                                    navigate("/admin")
+                                } else {
+                                    alert("Что-то пошло не так...");
+                                }
+                            })
                         }}>
                     Удалить лабораторию
                 </Button>

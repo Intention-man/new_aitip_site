@@ -9,10 +9,13 @@ import {
     updateElectionsAndContests
 } from "../../http/electionsAndContestsAPI";
 import "../../css/page_styles/AdminPanel.css"
+import {useNavigate} from "react-router";
+import {updateFileUsages} from "../../additional_commands/commonPanelsFunctions";
 
 
 const CreateElectionOrContest = observer(({eAC, mode}) => {
     const isEmpty = eAC.hasOwnProperty("fakeParam");
+    const navigate = useNavigate();
 
     const [name, setName] = useState( isEmpty ? "" : eAC.name)
     const [kind, setKind] = useState(isEmpty ? "Выборы" : eAC.kind);
@@ -107,14 +110,22 @@ const CreateElectionOrContest = observer(({eAC, mode}) => {
                         }}>
                             Сохранить выборы/конкурс
                         </Button>
-                    <Button className="buttom-close" variant="outline-warning" onClick={() => window.location.reload()}>
+                    <Button className="buttom-close" variant="outline-warning" onClick={() => navigate("/admin")}>
                         Выйти без сохранения
                     </Button>
                     {mode === "edit" &&
                         <Button className="buttom-close" variant="outline-danger"
                                 onClick={() => {
 
-                                    removeElectionsAndContests(eAC.id).then(() => alert("Успешно удалено"))
+                                    removeElectionsAndContests(eAC.id).then((data) => {
+                                        if (!isNaN(parseInt(data))){
+                                            alert("Успешно удалено");
+                                            navigate("/admin")
+                                        } else {
+                                            alert("Что-то пошло не так...");
+                                        }
+
+                                    })
                                 }}>
                             Удалить выборы или конкурс
                         </Button>

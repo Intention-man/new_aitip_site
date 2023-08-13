@@ -26,30 +26,38 @@ const Block = observer(({block, header, children}) => {
     // FIXME: ставить проп в аттрибут элемента - это костыль ;(
     return (
         <div className="Block" linkname={block === undefined ? header : block.header}>
-        {
-            (block === undefined) ?
-                ((children) ?
-                        <div>
-                            <h1 className="Block-header">{header}</h1>
-                            {children}
-                        </div>
-                        :
-                        <></>
-                )
+            {
+                (block === undefined) ?
+                    ((children) ?
+                            <div>
+                                <h1 className="Block-header">{header}</h1>
+                                {children}
+                            </div>
+                            :
+                            <></>
+                    )
 
-            :
-                <>
-                    <h1 className="Block-header">{block.header}</h1>
-                    {block.hasOwnProperty('id') ?
-                             block_store.lines.filter(line => line.blockId === block.id).sort((a, b) => a.lineOrdinal - b.lineOrdinal).map(line =>
-                                <LineDisplay key={line.id} line={line}/>
+                    :
+                    <>
+                        {((block.hasOwnProperty('id') && block_store.lines.filter(line => line.blockId === block.id).length > 0) || (!block.hasOwnProperty('id') && block.lines.length === 0)) &&
+                            <h1 className="Block-header">{block.header}</h1>
+
+                        }
+
+                        {block.hasOwnProperty('id') ?
+                            (block_store.lines.filter(line => line.blockId === block.id).length > 0 ?
+                                    block_store.lines.filter(line => line.blockId === block.id).sort((a, b) => a.lineOrdinal - b.lineOrdinal).map(line =>
+                                        <LineDisplay key={line.id} line={line}/>
+                                    ) : <></>
                             )
-                        : block.lines.map(line =>
-                                <LineDisplay key={line.id} line={line}/>
+                            : (block.lines.length > 0 ?
+                                    block.lines.map(line =>
+                                        <LineDisplay key={line.id} line={line}/>
+                                    ) : <></>
                             )
-                    }
-                </>
-        }
+                        }
+                    </>
+            }
         </div>
     );
 })

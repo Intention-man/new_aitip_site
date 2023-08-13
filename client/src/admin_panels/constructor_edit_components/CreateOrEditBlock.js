@@ -16,11 +16,13 @@ import arrow from "../../local_assets/icons/arrow-up.svg"
 import trash from "../../local_assets/icons/delete.svg"
 import {Context} from '../..';
 import LineDisplay from "../../components/display/LineDisplay";
+import {useNavigate} from "react-router";
 
 
 const CreateOrEditBlock = observer(({block, mode}) => {
 
     const {block_store} = useContext(Context);
+    const navigate = useNavigate();
 
     // возвращаемые "наверх" значения
     const isEmpty = block.hasOwnProperty("fakeParam");
@@ -325,8 +327,9 @@ const CreateOrEditBlock = observer(({block, mode}) => {
                     removeBlock(block_store.blocks.sort((a, b) => a.id - b.id).at(-1).id).then(data => {
                             if (data && data.hasOwnProperty("id")) {
                                 setSaveMessage("Успешно удалено")
-                            }
-                            window.location.reload();
+                                navigate("/admin")
+                            } else {setSaveMessage("Что-то пошло не так...")}
+
                         }
                     )
                 }

@@ -9,7 +9,6 @@ import SideBar from './components/permanent/SideBar';
 import {Context} from "./index";
 import ContentContext from './components/contexts/ContentContext';
 import LinksPanel from "./components/permanent/LinksPanel";
-import {check} from "./http/userAPI";
 import "./css/component_styles/SocialMedia.css"
 import Feedback from "./components/permanent/Feedback";
 import Footer from "./components/permanent/Footer";

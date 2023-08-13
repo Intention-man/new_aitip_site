@@ -9,12 +9,12 @@ import "../../css/page_styles/AdminPanel.css"
 import {Context} from "../../index";
 import {updateFileUsages} from "../../additional_commands/commonPanelsFunctions";
 import FilesPicker from '../FilesPicker';
+import {useNavigate} from "react-router";
 
 
 const CreateProgram = observer(({program, mode}) => {
-
-    const { block_store } = useContext(Context);
     const isEmpty = program.hasOwnProperty("fakeParam");
+    const navigate = useNavigate();
 
     const [name, setName] = useState(isEmpty ? "" : program.name)
     const [kind, setKind] = useState(isEmpty ? "" : program.kind);
@@ -166,15 +166,22 @@ const CreateProgram = observer(({program, mode}) => {
             }}>
                 Сохранить программу
             </Button>
-            <Button className="buttom-close" variant="outline-warning" onClick={() => window.location.reload()}>
+            <Button className="buttom-close" variant="outline-warning" onClick={() => navigate("/admin")}>
                 Выйти без сохранения
             </Button>
             {mode === "edit" &&
                 <Button className="buttom-close" variant="outline-danger"
                         onClick={() => {
-                            (prevProgramImg !== null) && updateFileUsages(prevProgramImg, -1);
-                            (prevSupervisorImg !== null) && updateFileUsages(prevSupervisorImg, -1);
-                            removeAdditionalProgram(program.id).then(() => alert("Успешно удалено"))
+
+                            removeAdditionalProgram(program.id).then((data) => {
+                                if (!isNaN(parseInt(data))){
+                                    (prevProgramImg !== null) && updateFileUsages(prevProgramImg, -1);
+                                    (prevSupervisorImg !== null) && updateFileUsages(prevSupervisorImg, -1);
+                                    navigate("/admin")
+                                } else {
+                                    alert("Что-то пошло не так...");
+                                }
+                            })
                         }}>
                     Удалить программу
                 </Button>

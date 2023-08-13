@@ -10,11 +10,12 @@ import "../../css/page_styles/AdminPanel.css";
 import "../../css/component_styles/PersonalitiesFilter.css";
 import {updateFileUsages} from "../../additional_commands/commonPanelsFunctions";
 import FilesPicker from '../FilesPicker';
+import {useNavigate} from "react-router";
 
 
 const CreateStaff = observer(({staffer, mode}) => {
     const {admission_store} = useContext(Context)
-    const {block_store} = useContext(Context)
+    const navigate = useNavigate();
 
     const isEmpty = staffer.hasOwnProperty("fakeParam");
 
@@ -77,7 +78,7 @@ const CreateStaff = observer(({staffer, mode}) => {
         console.log(programsAdd)
     }
 
-     const saveStaffer = async () => {
+    const saveStaffer = async () => {
         const formData = new FormData()
         console.log(file)
         // Object.keys(formData).forEach(k => console.log(formData.getAll(k)))
@@ -195,9 +196,7 @@ const CreateStaff = observer(({staffer, mode}) => {
             </div>
 
 
-            <Button style={{marginTop: "5%", marginRight: "2%", marginBottom: "5%"}} variant="outline-danger">
-                Закрыть
-            </Button>
+
             <Button style={{marginTop: "5%", marginBottom: "5%"}} variant="outline-success" onClick={() => {
                 saveStaffer().then((bool) => {
                     (prevFile !== null) && updateFileUsages(prevFile, -1)
@@ -207,9 +206,19 @@ const CreateStaff = observer(({staffer, mode}) => {
             }}>
                 Сохранить сотрудника
             </Button>
+            <Button className="buttom-close" variant="outline-warning" onClick={() => window.location.reload()}>
+                Выйти без сохранения
+            </Button>
             {mode === "edit" &&
-                <Button style={{marginTop: "5%", marginBottom: "5%"}} variant="outline-success" onClick={() => {
-                    removeStaffer(staffer.id).then(() => alert("Сотрудник успешно удален"))
+                <Button style={{marginTop: "5%", marginBottom: "5%"}} variant="outline-danger" onClick={() => {
+                    removeStaffer(staffer.id).then((data) => {
+                        if (!isNaN(parseInt(data))){
+                            (prevFile !== null) && updateFileUsages(prevFile, -1);
+                            navigate("/admin")
+                        } else {
+                            alert("Что-то пошло не так...");
+                        }
+                    })
                 }}>
                     Удалить сотрудника
                 </Button>}

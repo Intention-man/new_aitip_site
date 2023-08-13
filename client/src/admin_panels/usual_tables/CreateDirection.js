@@ -13,12 +13,14 @@ import {Button, Col, Dropdown, FormControl, Row} from "react-bootstrap";
 import "../../css/page_styles/AdminPanel.css"
 import {updateFileUsages} from "../../additional_commands/commonPanelsFunctions";
 import FilesPicker from '../FilesPicker';
+import {useNavigate} from "react-router";
 
 
 const CreateDirection = observer(({direction, mode}) => {
 
     const isEmpty = direction.hasOwnProperty("fakeParam");
     // console.log(direction.tests)
+    const navigate = useNavigate();
 
     const [name, setName] = useState(isEmpty ? "" : direction.name)
     const [code, setCode] = useState(isEmpty ? "" : direction.code)
@@ -138,7 +140,7 @@ const CreateDirection = observer(({direction, mode}) => {
                     isImage={true}
                 />
             </div>
-            
+
             <Button className="button-admin" onClick={() => {
                 addTest()
             }}>
@@ -197,12 +199,21 @@ const CreateDirection = observer(({direction, mode}) => {
             }}>
                 Сохранить направление
             </Button>
-            <Button className="buttom-close" variant="outline-warning" onClick={() => window.location.reload()}>
+            <Button className="buttom-close" variant="outline-warning" onClick={() => navigate("/admin")}>
                 Выйти без сохранения
             </Button>
             {mode === "edit" &&
                 <Button className="buttom-close" variant="outline-danger"
-                        onClick={() => removeDirectionBachelor(direction.id).then(() => alert("Успешно удалено"))}>
+                        onClick={() => removeDirectionBachelor(direction.id).then((data) => {
+                            if (!isNaN(parseInt(data))){
+                                alert("Успешно удалено");
+                                (prevFile !== null) && updateFileUsages(prevFile, -1)
+                                navigate("/admin")
+                            } else {
+                                alert("Что-то пошло не так...");
+                            }
+
+                        })}>
                     Удалить направление
                 </Button>
             }

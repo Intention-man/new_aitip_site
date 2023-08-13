@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Context} from "../index";
 import {observer} from "mobx-react-lite";
 import Block from "../components/display/Block";
@@ -10,6 +10,7 @@ import hat from "../local_assets/graduation.png";
 import Default from "../local_assets/logo-in-round.svg";
 import {useNavigate} from "react-router";
 import CommonPagesDisplay from "../components/display/CommonPagesDisplay";
+import BlockContainer from "../components/display/BlockContainer";
 
 
 // hand components
@@ -32,10 +33,17 @@ const NewsBlock = observer(() => {
         return Default;
     }
 
+    if (!block_store.news || (block_store.news && block_store.news.length === 0)) {
+        console.log(block_store.news && block_store.news.length > 0)
+        return (
+            <></>
+        )
+    }
+
     return (
         <Block header="Новости">
             <div className="news_container">
-                {block_store.news && block_store.news.map(e =>
+                {Array.from(block_store.news).slice(0, 4).map(e =>
                     <a onClick={() => navigate("/article/" + e.id)}>
                         <img src={getNewsCover(e)} alt=""/>
                         <p>{e.header}</p>
@@ -106,12 +114,32 @@ const LearnMoreAboutUsBlock = observer(() => {
 })
 
 const Main = observer(() => {
+    const {block_store} = useContext(Context);
+    const [withOutServer, setWithOutServer] = useState(true);
     let blockList = {
         2: <NewsBlock/>,
         // 3: <UpcomingEventsBlock/>,
         4: <LearnMoreAboutUsBlock/>
     }
     const handMadeBlocksCount = 2
+
+    // useEffect(() => {
+    //     setTimeout(() => {
+    //         setWithOutServer(false)
+    //     }, 500)
+    // }, [block_store.news]);
+
+
+    // if (withOutServer){
+    //     return (
+    //         <BlockContainer>
+    //             <p className="blue_page_title">Главная</p>
+    //             <LearnMoreAboutUsBlock/>
+    //         </BlockContainer>
+    //     )
+    // }
+
+
     return (
         <CommonPagesDisplay blockList={blockList} handMadeBlocksCount={handMadeBlocksCount}/>
     );

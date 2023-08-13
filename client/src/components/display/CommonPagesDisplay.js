@@ -27,7 +27,7 @@ const CommonPagesDisplay = observer(({blockList, handMadeBlocksCount}) => {
         blockList = addConstructorBlocks(myAddress, handMadeBlocksCount, block_store, blockList)
     }, [block_store.blocks, block_store.lines, handMadeBlocksCount, myAddress]);
 
-    console.log(blockList)
+    // console.log(blockList)
 
     return (
         <BlockContainer>

@@ -12,6 +12,7 @@ import email from "../../local_assets/sms (1).png";
 import phone from "../../local_assets/Vector (2).png";
 import address from "../../local_assets/location (1).png";
 import ButtonList from "../../components/ButtonList";
+import {DotLoader} from "react-spinners";
 
 
 const SmallStafferItem = observer(({staffer}) => {
@@ -133,7 +134,7 @@ const PersonalitiesList = observer(params => {
                     const count = Math.ceil(params.filteredStaff.length / lenGroup) * lenGroup
                     for (let i = 0; i < count; i += lenGroup) {
                         let staffers = []
-                        for(let l = 0; l < lenGroup; l++) {
+                        for (let l = 0; l < lenGroup; l++) {
                             staffers.push((params.filteredStaff.length > i + l ? staff_store.staff[i + l] : undefined))
 
                         }
@@ -156,7 +157,8 @@ const PersonalitiesList = observer(params => {
                             )}
                         </Row>)
                         rows.push(params.chosenStaffer && list.map(e => e.id).includes(params.chosenStaffer.id) &&
-                            <StafferItem key={params.chosenStaffer.id} staffer={params.chosenStaffer} closeStaffer={changeChosenStaffer}/>)
+                            <StafferItem key={params.chosenStaffer.id} staffer={params.chosenStaffer}
+                                         closeStaffer={changeChosenStaffer}/>)
                     }
                     return rows
                 })() : <div>Загрузка...</div>
@@ -286,6 +288,10 @@ const Personalities = observer(() => {
             }
         }, [filteredDirections, filteredPrograms])
 
+        if (!staff_store.staff || (staff_store.staff && staff_store.staff.length === 0)) {
+            return (<Container className="mt-md-5" style={{display: "flex"}}><DotLoader color="#497AD8" size={200}
+                                                                                       cssOverride={{margin: "15% 30%"}}/> </Container>)
+        }
 
         return (
             <Container className="mt-md-5" style={{display: "flex"}}>

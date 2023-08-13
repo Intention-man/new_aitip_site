@@ -15,7 +15,7 @@ const CreateElectionOrContest = observer(({eAC, mode}) => {
     const isEmpty = eAC.hasOwnProperty("fakeParam");
 
     const [name, setName] = useState( isEmpty ? "" : eAC.name)
-    const [kind, setKind] = useState(isEmpty ? "" : eAC.kind);
+    const [kind, setKind] = useState(isEmpty ? "Выборы" : eAC.kind);
     const [applicationsAcceptanceDateStart, setApplicationsAcceptanceDateStart] = useState(isEmpty ? "" : eAC.applicationsAcceptanceDateStart);
     const [applicationsAcceptanceDateEnd, setApplicationsAcceptanceDateEnd] = useState(isEmpty ? "" : eAC.applicationsAcceptanceDateEnd);
     const [applicationsAcceptancePlace, setApplicationsAcceptancePlace] = useState(isEmpty ? "" : eAC.applicationsAcceptancePlace);
@@ -57,7 +57,6 @@ const CreateElectionOrContest = observer(({eAC, mode}) => {
     }
 
     return (
-
                 <div>
                     <div>
                         <label htmlFor="name" className="mini-info">Название/описание</label>

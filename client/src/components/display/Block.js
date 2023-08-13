@@ -28,10 +28,15 @@ const Block = observer(({block, header, children}) => {
         <div className="Block" linkname={block === undefined ? header : block.header}>
         {
             (block === undefined) ?
-                <div>
-                    <h1 className="Block-header">{header}</h1>
-                    {children}
-                </div>
+                ((children) ?
+                        <div>
+                            <h1 className="Block-header">{header}</h1>
+                            {children}
+                        </div>
+                        :
+                        <></>
+                )
+
             :
                 <>
                     <h1 className="Block-header">{block.header}</h1>

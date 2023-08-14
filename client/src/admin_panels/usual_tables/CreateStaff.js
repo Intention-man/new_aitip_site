@@ -47,6 +47,11 @@ const CreateStaff = observer(({staffer, mode}) => {
             document.getElementById('email').value = email
             document.getElementById('phone_number').value = phoneNumber
             document.getElementById('adress').value = adress
+
+            admission_store.directionsBachelor && admission_store.directionsBachelor.map(direction => {
+                document.getElementById(direction.id + "d").value = (directionsBac && directionsBac.includes(direction.name))
+            })
+
         }
     }, [])
 

@@ -127,7 +127,7 @@ const PersonalitiesList = observer(params => {
 
     return (
         <div>
-            {(staff_store.staff.length !== 0) ?
+            {(params.filteredStaff.length !== 0) ?
                 (() => {
                     let rows = []
                     const lenGroup = size[0] > 800 ? 2 : 1
@@ -135,8 +135,7 @@ const PersonalitiesList = observer(params => {
                     for (let i = 0; i < count; i += lenGroup) {
                         let staffers = []
                         for (let l = 0; l < lenGroup; l++) {
-                            staffers.push((params.filteredStaff.length > i + l ? staff_store.staff[i + l] : undefined))
-
+                            staffers.push((params.filteredStaff.length > i + l ? params.filteredStaff[i + l] : undefined))
                         }
 
                         let list = staffers.filter(i => i !== undefined)
@@ -161,7 +160,7 @@ const PersonalitiesList = observer(params => {
                                          closeStaffer={changeChosenStaffer}/>)
                     }
                     return rows
-                })() : <div>Загрузка...</div>
+                })() : <h2 className="list_is_empty">Сотрудников, преподающих на данных программах и направлениях, нет</h2>
             }
         </div>
     );
@@ -244,7 +243,7 @@ const Personalities = observer(() => {
 
 
         useEffect(() => {
-            fetchStaff(1, 10).then(data => {
+            fetchStaff(1, 100).then(data => {
                     staff_store.setStaff(data.rows)
                     staff_store.setTotalCount(data.count)
                 }
@@ -268,6 +267,7 @@ const Personalities = observer(() => {
 
         useEffect(() => {
             setFilteredStaff(staff_store.staff)
+            console.log(staff_store.staff)
         }, [staff_store.staff])
 
         useEffect(() => {
@@ -280,17 +280,18 @@ const Personalities = observer(() => {
             console.log(filteredDirections)
             console.log(filteredPrograms)
             if (filteredDirections.length > 0 || filteredPrograms.length > 0) {
-                setFilteredStaff(staff_store.staff.filter(staffer => {
-                    return (staffer.directions_bac && filteredDirections && filteredDirections.some(direction => staffer.directions_bac.includes(direction.name))) || (staffer.programs_add && filteredPrograms && filteredPrograms.some(program => staffer.programs_add.includes(program.name)))
-                }))
+                setFilteredStaff(staff_store.staff.filter(staffer =>
+                    (staffer.directions_bac && filteredDirections && filteredDirections.some(direction => staffer.directions_bac.includes(direction.name))) || (staffer.programs_add && filteredPrograms && filteredPrograms.some(program => staffer.programs_add.includes(program.name)))
+                ))
             } else {
                 setFilteredStaff(staff_store.staff)
             }
         }, [filteredDirections, filteredPrograms])
 
         if (!staff_store.staff || (staff_store.staff && staff_store.staff.length === 0)) {
-            return (<Container className="mt-md-5" style={{display: "flex"}}><DotLoader color="#497AD8" size={200}
-                                                                                       cssOverride={{margin: "15% 30%"}}/> </Container>)
+            return (<Container className="mt-md-5" style={{display: "flex"}}>
+                <DotLoader color="#497AD8" size={200} cssOverride={{margin: "15% 30%"}}/>
+            </Container>)
         }
 
         return (

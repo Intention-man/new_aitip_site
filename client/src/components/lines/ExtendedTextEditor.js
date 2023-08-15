@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import MDEditor, {commands} from "@uiw/react-md-editor";
 import {getTextColorCommands} from "../../additional_commands/textColoringCommands";
 import {alignTextCenter, alignTextLeft, alignTextRight} from '../../additional_commands/textAlignCommands';
@@ -8,6 +8,10 @@ import "../../css/component_styles/Editor.css"
 
 
 const ExtendedTextEditor = ({text, setText, changeLine, index}) => {
+
+    useEffect(() => {
+        console.log(text)
+    }, [text]);
 
     return (
         <MDEditor
@@ -57,7 +61,7 @@ const ExtendedTextEditor = ({text, setText, changeLine, index}) => {
             onChange={(val) => {
                 if (setText)
                     setText(val);
-                // changeLine("text", val, index)
+                changeLine("text", val, index)
             }}
         />
     );

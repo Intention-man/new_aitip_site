@@ -48,12 +48,16 @@ const CreateStaff = observer(({staffer, mode}) => {
             document.getElementById('phone_number').value = phoneNumber
             document.getElementById('adress').value = adress
 
-            admission_store.directionsBachelor && admission_store.directionsBachelor.map(direction => {
-                document.getElementById(direction.id + "d").value = (directionsBac && directionsBac.includes(direction.name))
+            !isEmpty && staffer.directions_bac && admission_store.directionsBachelor && admission_store.directionsBachelor.map(direction => {
+                document.getElementById(direction.id + "d").checked = (directionsBac && directionsBac.includes(direction.name));
+            })
+
+            !isEmpty && staffer.programs_add && admission_store.additionalPrograms && admission_store.additionalPrograms.map(program => {
+                document.getElementById(program.id + "p").checked = (programsAdd && programsAdd.includes(program.name));
             })
 
         }
-    }, [])
+    }, [directionsBac, admission_store.directionsBachelor])
 
     useEffect(() => {
         // console.log(directionsBac)
@@ -153,7 +157,6 @@ const CreateStaff = observer(({staffer, mode}) => {
                     </div>
                 )}
             </div>
-
             <div>
                 <label htmlFor="bio_text" className="mini-info">Биография (текст)</label>
                 <textarea className="big-info" id="bio_text" onChange={e => setBio(e.target.value)}/>

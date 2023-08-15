@@ -32,12 +32,12 @@ const SmallStafferItem = observer(({staffer}) => {
 
 const StafferItem = observer(({staffer, closeStaffer}) => {
 
-    const textsNames = {
-        "Биография": staffer.bio_text,
-        "Дисциплины и курсы": staffer.disciplines_and_courses_text,
-        "Публикации": staffer.publications_text,
-        "Проекты": staffer.projects_text
-    }
+    const textsNames = {}
+
+    if (staffer.bio_text.length > 0) {textsNames["Биография"] = staffer.bio_text}
+    if (staffer.disciplines_and_courses_text.length > 0) {textsNames["Дисциплины и курсы"] = staffer.disciplines_and_courses_text}
+    if (staffer.publications_text.length > 0) {textsNames["Публикации"] = staffer.publications_text}
+    if (staffer.projects_text.length > 0) {textsNames["Проекты"] = staffer.projects_text}
 
     const [activeText, setActiveText] = useState(Object.keys(textsNames)[0]);
 
@@ -119,7 +119,6 @@ const PersonalitiesList = observer(params => {
         }
     }
 
-
     function updateSize() {
         setSize([window.innerWidth, window.innerHeight]);
     }
@@ -167,12 +166,7 @@ const PersonalitiesList = observer(params => {
 });
 
 
-const PersonalitiesFilterBar = observer(({
-                                             filteredDirections,
-                                             setFilteredDirections,
-                                             filteredPrograms,
-                                             setFilteredPrograms
-                                         }) => {
+const PersonalitiesFilterBar = observer(({filteredDirections, setFilteredDirections, filteredPrograms, setFilteredPrograms}) => {
     const {admission_store} = useContext(Context)
 
     return (

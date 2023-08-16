@@ -36,7 +36,7 @@ const Schedule = () => {
                         <div>
                             {/*<p>{schedule.name}</p>*/}
                             <p className="group">{schedule.group}</p>
-                            <p>{schedule.name}</p>
+                            <p style={{marginRight: "10px"}}>{schedule.name}</p>
                         </div>
                     </div>
                     <p className="updated_at">Изменено: {new Date(schedule.updatedAt).toLocaleDateString()+" "+new Date(schedule.updatedAt).toLocaleTimeString().match(/\d+:\d+/)[0]}</p>

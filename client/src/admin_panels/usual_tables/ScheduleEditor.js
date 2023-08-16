@@ -34,7 +34,7 @@ const ScheduleEditor = observer(() => {
             }}>
                 <option value="">Выберите расписание, данные которого вы хотите изменить</option>
                 {allSchedules.map(schedule => (
-                    <option key={schedule.id} value={schedule.id}>{schedule.name}</option>
+                    <option key={schedule.id} value={schedule.id}>{schedule.group}</option>
                 ))}
             </select>
 

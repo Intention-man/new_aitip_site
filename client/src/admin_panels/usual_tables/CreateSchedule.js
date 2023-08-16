@@ -15,7 +15,7 @@ const CreateSchedule = observer(({schedule, mode}) => {
 
 
     const [name, setName] = useState(isEmpty ? "" : schedule.name)
-    const [kind, setKind] = useState(isEmpty ? "" : schedule.kind);
+    const [kind, setKind] = useState(isEmpty ? "Бакалавриат" : schedule.kind);
     const [group, setGroup] = useState(isEmpty ? "" : schedule.group);
     const [fileLink, setFileLink] = useState(isEmpty ? "" : schedule.fileLink);
     const [prevFileLink, setPrevFileLink] = useState(isEmpty ? "" : schedule.fileLink);
@@ -55,7 +55,7 @@ const CreateSchedule = observer(({schedule, mode}) => {
         <div>
             <div>
                 <label className="mini-info" htmlFor="name">Название файла с расписанием</label>
-                <textarea className="big-info" id="name"
+                <input className="big-info" id="name" type="text"
                           onChange={e => setName(e.target.value)}/>
             </div>
 

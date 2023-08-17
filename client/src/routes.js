@@ -28,7 +28,7 @@ import {
     STUDENTS,
     SUPERADMIN,
     SUPPORT_AND_EQUIPMENT,
-    VACANT_PLACES
+    VACANT_PLACES, WORKING_PROGRAMS
 } from "./consts/pageConsts";
 import Main from "./pages/Main";
 import InternationalCooperation from "./pages/Institute/InternationalCooperation";
@@ -174,6 +174,11 @@ export const publicRoutes = [
         path: VACANT_PLACES,
         Component: <UsualPage/>,
         name: "Вакантные места для приема (перевода) обучающихся"
+    },
+    {
+        path: WORKING_PROGRAMS,
+        Component: <UsualPage/>,
+        name: "Рабочие программы"
     },
 
 

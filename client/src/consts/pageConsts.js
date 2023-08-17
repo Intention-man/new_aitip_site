@@ -28,6 +28,7 @@ export const SCIENCE = "/science"
 export const STRUCTURE = "/structure"
 export const SUPPORT_AND_EQUIPMENT = "/support_and_equipment"
 export const VACANT_PLACES = "/vacant_places"
+export const WORKING_PROGRAMS = "working_programs"
 
 export const AUTH = "/athr"
 export const ADMIN = "/admin"

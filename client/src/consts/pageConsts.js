@@ -29,6 +29,11 @@ export const STRUCTURE = "/structure"
 export const SUPPORT_AND_EQUIPMENT = "/support_and_equipment"
 export const VACANT_PLACES = "/vacant_places"
 export const WORKING_PROGRAMS = "working_programs"
+export const SCHOLARSHIPS_AND_OTHER_SUPPORT =  "/scholarships_and_other_support"
+export const COMMON_INFO = "/common_info"
+export const STANDARDS_AND_REQUIREMENTS = "/standards_and_requirements"
+
+
 
 export const AUTH = "/athr"
 export const ADMIN = "/admin"

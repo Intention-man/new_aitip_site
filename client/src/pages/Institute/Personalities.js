@@ -22,8 +22,8 @@ const SmallStafferItem = observer(({staffer}) => {
                         style={{width: "90px", backgroundPosition: "center"}}
                         className="ava_img"/>
             <div>
-                <div> {staffer.name} </div>
-                <div> {staffer.post} </div>
+                <p style={{fontWeight: 600, margin: "0 10px"}}> {staffer.name} </p>
+                <p style={{margin: "0 10px"}}> {staffer.post} </p>
             </div>
         </div>
     );
@@ -41,7 +41,7 @@ const StafferItem = observer(({staffer, closeStaffer}) => {
 
     const [activeText, setActiveText] = useState(Object.keys(textsNames)[0]);
 
-    console.log(staffer.name)
+    console.log(staffer.bio_text)
 
     return (
         <div className="staffer_item_opened">

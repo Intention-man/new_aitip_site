@@ -16,7 +16,16 @@ import BlockContainer from './BlockContainer';
  */
 const CommonPagesDisplay = observer(({blockList, handMadeBlocksCount}) => {
     const {block_store} = useContext(Context);
-    const myAddress = "/" + window.location.href.split("/")[3]
+    const locationDataArr = window.location.href.split("/")
+    let myAddress = "";
+
+    for (let i = 3; i < locationDataArr.length; i++) {
+        myAddress += "/" + locationDataArr[i]
+    }
+
+    console.log(myAddress)
+
+    // myAddress = "/" + window.location.href.split("/").slice(3)
 
 
     blockList = addConstructorBlocks(myAddress, handMadeBlocksCount, block_store, blockList)

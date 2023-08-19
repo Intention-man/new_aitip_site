@@ -28,6 +28,11 @@ h2, h3 {
     font-size: var(--subheading_font_size);
 }
 
+p {
+    white-space: pre-wrap;
+    /*text-indent: 30px;*/
+}
+
 body {
     background-color: var(--bgcolor);
 }

@@ -87,18 +87,6 @@ const AdmissionBacContent2 = observer(() => {
                                 </tbody>
                             </table>
                         </div>
-                        <div className="_2_documents">
-                            <div className="_1_of_first_2_documents">
-                                <img className="document_icon" src={"../assets/document_icon.png"}
-                                     alt="Чет не пошло как-то с картинкой..."/>
-                                <p>Правила проведения вступительных испытаний</p>
-                            </div>
-                            <div className="_1_of_first_2_documents">
-                                <img className="document_icon" src={"../assets/document_icon.png"}
-                                     alt="Изображение"/>
-                                <p>Расписание вступительных испытаний 2022</p>
-                            </div>
-                        </div>
                     </div>
                     <div className="cost_zone">
                         <div className="cost">
@@ -110,17 +98,6 @@ const AdmissionBacContent2 = observer(() => {
                             <p className="cost_form">Заочная</p>
                         </div>
                     </div>
-                    <div className="last_document_of_content_2">
-                        <img className="document_icon" src={"../assets/document_icon.png"}
-                             alt="Чет не пошло как-то с картинкой..."/>
-                        <p>ПОЛОЖЕНИЕ о порядке предоставления льгот по оплате обучения в Алтайском институте труда и
-                            права
-                            (филиал) Образовательного учреждения профсоюзов высшего образования «Академия труда и
-                            социальных
-                            отношений»</p>
-                    </div>
-                    <button className="small_grey_link_to_block" style={{float: "right"}}>Перейти к разделу "Документы"
-                    </button>
                 </div>}
         </Block>
     );

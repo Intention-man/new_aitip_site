@@ -49,7 +49,9 @@ const AdmissionAddContent2 = observer(() => {
                     <p>{chosenRetrainingProgram.description}</p>
                 </Card>}
             <ol className="modules_container">
-                <p className="modules_title">Программа переподготовки включает в себя следующие модули:</p>
+                {chosenRetrainingProgram && chosenRetrainingProgram.modules &&
+                    <p className="modules_title">Программа переподготовки включает в себя следующие модули:</p>
+                }
                 {chosenRetrainingProgram && chosenRetrainingProgram.modules && chosenRetrainingProgram.modules.map(e =>
                     <li>
                         {e}
@@ -76,19 +78,19 @@ const AdmissionAddContent2 = observer(() => {
             <div className="supervisor">
                 <div>
                     {chosenRetrainingProgram.supervisorName &&
-                        <p style={{color: "#076db1", fontWeight: "bold"}}>Научный руководитель программы:</p>}
+                        <p style={{color: "#076db1", fontWeight: "bold"}}>Научный руководитель:</p>}
                     {chosenRetrainingProgram.supervisorName &&
                         <p className="supervisor_name">{chosenRetrainingProgram.supervisorName}</p>}
                     {chosenRetrainingProgram.supervisorDescription &&
                         <p className="supervisor_description">{chosenRetrainingProgram.supervisorDescription}</p>}
                 </div>
                 {chosenRetrainingProgram.supervisorImg &&
-                    <img width="300" height="300" src={"http://localhost:3000/"+chosenRetrainingProgram.supervisorImg} alt="Чет не пошло как-то с картинкой..."/>}
+                    <img width="300" height="300" src={process.env.REACT_APP_API_URL+chosenRetrainingProgram.supervisorImg} alt="..."/>}
             </div>
             <div className="direction_block" style={{marginTop: "30px"}}>
                 <div className="last_document_of_content_2">
                     <img className="document_icon" src={"../assets/document_icon.png"}
-                         alt="Чет не пошло как-то с картинкой..."/>
+                         alt="..."/>
                     <p>ПОЛОЖЕНИЕ о порядке предоставления льгот по оплате обучения в Алтайском институте труда и
                         права
                         (филиал) Образовательного учреждения профсоюзов высшего образования «Академия труда и
@@ -172,12 +174,12 @@ const AdmissionAddContent3 = observer(() => {
                         <p className="supervisor_description">{chosenDevelopmentProgram.supervisorDescription}</p>}
                 </div>
                 {chosenDevelopmentProgram.supervisorImg &&
-                    <img width="300" height="300" src={process.env.REACT_APP_API_URL + chosenDevelopmentProgram.supervisorImg} alt="Чет не пошло как-то с картинкой..."/>}
+                    <img width="300" height="300" src={process.env.REACT_APP_API_URL + chosenDevelopmentProgram.supervisorImg} alt="..."/>}
             </div>
             <div className="direction_block" style={{marginTop: "30px"}}>
                 <div className="last_document_of_content_2">
                     <img className="document_icon" src={"../assets/document_icon.png"}
-                         alt="Чет не пошло как-то с картинкой..."/>
+                         alt="..."/>
                     <p>ПОЛОЖЕНИЕ о порядке предоставления льгот по оплате обучения в Алтайском институте труда и
                         права
                         (филиал) Образовательного учреждения профсоюзов высшего образования «Академия труда и

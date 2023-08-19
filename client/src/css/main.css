@@ -208,6 +208,16 @@ body {
     height: 16vw;
 }
 
+.news_date {
+    margin: 0 30px;
+    padding-bottom: 30px;
+    bottom: 30px;
+    text-align: right;
+    font-weight: 700;
+    color: var(--aitip_red);
+}
+
+
 /*------------------------*/
 
 @media (max-width: 1600px) {

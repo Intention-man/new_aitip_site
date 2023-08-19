@@ -41,8 +41,8 @@ const LineDisplay = observer(({line}) => {
                     }
 
                     {(line.kind === 2 && (line.filesNames.length > 0)) && (line.addressFileType === "global" ?
-                        <BigImg imgSrc={line.filesNames[0]} imgType={getImgType()}/> :
-                        <BigImg imgSrc={process.env.REACT_APP_API_URL + line.filesNames[0]} imgType={getImgType()}/>
+                            <BigImg imgSrc={line.filesNames[0]} imgType={getImgType()}/> :
+                            <BigImg imgSrc={process.env.REACT_APP_API_URL + line.filesNames[0]} imgType={getImgType()}/>
                     )
                     }
 
@@ -59,14 +59,17 @@ const LineDisplay = observer(({line}) => {
                     }
 
                     {(line.kind === 4 && (line.filesNames.length > 0) && line.addressFileType.length > 0) &&
-                        <Carusel photos={line.filesNames} addressFileType={line.addressFileType} color={line.params.color} ratio={line.params.ratio}/>
+                        <Carusel photos={line.filesNames} addressFileType={line.addressFileType}
+                                 color={line.params.color} ratio={line.params.ratio}/>
                     }
 
                     {(line.kind === 5 && (line.filesNames.length > 0)) &&
                         <YTVideoWrapper relativeLink={line.filesNames[0]}/>
                     }
                     {(line.kind === 6 && (line.filesNames.length > 0)) &&
-                        <DocumentLine documentLink={line.addressFileType === "global" ? line.filesNames[0] : process.env.REACT_APP_API_URL + line.filesNames[0]} documentName={getDocumentName()}/>
+                        <DocumentLine
+                            documentLink={line.addressFileType === "global" ? line.filesNames[0] : process.env.REACT_APP_API_URL + line.filesNames[0]}
+                            documentName={getDocumentName()}/>
                     }
                 </>
             }

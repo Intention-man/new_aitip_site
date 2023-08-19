@@ -63,7 +63,7 @@ export const publicRoutes = [
         name: "Поступление - Дополнительное профессиональное образование"
     },
     {
-        path: INTERNATIONAL_ACT ,
+        path: INTERNATIONAL_ACT,
         Component: <InternationalCooperation/>,
         name: "Международное сотрудничество"
     },
@@ -121,9 +121,6 @@ export const publicRoutes = [
         Component: <UsualPage/>,
         name: "Наука"
     },
-
-
-
 
 
     // Сведения об образовательной организации
@@ -191,9 +188,6 @@ export const publicRoutes = [
     },
 
 
-
-
-
     {
         path: CONTACTS,
         Component: <UsualPage/>,
@@ -214,7 +208,7 @@ export const publicRoutes = [
 
     {
         path: AUTH,
-        Component: <Auth/>, 
+        Component: <Auth/>,
         name: "Авторизация"
     },
 ]

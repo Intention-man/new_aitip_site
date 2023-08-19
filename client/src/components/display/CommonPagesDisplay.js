@@ -23,10 +23,6 @@ const CommonPagesDisplay = observer(({blockList, handMadeBlocksCount}) => {
         myAddress += "/" + locationDataArr[i]
     }
 
-    console.log(myAddress)
-
-    // myAddress = "/" + window.location.href.split("/").slice(3)
-
 
     blockList = addConstructorBlocks(myAddress, handMadeBlocksCount, block_store, blockList)
 
@@ -35,8 +31,6 @@ const CommonPagesDisplay = observer(({blockList, handMadeBlocksCount}) => {
     useEffect(() => {
         blockList = addConstructorBlocks(myAddress, handMadeBlocksCount, block_store, blockList)
     }, [block_store.blocks, block_store.lines, handMadeBlocksCount, myAddress]);
-
-    // console.log(blockList)
 
     return (
         <BlockContainer>

@@ -104,7 +104,7 @@ body {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     grid-template-rows: auto auto;
-    gap: 20px;
+    gap: calc(10px + 0.005%);
     margin-bottom: 20px;
 }
 
@@ -112,19 +112,18 @@ body {
     /*width: 50px;*/
     height: 150px;
     text-align: center;
+    justify-content: center;
+    align-items: center;
     display: flex;
-    color: #FFF;
+
     border-radius: var(--default_border_radius);
     background: #FFF;
-    cursor: pointer;
-    text-decoration: none;
-}
 
-.know_more_about > * p{
-    margin: auto;
+    color: #FFF;
     font-size: var(--default_font_size);
     font-weight: bold;
-    color: #FFF;
+    cursor: pointer;
+    text-decoration: none;
 }
 
 li > span.list_element_header{
@@ -247,7 +246,7 @@ li > span.list_element_header{
 }
 
 .admission_info_commission > div > p:first-child {
-    font-size: calc(var(--font_size_const) * 1.2);
+    font-size: calc(var(--default_font_size) * 1.2);
     font-weight: bold;
 }
 
@@ -265,16 +264,14 @@ li > span.list_element_header{
     background-size: 50% 42%;
 }
 
-/*Some changes to carusel*/
-.carusel{
-    padding-bottom: 20px;
-}
+
 .mySlides{
     margin: 0 -5%;
     width: 100%;
 }
 .prev, .next {
     position: relative;
+}
 .news_date {
     margin: 0 30px;
     padding-bottom: 30px;
@@ -342,6 +339,9 @@ li > span.list_element_header{
 
 @media (max-width: 500px) {
     .entrance_exams_points{
+        grid-template-columns: 1fr;
+    }
+    .admission_info_commission{
         grid-template-columns: 1fr;
     }
 }

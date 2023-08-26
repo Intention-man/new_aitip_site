@@ -2,6 +2,7 @@
     background-color: var(--aitip_white);
     border-radius: var(--default_border_radius);
     box-sizing: border-box;
+    display: grid;
 }
 
 .Block-header {
@@ -149,7 +150,8 @@
 
 .BigImg {
     /*height: 100%;*/
-    width: calc(100% - 60px);
+    width: calc(100% - 120px);
+    justify-self: center;
     min-height: 50%;
     min-width: 50%;
     object-fit: contain;
@@ -184,6 +186,10 @@
     }
 
     .Card-body-right {
+        width: 100%;
+    }
+
+    .BigImg {
         width: 100%;
     }
 

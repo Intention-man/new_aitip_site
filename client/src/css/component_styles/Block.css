@@ -169,16 +169,14 @@
 }
 
 @media (max-width: 600px) {
-    .Card-left {
+    .Card-left, .Card-right {
         flex-direction: column;
-    }
-
-    .Card-right {
-        flex-direction: column;
+        margin: 0 clamp(20px, 100vw / 19.2, 100px);
     }
 
     .Card-image-left, .Card-image-right {
         width: 100%;
+        max-width: 100%;
     }
 
     .Card-body-left {

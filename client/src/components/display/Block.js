@@ -31,10 +31,10 @@ const Block = observer(({block, header, children}) => {
             {
                 (block === undefined) ?
                     ((children) ?
-                            <div>
+                            <>
                                 <h1 className="Block-header">{header}</h1>
                                 {children}
-                            </div>
+                            </>
                             :
                             <></>
                     )

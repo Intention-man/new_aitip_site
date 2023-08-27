@@ -83,15 +83,7 @@
 
 /* Спец. стили для исчезающей картинки сверху и снизу для BigImg */
 .FadingImg-top-and-bottom {
-    /* Случай, когда картинка - между какими-то линиями в блоке. Тогда эффекты исчезновения и сверху, и снизу */
-    -webkit-mask:   linear-gradient(to top, transparent 15%, #fff 0% calc(100% - 15%), transparent 98%),
-    linear-gradient(to bottom, transparent 15%, #fff 0% calc(100% - 15%), transparent 98%);
-    mask:   linear-gradient(to top, transparent 15%, #fff 0% calc(100% - 15%), transparent 98%),
-    linear-gradient(to bottom, transparent 15%, #fff 0% calc(100% - 15%), transparent 98%);
-}
-
-.FadingImg-top-and-bottom:first-child {
-    /* Случай, когда картинка - первая линия. Тогда эффект исчезновения только снизу */
+    /* Дефолтный случай (картинка - первая линия или между линиями). Тогда эффекты исчезновения только снизу */
     -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,0), rgba(0,0,0,1) 30%);
     mask-image: linear-gradient(to top, rgba(0,0,0,0), rgba(0,0,0,1) 30%);
 }
@@ -103,7 +95,6 @@
 }
 
 .FadingImg-right {
-    /* Случай, когда картинка - первая линия. Тогда эффект исчезновения только снизу */
     -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,1) 30%);
     mask-image: linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,1) 30%);
 }
@@ -175,6 +166,7 @@
     }
 
     .Card-image-left, .Card-image-right {
+        margin-top: 20px;
         width: 100%;
         max-width: 100%;
     }
@@ -192,16 +184,12 @@
     }
 
     .FadingImg-right {
-        -webkit-mask:   linear-gradient(to top, transparent 25%, #fff 0% calc(100% - 25%), transparent 95%),
-        linear-gradient(to bottom, transparent 25%, #fff 0% calc(100% - 25%), transparent 95%);
-        mask:   linear-gradient(to top, transparent 25%, #fff 0% calc(100% - 25%), transparent 95%),
-        linear-gradient(to bottom, transparent 25%, #fff 0% calc(100% - 25%), transparent 95%);
+        -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,0), rgba(0,0,0,1) 30%);
+        mask-image: linear-gradient(to top, rgba(0,0,0,0), rgba(0,0,0,1) 30%);
     }
 
     .FadingImg-left {
-        -webkit-mask:   linear-gradient(to top, transparent 25%, #fff 0% calc(100% - 25%), transparent 95%),
-        linear-gradient(to bottom, transparent 25%, #fff 0% calc(100% - 25%), transparent 95%);
-        mask:   linear-gradient(to top, transparent 25%, #fff 0% calc(100% - 25%), transparent 95%),
-        linear-gradient(to bottom, transparent 25%, #fff 0% calc(100% - 25%), transparent 95%);
+        -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,0), rgba(0,0,0,1) 30%);
+        mask-image: linear-gradient(to top, rgba(0,0,0,0), rgba(0,0,0,1) 30%);
     }
 }

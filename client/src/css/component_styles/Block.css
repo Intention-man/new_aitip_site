@@ -187,9 +187,13 @@
         -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,0), rgba(0,0,0,1) 30%);
         mask-image: linear-gradient(to top, rgba(0,0,0,0), rgba(0,0,0,1) 30%);
     }
-
+    
     .FadingImg-left {
         -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,0), rgba(0,0,0,1) 30%);
         mask-image: linear-gradient(to top, rgba(0,0,0,0), rgba(0,0,0,1) 30%);
+    }
+    
+    .Card img {
+        border-radius: var(--default_border_radius) !important;
     }
 }

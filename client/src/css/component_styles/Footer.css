@@ -6,18 +6,11 @@
     justify-content: space-between;
     /*align-items: center;*/
     flex-direction: row;
-    padding: 20px;
+    padding: 30px 20px;
     margin-top: 20px;
     flex-flow: row wrap;
     flex-wrap: wrap;
 }
-
-/*.aitip_footer > div {*/
-/*    width: calc(45% - 30px);*/
-/*    text-align: left;*/
-/*    margin-left: calc(5% + 30px);*/
-/*    !*margin-top: 30px;*!*/
-/*}*/
 
 .footer-link-block {
     width: calc(45% - 30px);

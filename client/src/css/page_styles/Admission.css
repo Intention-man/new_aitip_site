@@ -10,7 +10,7 @@
 }
 
 .admission-bac-content2 .Card-body p, .admission-bac-content2 .Card-body li, .admission-bac-content2 .Card-body tr{
-    font-size: var(--font_size_const);
+    font-size: var(--default_font_size);
 }
 
 .admission-bac-content2 .Card-body table{
@@ -77,7 +77,7 @@ h1, h3{
     justify-content: center;
     align-items: center;
     text-align: justify;
-    font-size: var(--font_size_const);
+    font-size: var(--default_font_size);
 }
 
 .title_who_can_you_become{
@@ -85,7 +85,7 @@ h1, h3{
     margin: 0 clamp(20px, 100vw / 24, 80px);
     justify-content: left;
     font-weight: 600;
-    font-size: var(--font_size_const);
+    font-size: var(--default_font_size);
     background: white;
 }
 
@@ -106,7 +106,7 @@ h1, h3{
     height: auto;
     justify-content: left;
     align-content: flex-start;
-    font-size: var(--font_size_const);
+    font-size: var(--default_font_size);
 }
 
 
@@ -122,7 +122,7 @@ h1, h3{
 .passing_points {
     border: 3px solid;
     border-radius: 10px;
-    width: 35%;
+    width: 45%;
     min-width: 200px;
     max-width: 450px;
     margin: 10px 2% 10px 0;
@@ -180,7 +180,7 @@ h1, h3{
 }
 
 .Card-body .cost .cost_price{
-     font-size: calc(var(--font_size_const) + 8px);
+     font-size: calc(var(--default_font_size) + 8px);
 }
 
 .direction_block .last_document_of_content_2{

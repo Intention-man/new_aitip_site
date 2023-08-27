@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {observer} from "mobx-react-lite";
 import MDEditor from "@uiw/react-md-editor";
 import Card from "../lines/Card";
@@ -50,20 +50,26 @@ const LineDisplay = observer(({line}) => {
                         <Card
                             imgType={getImgType()}
                             imgSrc={line.addressFileType === "global" ? line.filesNames[0] : process.env.REACT_APP_API_URL + line.filesNames[0]}
-                            imgPos={line.params.side}>
-                            <MDEditor.Markdown source={Array.isArray(line.text) ? line.text[0] : line.text} style={{whiteSpace: 'pre-wrap'}}/>
+                            imgPos={line.params.side}
+                        >
+                            <StyledText
+                                line={line}
+                            />
                         </Card>
                     }
 
                     {(line.kind === 4 && (line.filesNames.length > 0) && line.addressFileType.length > 0) &&
-                        <Carusel photos={line.filesNames} addressFileType={line.addressFileType} color={line.params.color} ratio={line.params.ratio}/>
+                        <Carusel photos={line.filesNames} addressFileType={line.addressFileType}
+                                 color={line.params.color} ratio={line.params.ratio}/>
                     }
 
                     {(line.kind === 5 && (line.filesNames.length > 0)) &&
                         <YTVideoWrapper relativeLink={line.filesNames[0]}/>
                     }
                     {(line.kind === 6 && (line.filesNames.length > 0)) &&
-                        <DocumentLine documentLink={line.addressFileType === "global" ? line.filesNames[0] : process.env.REACT_APP_API_URL + line.filesNames[0]} documentName={getDocumentName()}/>
+                        <DocumentLine
+                            documentLink={line.addressFileType === "global" ? line.filesNames[0] : process.env.REACT_APP_API_URL + line.filesNames[0]}
+                            documentName={getDocumentName()}/>
                     }
                 </>
             }

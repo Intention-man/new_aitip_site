@@ -1,14 +1,12 @@
 // Окно для добавления лабораторий и функции, изменяющие состояния(установлено в модальном окне определенное значение или нет).
 
-import React, {useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {observer} from "mobx-react-lite";
 import {Button} from "react-bootstrap";
 import "../../css/page_styles/AdminPanel.css"
-import {useContext, useEffect} from "react";
 import {Context} from "../../index";
-import {updateFileUsages, selectFile} from "../../additional_commands/commonPanelsFunctions";
+import {updateFileUsages} from "../../additional_commands/commonPanelsFunctions";
 import {createLab, removeLab, updateLab} from "../../http/labAPI";
-import Carusel from "../../components/lines/Carusel";
 import FilesPicker from '../FilesPicker';
 
 
@@ -81,7 +79,7 @@ const CreateLab = observer(({lab, mode}) => {
         formData.append("text2", text2)
         formData.append("text3", text3)
         formData.append("carousel_photos_links", JSON.stringify(carouselPhotosLinks));
-        (mode === "edit") ? updateLab(formData).then(() => alert("Успешно обновлено")): createLab(formData).then(() => {
+        (mode === "edit") ? updateLab(formData).then(() => alert("Успешно обновлено")) : createLab(formData).then(() => {
             alert("Успешно добавлено")
             mode = "edit"
         })
@@ -144,7 +142,6 @@ const CreateLab = observer(({lab, mode}) => {
             </div>
 
 
-
             <div>
                 <label className="mini-info" htmlFor="carouselPhotosLinks">Фотографии совместных проектов</label>
                 <FilesPicker
@@ -164,19 +161,24 @@ const CreateLab = observer(({lab, mode}) => {
             }}>
                 Сохранить лабораторию
             </Button>
-            <Button className="buttom-close" variant="outline-warning" onClick={() => window.location.reload()}>
+            <Button className="buttom-close" variant="outline-warning" onClick={() => document.location.reload()}>
                 Выйти без сохранения
             </Button>
 
             {mode === "edit" &&
                 <Button className="buttom-close" variant="outline-danger"
                         onClick={() => {
-                            // (prevLogo !== null) && updateFileUsages(prevLogo, -1);
-                            // (prevSupervisorImg !== null) && updateFileUsages(prevSupervisorImg, -1);
-                            (prevCover !== null) && updateFileUsages(prevCover, -1);
-                            (prevSupervisorPhoto !== null) && updateFileUsages(prevSupervisorPhoto, -1);
-                            (prevCarouselPhotosLinks !== null) && prevCarouselPhotosLinks.forEach(photo => updateFileUsages(photo, -1));
-                            removeLab(lab.id).then(() => alert("Успешно удалено"))
+
+                            removeLab(lab.id).then((data) => {
+                                if (!isNaN(parseInt(data))) {
+                                    (prevCover !== null) && updateFileUsages(prevCover, -1);
+                                    (prevSupervisorPhoto !== null) && updateFileUsages(prevSupervisorPhoto, -1);
+                                    (prevCarouselPhotosLinks !== null) && prevCarouselPhotosLinks.forEach(photo => updateFileUsages(photo, -1));
+                                    document.location.reload()
+                                } else {
+                                    alert("Что-то пошло не так...");
+                                }
+                            })
                         }}>
                     Удалить лабораторию
                 </Button>

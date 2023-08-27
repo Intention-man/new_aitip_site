@@ -16,16 +16,18 @@ import telescope from "../local_assets/icons/svg background/telescope.svg";
 
 //Выпускники
 import Default from "../local_assets/logo-in-round.svg";
-import {addConstructorBlocks} from "../additional_commands/commonPanelsFunctions";
+import {useNavigate} from "react-router";
+import CommonPagesDisplay from "../components/display/CommonPagesDisplay";
+import BlockContainer from "../components/display/BlockContainer";
 
 
 // hand components
 
 const NewsBlock = observer(() => {
     const {block_store} = useContext(Context);
+    const navigate = useNavigate();
 
     const getNewsCover = (item) => {
-        console.log(item.header)
         for (let line of block_store.lines.filter(line => line.blockId === item.id).sort((a, b) => a.lineOrdinal - b.lineOrdinal)) {
             if ([2, 3, 4].includes(line.kind) && line.filesNames.length > 0) {
                 if (line.addressFileType === "global") {
@@ -38,11 +40,17 @@ const NewsBlock = observer(() => {
         return Default;
     }
 
+    if (!block_store.news || (block_store.news && block_store.news.length === 0)) {
+        return (
+            <></>
+        )
+    }
+
     return (
         <Block header="Новости">
             <div className="news_container">
-                {block_store.news && block_store.news.map(e =>
-                    <a href="#">
+                {Array.from(block_store.news).slice(0, 4).map(e =>
+                    <a onClick={() => navigate("/article/" + e.id)}>
                         <img src={getNewsCover(e)} alt=""/>
                         <p>{e.header}</p>
                     </a>
@@ -528,30 +536,33 @@ const LearnMoreAboutUsBlock = observer(() => {
 
 const Main = observer(() => {
     const {block_store} = useContext(Context);
-    const [blockList, setBlockList] = useState({
+    const [withOutServer, setWithOutServer] = useState(true);
+    let blockList = {
         2: <NewsBlock/>,
-        3: <UpcomingEventsBlock/>,
+        // 3: <UpcomingEventsBlock/>,
         4: <LearnMoreAboutUsBlock/>
-    });
-    const handMadeBlocksCount = 3
-    const myAddress = "/" + window.location.href.split("/")[3]
+    }
+    const handMadeBlocksCount = 2
+
+    // useEffect(() => {
+    //     setTimeout(() => {
+    //         setWithOutServer(false)
+    //     }, 500)
+    // }, [block_store.news]);
 
 
-    useEffect(() => {
-        addConstructorBlocks(myAddress, handMadeBlocksCount, block_store, blockList, setBlockList)
-    }, [block_store.blocks, block_store.lines, handMadeBlocksCount]);
+    // if (withOutServer){
+    //     return (
+    //         <BlockContainer>
+    //             <p className="blue_page_title">Главная</p>
+    //             <LearnMoreAboutUsBlock/>
+    //         </BlockContainer>
+    //     )
+    // }
 
-    console.log(blockList)
+
     return (
-        <>
-            {Object.values(blockList).map((block, index) => {
-                if (block.hasOwnProperty("id")) {
-                    return <Block key={index} block={block} header={block.header}/>
-                } else {
-                    return <>{block}</>
-                }
-            })}
-        </>
+        <CommonPagesDisplay blockList={blockList} handMadeBlocksCount={handMadeBlocksCount}/>
     );
 });
 

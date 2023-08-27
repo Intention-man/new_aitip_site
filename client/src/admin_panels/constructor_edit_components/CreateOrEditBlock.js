@@ -16,20 +16,22 @@ import arrow from "../../local_assets/icons/arrow-up.svg"
 import trash from "../../local_assets/icons/delete.svg"
 import {Context} from '../..';
 import LineDisplay from "../../components/display/LineDisplay";
+import {useNavigate} from "react-router";
 
 
 const CreateOrEditBlock = observer(({block, mode}) => {
 
-    const { block_store } = useContext(Context);
+    const {block_store} = useContext(Context);
+    const navigate = useNavigate();
 
     // возвращаемые "наверх" значения
     const isEmpty = block.hasOwnProperty("fakeParam");
     const prevLinesIdList = isEmpty ? [] : block.lines.map(line => line.id)
 
-    const [isNews, setIsNews] = useState(isEmpty ? null : block.isNews);
+    const [isNews, setIsNews] = useState(isEmpty ? false : block.isNews);
     const [header, setHeader] = useState(isEmpty ? "" : block.header);
     const [pageLink, setPageLink] = useState(isEmpty ? "" : block.pageLink);
-    const [ordinal, setOrdinal] = useState(isEmpty ? -1 : block.ordinal);
+    const [ordinal, setOrdinal] = useState(mode !== "edit" ? -1 : block.ordinal);
     const [lines, setLines] = useState(isEmpty ? [] : block.lines.sort((line1, line2) => line1.lineOrdinal - line2.lineOrdinal));
 
     const [doUpdateUsages, setDoUpdateUsages] = useState(false);
@@ -39,12 +41,12 @@ const CreateOrEditBlock = observer(({block, mode}) => {
 
 
     useEffect(() => {
-        setIsNews(block.isNews)
-        setHeader(block.header)
-        setOrdinal(block.ordinal)
-        setPageLink(block.pageLink !== null ? block.pageLink : "")
-        setLines(block.lines !== undefined ? block.lines : [])
-        if (mode === "edit") {
+        if (!isEmpty) {
+            setIsNews(block.isNews)
+            setHeader(block.header)
+            setOrdinal(block.ordinal)
+            setPageLink(block.pageLink !== null ? block.pageLink : "")
+            setLines(block.lines !== undefined ? block.lines : [])
             document.getElementById('header').value = block.header
         }
         if (checkSameLineOrdinal()) {
@@ -57,17 +59,26 @@ const CreateOrEditBlock = observer(({block, mode}) => {
     }, [saveMessage])
 
 
+    useEffect(() => {
+        if (pageLink !== "" && ordinal === -1){
+            const array = Array.from(block_store.blocks.filter(block => block.pageLink === pageLink).sort((block1, block2) => block2.ordinal - block1.ordinal))
+            setOrdinal(array.length > 0 ? array[0].ordinal + 1 : 1)
+        }
+    }, [pageLink])
+
+
     const addLine = () => {
         if (lineKind > 0) {
             setLines([...lines, {
-            lineOrdinal: (lines.length > 0 ? lines.sort((a, b) => a.lineOrdinal - b.lineOrdinal).at(-1).lineOrdinal + 1 : 0),
-            kind: lineKind,
-            params: {},
-            text: [""],
-            filesNames: [],
-            addressFileType: ""
-        }])
-    }}
+                lineOrdinal: (lines.length > 0 ? lines.sort((a, b) => a.lineOrdinal - b.lineOrdinal).at(-1).lineOrdinal + 1 : 0),
+                kind: lineKind,
+                params: {},
+                text: [""],
+                filesNames: [],
+                addressFileType: ""
+            }])
+        }
+    }
 
     const changeLine = (key, value, index) => {
         setLines(lines => lines.map(line => (line.lineOrdinal === index ? {...line, [key]: value} : line)))
@@ -105,7 +116,7 @@ const CreateOrEditBlock = observer(({block, mode}) => {
     const saveBlock = async () => {
         if (isDataValid()) {
             const formData = new FormData()
-            block.id && formData.append("id", block.id)
+            block.id && mode === "edit" && formData.append("id", block.id)
             formData.append("isNews", isNews)
             formData.append("header", header);
             !isNews ? formData.append("pageLink", pageLink) : formData.append("pageLink", "/news");
@@ -121,25 +132,29 @@ const CreateOrEditBlock = observer(({block, mode}) => {
 
             mode === "edit" ?
                 updateBlock(formData).then(data => {
-                    if (data && data.hasOwnProperty("id")){
+                    if (data && data.hasOwnProperty("id")) {
                         refetchAllContent(block_store)
                         setDoUpdateUsages(true)
                         setSaveMessage("Блок успешно обновлен")
                         setTimeout(() => setDoUpdateUsages(false), 2000)
-                    } else {setSaveMessage("Произошла ошибка на сервере")}
+                    } else {
+                        setSaveMessage("Произошла ошибка на сервере")
+                    }
                 })
                 :
                 createBlock(formData).then(data => {
                     console.log(0)
-                    if (data && data.hasOwnProperty("id")){
+                    if (data && data.hasOwnProperty("id")) {
                         refetchAllContent(block_store)
                         setDoUpdateUsages(true)
                         setSaveMessage("Блок успешно обновлен")
                         setTimeout(() => setDoUpdateUsages(false), 2000)
-                    } else {setSaveMessage("Произошла ошибка на сервере")}
+                    } else {
+                        setSaveMessage("Произошла ошибка на сервере")
+                    }
                 });
         } else {
-           setSaveMessage("Заполнены не все обязательные поля")
+            setSaveMessage("Заполнены не все обязательные поля")
         }
     };
 
@@ -196,7 +211,7 @@ const CreateOrEditBlock = observer(({block, mode}) => {
                                 setPageLink(e.target.value)
                             }}>
                                 <option value="" disabled="disabled">Выберите страницу</option>
-                                {publicRoutes.map((publicRoute) => (
+                                {publicRoutes.sort((a,b) => (a.name.toLowerCase() < b.name.toLowerCase()) ? -1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? 1 : 0)).map((publicRoute) => (
                                     <option key={publicRoute.name}
                                             value={publicRoute.path}>{publicRoute.name}</option>
                                 ))}
@@ -210,7 +225,7 @@ const CreateOrEditBlock = observer(({block, mode}) => {
                 <div>
                     <p>Тип блока</p>
                     <label className="custom_select">
-                        <select id="isNews" value={isNews === undefined ? "" : isNews} onChange={e => {
+                        <select id="isNews" value={isNews} onChange={e => {
                             if (e.target.value === "")
                                 setIsNews(undefined)
                             else
@@ -226,7 +241,7 @@ const CreateOrEditBlock = observer(({block, mode}) => {
                     </label>
                 </div>
                 <div>
-                    <p>Заголовок карточки</p>
+                    <p>Заголовок блока</p>
                     <input
                         placeholder={!isNews ? "Введите заголовок, он будет отображаться вверху карточки и на боковой панели содержания" : "Введите заголовок новости"}
                         id="header" onChange={(e) => setHeader(e.target.value)}/>
@@ -301,23 +316,30 @@ const CreateOrEditBlock = observer(({block, mode}) => {
             <button onClick={() => {
                 if (block.id) {
                     removeBlock(block.id).then(data => {
-                        if (data && data.hasOwnProperty("id")){
-                           setSaveMessage("Успешно удалено")
+                            if (data && data.hasOwnProperty("id")) {
+                                setSaveMessage("Успешно удалено")
+                            }
+                            window.location.reload();
                         }
-                        window.location.reload();
-                    }
-                        )
+                    )
                 } else {
                     refetchAllContent(block_store)
                     removeBlock(block_store.blocks.sort((a, b) => a.id - b.id).at(-1).id).then(data => {
-                        if (data && data.hasOwnProperty("id")){
-                           setSaveMessage("Успешно удалено")
+                            if (data && data.hasOwnProperty("id")) {
+                                setSaveMessage("Успешно удалено")
+                                navigate("/admin")
+                            } else {setSaveMessage("Что-то пошло не так...")}
+
                         }
-                        window.location.reload();
-                    }
-                        )
+                    )
                 }
-            }}>Удалить блок</button>
+            }}>Удалить блок
+            </button>
+            <svg className="sprites">
+                <symbol id="select-arrow-down" viewBox="0 0 10 6">
+                    <polyline points="1 1 5 5 9 1"></polyline>
+                </symbol>
+            </svg>
         </div>
     )
 });

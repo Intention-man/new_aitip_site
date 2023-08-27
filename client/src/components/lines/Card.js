@@ -57,7 +57,7 @@ class Card extends React.Component {
                                         imgSrc={this.props.imgSrc}
                                     />,
                         'normal':   <img
-                                        src={this.props.imgSrc} style={{borderRadius: "var(--card-border-radius)"}}
+                                        src={this.props.imgSrc} style={{borderRadius: "var(--default_border_radius)"}}
                                     />,
                     }[this.props.imgType]
                 }

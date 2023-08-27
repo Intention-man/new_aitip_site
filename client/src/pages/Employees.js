@@ -1,20 +1,15 @@
-import React, {useContext, useEffect, useState} from 'react';
-import {Context} from "../index";
+import React, {useEffect, useState} from 'react';
 import {observer} from "mobx-react-lite";
 import "../css/page_styles/Employees.css"
 import {fetchElectionsAndContests} from "../http/electionsAndContestsAPI";
 import Block from "../components/display/Block";
 import ButtonList from "../components/ButtonList";
-import {addConstructorBlocks} from "../additional_commands/commonPanelsFunctions";
+import CommonPagesDisplay from "../components/display/CommonPagesDisplay";
 
 
 const EmployeesAdCurrentList = observer(({adList, header}) => {
     const monthList = ["", "января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря"]
-    // const [list, setList] = useState(adList);
 
-    useEffect(() => {
-        console.log(adList)
-    }, [adList]);
 
     const getDateFormat = (date) => {
         const d = new Date(date)
@@ -26,6 +21,11 @@ const EmployeesAdCurrentList = observer(({adList, header}) => {
         if (day.length < 2)
             day = '0' + day;
         return day + "." + month + "." + year
+    }
+    console.log(adList, header)
+
+    if (!adList || (adList && adList.length === 0)){
+        return <></>
     }
 
     return (
@@ -129,57 +129,52 @@ const EmployeesArchive = observer(() => {
 });
 
 const Employees = observer(() => {
+    let [contestsList, setContestsList] = useState([]);
+    let [electionsList, setElectionsList] = useState([]);
 
-    const {block_store} = useContext(Context);
 
-    const [blockList, setBlockList] = useState({
-        2: <EmployeesAdCurrentList header="Актуальные выборы заведующих кафедрами"/>,
-        3: <EmployeesAdCurrentList header="Актуальные конкурсы на замещение вакантных должностей"/>,
+    let blockList = {
+        2: <EmployeesAdCurrentList adList={electionsList} header="Актуальные выборы заведующих кафедрами"/>,
+        3: <EmployeesAdCurrentList adList={contestsList} header="Актуальные конкурсы на замещение вакантных должностей"/>,
         5: <EmployeesArchive/>
-    });
+    };
+
 
     const handMadeBlocksCount = 3
-    const myAddress = "/" + window.location.href.split("/")[3]
     const date = new Date().getFullYear()
     const day = new Date().getDate();
     const month = new Date().getMonth() + 1;
 
     useEffect(() => {
+        console.log(1)
         fetchElectionsAndContests().then(data => {
-            const contestsList = data.rows.filter(ad =>
-                ((ad.kind === "Конкурс") && ((date - Number(ad.eventDate.slice(0, 4))) === 0) && ((month - Number(ad.eventDate.slice(5, 7))) === 0) && ((day - Number(ad.eventDate.slice(8, 10))) <= 0)) ||
-                ((ad.kind === "Конкурс") && ((date - Number(ad.eventDate.slice(0, 4))) < 0)) ||
+            setContestsList(data.rows.filter(ad =>
+                ((ad.kind === "Конкурс") && ((date - Number(ad.eventDate.slice(0, 4))) === 0) && ((month - Number(ad.eventDate.slice(5, 7))) === 0) && ((day - Number(ad.eventDate.slice(8, 10))) <= 0))
+                ||
+                ((ad.kind === "Конкурс") && ((date - Number(ad.eventDate.slice(0, 4))) < 0))
+                ||
                 ((ad.kind === "Конкурс") && ((date - Number(ad.eventDate.slice(0, 4))) === 0) && (month - Number(ad.eventDate.slice(5, 7)) < 0))
-            );
-            const electionsList = data.rows.filter(ad =>
-                ((ad.kind === "Выборы") && ((date - Number(ad.eventDate.slice(0, 4))) === 0) && ((month - Number(ad.eventDate.slice(5, 7))) === 0) && ((day - Number(ad.eventDate.slice(8, 10))) <= 0)) ||
-                ((ad.kind === "Выборы") && ((date - Number(ad.eventDate.slice(0, 4))) < 0)) ||
+            ));
+            setElectionsList(data.rows.filter(ad =>
+                ((ad.kind === "Выборы") && ((date - Number(ad.eventDate.slice(0, 4))) === 0) && ((month - Number(ad.eventDate.slice(5, 7))) === 0) && ((day - Number(ad.eventDate.slice(8, 10))) <= 0))
+                ||
+                ((ad.kind === "Выборы") && ((date - Number(ad.eventDate.slice(0, 4))) < 0))
+                ||
                 ((ad.kind === "Выборы") && ((date - Number(ad.eventDate.slice(0, 4))) === 0) && (month - Number(ad.eventDate.slice(5, 7)) < 0))
-            )
-            setBlockList(prev => ({
-                ...prev,
-                [2]: <EmployeesAdCurrentList adList={electionsList} header="Актуальные выборы заведующих кафедрами"/>,
-                [3]: <EmployeesAdCurrentList adList={contestsList}
-                                             header="Актуальные конкурсы на замещение вакантных должностей"/>,
-            }))
-        })
-    }, [])
+            ));
 
-    useEffect(() => {
-        addConstructorBlocks(myAddress, handMadeBlocksCount, block_store, blockList, setBlockList)
-    }, [block_store.blocks, block_store.lines]);
+
+            // setBlockList({
+            //     2: <EmployeesAdCurrentList adList={electionsList} header="Актуальные выборы заведующих кафедрами"/>,
+            //     3: <EmployeesAdCurrentList adList={contestsList} header="Актуальные конкурсы на замещение вакантных должностей"/>,
+            //     5: <EmployeesArchive/>
+            // })
+        })
+    }, []);
 
 
     return (
-        <>
-            {Object.values(blockList).map((block, index) => {
-                if (block.hasOwnProperty("id")) {
-                    return <Block key={index} block={block} header={block.header}/>
-                } else {
-                    return <>{block}</>
-                }
-            })}
-        </>
+        <CommonPagesDisplay blockList={blockList} handMadeBlocksCount={handMadeBlocksCount}/>
     );
 });
 

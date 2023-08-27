@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import location from "../../local_assets/location.png";
 import internet from "../../local_assets/global.png";
 import phone from "../../local_assets/icons/svg white/Phone.svg";
@@ -10,36 +10,34 @@ const Footer = () => {
     //FIXME при ширине экрана < 300 ширина подвала меньше ширины экрана //Отклонён, не воспроизводится
     return (
         <footer className="aitip_footer">
-            <div>
-                <h3>Где нас найти?</h3>
+            <div className="footer-link-block">
+                <p style={{fontSize: "23px", fontWeight: "bold"}}>Где нас найти?</p>
                 <div>
-                    <img src={location} width="20px" height="20px" style={{paddingRight: "2px"}}/>
+                    <img src={location} width="30px" height="30px" style={{marginRight: "20px"}}/>
                     город Барнаул, улица Сизова, дом 28а
                 </div>
                 <div>
-                    <img src={location} width="20px" height="20px" style={{paddingRight: "2px"}}/>
+                    <img src={location} width="30px" height="30px" style={{marginRight: "20px"}}/>
                     проспект Ленина, дом 23, каб. 219.
                 </div>
                 <div>
-                    <img src={internet} width="20px" height="18px" style={{paddingRight: "2px"}}/>
+                    <img src={internet} width="30px" height="30px" style={{marginRight: "20px"}}/>
                     <a href={"http://www.aitip.ru/"} style={{color: "white", textDecoration: "none"}}>aitip.ru -
                         старая версия сайта</a>
                 </div>
             </div>
-            <div>
+            <div className="footer-link-block">
+                    <p style={{fontSize: "23px", fontWeight: "bold"}}>Остались вопросы?</p>
                 <div>
-                    <h3>Остались вопросы?</h3>
-                </div>
-                <div>
-                    <img src={phone} width="30px" height="20px" style={{paddingRight: "2px"}}/>
+                    <img src={phone} width="30px" height="30px" style={{marginRight: "20px"}}/>
                     8 (3852) 35-93-55
                 </div>
                 <div>
-                    <img src={phone} width="30px" height="20px" style={{paddingRight: "2px"}}/>
+                    <img src={phone} width="30px" height="30px" style={{marginRight: "20px"}}/>
                     8 (3852) 22-80-04
                 </div>
                 <div>
-                    <img src={mail} width="30px" height="25px" style={{paddingRight: "2px"}}/>
+                    <img src={mail} width="30px" height="30px" style={{marginRight: "20px"}}/>
                     aitip@mail.ru
                 </div>
             </div>

@@ -1,23 +1,21 @@
 // Окно для добавления выборов и конкурсов и функции, изменяющие состояния(установлено в модальном окне определенное значение или нет).
 
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {observer} from "mobx-react-lite";
-import {Button, Modal} from "react-bootstrap";
+import {Button} from "react-bootstrap";
 import {
     createElectionsAndContests,
     removeElectionsAndContests,
     updateElectionsAndContests
 } from "../../http/electionsAndContestsAPI";
 import "../../css/page_styles/AdminPanel.css"
-import {useEffect} from "react";
-
 
 
 const CreateElectionOrContest = observer(({eAC, mode}) => {
     const isEmpty = eAC.hasOwnProperty("fakeParam");
 
     const [name, setName] = useState( isEmpty ? "" : eAC.name)
-    const [kind, setKind] = useState(isEmpty ? "" : eAC.kind);
+    const [kind, setKind] = useState(isEmpty ? "Выборы" : eAC.kind);
     const [applicationsAcceptanceDateStart, setApplicationsAcceptanceDateStart] = useState(isEmpty ? "" : eAC.applicationsAcceptanceDateStart);
     const [applicationsAcceptanceDateEnd, setApplicationsAcceptanceDateEnd] = useState(isEmpty ? "" : eAC.applicationsAcceptanceDateEnd);
     const [applicationsAcceptancePlace, setApplicationsAcceptancePlace] = useState(isEmpty ? "" : eAC.applicationsAcceptancePlace);
@@ -59,7 +57,6 @@ const CreateElectionOrContest = observer(({eAC, mode}) => {
     }
 
     return (
-
                 <div>
                     <div>
                         <label htmlFor="name" className="mini-info">Название/описание</label>
@@ -110,14 +107,22 @@ const CreateElectionOrContest = observer(({eAC, mode}) => {
                         }}>
                             Сохранить выборы/конкурс
                         </Button>
-                    <Button className="buttom-close" variant="outline-warning" onClick={() => window.location.reload()}>
+                    <Button className="buttom-close" variant="outline-warning" onClick={() => document.location.reload()}>
                         Выйти без сохранения
                     </Button>
                     {mode === "edit" &&
                         <Button className="buttom-close" variant="outline-danger"
                                 onClick={() => {
 
-                                    removeElectionsAndContests(eAC.id).then(() => alert("Успешно удалено"))
+                                    removeElectionsAndContests(eAC.id).then((data) => {
+                                        if (!isNaN(parseInt(data))){
+                                            alert("Успешно удалено");
+                                            document.location.reload()
+                                        } else {
+                                            alert("Что-то пошло не так...");
+                                        }
+
+                                    })
                                 }}>
                             Удалить выборы или конкурс
                         </Button>

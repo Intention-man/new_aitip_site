@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import {useEffect, useState} from "react"
 import EyeIcon from "../../local_assets/eye.png"
 import "../../css/component_styles/Menu.css"
 
@@ -8,12 +8,14 @@ import "../../css/component_styles/Menu.css"
  */
 const BlindVersionSwitcher = () => {
 
-    const BLIND_VERSION_FONT_SIZE = '25px';  // Размер шрифта в версии для слабовидящих
+    const BLIND_VERSION_FONT_INCREMENT = 6;  // На сколько увеличивать весь шрифт (в пикселях)
+    const FONT_SIZE_CONSTS = [  // Названия CSS-констант, которые будут изменяться
+        'default_font_size',
+        'subheading_font_size',
+        'heading_font_size'
+    ]
 
     const [isBlindVersionActive, setIsBlindVersionActive] = useState(false);
-    const [defaultFontSize, setDefaultFontSize] = useState('20px');  /* Размер шрифта в обычной версии,
-                                                                        помещён в стейт, так как его желательно
-                                                                        подгружать из CSS-константы */
 
     useEffect(() => {  // При загрузке компонента вызываем необходимые функции
         restoreSavedState();
@@ -37,15 +39,24 @@ const BlindVersionSwitcher = () => {
      */
     const toggleBlindVersion = () => {
         const root = document.documentElement;  // Селектор элемента :root
-        let newValue;  
-        if (isBlindVersionActive) {
-            newValue = defaultFontSize;  // Если был режим для слабовидящих - возвращаем стандартный шрифт
-        } else {
-            newValue = BLIND_VERSION_FONT_SIZE;  // Если был стандартный режим - устанавливаем увеличенный шрифт
-            // Далее твик, чтобы подгрузить значение константы --font_size_const в defaultFontSize
-            setDefaultFontSize(root.style.getPropertyValue('--font_size_const'));
+        for (const constName of FONT_SIZE_CONSTS) {
+             let currentValue = parseInt(
+                getComputedStyle(root)
+                .getPropertyValue(`--${constName}`)
+                .replace('px', '')
+            )
+            if (Number.isNaN(currentValue))
+                currentValue = 19
+        
+            let newValue;  
+            if (isBlindVersionActive) {
+                newValue = currentValue - BLIND_VERSION_FONT_INCREMENT;  // Если был режим для слабовидящих - возвращаем стандартный шрифт
+            } else {
+                newValue = currentValue + BLIND_VERSION_FONT_INCREMENT;  // Если был стандартный режим - устанавливаем увеличенный шрифт
+            }
+            const newValueWithUnits = `${newValue}px`
+            root.style.setProperty(`--${constName}`, newValueWithUnits);  // Обновляем размер шрифта
         }
-        root.style.setProperty('--font_size_const', newValue);  // Обновляем размер шрифта
         localStorage.setItem('isBlindVersionActive', !isBlindVersionActive);
         setIsBlindVersionActive(!isBlindVersionActive);
     };

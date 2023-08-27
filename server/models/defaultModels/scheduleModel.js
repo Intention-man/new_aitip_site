@@ -7,8 +7,8 @@ const {DataTypes} = require("sequelize")
 const Schedule = sequelize.define("schedule", {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     kind: {type: DataTypes.STRING, allowNull: false},
-    name: {type: DataTypes.STRING, allowNull: false, unique: true},
-    group: {type: DataTypes.STRING, allowNull: false, unique: true},
+    name: {type: DataTypes.TEXT, allowNull: false, unique: true},
+    group: {type: DataTypes.TEXT, allowNull: false, unique: true},
     fileLink: {type: DataTypes.STRING, allowNull: false},
 })
 

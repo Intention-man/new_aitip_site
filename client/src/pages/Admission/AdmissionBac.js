@@ -7,7 +7,7 @@ import ButtonList from "../../components/ButtonList";
 import "../../css/main.css"
 import "../../css/page_styles/Admission.css";
 import Card from "../../components/lines/Card";
-import {addConstructorBlocks} from "../../additional_commands/commonPanelsFunctions";
+import CommonPagesDisplay from "../../components/display/CommonPagesDisplay";
 
 
 const AdmissionBacContent2 = observer(() => {
@@ -87,18 +87,6 @@ const AdmissionBacContent2 = observer(() => {
                                 </tbody>
                             </table>
                         </div>
-                        <div className="_2_documents">
-                            <div className="_1_of_first_2_documents">
-                                <img className="document_icon" src={"../assets/document_icon.png"}
-                                     alt="Чет не пошло как-то с картинкой..."/>
-                                <p>Правила проведения вступительных испытаний</p>
-                            </div>
-                            <div className="_1_of_first_2_documents">
-                                <img className="document_icon" src={"../assets/document_icon.png"}
-                                     alt="Изображение"/>
-                                <p>Расписание вступительных испытаний 2022</p>
-                            </div>
-                        </div>
                     </div>
                     <div className="cost_zone">
                         <div className="cost">
@@ -110,17 +98,6 @@ const AdmissionBacContent2 = observer(() => {
                             <p className="cost_form">Заочная</p>
                         </div>
                     </div>
-                    <div className="last_document_of_content_2">
-                        <img className="document_icon" src={"../assets/document_icon.png"}
-                             alt="Чет не пошло как-то с картинкой..."/>
-                        <p>ПОЛОЖЕНИЕ о порядке предоставления льгот по оплате обучения в Алтайском институте труда и
-                            права
-                            (филиал) Образовательного учреждения профсоюзов высшего образования «Академия труда и
-                            социальных
-                            отношений»</p>
-                    </div>
-                    <button className="small_grey_link_to_block" style={{float: "right"}}>Перейти к разделу "Документы"
-                    </button>
                 </div>}
         </Block>
     );
@@ -128,31 +105,14 @@ const AdmissionBacContent2 = observer(() => {
 
 
 const AdmissionBac = observer(() => {
-    const {block_store} = useContext(Context);
-
-    const [blockList, setBlockList] = useState({
+    let blockList = {
         2: <AdmissionBacContent2/>
-    });
+    }
 
     const handMadeBlocksCount = 1
-    const myAddress = "/" + window.location.href.split("/")[3]
-
-
-    useEffect(() => {
-        addConstructorBlocks(myAddress, handMadeBlocksCount, block_store, blockList, setBlockList)
-    }, [block_store.blocks, block_store.lines]);
-
 
     return (
-        <>
-            {Object.values(blockList).map((block, index) => {
-                if (block.hasOwnProperty("id")) {
-                    return <Block key={index} block={block} header={block.header}/>
-                } else {
-                    return <>{block}</>
-                }
-            })}
-        </>
+        <CommonPagesDisplay blockList={blockList} handMadeBlocksCount={handMadeBlocksCount}/>
 
     );
 })

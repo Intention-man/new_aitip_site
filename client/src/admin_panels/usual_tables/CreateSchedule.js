@@ -1,22 +1,21 @@
 // Окно для добавления партнеров и функции, изменяющие состояния(установлено в модальном окне определенное значение или нет).
 
-import React, {useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {observer} from "mobx-react-lite";
 import {Button} from "react-bootstrap";
 import "../../css/page_styles/AdminPanel.css"
-import {useContext, useEffect} from "react";
 import {Context} from "../../index";
-import {updateFileUsages, selectFile} from "../../additional_commands/commonPanelsFunctions";
+import {updateFileUsages} from "../../additional_commands/commonPanelsFunctions";
 import {createSchedule, removeSchedule, updateSchedule} from "../../http/scheduleAPI";
 import FilesPicker from '../FilesPicker';
 
 
 const CreateSchedule = observer(({schedule, mode}) => {
-    const {block_store} = useContext(Context)
     const isEmpty = schedule.hasOwnProperty("fakeParam");
 
+
     const [name, setName] = useState(isEmpty ? "" : schedule.name)
-    const [kind, setKind] = useState(isEmpty ? "" : schedule.kind);
+    const [kind, setKind] = useState(isEmpty ? "Бакалавриат" : schedule.kind);
     const [group, setGroup] = useState(isEmpty ? "" : schedule.group);
     const [fileLink, setFileLink] = useState(isEmpty ? "" : schedule.fileLink);
     const [prevFileLink, setPrevFileLink] = useState(isEmpty ? "" : schedule.fileLink);
@@ -56,7 +55,7 @@ const CreateSchedule = observer(({schedule, mode}) => {
         <div>
             <div>
                 <label className="mini-info" htmlFor="name">Название файла с расписанием</label>
-                <textarea className="big-info" id="name"
+                <input className="big-info" id="name" type="text"
                           onChange={e => setName(e.target.value)}/>
             </div>
 
@@ -97,8 +96,14 @@ const CreateSchedule = observer(({schedule, mode}) => {
             {mode === "edit" &&
                 <Button className="buttom-close" variant="outline-danger"
                         onClick={() => {
-                            (prevFileLink !== null) && updateFileUsages(prevFileLink, -1);
-                            removeSchedule(schedule.id).then(() => alert("Успешно удалено"))
+                            removeSchedule(schedule.id).then((data) => {
+                                if (!isNaN(parseInt(data))){
+                                    alert("Успешно удалено");
+                                    (prevFileLink !== null) && updateFileUsages(prevFileLink, -1);
+                                } else {
+                                    alert("Что-то пошло не так...");
+                                }
+                            })
                         }}>
                     Удалить расписание
                 </Button>

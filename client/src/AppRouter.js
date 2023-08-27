@@ -10,6 +10,7 @@ import {authRoutes, publicRoutes} from "./routes";
 
 const AppRouter = observer(() => {
     const {user_store} = useContext(Context);
+    console.log()
 
 
     const aRoutes = authRoutes.map(
@@ -24,7 +25,7 @@ const AppRouter = observer(() => {
 
     return (
         <Routes>
-            {user_store.isAuth && aRoutes}
+            {(user_store.isAuth || sessionStorage.getItem("token") !== null) && aRoutes}
             {pRoutes}
             <Route
                 path="*"

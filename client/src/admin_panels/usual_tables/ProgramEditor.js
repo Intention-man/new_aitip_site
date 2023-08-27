@@ -1,10 +1,8 @@
-import React from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {observer} from "mobx-react-lite";
-import {useContext, useEffect, useState} from "react";
 import {Context} from "../../index";
 import {fetchAdditionalPrograms} from "../../http/admissionAPI";
 import CreateProgram from "./CreateProgram";
-
 
 
 const ProgramEditor = observer(() => {

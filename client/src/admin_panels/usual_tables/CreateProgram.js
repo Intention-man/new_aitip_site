@@ -1,23 +1,16 @@
 // Frontend модального окна для добавления направления и функции, изменяющие состояния(установлено в модальном окне определенное значение или нет). Возможно, не будет использоваться.
 
 
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {observer} from "mobx-react-lite";
-import {
-    createAdditionalProgram, removeAdditionalProgram, updateAdditionalProgram
-} from "../../http/admissionAPI";
+import {createAdditionalProgram, removeAdditionalProgram, updateAdditionalProgram} from "../../http/admissionAPI";
 import {Button} from "react-bootstrap";
 import "../../css/page_styles/AdminPanel.css"
-import {useContext} from "react";
-import {Context} from "../../index";
-import {useEffect} from "react";
-import {updateFileUsages, selectFile} from "../../additional_commands/commonPanelsFunctions";
+import {updateFileUsages} from "../../additional_commands/commonPanelsFunctions";
 import FilesPicker from '../FilesPicker';
 
 
 const CreateProgram = observer(({program, mode}) => {
-
-    const { block_store } = useContext(Context);
     const isEmpty = program.hasOwnProperty("fakeParam");
 
     const [name, setName] = useState(isEmpty ? "" : program.name)
@@ -170,15 +163,22 @@ const CreateProgram = observer(({program, mode}) => {
             }}>
                 Сохранить программу
             </Button>
-            <Button className="buttom-close" variant="outline-warning" onClick={() => window.location.reload()}>
+            <Button className="buttom-close" variant="outline-warning" onClick={() => document.location.reload()}>
                 Выйти без сохранения
             </Button>
             {mode === "edit" &&
                 <Button className="buttom-close" variant="outline-danger"
                         onClick={() => {
-                            (prevProgramImg !== null) && updateFileUsages(prevProgramImg, -1);
-                            (prevSupervisorImg !== null) && updateFileUsages(prevSupervisorImg, -1);
-                            removeAdditionalProgram(program.id).then(() => alert("Успешно удалено"))
+
+                            removeAdditionalProgram(program.id).then((data) => {
+                                if (!isNaN(parseInt(data))){
+                                    (prevProgramImg !== null) && updateFileUsages(prevProgramImg, -1);
+                                    (prevSupervisorImg !== null) && updateFileUsages(prevSupervisorImg, -1);
+                                    document.location.reload()
+                                } else {
+                                    alert("Что-то пошло не так...");
+                                }
+                            })
                         }}>
                     Удалить программу
                 </Button>

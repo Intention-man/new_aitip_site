@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {fetchSchedules} from "../http/scheduleAPI";
 import ButtonList from "../components/ButtonList";
 import "../css/page_styles/Students.css";
@@ -6,8 +6,7 @@ import {fetchLabs} from "../http/labAPI";
 import Card from "../components/lines/Card";
 import Carusel from "../components/lines/Carusel";
 import Block from "../components/display/Block";
-import {Context} from "../index";
-import {addConstructorBlocks} from "../additional_commands/commonPanelsFunctions";
+import CommonPagesDisplay from "../components/display/CommonPagesDisplay";
 
 
 const Schedule = () => {
@@ -30,14 +29,14 @@ const Schedule = () => {
         <div className="schedules">
             {allSchedules && allSchedules.filter(e => e.kind === forms[chosenSchedule]).map(schedule =>
                 <a href={process.env.REACT_APP_API_URL + schedule.fileLink}
-                   download target="_blank">
+                   download target="_blank" key={schedule.id}>
                     <div>
                         <img className="document_icon" src={"../assets/document_icon.png"}
                              alt="Чет не пошло как-то с картинкой..."/>
                         <div>
                             {/*<p>{schedule.name}</p>*/}
                             <p className="group">{schedule.group}</p>
-                            <p>расписание занятий</p>
+                            <p style={{marginRight: "10px"}}>{schedule.name}</p>
                         </div>
                     </div>
                     <p className="updated_at">Изменено: {new Date(schedule.updatedAt).toLocaleDateString()+" "+new Date(schedule.updatedAt).toLocaleTimeString().match(/\d+:\d+/)[0]}</p>
@@ -97,30 +96,14 @@ const Laboratories = () => {
 
 
 const Students = () => {
-    const {block_store} = useContext(Context);
-    const [blockList, setBlockList] = useState({
+    let blockList = {
         1: <Schedule/>,
         2: <Laboratories/>
-    });
+    }
     const handMadeBlocksCount = 2
-    const myAddress = "/" + window.location.href.split("/")[3]
 
-
-    useEffect(() => {
-        addConstructorBlocks(myAddress, handMadeBlocksCount, block_store, blockList, setBlockList)
-    }, [block_store.blocks, block_store.lines, handMadeBlocksCount]);
-
-    console.log(blockList)
     return (
-        <>
-            {Object.values(blockList).map((block, index) => {
-                if (block.hasOwnProperty("id")) {
-                    return <Block key={index} block={block} header={block.header}/>
-                } else {
-                    return <>{block}</>
-                }
-            })}
-        </>
+        <CommonPagesDisplay blockList={blockList} handMadeBlocksCount={handMadeBlocksCount}/>
     )
 };
 

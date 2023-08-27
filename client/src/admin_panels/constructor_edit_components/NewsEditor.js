@@ -1,7 +1,5 @@
-import React, {useState} from 'react';
-import {useContext} from "react";
+import React, {useContext, useState} from 'react';
 import {Context} from "../../index";
-import {publicRoutes} from "../../routes";
 import {observer} from "mobx-react-lite";
 import {fetchOneBlock} from "../../http/blockAPI";
 import CreateOrEditBlock from "./CreateOrEditBlock";

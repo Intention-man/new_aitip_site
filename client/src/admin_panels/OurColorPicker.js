@@ -1,6 +1,6 @@
-import Select, { components } from 'react-select';
-import { ourColorsOptions } from '../consts/ourColorOptionsConsts';
-import { useState } from 'react';
+import Select, {components} from 'react-select';
+import {ourColorsOptions} from '../consts/ourColorOptionsConsts';
+import {useState} from 'react';
 
 
 /**

@@ -9,55 +9,37 @@ import SideBar from './components/permanent/SideBar';
 import {Context} from "./index";
 import ContentContext from './components/contexts/ContentContext';
 import LinksPanel from "./components/permanent/LinksPanel";
-import {check} from "./http/userAPI";
-import {Spinner} from "react-bootstrap";
 import "./css/component_styles/SocialMedia.css"
 import Feedback from "./components/permanent/Feedback";
 import Footer from "./components/permanent/Footer";
-import { refetchAllContent } from "./additional_commands/commonPanelsFunctions";
+import {refetchAllContent} from "./additional_commands/commonPanelsFunctions";
 
-import { fetchLines } from "./http/blockAPI";
-import BlockContainer from "./components/display/BlockContainer";
+import {fetchLines} from "./http/blockAPI";
+import {DotLoader} from "react-spinners";
 
 
 const App = observer(() => {
     const {block_store} = useContext(Context);
-    const {user_store} = useContext(Context);
 
     const [loading, setLoading] = useState(true);
     const [currentContent, setCurrentContent] = useState([]);  // Стейт с текущими блоками страницы (нужны для LinksPanel)
 
-    
+
     useEffect(() => {
         refetchAllContent(block_store);
         fetchLines().then(data => {
             block_store.setLines(data.rows)
         })
     }, [])
-    
+
     useEffect(() => {
         setTimeout(() => {
-            try {
-                check().then(response => {
-                    if (response !== undefined && typeof response === "object" && response.hasOwnProperty("email")) {
-                        user_store.setIsAuth(true)
-                        user_store.setUser(response)
-                        // setIsAdmin(true)
-                    } else {
-                        user_store.setIsAuth(false)
-                        // setIsAdmin(false)
-                    }
-                }).finally(() => setLoading(false))
-            } catch (error) {
-                const {response} = error;
-                const {request, ...errorObject} = response; // take everything but 'request'
-                console.log(errorObject);
-            }
-        }, 200)
+            setLoading(false)
+        }, 500)
     });
 
     if (loading) {
-        return <Spinner animation={"grow"}/>
+        return <DotLoader color="#497AD8" size={200} cssOverride={{marginTop: "20%", marginLeft: "40%"}}/>
     }
 
     const updateContent = (newContent) => {  /* Это callback, который будет передан в ContentContext.Provider, 
@@ -88,9 +70,7 @@ const App = observer(() => {
                     />
                 </SideBar>
                 <ContentContext.Provider value={updateContent}>
-                    <BlockContainer>
-                        <AppRouter/>
-                    </BlockContainer>
+                    <AppRouter/>
                 </ContentContext.Provider>
                 <SideBar
                     alignment='right'

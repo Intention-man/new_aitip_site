@@ -1,13 +1,17 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import MDEditor, {commands} from "@uiw/react-md-editor";
-import { getTextColorCommands } from "../../additional_commands/textColoringCommands";
-import { alignTextCenter, alignTextRight, alignTextLeft } from '../../additional_commands/textAlignCommands';
+import {getTextColorCommands} from "../../additional_commands/textColoringCommands";
+import {alignTextCenter, alignTextLeft, alignTextRight} from '../../additional_commands/textAlignCommands';
 import AlignLeftIcon from "../../local_assets/icons/align-left.svg";
 import ColorChangeIcon from '../../local_assets/icons/color-fill.svg';
 import "../../css/component_styles/Editor.css"
 
 
 const ExtendedTextEditor = ({text, setText, changeLine, index}) => {
+
+    useEffect(() => {
+        console.log(text)
+    }, [text]);
 
     return (
         <MDEditor

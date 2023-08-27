@@ -12,6 +12,7 @@ import email from "../../local_assets/sms (1).png";
 import phone from "../../local_assets/Vector (2).png";
 import address from "../../local_assets/location (1).png";
 import ButtonList from "../../components/ButtonList";
+import {DotLoader} from "react-spinners";
 
 
 const SmallStafferItem = observer(({staffer}) => {
@@ -21,8 +22,8 @@ const SmallStafferItem = observer(({staffer}) => {
                         style={{width: "90px", backgroundPosition: "center"}}
                         className="ava_img"/>
             <div>
-                <div> {staffer.name} </div>
-                <div> {staffer.post} </div>
+                <p style={{fontWeight: 600, margin: "0 10px"}}> {staffer.name} </p>
+                <p style={{margin: "0 10px"}}> {staffer.post} </p>
             </div>
         </div>
     );
@@ -31,16 +32,16 @@ const SmallStafferItem = observer(({staffer}) => {
 
 const StafferItem = observer(({staffer, closeStaffer}) => {
 
-    const textsNames = {
-        "Биография": staffer.bio_text,
-        "Дисциплины и курсы": staffer.disciplines_and_courses_text,
-        "Публикации": staffer.publications_text,
-        "Проекты": staffer.projects_text
-    }
+    const textsNames = {}
+
+    if (staffer.bio_text.length > 0) {textsNames["Биография"] = staffer.bio_text}
+    if (staffer.disciplines_and_courses_text.length > 0) {textsNames["Дисциплины и курсы"] = staffer.disciplines_and_courses_text}
+    if (staffer.publications_text.length > 0) {textsNames["Публикации"] = staffer.publications_text}
+    if (staffer.projects_text.length > 0) {textsNames["Проекты"] = staffer.projects_text}
 
     const [activeText, setActiveText] = useState(Object.keys(textsNames)[0]);
 
-    console.log(staffer.name)
+    console.log(staffer.bio_text)
 
     return (
         <div className="staffer_item_opened">
@@ -61,15 +62,12 @@ const StafferItem = observer(({staffer, closeStaffer}) => {
                          className="big_avatar m-auto m-md-0"
                          alt="картинка чет не загрузилась"/>
                     <div>
-                        {/*<div className="top_block_row">*/}
-                        {/*    <div className="top_content">*/}
                         <div className="staffer_name"> {staffer.name} </div>
                         <button className="close-btn"
                                 onClick={() => closeStaffer(staffer.id)}>
                             Х
                         </button>
-                        {/*    </div>*/}
-                        {/*</div>*/}
+
 
                         <div className="general_desc"> {staffer.post} </div>
                         <div className="general_desc"> {staffer.academic_degree} {staffer.title}</div>
@@ -121,7 +119,6 @@ const PersonalitiesList = observer(params => {
         }
     }
 
-
     function updateSize() {
         setSize([window.innerWidth, window.innerHeight]);
     }
@@ -129,26 +126,16 @@ const PersonalitiesList = observer(params => {
 
     return (
         <div>
-            {(staff_store.staff.length !== 0) ?
+            {(params.filteredStaff.length !== 0) ?
                 (() => {
                     let rows = []
                     const lenGroup = size[0] > 800 ? 2 : 1
                     const count = Math.ceil(params.filteredStaff.length / lenGroup) * lenGroup
-                    // console.log(staff_store.staff[0])
-                    // console.log(staff_store.staff[1])
-                    // console.log(staff_store.staff[2])
                     for (let i = 0; i < count; i += lenGroup) {
                         let staffers = []
-                        for(let l = 0; l < lenGroup; l++) {
-                            staffers.push((params.filteredStaff.length > i + l ? staff_store.staff[i + l] : undefined))
-
+                        for (let l = 0; l < lenGroup; l++) {
+                            staffers.push((params.filteredStaff.length > i + l ? params.filteredStaff[i + l] : undefined))
                         }
-                        // const staffer1 = (params.filteredStaff.length > i ? staff_store.staff[i] : undefined)
-                        // const staffer2 = (params.filteredStaff.length > (i + 1) ? staff_store.staff[i + 1] : undefined)
-                        // const staffer3 = (params.filteredStaff.length > (i + 2) ? staff_store.staff[i + 2] : undefined)
-                        // if (staffer1 !== undefined) {lastThreeStaffId.push(staffer1.id)}
-                        // if (staffer2 !== undefined) lastThreeStaffId.push(staffer2.id)
-                        // if (staffer3 !== undefined) lastThreeStaffId.push(staffer3.id)
 
                         let list = staffers.filter(i => i !== undefined)
 
@@ -168,22 +155,18 @@ const PersonalitiesList = observer(params => {
                             )}
                         </Row>)
                         rows.push(params.chosenStaffer && list.map(e => e.id).includes(params.chosenStaffer.id) &&
-                            <StafferItem key={params.chosenStaffer.id} staffer={params.chosenStaffer} closeStaffer={changeChosenStaffer}/>)
+                            <StafferItem key={params.chosenStaffer.id} staffer={params.chosenStaffer}
+                                         closeStaffer={changeChosenStaffer}/>)
                     }
                     return rows
-                })() : <div>Загрузка...</div>
+                })() : <h2 className="list_is_empty">Сотрудников, преподающих на данных программах и направлениях, нет</h2>
             }
         </div>
     );
 });
 
 
-const PersonalitiesFilterBar = observer(({
-                                             filteredDirections,
-                                             setFilteredDirections,
-                                             filteredPrograms,
-                                             setFilteredPrograms
-                                         }) => {
+const PersonalitiesFilterBar = observer(({filteredDirections, setFilteredDirections, filteredPrograms, setFilteredPrograms}) => {
     const {admission_store} = useContext(Context)
 
     return (
@@ -254,7 +237,7 @@ const Personalities = observer(() => {
 
 
         useEffect(() => {
-            fetchStaff(1, 10).then(data => {
+            fetchStaff(1, 100).then(data => {
                     staff_store.setStaff(data.rows)
                     staff_store.setTotalCount(data.count)
                 }
@@ -278,6 +261,7 @@ const Personalities = observer(() => {
 
         useEffect(() => {
             setFilteredStaff(staff_store.staff)
+            console.log(staff_store.staff)
         }, [staff_store.staff])
 
         useEffect(() => {
@@ -290,14 +274,19 @@ const Personalities = observer(() => {
             console.log(filteredDirections)
             console.log(filteredPrograms)
             if (filteredDirections.length > 0 || filteredPrograms.length > 0) {
-                setFilteredStaff(staff_store.staff.filter(staffer => {
-                    return (staffer.directions_bac && filteredDirections && filteredDirections.some(direction => staffer.directions_bac.includes(direction.name))) || (staffer.programs_add && filteredPrograms && filteredPrograms.some(program => staffer.programs_add.includes(program.name)))
-                }))
+                setFilteredStaff(staff_store.staff.filter(staffer =>
+                    (staffer.directions_bac && filteredDirections && filteredDirections.some(direction => staffer.directions_bac.includes(direction.name))) || (staffer.programs_add && filteredPrograms && filteredPrograms.some(program => staffer.programs_add.includes(program.name)))
+                ))
             } else {
                 setFilteredStaff(staff_store.staff)
             }
         }, [filteredDirections, filteredPrograms])
 
+        if (!staff_store.staff || (staff_store.staff && staff_store.staff.length === 0)) {
+            return (<Container className="mt-md-5" style={{display: "flex"}}>
+                <DotLoader color="#497AD8" size={200} cssOverride={{margin: "15% 30%"}}/>
+            </Container>)
+        }
 
         return (
             <Container className="mt-md-5" style={{display: "flex"}}>

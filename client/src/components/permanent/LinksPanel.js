@@ -26,17 +26,6 @@ class LinksPanel extends React.Component {
         this.navigateToBlock = this.navigateToBlock.bind(this);
     }    
     
-    componentDidMount() {
-        // Обновить активные блоки нужно при изменении размеров страницы или скроллинге
-        window.addEventListener('resize', this.updateActiveBlocks);
-        window.addEventListener('scroll', this.updateActiveBlocks);
-        this.updateActiveBlocks();
-    }
-
-    componentWillUnmount() {
-        window.removeEventListener('resize', this.updateActiveBlocks);
-        window.removeEventListener('scroll', this.updateActiveBlocks);
-    }
 
     /**
      * Метод для обновления активных блоков
@@ -53,7 +42,7 @@ class LinksPanel extends React.Component {
                     if (offsetTop < activeBlocksOffsetTop) {
                         newActiveBlocks = [i];
                         activeBlocksOffsetTop = offsetTop;
-                    } else if (offsetTop == activeBlocksOffsetTop) {
+                    } else if (offsetTop === activeBlocksOffsetTop) {
                         newActiveBlocks.push(i);
                     }
                 }
@@ -86,6 +75,19 @@ class LinksPanel extends React.Component {
         event.preventDefault();
         window.scrollTo(0, 0);
     }
+
+    componentDidMount() {
+        // Обновить активные блоки нужно при изменении размеров страницы или скроллинге
+        window.addEventListener('resize', this.updateActiveBlocks);
+        window.addEventListener('scroll', this.updateActiveBlocks);
+        this.updateActiveBlocks();
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.updateActiveBlocks);
+        window.removeEventListener('scroll', this.updateActiveBlocks);
+    }
+
 
     render() {
 

@@ -1,9 +1,7 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {observer} from "mobx-react-lite";
-import {useEffect, useState} from "react";
 import CreateSchedule from "./CreateSchedule";
 import {fetchSchedules} from "../../http/scheduleAPI";
-
 
 
 const ScheduleEditor = observer(() => {
@@ -36,7 +34,7 @@ const ScheduleEditor = observer(() => {
             }}>
                 <option value="">Выберите расписание, данные которого вы хотите изменить</option>
                 {allSchedules.map(schedule => (
-                    <option key={schedule.id} value={schedule.id}>{schedule.name}</option>
+                    <option key={schedule.id} value={schedule.id}>{schedule.group}</option>
                 ))}
             </select>
 

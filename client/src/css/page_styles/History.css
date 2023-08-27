@@ -1,11 +1,11 @@
 .h3{
     color: var(--aitip_blue);
-    font-size: calc(var(--font_size_const)*1.5);
+    font-size: calc(var(--default_font_size)*1.5);
     padding-top: 20px;
     padding-bottom: 20px;
 }
 p{
-    font-size: calc(var(--font_size_const) * 0.8);
+    font-size: calc(var(--default_font_size) * 0.8);
 }
 
 .universal{
@@ -14,7 +14,7 @@ p{
     border-radius: 10px;
     padding-top: 20px;
     padding-bottom: 20px;
-    font-size: calc(var(--font_size_const) * 0.8);
+    font-size: calc(var(--default_font_size) * 0.8);
 }
 
 .block-text{
@@ -52,7 +52,7 @@ p{
     margin-left: 10%;
     border-radius: 10px;
     padding: 10px;
-    font-size: calc(var(--font_size_const) * 0.75);
+    font-size: calc(var(--default_font_size) * 0.75);
 }
 
 .mid-heading{
@@ -61,7 +61,7 @@ p{
 
 .li_font{
     margin-left: 20px;
-    font-size: calc(var(--font_size_const)*0.8);
+    font-size: calc(var(--default_font_size)*0.8);
 }
 
 

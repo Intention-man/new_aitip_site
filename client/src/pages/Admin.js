@@ -1,6 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Container} from "react-bootstrap";
 
 import {fetchAdditionalPrograms, fetchDirectionsBachelor} from "../http/admissionAPI";
 import {Context} from "../index";
@@ -29,8 +28,10 @@ import NewsEditor from "../admin_panels/constructor_edit_components/NewsEditor";
 
 
 const Admin = observer(() => {
+    const {user_store} = useContext(Context)
     const {admission_store} = useContext(Context)
     const {block_store} = useContext(Context)
+    console.log(user_store.isAuth)
 
     const [windowVisible, setWindowVisible] = useState("")
     const forms = {
@@ -49,7 +50,7 @@ const Admin = observer(() => {
         "Создать лабораторию": <CreateLab lab={{fakeParam: undefined}}/>,
         "Редактировать лабораторию": <LabEditor/>,
 
-        "Добавить блок": <CreateOrEditBlock block={{fakeParam: undefined}}/>,
+        "Добавить блок": <CreateOrEditBlock block={{fakeParam: undefined}} mode="create"/>,
         "Редактировать новость": <NewsEditor/>,
         "Редактировать блок": <BlocksEditor/>,
         "Изменить порядок блоков на странице": <BlocksSwap/>,
@@ -71,10 +72,10 @@ const Admin = observer(() => {
 
 
     return (
-        <Container className="d-flex flex-column">
+        <div className="d-flex flex-column">
             <ButtonList buttonList={forms} setChosenValue={setWindowVisible}/>
             {windowVisible && forms[windowVisible]}
-        </Container>
+        </div>
     );
 });
 

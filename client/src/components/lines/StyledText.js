@@ -9,10 +9,12 @@ import "../../css/component_styles/StyledText.css"
  * @param {line} Объект линии (???) TODO 
  * @returns Компонент линии стилизованного текста
  */
+
 const StyledText = ({ line }) => {
+    // console.log(line.text)
     const getMarkdownClassname = () => {
         const className = ['StyledText-mdText'];
-        
+
         const backgroundColor = line.params !== null && line.params.backgroundColor;
         if (backgroundColor != null)
             className.push('StyledText-mdText-bg', `StyledText-mdText-bg-${backgroundColor}`)
@@ -20,8 +22,12 @@ const StyledText = ({ line }) => {
         const borderColor = line.params !== null && line.params.borderColor;
         if (borderColor != null)
             className.push('StyledText-mdText-border', `StyledText-mdText-border-${borderColor}`);
-        
+
         return className.join(' ');
+    }
+
+    if (typeof line.text == 'string') {  // Проверка на всякий случай: если нам поступилв в line.text голая строка - обернём как надо
+        line.text = [line.text]
     }
 
     return (
@@ -31,11 +37,14 @@ const StyledText = ({ line }) => {
                     <div
                         key={i}
                         className="StyledText-column"
+                        data-color-mode="light"  /* Выключение установки тёмной темы MDEditor'ом */
                     >
                         <MDEditor.Markdown
                             className={getMarkdownClassname()}
                             source={columnText}
-                            style={{whiteSpace: 'pre-wrap'}}
+                            style={{
+                                fontSize: 'var(--default_font_size)',
+                            }}
                         />
                     </div>
                 )

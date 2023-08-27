@@ -4,8 +4,9 @@ import {
     ADMIN,
     ADMISSION_APE,
     ADMISSION_BAC,
+    ARTICLE,
     AUTH,
-    AVAILABLE_ENVIRONMENT,
+    AVAILABLE_ENVIRONMENT, COMMON_INFO,
     CONTACTS,
     COUNTERING,
     DOCUMENTS,
@@ -20,14 +21,14 @@ import {
     PAID_SERVICES,
     PARTNERS,
     PERSONALITIES_PAGE,
-    PHOTO_GALLERY,
+    PHOTO_GALLERY, SCHOLARSHIPS_AND_OTHER_SUPPORT,
     SCIENCE,
-    STAFF,
+    STAFF, STANDARDS_AND_REQUIREMENTS,
     STRUCTURE,
     STUDENTS,
     SUPERADMIN,
     SUPPORT_AND_EQUIPMENT,
-    VACANT_PLACES
+    VACANT_PLACES, WORKING_PROGRAMS
 } from "./consts/pageConsts";
 import Main from "./pages/Main";
 import InternationalCooperation from "./pages/Institute/InternationalCooperation";
@@ -40,8 +41,9 @@ import Students from "./pages/Students";
 import Auth from "./pages/Auth";
 import SuperAdminPage from "./pages/SuperAdminPage";
 import Partners from "./pages/Partners";
-import News from "./pages/News";
+import NewsPage from "./pages/NewsPage";
 import UsualPage from "./pages/UsualPage";
+import DefinedNews from "./pages/DefinedNews";
 
 
 export const publicRoutes = [
@@ -58,23 +60,27 @@ export const publicRoutes = [
     {
         path: ADMISSION_APE,
         Component: <AdmissionAdd/>,
-        name: "Поступление - ДПО"
+        name: "Поступление - Дополнительное профессиональное образование"
     },
     {
-        path: INTERNATIONAL_ACT ,
+        path: INTERNATIONAL_ACT,
         Component: <InternationalCooperation/>,
         name: "Международное сотрудничество"
     },
     {
         path: NEWS,
-        Component: <News/>,
+        Component: <NewsPage/>,
         name: "Новости"
     },
-
+    {
+        path: ARTICLE + "/:id",
+        Component: <DefinedNews/>,
+        name: "Новость"
+    },
     {
         path: PARTNERS,
         Component: <Partners/>,
-        name: "Научные партнёры"
+        name: "Партнёры"
     },
     {
         path: PERSONALITIES_PAGE,
@@ -93,20 +99,47 @@ export const publicRoutes = [
     },
 
 
+    // Конструкторские страницы
+
     {
-        path: AVAILABLE_ENVIRONMENT,
+        path: HISTORY,
         Component: <UsualPage/>,
-        name: "Доступная среда"
+        name: "История"
     },
     {
-        path: CONTACTS,
+        path: LEGAL_CLINIC,
         Component: <UsualPage/>,
-        name: "Контакты"
+        name: "Юридическая клиника"
     },
     {
-        path: COUNTERING,
+        path: PHOTO_GALLERY,
         Component: <UsualPage/>,
-        name: "Противодействие угрозам"
+        name: "Фотогалерея"
+    },
+    {
+        path: SCIENCE,
+        Component: <UsualPage/>,
+        name: "Наука"
+    },
+
+
+    // Сведения об образовательной организации
+
+    {
+        path: INFO_EDU_ORG,
+        Component: <UsualPage/>,
+        name: "Сведения об образовательной организации"
+    },
+
+    {
+        path: COMMON_INFO,
+        Component: <UsualPage/>,
+        name: "Основные сведения"
+    },
+    {
+        path: STRUCTURE,
+        Component: <UsualPage/>,
+        name: "Структура и органы управления образовательной организацией"
     },
     {
         path: DOCUMENTS,
@@ -119,45 +152,9 @@ export const publicRoutes = [
         name: "Образование"
     },
     {
-        path: FINANCIAL_ACTIVITY,
+        path: STANDARDS_AND_REQUIREMENTS,
         Component: <UsualPage/>,
-        name: "Финансово-хозяйственная деятельность"
-    },
-    {
-        path: HISTORY,
-        Component: <UsualPage/>,
-        name: "История"
-    },
-    {
-        path: INFO_EDU_ORG,
-        Component: <UsualPage/>,
-        name: "Сведения об образовательной организации"
-    },
-
-    {
-        path: LEGAL_CLINIC,
-        Component: <UsualPage/>,
-        name: "Юридическая клиника"
-    },
-    {
-        path: PAID_SERVICES,
-        Component: <UsualPage/>,
-        name: "Платные образовательные услуги"
-    },
-    {
-        path: PHOTO_GALLERY,
-        Component: <UsualPage/>,
-        name: "Фотогалерея"
-    },
-    {
-        path: SCIENCE,
-        Component: <UsualPage/>,
-        name: "Наука"
-    },
-    {
-        path: STRUCTURE,
-        Component: <UsualPage/>,
-        name: "Структура"
+        name: "Образовательные стандарты и требования"
     },
     {
         path: SUPPORT_AND_EQUIPMENT,
@@ -165,15 +162,53 @@ export const publicRoutes = [
         name: "Материально-техническое обеспечение и оснащенность образовательного процесса"
     },
     {
+        path: SCHOLARSHIPS_AND_OTHER_SUPPORT,
+        Component: <UsualPage/>,
+        name: "Стипендии и иные виды материальной поддержки"
+    },
+    {
+        path: PAID_SERVICES,
+        Component: <UsualPage/>,
+        name: "Платные образовательные услуги"
+    },
+    {
+        path: FINANCIAL_ACTIVITY,
+        Component: <UsualPage/>,
+        name: "Финансово-хозяйственная деятельность"
+    },
+    {
         path: VACANT_PLACES,
         Component: <UsualPage/>,
         name: "Вакантные места для приема (перевода) обучающихся"
+    },
+    {
+        path: AVAILABLE_ENVIRONMENT,
+        Component: <UsualPage/>,
+        name: "Доступная среда"
+    },
+
+
+    {
+        path: CONTACTS,
+        Component: <UsualPage/>,
+        name: "Контакты"
+    },
+    {
+        path: COUNTERING,
+        Component: <UsualPage/>,
+        name: "Противодействие угрозам"
+    },
+
+    {
+        path: WORKING_PROGRAMS,
+        Component: <UsualPage/>,
+        name: "Рабочие программы"
     },
 
 
     {
         path: AUTH,
-        Component: <Auth/>, 
+        Component: <Auth/>,
         name: "Авторизация"
     },
 ]

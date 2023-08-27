@@ -9,9 +9,9 @@
  * @returns Компонент блока для размещения в BlockContainer
  */
 
-import { observer } from 'mobx-react-lite';
-import { useContext, useState, useEffect } from 'react';
-import { Context } from '../../index';
+import {observer} from 'mobx-react-lite';
+import React, {useContext} from 'react';
+import {Context} from '../../index';
 import LineDisplay from './LineDisplay';
 import '../../css/component_styles/Block.css';
 
@@ -20,40 +20,48 @@ const Block = observer(({block, header, children}) => {
     // TODO: отрефакторить этот код, так как хотелось бы создавать блок необязательно обращаясь к БД.
     // Например, когда мы хотим показать превью блока, ещё не сохранённого пользователем.
     // Нужно убрать проп block, заменив его на важные для блока пропы (header, lines и др.).
-    console.log(block)
+    // console.log(block)
     const {block_store} = useContext(Context);
 
-    // const [myLines, setMyLines] = useState([]);
-    //
-    // useEffect(() => {
-    //     if (block === undefined)
-    //         return;
-    //
-    //     if (block.hasOwnProperty('id'))  // Поле id имеют блоки ТОЛЬКО ИЗ БД (следовательно, можем загружать их из BlockStore, где хранятся подгруженные линии из БД)
-    //         setMyLines(block_store.lines.filter(line => line.blockId === block.id).sort((a, b) => a.lineOrdinal - b.lineOrdinal));
-    //     else
-    //         setMyLines(block.lines);
-    // }, [block]);
+    const monthList = ["", "января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря"]
 
     // FIXME: ставить проп в аттрибут элемента - это костыль ;(
     return (
         <div className="Block" linkname={block === undefined ? header : block.header}>
-        {
-            (block === undefined) ?
-                <div>
-                    <h1 style={{textAlign: "center", margin: "0 clamp(20px, 100vw / 19.2, 100px)", paddingTop: "clamp(10px, 100vh / 18, 40px)"}}>{header}</h1>
-                    {children}
-                </div>
-            :
-                <>
-                    <h1 style={{textAlign: "center", margin: "0 clamp(20px, 100vw / 19.2, 100px)", paddingTop: "clamp(10px, 100vh / 18, 40px)"}}>{block.header}</h1>
-                    {
-                        block_store.lines.filter(line => line.blockId === block.id).sort((a, b) => a.lineOrdinal - b.lineOrdinal).map(line =>
-                            <LineDisplay key={line.id} line={line}/>
+            {
+                (block === undefined) ?
+                    ((children) ?
+                            <>
+                                <h1 className="Block-header">{header}</h1>
+                                {children}
+                            </>
+                            :
+                            <></>
+                    )
+
+                    :
+                    <>
+                        {((block.hasOwnProperty('id') && block_store.lines.filter(line => line.blockId === block.id).length > 0) || (!block.hasOwnProperty('id') && block.lines.length === 0)) && (
+                            !block.isNews && <h1 className="Block-header">{block.header}</h1>
                         )
-                    }
-                </>
-        }
+                        }
+                        {block.hasOwnProperty('id') ?
+                            (block_store.lines.filter(line => line.blockId === block.id).length > 0 ?
+                                    block_store.lines.filter(line => line.blockId === block.id).sort((a, b) => a.lineOrdinal - b.lineOrdinal).map(line =>
+                                        <LineDisplay key={line.id} line={line}/>
+                                    ) : <></>
+                            )
+                            : (block.lines.length > 0 ?
+                                    block.lines.map(line =>
+                                        <LineDisplay key={line.id} line={line}/>
+                                    ) : <></>
+                            )
+                        }
+                        {
+                            block.isNews && <div className="news_date">{Number(block.createdAt.substring(8, 10)) + " " + monthList[Number(block.createdAt.substring(5, 7))] + " " + Number(block.createdAt.substring(0, 4))}</div>
+                        }
+                    </>
+            }
         </div>
     );
 })

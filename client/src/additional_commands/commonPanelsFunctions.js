@@ -1,5 +1,6 @@
 import {convertFiles, fetchAllFiles, updateFileUsagesAPI} from "../http/commonAPI";
 import {fetchBlocks, fetchLines} from "../http/blockAPI";
+import {useNavigate} from "react-router";
 
 
 export async function selectFile(files, block_store) {
@@ -25,6 +26,10 @@ export async function selectFile(files, block_store) {
     }
 }
 
+/**
+ * Обновляет количество использования файла
+ */
+
 export const updateFileUsages = (fileLink, delta) => {
     const formData = new FormData();
     formData.append("fileLink", fileLink)
@@ -49,18 +54,22 @@ export const refetchAllContent = (blockStore) => {
     });
 }
 
-export const addConstructorBlocks = (myAddress, handMadeBlocksCount, block_store, blockList, setBlockList) => {
+
+/**
+ * Получает адрес страницы, количество ручных блоков, ссылку на глобальный класс, и 2 элемента состояния, хранящего блоки страницы.
+ * Изначально в последнем только ссылки на компоненты-ручные блоки.
+ * Метод добавляет в blockList все конструкторские блоки данной страницы
+ */
+
+export const addConstructorBlocks = (myAddress, handMadeBlocksCount, block_store, blockList) => {
     let pageConstructorBlocks = Array.from(block_store.blocks.filter(block => block.pageLink === myAddress).sort((block1, block2) => block1.ordinal - block2.ordinal))
     const count = pageConstructorBlocks.length + handMadeBlocksCount
-    console.log(pageConstructorBlocks)
 
     for (let i = 1; (i <= count && pageConstructorBlocks.length > 0); i++) {
         if (!blockList.hasOwnProperty(i)) {
             // shift() - удаляет 0-ой элемент из массива и возвращает его
-            const first = pageConstructorBlocks.shift()
-            setBlockList(prev => ({...prev, [i]: first}))
-        } else {
-            console.log(blockList[i])
+            blockList[i] = pageConstructorBlocks.shift();
         }
     }
+    return blockList
 }

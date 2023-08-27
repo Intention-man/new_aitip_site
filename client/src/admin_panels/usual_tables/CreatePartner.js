@@ -12,6 +12,7 @@ import Carusel from "../../components/lines/Carusel";
 import FilesPicker from '../FilesPicker';
 
 
+
 const CreatePartner = observer(({partner, mode}) => {
     const {block_store} = useContext(Context)
     const isEmpty = partner.hasOwnProperty("fakeParam");
@@ -135,18 +136,23 @@ const CreatePartner = observer(({partner, mode}) => {
             }}>
                 Сохранить партнера
             </Button>
-            <Button className="buttom-close" variant="outline-warning" onClick={() => window.location.reload()}>
+            <Button className="buttom-close" variant="outline-warning" onClick={() => document.location.reload()}>
                 Выйти без сохранения
             </Button>
 
             {mode === "edit" &&
                 <Button className="buttom-close" variant="outline-danger"
                         onClick={() => {
-                            // (prevLogo !== null) && updateFileUsages(prevLogo, -1);
-                            // (prevSupervisorImg !== null) && updateFileUsages(prevSupervisorImg, -1);
-                            (prevLogo !== null) && updateFileUsages(prevLogo, -1);
-                            (prevJointProjectsPhotos !== null) && prevJointProjectsPhotos.forEach(photo => updateFileUsages(photo, -1));
-                            removePartner(partner.id).then(() => alert("Успешно удалено"))
+
+                            removePartner(partner.id).then((data) => {
+                                if (!isNaN(parseInt(data))){
+                                    (prevLogo !== null) && updateFileUsages(prevLogo, -1);
+                                    (prevJointProjectsPhotos !== null) && prevJointProjectsPhotos.forEach(photo => updateFileUsages(photo, -1));
+                                    document.location.reload()
+                                } else {
+                                    alert("Что-то пошло не так...");
+                                }
+                            })
                         }}>
                     Удалить программу
                 </Button>

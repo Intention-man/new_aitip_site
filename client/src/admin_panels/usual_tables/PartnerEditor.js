@@ -1,11 +1,7 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {observer} from "mobx-react-lite";
-import {useContext, useEffect, useState} from "react";
-import {Context} from "../../index";
-import CreateProgram from "./CreateProgram";
 import {fetchPartners} from "../../http/partnersAPI";
 import CreatePartner from "./CreatePartner";
-
 
 
 const PartnerEditor = observer(() => {

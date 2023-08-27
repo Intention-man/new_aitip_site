@@ -1,7 +1,7 @@
 // Frontend модального окна для добавления направления и функции, изменяющие состояния(установлено в модальном окне определенное значение или нет). Возможно, не будет использоваться.
 
 
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {observer} from "mobx-react-lite";
 import {
     createDirectionBachelor,
@@ -9,20 +9,15 @@ import {
     removeEntranceTest,
     updateDirectionBachelor
 } from "../../http/admissionAPI";
-import {Button, Col, Dropdown, FormControl, Modal, Row} from "react-bootstrap";
+import {Button, Col, Dropdown, FormControl, Row} from "react-bootstrap";
 import "../../css/page_styles/AdminPanel.css"
-import {useContext, useEffect} from "react";
-import {Context} from "../../index";
-import {updateFileUsages, selectFile} from "../../additional_commands/commonPanelsFunctions";
+import {updateFileUsages} from "../../additional_commands/commonPanelsFunctions";
 import FilesPicker from '../FilesPicker';
 
 
-
 const CreateDirection = observer(({direction, mode}) => {
-    const {block_store} = useContext(Context)
 
     const isEmpty = direction.hasOwnProperty("fakeParam");
-    // console.log(direction.tests)
 
     const [name, setName] = useState(isEmpty ? "" : direction.name)
     const [code, setCode] = useState(isEmpty ? "" : direction.code)
@@ -68,9 +63,6 @@ const CreateDirection = observer(({direction, mode}) => {
 
     const saveDirection = async () => {
         const formData = new FormData()
-        console.log(typeof tests)
-        console.log(tests)
-        console.log(mode)
         direction.id && formData.append("id", direction.id)
         formData.append("name", name)
         formData.append("code", code)
@@ -142,7 +134,7 @@ const CreateDirection = observer(({direction, mode}) => {
                     isImage={true}
                 />
             </div>
-            
+
             <Button className="button-admin" onClick={() => {
                 addTest()
             }}>
@@ -201,12 +193,21 @@ const CreateDirection = observer(({direction, mode}) => {
             }}>
                 Сохранить направление
             </Button>
-            <Button className="buttom-close" variant="outline-warning" onClick={() => window.location.reload()}>
+            <Button className="buttom-close" variant="outline-warning" onClick={() => document.location.reload()}>
                 Выйти без сохранения
             </Button>
             {mode === "edit" &&
                 <Button className="buttom-close" variant="outline-danger"
-                        onClick={() => removeDirectionBachelor(direction.id).then(() => alert("Успешно удалено"))}>
+                        onClick={() => removeDirectionBachelor(direction.id).then((data) => {
+                            if (!isNaN(parseInt(data))){
+                                alert("Успешно удалено");
+                                (prevFile !== null) && updateFileUsages(prevFile, -1)
+                                document.location.reload()
+                            } else {
+                                alert("Что-то пошло не так...");
+                            }
+
+                        })}>
                     Удалить направление
                 </Button>
             }

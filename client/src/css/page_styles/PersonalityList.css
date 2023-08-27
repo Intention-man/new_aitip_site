@@ -45,20 +45,20 @@
 }
 
 .big_avatar {
-    width: 200px;
+    /*max-width: 200px;*/
     height: 200px;
     padding: 10px;
     margin: auto;
 }
 
 .staffer_name {
-    font-size: var(--font_size_const);
+    font-size: var(--default_font_size);
     font-weight: bold;
     margin: 10px;
 }
 
 .general_desc {
-    font-size: calc(var(--font_size_const) * 0.85);
+    font-size: calc(var(--default_font_size) * 0.85);
     margin: 10px;
 }
 
@@ -114,7 +114,7 @@
     margin: 5px;
     background: var(--bgcolor);
     border-radius: 5px;
-    font-size: var(--font_size_const);
+    font-size: var(--default_font_size);
     text-align: justify;
 }
 
@@ -144,7 +144,7 @@
 }
 
 .small_button_list > button{
-    min-width: 0 !important;
+    min-width: 0;
     width: 120px;
     height: 60px;
     max-width: calc(50% - 36px);
@@ -154,6 +154,12 @@
     width: 100%;
     flex-wrap: wrap;
     padding: 10px;
+}
+
+.list_is_empty {
+    display: flex;
+    margin: 30% 0 10%;
+    font-weight: 600;
 }
 
 @media (max-width: 800px) {

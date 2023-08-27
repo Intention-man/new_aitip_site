@@ -8,14 +8,12 @@ import {observer} from "mobx-react-lite";
 import {createStaffer, removeStaffer, updateStaffer} from "../../http/staffAPI";
 import "../../css/page_styles/AdminPanel.css";
 import "../../css/component_styles/PersonalitiesFilter.css";
-import {updateFileUsages, selectFile} from "../../additional_commands/commonPanelsFunctions";
+import {updateFileUsages} from "../../additional_commands/commonPanelsFunctions";
 import FilesPicker from '../FilesPicker';
-
 
 
 const CreateStaff = observer(({staffer, mode}) => {
     const {admission_store} = useContext(Context)
-    const {block_store} = useContext(Context)
 
     const isEmpty = staffer.hasOwnProperty("fakeParam");
 
@@ -49,36 +47,44 @@ const CreateStaff = observer(({staffer, mode}) => {
             document.getElementById('email').value = email
             document.getElementById('phone_number').value = phoneNumber
             document.getElementById('adress').value = adress
+
+            !isEmpty && staffer.directions_bac && admission_store.directionsBachelor && admission_store.directionsBachelor.map(direction => {
+                document.getElementById(direction.id + "d").checked = (directionsBac && directionsBac.includes(direction.name));
+            })
+
+            !isEmpty && staffer.programs_add && admission_store.additionalPrograms && admission_store.additionalPrograms.map(program => {
+                document.getElementById(program.id + "p").checked = (programsAdd && programsAdd.includes(program.name));
+            })
+
         }
-    }, [])
+    }, [directionsBac, admission_store.directionsBachelor])
 
     useEffect(() => {
-        console.log(directionsBac)
-        console.log(programsAdd)
+        // console.log(directionsBac)
+        // console.log(programsAdd)
     }, [directionsBac, programsAdd]);
 
 
     const addDirection = (directionName) => {
         setDirectionsBac([...directionsBac, directionName])
-        console.log(directionsBac)
     }
 
     const removeDirection = (directionName) => {
         setDirectionsBac(directionsBac.filter(i => i !== directionName))
-        console.log(directionsBac)
+
     }
 
     const addProgram = (programName) => {
         setProgramsAdd([...programsAdd, programName])
-        console.log(programsAdd)
+
     }
 
     const removeProgram = (programName) => {
         setProgramsAdd(programsAdd.filter(i => i !== programName))
-        console.log(programsAdd)
+
     }
 
-     const saveStaffer = async () => {
+    const saveStaffer = async () => {
         const formData = new FormData()
         console.log(file)
         // Object.keys(formData).forEach(k => console.log(formData.getAll(k)))
@@ -151,7 +157,6 @@ const CreateStaff = observer(({staffer, mode}) => {
                     </div>
                 )}
             </div>
-
             <div>
                 <label htmlFor="bio_text" className="mini-info">Биография (текст)</label>
                 <textarea className="big-info" id="bio_text" onChange={e => setBio(e.target.value)}/>
@@ -196,9 +201,7 @@ const CreateStaff = observer(({staffer, mode}) => {
             </div>
 
 
-            <Button style={{marginTop: "5%", marginRight: "2%", marginBottom: "5%"}} variant="outline-danger">
-                Закрыть
-            </Button>
+
             <Button style={{marginTop: "5%", marginBottom: "5%"}} variant="outline-success" onClick={() => {
                 saveStaffer().then((bool) => {
                     (prevFile !== null) && updateFileUsages(prevFile, -1)
@@ -208,9 +211,19 @@ const CreateStaff = observer(({staffer, mode}) => {
             }}>
                 Сохранить сотрудника
             </Button>
+            <Button className="buttom-close" variant="outline-warning" onClick={() => document.location.reload()}>
+                Выйти без сохранения
+            </Button>
             {mode === "edit" &&
-                <Button style={{marginTop: "5%", marginBottom: "5%"}} variant="outline-success" onClick={() => {
-                    removeStaffer(staffer.id).then(() => alert("Сотрудник успешно удален"))
+                <Button style={{marginTop: "5%", marginBottom: "5%"}} variant="outline-danger" onClick={() => {
+                    removeStaffer(staffer.id).then((data) => {
+                        if (!isNaN(parseInt(data))){
+                            (prevFile !== null) && updateFileUsages(prevFile, -1);
+                            document.location.reload()
+                        } else {
+                            alert("Что-то пошло не так...");
+                        }
+                    })
                 }}>
                     Удалить сотрудника
                 </Button>}

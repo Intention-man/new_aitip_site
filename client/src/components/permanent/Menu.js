@@ -25,7 +25,6 @@ import BlindVersionSwitcher from './BlindVersionSwitcher';
 import {Context} from "../../index";
 
 
-
 function myFunction() {
 
     const x = document.getElementById("myTopnav");

@@ -63,6 +63,11 @@
     border-color: var(--aitip_red);
 }
 
+.StyledText-mdText thead {
+    max-width: 10%;
+}
+
+
 @media (max-width: 500px) {
     .StyledText-container {
         gap: 20px 0;

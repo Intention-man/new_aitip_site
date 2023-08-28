@@ -37,6 +37,7 @@ body {
     background-color: var(--bgcolor);
 }
 
+
 .rootContainer {
     background-color: var(--bgcolor);
     display: flex;

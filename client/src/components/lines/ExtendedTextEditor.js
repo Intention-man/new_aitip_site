@@ -19,8 +19,8 @@ const ExtendedTextEditor = ({text, setText, changeLine, index}) => {
             value={text}
             preview="edit"
             commands={[
-                commands.bold, 
-                commands.italic, 
+                commands.bold,
+                commands.italic,
                 commands.group(getTextColorCommands(),
                     {
                         name: 'textColor',
@@ -30,29 +30,29 @@ const ExtendedTextEditor = ({text, setText, changeLine, index}) => {
                             'title': 'Изменить цвет выделенного текста'
                         },
                         icon: (
-                            <img style={{width: '12px', height: '12px'}} src={ColorChangeIcon} />
+                            <img style={{width: '12px', height: '12px'}} src={ColorChangeIcon}/>
                         )
                     }
                 ),
-                commands.group([alignTextLeft, alignTextCenter, alignTextRight], 
+                commands.group([alignTextLeft, alignTextCenter, alignTextRight],
                     {
                         name: "textAlign",
-                        groupName: "textAlign",    
+                        groupName: "textAlign",
                         buttonProps: {
                             'aria-label': "Изменить выравнивание выделенного текста",
                             'title': "Изменить выравнивание выделенного текста"
                         },
                         icon: (
-                            <img style={{width: '12px', height: '12px'}} src={AlignLeftIcon} />
+                            <img style={{width: '12px', height: '12px'}} src={AlignLeftIcon}/>
                         )
                     }
                 ),
                 commands.divider,
-                commands.link, 
-                commands.quote, 
-                commands.orderedListCommand, 
-                commands.unorderedListCommand, 
-                commands.checkedListCommand, 
+                commands.link,
+                commands.quote,
+                commands.orderedListCommand,
+                commands.unorderedListCommand,
+                commands.checkedListCommand,
                 commands.hr,
             ]}
             extraCommands={[

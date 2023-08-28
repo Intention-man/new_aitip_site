@@ -24,6 +24,8 @@ export const INFO_EDU_ORG = "/sveden"
 export const LEGAL_CLINIC = "/legal_clinic"
 export const PAID_SERVICES = "/sveden/paid_services"
 export const PHOTO_GALLERY = "/photo_gallery"
+export const LIBRARY = "/library"
+
 export const SCIENCE = "/science"
 export const STRUCTURE = "/sveden/structure"
 export const SUPPORT_AND_EQUIPMENT = "/sveden/support_and_equipment"

@@ -11,7 +11,7 @@ import {
     HISTORY,
     INFO_EDU_ORG,
     INTERNATIONAL_ACT,
-    LEGAL_CLINIC,
+    LEGAL_CLINIC, LIBRARY,
     PARTNERS,
     PERSONALITIES_PAGE,
     SCIENCE,
@@ -82,6 +82,10 @@ const Menu = () => {
                 {
                     name: "Контакты",
                     link: CONTACTS,
+                },
+                {
+                    name: "Библиотека",
+                    link: LIBRARY,
                 },
             ]
         },

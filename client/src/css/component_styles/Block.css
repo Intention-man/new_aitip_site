@@ -2,6 +2,7 @@
     background-color: var(--aitip_white);
     border-radius: var(--default_border_radius);
     box-sizing: border-box;
+    display: grid;
 }
 
 .Block-header {
@@ -82,34 +83,25 @@
 
 /* Спец. стили для исчезающей картинки сверху и снизу для BigImg */
 .FadingImg-top-and-bottom {
-    /* Случай, когда картинка - между какими-то линиями в блоке. Тогда эффекты исчезновения и сверху, и снизу */
-    -webkit-mask:   linear-gradient(to top, transparent 25%, #fff 0% calc(100% - 25%), transparent 95%),
-    linear-gradient(to bottom, transparent 25%, #fff 0% calc(100% - 25%), transparent 95%);
-    mask:   linear-gradient(to top, transparent 25%, #fff 0% calc(100% - 25%), transparent 95%),
-    linear-gradient(to bottom, transparent 25%, #fff 0% calc(100% - 25%), transparent 95%);
-}
-
-.FadingImg-top-and-bottom:first-child {
-    /* Случай, когда картинка - первая линия. Тогда эффект исчезновения только снизу */
-    -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,0), rgba(0,0,0,1) 60%);
-    mask-image: linear-gradient(to top, rgba(0,0,0,0), rgba(0,0,0,1) 60%);
+    /* Дефолтный случай (картинка - первая линия или между линиями). Тогда эффекты исчезновения только снизу */
+    -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,0), rgba(0,0,0,1) 30%);
+    mask-image: linear-gradient(to top, rgba(0,0,0,0), rgba(0,0,0,1) 30%);
 }
 
 .FadingImg-top-and-bottom:last-child {
     /* Случай, когда картинка - последняя линия. Тогда эффект исчезновения только сверху */
-    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,1) 60%);
-    mask-image: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,1) 60%);
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,1) 30%);
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,1) 30%);
 }
 
 .FadingImg-right {
-    /* Случай, когда картинка - первая линия. Тогда эффект исчезновения только снизу */
-    -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,1) 60%);
-    mask-image: linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,1) 60%);
+    -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,1) 30%);
+    mask-image: linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,1) 30%);
 }
 
 .FadingImg-left {
-    -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,0), rgba(0,0,0,1) 60%);
-    mask-image: linear-gradient(to left, rgba(0,0,0,0), rgba(0,0,0,1) 60%);
+    -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,0), rgba(0,0,0,1) 30%);
+    mask-image: linear-gradient(to left, rgba(0,0,0,0), rgba(0,0,0,1) 30%);
 }
 
 .RoundedImg {
@@ -149,7 +141,8 @@
 
 .BigImg {
     /*height: 100%;*/
-    width: calc(100% - 60px);
+    width: calc(100% - 120px);
+    justify-self: center;
     min-height: 50%;
     min-width: 50%;
     object-fit: contain;
@@ -167,16 +160,15 @@
 }
 
 @media (max-width: 600px) {
-    .Card-left {
+    .Card-left, .Card-right {
         flex-direction: column;
-    }
-
-    .Card-right {
-        flex-direction: column;
+        margin: 0 clamp(20px, 100vw / 19.2, 100px);
     }
 
     .Card-image-left, .Card-image-right {
+        margin-top: 20px;
         width: 100%;
+        max-width: 100%;
     }
 
     .Card-body-left {
@@ -187,17 +179,21 @@
         width: 100%;
     }
 
-    .FadingImg-right {
-        -webkit-mask:   linear-gradient(to top, transparent 25%, #fff 0% calc(100% - 25%), transparent 95%),
-        linear-gradient(to bottom, transparent 25%, #fff 0% calc(100% - 25%), transparent 95%);
-        mask:   linear-gradient(to top, transparent 25%, #fff 0% calc(100% - 25%), transparent 95%),
-        linear-gradient(to bottom, transparent 25%, #fff 0% calc(100% - 25%), transparent 95%);
+    .BigImg {
+        width: 100%;
     }
 
+    .FadingImg-right {
+        -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,0), rgba(0,0,0,1) 30%);
+        mask-image: linear-gradient(to top, rgba(0,0,0,0), rgba(0,0,0,1) 30%);
+    }
+    
     .FadingImg-left {
-        -webkit-mask:   linear-gradient(to top, transparent 25%, #fff 0% calc(100% - 25%), transparent 95%),
-        linear-gradient(to bottom, transparent 25%, #fff 0% calc(100% - 25%), transparent 95%);
-        mask:   linear-gradient(to top, transparent 25%, #fff 0% calc(100% - 25%), transparent 95%),
-        linear-gradient(to bottom, transparent 25%, #fff 0% calc(100% - 25%), transparent 95%);
+        -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,0), rgba(0,0,0,1) 30%);
+        mask-image: linear-gradient(to top, rgba(0,0,0,0), rgba(0,0,0,1) 30%);
+    }
+    
+    .Card img {
+        border-radius: var(--default_border_radius) !important;
     }
 }

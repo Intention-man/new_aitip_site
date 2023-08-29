@@ -6,7 +6,7 @@ import {
     ADMISSION_BAC,
     ARTICLE,
     AUTH,
-    AVAILABLE_ENVIRONMENT,
+    AVAILABLE_ENVIRONMENT, COMMON_INFO,
     CONTACTS,
     COUNTERING,
     DOCUMENTS,
@@ -15,15 +15,15 @@ import {
     HISTORY,
     INFO_EDU_ORG,
     INTERNATIONAL_ACT,
-    LEGAL_CLINIC,
+    LEGAL_CLINIC, LIBRARY,
     MAIN_ROUTE,
     NEWS,
     PAID_SERVICES,
     PARTNERS,
     PERSONALITIES_PAGE,
-    PHOTO_GALLERY,
+    PHOTO_GALLERY, SCHOLARSHIPS_AND_OTHER_SUPPORT,
     SCIENCE,
-    STAFF,
+    STAFF, STANDARDS_AND_REQUIREMENTS,
     STRUCTURE,
     STUDENTS,
     SUPERADMIN,
@@ -63,7 +63,7 @@ export const publicRoutes = [
         name: "Поступление - Дополнительное профессиональное образование"
     },
     {
-        path: INTERNATIONAL_ACT ,
+        path: INTERNATIONAL_ACT,
         Component: <InternationalCooperation/>,
         name: "Международное сотрудничество"
     },
@@ -99,20 +99,52 @@ export const publicRoutes = [
     },
 
 
+    // Конструкторские страницы
+
     {
-        path: AVAILABLE_ENVIRONMENT,
+        path: HISTORY,
         Component: <UsualPage/>,
-        name: "Доступная среда"
+        name: "История"
     },
     {
-        path: CONTACTS,
+        path: LEGAL_CLINIC,
         Component: <UsualPage/>,
-        name: "Контакты"
+        name: "Юридическая клиника"
     },
     {
-        path: COUNTERING,
+        path: SCIENCE,
         Component: <UsualPage/>,
-        name: "Противодействие угрозам"
+        name: "Наука"
+    },
+    {
+        path: PHOTO_GALLERY,
+        Component: <UsualPage/>,
+        name: "Фотогалерея"
+    },
+    {
+        path: LIBRARY,
+        Component: <UsualPage/>,
+        name: "Библиотека"
+    },
+
+
+    // Сведения об образовательной организации
+
+    {
+        path: INFO_EDU_ORG,
+        Component: <UsualPage/>,
+        name: "Сведения об образовательной организации"
+    },
+
+    {
+        path: COMMON_INFO,
+        Component: <UsualPage/>,
+        name: "Основные сведения"
+    },
+    {
+        path: STRUCTURE,
+        Component: <UsualPage/>,
+        name: "Структура и органы управления образовательной организацией"
     },
     {
         path: DOCUMENTS,
@@ -125,45 +157,9 @@ export const publicRoutes = [
         name: "Образование"
     },
     {
-        path: FINANCIAL_ACTIVITY,
+        path: STANDARDS_AND_REQUIREMENTS,
         Component: <UsualPage/>,
-        name: "Финансово-хозяйственная деятельность"
-    },
-    {
-        path: HISTORY,
-        Component: <UsualPage/>,
-        name: "История"
-    },
-    {
-        path: INFO_EDU_ORG,
-        Component: <UsualPage/>,
-        name: "Сведения об образовательной организации"
-    },
-
-    {
-        path: LEGAL_CLINIC,
-        Component: <UsualPage/>,
-        name: "Юридическая клиника"
-    },
-    {
-        path: PAID_SERVICES,
-        Component: <UsualPage/>,
-        name: "Платные образовательные услуги"
-    },
-    {
-        path: PHOTO_GALLERY,
-        Component: <UsualPage/>,
-        name: "Фотогалерея"
-    },
-    {
-        path: SCIENCE,
-        Component: <UsualPage/>,
-        name: "Наука"
-    },
-    {
-        path: STRUCTURE,
-        Component: <UsualPage/>,
-        name: "Структура"
+        name: "Образовательные стандарты и требования"
     },
     {
         path: SUPPORT_AND_EQUIPMENT,
@@ -171,10 +167,43 @@ export const publicRoutes = [
         name: "Материально-техническое обеспечение и оснащенность образовательного процесса"
     },
     {
+        path: SCHOLARSHIPS_AND_OTHER_SUPPORT,
+        Component: <UsualPage/>,
+        name: "Стипендии и иные виды материальной поддержки"
+    },
+    {
+        path: PAID_SERVICES,
+        Component: <UsualPage/>,
+        name: "Платные образовательные услуги"
+    },
+    {
+        path: FINANCIAL_ACTIVITY,
+        Component: <UsualPage/>,
+        name: "Финансово-хозяйственная деятельность"
+    },
+    {
         path: VACANT_PLACES,
         Component: <UsualPage/>,
         name: "Вакантные места для приема (перевода) обучающихся"
     },
+    {
+        path: AVAILABLE_ENVIRONMENT,
+        Component: <UsualPage/>,
+        name: "Доступная среда"
+    },
+
+
+    {
+        path: CONTACTS,
+        Component: <UsualPage/>,
+        name: "Контакты"
+    },
+    {
+        path: COUNTERING,
+        Component: <UsualPage/>,
+        name: "Противодействие угрозам"
+    },
+
     {
         path: WORKING_PROGRAMS,
         Component: <UsualPage/>,
@@ -184,7 +213,7 @@ export const publicRoutes = [
 
     {
         path: AUTH,
-        Component: <Auth/>, 
+        Component: <Auth/>,
         name: "Авторизация"
     },
 ]

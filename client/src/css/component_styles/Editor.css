@@ -1,11 +1,10 @@
-.w-md-editor-text-pre > code,
-.w-md-editor-text-input {
+.w-md-editor-text-pre > code, .w-md-editor-text-input {
     font-size: 18px !important;
     line-height: 20px !important;
 }
 
 
-.im  {
+.im {
     border-style: none;
     width: 200px;
     height: 200px;
@@ -150,7 +149,7 @@ input[type="text"]{
     font-size: var(--default_font_size);
 }
 
-.line_type img{
+.line_type img {
     width: 25px;
     height: 25px;
     border-radius: 0;

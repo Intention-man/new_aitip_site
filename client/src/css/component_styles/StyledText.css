@@ -63,9 +63,42 @@
     border-color: var(--aitip_red);
 }
 
+.StyledText-mdText table {
+    font-size: calc(10 * 0.05vw + 4px);
+    /*width: 100%;*/
+    margin-left: calc(-15px - 1vw);
+}
+
+.StyledText-mdText table th{
+    padding: 0.3vh 0.15vw;
+}
+
+.StyledText-mdText table tr {
+    width: content-box;
+}
+
+.StyledText-mdText table td{
+    padding: 0.01vw;
+    text-align: center;
+}
+
+
 @media (max-width: 500px) {
     .StyledText-container {
         gap: 20px 0;
         grid-auto-flow: row;
     }
 }
+
+@media (max-width: 1300px) {
+    .StyledText-mdText table {
+        font-size: calc(10 * 0.02vw + 7px);
+    }
+}
+
+@media (max-width: 700px) {
+    .StyledText-mdText table {
+        font-size: calc(30 * 0.025vw);
+    }
+}
+

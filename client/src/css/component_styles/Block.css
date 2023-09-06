@@ -1,24 +1,26 @@
 .Block {
+    display: flex;
+    flex-direction: column;
     background-color: var(--aitip_white);
     border-radius: var(--default_border_radius);
     box-sizing: border-box;
+    margin-bottom: 30px;
+    padding-top: 60px;
+    /*padding-bottom: 30px;*/
 }
 
 .Block-header {
     text-align: center;
-    margin: 0 clamp(20px, 100vw / 19.2, 100px);
-    padding-top: clamp(10px, 100vh / 18, 40px);
+    /*margin-top: clamp(100vh/18, 60px, 60px);*/
+    margin-bottom: 40px;
     font-size: var(--heading_font_size);
     font-weight: 700;
 }
 
-.Block > .StyledText-container {  /* Стили для дочерних линий текста в блоке  */
-    margin: clamp(10px, 100vh / 18, 40px) clamp(10px, 100vw / 19.2 - 10px, 80px) 0 clamp(10px, 100vw / 19.2 - 10px, 80px);
+.Block > *:not(:last-child) {
+    margin-bottom: 40px;
 }
 
-.Block:not(:last-child) {
-    margin: 0 0 30px 0;
-}
 
 .BlockContainer {
     padding: 30px 20px 30px 20px;
@@ -32,23 +34,16 @@
     background-color: var(--aitip_white);
     border-radius: var(--default_border_radius);
     justify-content: space-between;
-    margin-top: clamp(10px, 100vh / 18, 40px);
-    column-gap: clamp(20px, 100vw / 30, 60px);
 }
-
-.Card:last-child {
-    padding-bottom: clamp(15px, 100vh / 12, 60px);
-}
-
 
 .Card-left {
     flex-direction: row;
-    margin-right: clamp(20px, 100vw / 19.2, 100px);
+    margin-right: clamp(10px, 3vw, 40px);
 }
 
 .Card-right {
     flex-direction: row-reverse;
-    margin-left: clamp(20px, 100vw / 19.2, 100px);
+    margin-left: clamp(10px, 3vw, 40px);
 }
 
 .Card-image img {
@@ -60,7 +55,8 @@
 }
 
 .Card-image-left, .Card-image-right {
-    max-width: 50%;
+    max-width: 40%;
+    min-width: 30%;
     width: 100%;
     display: flex;
 }
@@ -70,14 +66,16 @@
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
+    min-width: 60%;
 }
 
 .Card-body-left .StyledText-container {
-    margin-left: clamp(20px, 100vw / 30, 100px);
+    /*margin-left: clamp(10px, 1vw, 50px);*/
 }
 
 .Card-body-left, .Card-body-right {
-    width: 60%;
+    /*min-width: 60%;*/
+    margin: 0;
 }
 
 /* Спец. стили для исчезающей картинки сверху и снизу для BigImg */
@@ -124,22 +122,22 @@
 }
 
 .Card-image > .RoundedImg > .RoundedImg-img {
-    height: 280px;
-    width: 280px;
+    height: clamp(15vw, 250px, 30vw);
+    width: clamp(15vw, 250px, 30vw);
 }
 
 .Card-image-left > :not(.FadingImg-left, .FadingImg-right) {
-    margin-left: clamp(20px, 100vw / 19.2, 100px);
+    /*margin-left: clamp(20px, 100vw / 19.2, 100px);*/
 }
 
 .Card-image-right > :not(.FadingImg-left, .FadingImg-right) {
-    margin-right: clamp(20px, 100vw / 19.2, 100px);
+    /*margin-right: clamp(20px, 100vw / 19.2, 100px);*/
     max-width: calc(100% - clamp(20px, 100vw / 19.2, 100px));
 }
 
 .Card-image-rounded > .RoundedImg {
-    height: 280px;
-    width: 280px;
+    height: clamp(15vw, 250px, 30vw);
+    width: clamp(15vw, 250px, 30vw);
     padding: 0;
 }
 
@@ -148,35 +146,33 @@
 }
 
 .BigImg {
-    /*height: 100%;*/
-    width: calc(100% - 60px);
+    width: 100%;
     min-height: 50%;
     min-width: 50%;
     object-fit: contain;
     border-radius: var(--default_border_radius);
+    margin: auto;
 }
 
 .BigImg:not(.FadingImg-top-and-bottom, .slideshow-container){
-    margin: clamp(10px, 100vh / 18, 40px) clamp(20px, 100vw / 19.2, 100px) 0 clamp(20px, 100vw / 19.2, 100px);
-    width: calc(100% - clamp(20px, 100vw / 19.2, 100px) * 2);
+    /*width: calc(100% - clamp(20px, 100vw / 19.2, 100px) * 2);*/
     max-height: 90vh;
 }
 
-.BigImg:last-child:not(.FadingImg-top-and-bottom) {
-    padding-bottom: clamp(15px, 100vh / 12, 60px);
-}
 
-@media (max-width: 600px) {
-    .Card-left {
+@media (max-width: 1000px)  {
+    .Card-left, .Card-right {
         flex-direction: column;
-    }
-
-    .Card-right {
-        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 
     .Card-image-left, .Card-image-right {
         width: 100%;
+    }
+
+    .Card-image-left > :not(.FadingImg-left, .FadingImg-right) {
+        margin: auto;
     }
 
     .Card-body-left {
@@ -187,17 +183,42 @@
         width: 100%;
     }
 
-    .FadingImg-right {
-        -webkit-mask:   linear-gradient(to top, transparent 25%, #fff 0% calc(100% - 25%), transparent 95%),
-        linear-gradient(to bottom, transparent 25%, #fff 0% calc(100% - 25%), transparent 95%);
-        mask:   linear-gradient(to top, transparent 25%, #fff 0% calc(100% - 25%), transparent 95%),
-        linear-gradient(to bottom, transparent 25%, #fff 0% calc(100% - 25%), transparent 95%);
+    .FadingImg-left, .FadingImg-right {
+        -webkit-mask-image: unset;
+        mask-image: unset;
+        width: 100%;
+    }
+}
+
+@media (max-width: 1400px) and (min-width: 1157px) {
+    .Card-left, .Card-right {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-left: unset;
+        margin-right: unset;
     }
 
-    .FadingImg-left {
-        -webkit-mask:   linear-gradient(to top, transparent 25%, #fff 0% calc(100% - 25%), transparent 95%),
-        linear-gradient(to bottom, transparent 25%, #fff 0% calc(100% - 25%), transparent 95%);
-        mask:   linear-gradient(to top, transparent 25%, #fff 0% calc(100% - 25%), transparent 95%),
-        linear-gradient(to bottom, transparent 25%, #fff 0% calc(100% - 25%), transparent 95%);
+    .Card-image-left, .Card-image-right {
+        width: 100%;
+    }
+
+    .Card-image-left > :not(.FadingImg-left, .FadingImg-right) {
+        margin: auto;
+    }
+
+    .Card-body-left {
+        width: 100%;
+    }
+
+    .Card-body-right {
+        width: 100%;
+    }
+
+    .FadingImg-left, .FadingImg-right {
+        -webkit-mask-image: unset;
+        mask-image: unset;
+        width: 100%;
+        height: unset;
     }
 }

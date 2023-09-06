@@ -44,10 +44,10 @@
     background-color: var(--bgcolor);
 }
 
-.direction_inner_card .Card-body-right, .direction_inner_card .Card-body{
-    margin: 0;
-    padding: 0;
-}
+/*.direction_inner_card .Card-body-right, .direction_inner_card .Card-body{*/
+/*    margin: 0;*/
+/*    padding: 0;*/
+/*}*/
 
 .admission-bac-content2 .Card-body .direction_inner_card :is(h1, h3) {
     margin: 20px 0;
@@ -70,8 +70,10 @@ h1, h3{
 .extended_description {
     -ms-hyphens: auto;
     display: flex;
-    margin: 30px clamp(20px, 100vw / 24, 80px);
-    padding: 5px 20px;
+    /*margin: 30px clamp(20px, 100vw / 24, 80px);*/
+    /*padding: 5px 20px;*/
+    padding: 10px 10px;
+    margin: 10px 20px;
     border-radius: 10px;
     background: var(--bgcolor);
     justify-content: center;
@@ -165,6 +167,7 @@ h1, h3{
 
 .cost_price {
     text-align: center;
+    font-weight: 600;
 }
 
 .Card-body .cost{

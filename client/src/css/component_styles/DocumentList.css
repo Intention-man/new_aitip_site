@@ -1,18 +1,20 @@
 .main_list{
-    margin-top: 10px;
+    /*margin-top: 10px;*/
     box-sizing: border-box;
-    font-family: Verdana,
-    sans-serif;
+    font-family: Verdana, sans-serif;
     font-size: calc(var(--default_font_size)*1.5);
     background-color: white;
     border-radius: 10px;
     text-align: center;
-    width: 100%;
+    width: calc(100% - 2 * var(--default_side_margin));
+    padding: 10px 20px;
+    /*margin: 0 -20px;*/
 }
 
-.inner_block{
-    margin: 7px;
-}
+/*.inner_block{*/
+/*    margin: 7px;*/
+/*}*/
+
 .doc_block{
     display: flex;
     flex-wrap: nowrap;

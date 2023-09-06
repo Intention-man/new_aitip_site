@@ -1,5 +1,6 @@
 import MDEditor from '@uiw/react-md-editor';
 import "../../css/component_styles/StyledText.css"
+import "../../css/component_styles/Block.css"
 
 
 /**

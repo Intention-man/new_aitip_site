@@ -28,6 +28,7 @@ import "../../css/component_styles/Block.css";
  * @param {"left" | "right"} imgPos - позиция изображения в карточке (top, right, bottom, left, none). imgPos="none" указывает на отсутствие изображения.
  * @param {"fading" | "rounded" | "normal"} imgType - тип изображения: fading - исчезающее, rounded - круглое, normal - без эффектов.
 */
+
 class Card extends React.Component {
     // Значени пропов по умолчанию (если они не были переданы)
     static defaultProps = {
@@ -57,7 +58,7 @@ class Card extends React.Component {
                                         imgSrc={this.props.imgSrc}
                                     />,
                         'normal':   <img
-                                        src={this.props.imgSrc} style={{borderRadius: "var(--default_border_radius)"}}
+                                        src={this.props.imgSrc} style={{borderRadius: "var(--default_border_radius)"}} align={this.props.imgPos}
                                     />,
                     }[this.props.imgType]
                 }

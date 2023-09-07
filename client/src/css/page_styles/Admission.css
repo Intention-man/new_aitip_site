@@ -70,8 +70,8 @@ h1, h3{
 .extended_description {
     -ms-hyphens: auto;
     display: flex;
-    padding: 10px 10px;
-    margin: 10px 20px;
+    margin: 30px clamp(20px, 100vw / 24, 80px);
+    padding: 5px 20px;
     border-radius: 10px;
     background: var(--bgcolor);
     justify-content: center;

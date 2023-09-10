@@ -214,21 +214,16 @@ li > span.list_element_header{
     height: auto;
 }
 
-.adm_add, .postuplenie{
+.adm_bac{
+    grid-column: span 2;
+}
+
+.adm_add, .postuplenie, .adm_bac{
     background-color: #9fb7e6;
 }
 
-.adm_add.active, .postuplenie.active{
+.adm_add.active, .postuplenie.active, .adm_bac.active{
     background: #4081ff;
-}
-
-.adm_bac{
-    grid-column: span 2;
-    background-color: #497ad8;
-}
-
-.adm_bac.active{
-    background-color: #236cff;
 }
 
 .science, .partners{

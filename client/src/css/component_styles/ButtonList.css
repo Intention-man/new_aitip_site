@@ -37,3 +37,7 @@
     background: #FFFFFF;
     font-weight: bold;
 }
+
+.button_list > button.stretch{
+    width: 100%;
+}

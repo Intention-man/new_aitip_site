@@ -35,7 +35,7 @@ const AdmissionAddContent2 = observer(() => {
                 По результатам итоговой аттестации выдается диплом о профессиональной переподготовке
                 Образовательного учреждения профсоюзов высшего образования "Академия труда и социальных
                 отношений", г. Москва.</p>
-            <ButtonList buttonList={admission_store.additionalPrograms.filter(program => program.kind === "Программа профессиональной переподготовки").map(e => e.name)} setChosenValue={setChosenRetrainingProgramName}/>
+            <ButtonList buttonList={admission_store.additionalPrograms.filter(program => program.kind === "Программа профессиональной переподготовки").map(e => e.name)} setChosenValue={setChosenRetrainingProgramName} isStretchLastButton={true}/>
 
             {chosenRetrainingProgram.hasOwnProperty("name") &&
                 <Card
@@ -128,7 +128,7 @@ const AdmissionAddContent3 = observer(() => {
             <p className="extended_description">Совершенствование И получение новой
                 компетенции, необходимой профессиональной деятельности, a также повышение профессионального уровня B рамках имеющейся квалификации. Продолжительность курсов повышения квалификации от 16 часов.
                 По результатам итоговой аттестации выдается диплом 0 повышении квалификации Образовательного учреждения профсоюзов высшего образования "Академия труда и социальных отношений", г. Москва.</p>
-            <ButtonList buttonList={admission_store.additionalPrograms.filter(program => program.kind === "Программа повышения квалификации").map(e => e.name)} setChosenValue={setChosenDevelopmentProgramName}/>
+            <ButtonList buttonList={admission_store.additionalPrograms.filter(program => program.kind === "Программа повышения квалификации").map(e => e.name)} setChosenValue={setChosenDevelopmentProgramName} isStretchLastButton={true}/>
             {chosenDevelopmentProgram.hasOwnProperty("name") &&
                 <Card
                     width={12}

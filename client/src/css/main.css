@@ -105,7 +105,10 @@ body {
     grid-template-columns: repeat(7, 1fr);
     grid-template-rows: auto auto;
     gap: calc(10px + 0.005%);
-    margin-bottom: 20px;
+    margin-top: 20px;
+    padding: 20px 0;
+    background: #eeeeee;
+    color: white;
 }
 
 .know_more_about > * {
@@ -185,6 +188,10 @@ li > span.list_element_header{
     margin-bottom: 0;
 }
 
+.know_more_about .active {
+    font-weight: bold;
+}
+
 .know_more_about_block .extended_description{
     margin: 0 clamp(20px, 100vw / 24, 80px);
 }
@@ -205,7 +212,14 @@ li > span.list_element_header{
     grid-row: span 2;
     grid-column: span 2;
     height: auto;
+}
+
+.adm_add, .postuplenie{
     background-color: #9fb7e6;
+}
+
+.adm_add.active, .postuplenie.active{
+    background: #4081ff;
 }
 
 .adm_bac{
@@ -213,9 +227,28 @@ li > span.list_element_header{
     background-color: #497ad8;
 }
 
-.science{
+.adm_bac.active{
+    background-color: #236cff;
+}
+
+.science, .partners{
     background-color: #e6b09f;
 }
+
+.science.active, .partners.active{
+    background: #d86b49;
+}
+
+.history, .teachers{
+    color: #929396;
+}
+
+.history.active, .teachers.active{
+    background: darkgray;
+    color: white;
+}
+
+
 
 .news_container{
     display: flex;

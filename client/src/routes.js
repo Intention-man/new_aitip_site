@@ -15,7 +15,7 @@ import {
     HISTORY,
     INFO_EDU_ORG,
     INTERNATIONAL_ACT,
-    LEGAL_CLINIC,
+    LEGAL_CLINIC, LIBRARY,
     MAIN_ROUTE,
     NEWS,
     PAID_SERVICES,
@@ -112,14 +112,19 @@ export const publicRoutes = [
         name: "Юридическая клиника"
     },
     {
+        path: SCIENCE,
+        Component: <UsualPage/>,
+        name: "Наука"
+    },
+    {
         path: PHOTO_GALLERY,
         Component: <UsualPage/>,
         name: "Фотогалерея"
     },
     {
-        path: SCIENCE,
+        path: LIBRARY,
         Component: <UsualPage/>,
-        name: "Наука"
+        name: "Библиотека"
     },
 
 

@@ -72,7 +72,7 @@ const BlindVersionSwitcher = () => {
             Версия для слабовидящих
             <img
                 src={EyeIcon}
-                style={{color: "white", paddingLeft: "10px", paddingTop: "12px"}}
+                style={{color: "white", paddingLeft: "0px", paddingTop: "8px"}}
             />
         </button>
     );

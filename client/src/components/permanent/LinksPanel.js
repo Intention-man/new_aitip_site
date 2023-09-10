@@ -2,19 +2,19 @@ import React from "react";
 import './../../css/component_styles/SideBar.css';
 import ArrowUpIcon from '../../local_assets/icons/arrow-up.svg';
 
-/** 
+/**
  * Компонент списка ссылок на блоки текущей страницы.
- * Используется в `App.js`. 
- * 
+ * Используется в `App.js`.
+ *
  * Props:
- * @param {Array} links - массив из объектов, содержащих DOM-ноды блоков страницы, чтобы ссылаться на них.  
-*/
+ * @param {Array} links - массив из объектов, содержащих DOM-ноды блоков страницы, чтобы ссылаться на них.
+ */
 class LinksPanel extends React.Component {
     // Значени пропов по умолчанию (если они не были переданы)
     static defaultProps = {
         links: [],
     }
-    
+
     constructor(props) {
         super(props);
 
@@ -24,8 +24,8 @@ class LinksPanel extends React.Component {
 
         this.updateActiveBlocks = this.updateActiveBlocks.bind(this);
         this.navigateToBlock = this.navigateToBlock.bind(this);
-    }    
-    
+    }
+
 
     /**
      * Метод для обновления активных блоков
@@ -93,28 +93,35 @@ class LinksPanel extends React.Component {
 
         return (
             <>
-            <div className="LinksPanel-linksContainer">
-                {
-                    this.props.links.map(x => 
-                        <a 
-                            id={x.id}
-                            key={x.id}
-                            className={`LinksPanel-link 
-                                        ${this.state.activeBlocks.includes(`${x.id}`) ? "LinksPanel-linkActive" : "LinksPanel-linkStill"}`} 
-                            href=""
-                            onClick={this.navigateToBlock}
-                            title={x.name}  /* Специальный аттрибут, содержащий текст. 
+                {this.props.links.length > 0 &&
+                    <>
+                        <div className="LinksPanel-linksContainer">
+                            {
+                                this.props.links.map(x =>
+                                    <a
+                                        id={x.id}
+                                        key={x.id}
+                                        className={`LinksPanel-link 
+                                        ${this.state.activeBlocks.includes(`${x.id}`) ? "LinksPanel-linkActive" : "LinksPanel-linkStill"}`}
+                                        href=""
+                                        onClick={this.navigateToBlock}
+                                        title={x.name}  /* Специальный аттрибут, содержащий текст.
                                                Нужен для костыля в CSS, исправляющего ненужное изменение размеров, когда текст в ссылке становится жирным. */
-                        >
-                            {x.name}
+                                    >
+                                        {x.name}
+                                    </a>
+                                )
+                            }
+                        </div>
+
+                        <a className="LinksPanel-goTopBtn" onClick={this.goTop} href="">
+                            <span className="LinksPanel-goTopBtn-text">Наверх</span>
+                            <img className="LinksPanel-goTopBtn-icon" src={ArrowUpIcon}/>
                         </a>
-                    )
+
+                    </>
+
                 }
-            </div>
-            <a className="LinksPanel-goTopBtn" onClick={this.goTop} href="">
-                <span className="LinksPanel-goTopBtn-text">Наверх</span>
-                <img className="LinksPanel-goTopBtn-icon" src={ArrowUpIcon}/>
-            </a>
             </>
         );
     }

@@ -11,7 +11,7 @@ import {
     HISTORY,
     INFO_EDU_ORG,
     INTERNATIONAL_ACT,
-    LEGAL_CLINIC,
+    LEGAL_CLINIC, LIBRARY,
     PARTNERS,
     PERSONALITIES_PAGE,
     SCIENCE,
@@ -23,7 +23,6 @@ import SearchOutputWindow from "./SearchOutputWindow";
 import {useNavigate} from "react-router";
 import BlindVersionSwitcher from './BlindVersionSwitcher';
 import {Context} from "../../index";
-
 
 
 function myFunction() {
@@ -83,6 +82,10 @@ const Menu = () => {
                 {
                     name: "Контакты",
                     link: CONTACTS,
+                },
+                {
+                    name: "Библиотека",
+                    link: LIBRARY,
                 },
             ]
         },

@@ -7,7 +7,7 @@ import {Context} from "../../index";
 import {observer} from "mobx-react-lite";
 import {createStaffer, removeStaffer, updateStaffer} from "../../http/staffAPI";
 import "../../css/page_styles/AdminPanel.css";
-import "../../css/component_styles/PersonalitiesFilter.css";
+import "../../css/page_styles/Personalities.css";
 import {updateFileUsages} from "../../additional_commands/commonPanelsFunctions";
 import FilesPicker from '../FilesPicker';
 

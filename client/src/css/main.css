@@ -104,7 +104,7 @@ body {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     grid-template-rows: auto auto;
-    gap: 20px;
+    gap: calc(10px + 0.005%);
     margin-bottom: 20px;
 }
 
@@ -112,19 +112,21 @@ body {
     /*width: 50px;*/
     height: 150px;
     text-align: center;
+    justify-content: center;
+    align-items: center;
     display: flex;
-    color: #FFF;
+
     border-radius: var(--default_border_radius);
     background: #FFF;
-    cursor: pointer;
-    text-decoration: none;
 }
 
 .know_more_about > *  p{
     margin: auto !important;
+    color: #FFF;
     font-size: var(--default_font_size);
     font-weight: bold;
-    color: #FFF;
+    cursor: pointer;
+    text-decoration: none;
 }
 
 li > span.list_element_header{
@@ -158,12 +160,6 @@ li > span.list_element_header{
 
 .bachelor{
     margin-top: 10px;
-    padding: 0 clamp(20px, 100vw / 19.2, 100px);
-}
-
-.bachelor ul{
-    padding-left: 0;
-    width: 72%;
 }
 
 .bachelor li{
@@ -244,14 +240,6 @@ li > span.list_element_header{
     height: 16vw;
 }
 
-.news_date {
-    margin: 0 30px;
-    padding-bottom: 30px;
-    bottom: 30px;
-    text-align: right;
-    font-weight: 700;
-    color: var(--aitip_red);
-}
 .admission_info_commission{
     display: grid;
     gap: 20px;
@@ -261,7 +249,7 @@ li > span.list_element_header{
 }
 
 .admission_info_commission > div > p:first-child {
-    font-size: calc(var(--font_size_const) * 1.2);
+    font-size: calc(var(--default_font_size) * 1.2);
     font-weight: bold;
 }
 
@@ -279,6 +267,25 @@ li > span.list_element_header{
     background-size: 50% 42%;
 }
 
+
+.mySlides{
+    margin: 0 -5%;
+    width: 100%;
+}
+.prev, .next {
+    position: relative;
+}
+.news_date {
+    margin: 0 30px;
+    padding-bottom: 30px;
+    bottom: 30px;
+    text-align: right;
+    font-weight: 700;
+    color: var(--aitip_red);
+}
+.slideshow-container{
+    padding: 0;
+}
 /*------------------------*/
 
 @media (max-width: 1600px) {
@@ -335,6 +342,9 @@ li > span.list_element_header{
 
 @media (max-width: 500px) {
     .entrance_exams_points{
+        grid-template-columns: 1fr;
+    }
+    .admission_info_commission{
         grid-template-columns: 1fr;
     }
 }

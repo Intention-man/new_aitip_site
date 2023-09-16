@@ -31,6 +31,7 @@ h2, h3 {
 
 p {
     white-space: pre-wrap;
+    text-wrap: balance;
     /*text-indent: 30px;*/
 }
 

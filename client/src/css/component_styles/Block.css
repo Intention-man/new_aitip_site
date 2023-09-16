@@ -57,7 +57,7 @@
     height: 100%;
     align-self: flex-end;
     border-radius: var(--default_border_radius);
-    object-fit: cover;
+    object-fit: contain;
 }
 
 .Card-image-left, .Card-image-right {

@@ -10,6 +10,7 @@
     --document_icon_size: 40px;
     --default_border_radius: 10px;
     --default_border_width: 1px;
+    --default_side_margin: 1vw;
     font-family: "Open Sans", sans-serif;
 }
 
@@ -30,6 +31,7 @@ h2, h3 {
 
 p {
     white-space: pre-wrap;
+    text-wrap: balance;
     /*text-indent: 30px;*/
 }
 

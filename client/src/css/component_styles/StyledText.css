@@ -1,12 +1,20 @@
 .StyledText-container {
     display: grid;
-    gap: 0 20px;
+    /*gap: 0 20px;*/
     grid-auto-columns: minmax(0, 1fr);
     grid-auto-flow: column;
-    padding: calc(30px + 0.01vw);
+    padding: calc(clamp(10px, calc(10px + 0.01vw), 50px) * 2) clamp(10px, calc(10px + 0.01vw), 50px) ;
+    width: calc(100% - 60px);
+    margin: auto;
+}
+
+.Card-body > .StyledText-container {
+    padding: unset;
+    margin: auto 0;
 }
 
 .StyledText-column {
+    margin: 0 clamp(5px, 0.5vw, 20px);
     padding-bottom: 1px;
     word-wrap: normal;
 }
@@ -21,7 +29,7 @@
 }
 
 .StyledText-container:last-child {
-    padding-bottom: clamp(10px, 100vh / 12, 60px);
+    padding-bottom: clamp(10px, 100vh / 20, 40px);
 }
 
 .StyledText-mdText h1  {
@@ -40,10 +48,11 @@
 
 .StyledText-mdText-bg {
     padding: 10px 20px;
+    margin: 0 -20px;
 }
 
 .StyledText-mdText-bg-grey {
-    padding: 26px 20px;
+    /*padding: 26px 20px;*/
     background-color: var(--aitip_bg_grey);
 }
 

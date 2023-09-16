@@ -1,20 +1,24 @@
 .Block {
+    display: flex;
+    flex-direction: column;
     background-color: var(--aitip_white);
     border-radius: var(--default_border_radius);
     box-sizing: border-box;
-    display: grid;
+    margin-bottom: 30px;
+    padding-top: 60px;
+    /*padding-bottom: 30px;*/
 }
 
 .Block-header {
     text-align: center;
-    margin: 0 clamp(20px, 100vw / 19.2, 100px);
-    padding-top: clamp(10px, 100vh / 18, 40px);
+    /*margin-top: clamp(100vh/18, 60px, 60px);*/
+    margin-bottom: 40px;
     font-size: var(--heading_font_size);
     font-weight: 700;
 }
 
-.Block > .StyledText-container {  /* Стили для дочерних линий текста в блоке  */
-    margin: clamp(10px, 100vh / 18, 40px) clamp(10px, 100vw / 19.2 - 10px, 80px) 0 clamp(10px, 100vw / 19.2 - 10px, 80px);
+.Block > *:not(:last-child) {
+    margin-bottom: 40px;
 }
 
 .Block:not(:last-child) {
@@ -83,25 +87,34 @@
 
 /* Спец. стили для исчезающей картинки сверху и снизу для BigImg */
 .FadingImg-top-and-bottom {
-    /* Дефолтный случай (картинка - первая линия или между линиями). Тогда эффекты исчезновения только снизу */
-    -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,0), rgba(0,0,0,1) 30%);
-    mask-image: linear-gradient(to top, rgba(0,0,0,0), rgba(0,0,0,1) 30%);
+    /* Случай, когда картинка - между какими-то линиями в блоке. Тогда эффекты исчезновения и сверху, и снизу */
+    -webkit-mask:   linear-gradient(to top, transparent 25%, #fff 0% calc(100% - 25%), transparent 95%),
+    linear-gradient(to bottom, transparent 25%, #fff 0% calc(100% - 25%), transparent 95%);
+    mask:   linear-gradient(to top, transparent 25%, #fff 0% calc(100% - 25%), transparent 95%),
+    linear-gradient(to bottom, transparent 25%, #fff 0% calc(100% - 25%), transparent 95%);
+}
+
+.FadingImg-top-and-bottom:first-child {
+    /* Случай, когда картинка - первая линия. Тогда эффект исчезновения только снизу */
+    -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,0), rgba(0,0,0,1) 60%);
+    mask-image: linear-gradient(to top, rgba(0,0,0,0), rgba(0,0,0,1) 60%);
 }
 
 .FadingImg-top-and-bottom:last-child {
     /* Случай, когда картинка - последняя линия. Тогда эффект исчезновения только сверху */
-    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,1) 30%);
-    mask-image: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,1) 30%);
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,1) 60%);
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,1) 60%);
 }
 
 .FadingImg-right {
-    -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,1) 30%);
-    mask-image: linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,1) 30%);
+    /* Случай, когда картинка - первая линия. Тогда эффект исчезновения только снизу */
+    -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,1) 60%);
+    mask-image: linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,1) 60%);
 }
 
 .FadingImg-left {
-    -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,0), rgba(0,0,0,1) 30%);
-    mask-image: linear-gradient(to left, rgba(0,0,0,0), rgba(0,0,0,1) 30%);
+    -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,0), rgba(0,0,0,1) 60%);
+    mask-image: linear-gradient(to left, rgba(0,0,0,0), rgba(0,0,0,1) 60%);
 }
 
 .RoundedImg {
@@ -147,6 +160,7 @@
     min-width: 50%;
     object-fit: contain;
     border-radius: var(--default_border_radius);
+    margin: auto;
 }
 
 .BigImg:not(.FadingImg-top-and-bottom, .slideshow-container){
@@ -187,12 +201,12 @@
         -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,0), rgba(0,0,0,1) 30%);
         mask-image: linear-gradient(to top, rgba(0,0,0,0), rgba(0,0,0,1) 30%);
     }
-    
+
     .FadingImg-left {
         -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,0), rgba(0,0,0,1) 30%);
         mask-image: linear-gradient(to top, rgba(0,0,0,0), rgba(0,0,0,1) 30%);
     }
-    
+
     .Card img {
         border-radius: var(--default_border_radius) !important;
     }

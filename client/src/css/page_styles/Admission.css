@@ -44,10 +44,10 @@
     background-color: var(--bgcolor);
 }
 
-.direction_inner_card .Card-body-right, .direction_inner_card .Card-body{
-    margin: 0;
-    padding: 0;
-}
+/*.direction_inner_card .Card-body-right, .direction_inner_card .Card-body{*/
+/*    margin: 0;*/
+/*    padding: 0;*/
+/*}*/
 
 .admission-bac-content2 .Card-body .direction_inner_card :is(h1, h3) {
     margin: 20px 0;
@@ -165,6 +165,7 @@ h1, h3{
 
 .cost_price {
     text-align: center;
+    font-weight: 600;
 }
 
 .Card-body .cost{

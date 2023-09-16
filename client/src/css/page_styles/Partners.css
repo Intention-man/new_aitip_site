@@ -29,10 +29,6 @@
     text-align: center;
     margin: 30px;
 }
-.button_list > button{
-    background-color: var(--aitip_bg_grey);
-    font-weight: bold;
-}
 .button_list > button:focus{
     background-color: #d86b49;
     color: #fff;

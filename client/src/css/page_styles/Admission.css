@@ -64,7 +64,8 @@ h1, h3{
 .direction_block {
     justify-content: center;
     align-items: center;
-    background: white;
+    /*background: white;*/
+    padding-bottom: 20px;
 }
 
 .extended_description {
@@ -114,18 +115,18 @@ h1, h3{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    margin: 0;
+    margin: 0 clamp(20px, 100vw / 24, 80px);
     padding: 5px;
     justify-content: center;
+    gap: 10px;
 }
 
 .passing_points {
     border: 3px solid;
     border-radius: 10px;
-    width: 45%;
+    width: calc(50% - 5px);
     min-width: 200px;
     max-width: 450px;
-    margin: 10px 2% 10px 0;
     padding: 5px 10px;
 }
 
@@ -161,6 +162,7 @@ h1, h3{
     justify-content: space-around;
     align-items: center;
     margin: 10px 0 20px 0;
+    font-size: calc(var(--default_font_size) * 1.2);
 }
 
 .cost_price {
@@ -198,8 +200,8 @@ h1, h3{
 }
 
 .modules_container{
+    margin: 0 clamp(20px, 100vw / 24, 80px);
     margin-top: 30px;
-    margin-left: -1%;
 }
 
 .modules_container p{
@@ -213,6 +215,7 @@ h1, h3{
 .supervisor{
     display: flex;
     flex-wrap: nowrap;
+    margin-left: clamp(20px, 100vw / 24, 80px);
 }
 
 .supervisor > img{

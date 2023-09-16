@@ -12,7 +12,7 @@
     width: calc(50% - 20px);
     background: var(--aitip_bg_grey);
     display: inline-block;
-    height: 90px;
+    min-height: 90px;
     padding: 0 8px;
     text-align: center;
     border-radius: 10px;
@@ -36,4 +36,8 @@
 .button_list > button:focus{
     background: #FFFFFF;
     font-weight: bold;
+}
+
+.button_list > button.stretch{
+    width: 100%;
 }

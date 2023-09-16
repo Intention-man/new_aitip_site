@@ -5,7 +5,8 @@ import {fetchOneStaffer, fetchStaff} from "../../http/staffAPI";
 import {observer} from "mobx-react-lite";
 import {fetchAdditionalPrograms, fetchDirectionsBachelor} from "../../http/admissionAPI";
 import RoundedImg from "../../components/lines/RoundedImg";
-import "../../css/page_styles/Personalities.css"
+// import "../../css/component_styles/PersonalitiesFilter.css"
+// import "../../css/page_styles/PersonalityList.css"
 import test from "../../local_assets/logo-noincome.png"
 import email from "../../local_assets/sms (1).png";
 import phone from "../../local_assets/Vector (2).png";
@@ -21,8 +22,8 @@ const SmallStafferItem = observer(({staffer}) => {
                         style={{width: "90px", backgroundPosition: "center"}}
                         className="ava_img"/>
             <div>
-                <p style={{fontWeight: 600, margin: "0 10px", whiteSpace: "normal"}}> {staffer.name} </p>
-                <p style={{margin: "0 10px", fontSize: "var(--default_font_size) * 0.5", whiteSpace: "normal"}}> {staffer.post} </p>
+                <p style={{fontWeight: 600, margin: "0 10px"}}> {staffer.name} </p>
+                <p style={{margin: "0 10px"}}> {staffer.post} </p>
             </div>
         </div>
     );
@@ -33,22 +34,14 @@ const StafferItem = observer(({staffer, closeStaffer}) => {
 
     const textsNames = {}
 
-    if (staffer.bio_text.replace(/\s/g, "").length > 0) {
-        textsNames["Биография"] = staffer.bio_text
-    }
-    if (staffer.disciplines_and_courses_text.replace(/\s/g, "").length > 0) {
-        textsNames["Дисциплины и курсы"] = staffer.disciplines_and_courses_text
-    }
-    if (staffer.publications_text.replace(/\s/g, "").length > 0) {
-        textsNames["Публикации"] = staffer.publications_text
-    }
-    if (staffer.projects_text.replace(/\s/g, "").length > 0) {
-        textsNames["Проекты"] = staffer.projects_text
-    }
+    if (staffer.bio_text.length > 0) {textsNames["Биография"] = staffer.bio_text}
+    if (staffer.disciplines_and_courses_text.length > 0) {textsNames["Дисциплины и курсы"] = staffer.disciplines_and_courses_text}
+    if (staffer.publications_text.length > 0) {textsNames["Публикации"] = staffer.publications_text}
+    if (staffer.projects_text.length > 0) {textsNames["Проекты"] = staffer.projects_text}
 
     const [activeText, setActiveText] = useState(Object.keys(textsNames)[0]);
 
-    console.log(Object.entries(textsNames))
+    console.log(staffer.bio_text)
 
     return (
         <div className="staffer_item_opened">
@@ -97,16 +90,13 @@ const StafferItem = observer(({staffer, closeStaffer}) => {
                     </div>
 
                 </div>
-                {Object.entries(textsNames).length > 0 &&
-                    <ButtonList className="small_button_list" buttonList={textsNames} setChosenValue={setActiveText}/>}
+                <ButtonList className="small_button_list" buttonList={textsNames} setChosenValue={setActiveText}/>
             </div>
-            {Object.entries(textsNames).length > 0 &&
-                <div className="text_block">
-                    <p className="text_desc">
-                        {textsNames[activeText]}
-                    </p>
-                </div>
-            }
+            <div className="text_block">
+                <p className="text_desc">
+                    {textsNames[activeText]}
+                </p>
+            </div>
         </div>
     )
 });
@@ -135,7 +125,7 @@ const PersonalitiesList = observer(params => {
 
 
     return (
-        <div style={{width: "100%"}}>
+        <div>
             {(params.filteredStaff.length !== 0) ?
                 (() => {
                     let rows = []
@@ -149,12 +139,7 @@ const PersonalitiesList = observer(params => {
 
                         let list = staffers.filter(i => i !== undefined)
 
-                        rows.push(<Row style={{
-                            display: "grid", gridTemplateColumns:
-                            // "1fr ".repeat(lenGroup)
-                                "minmax(0, 1fr)".repeat(lenGroup)
-                            // repeat(3, minmax(0, 1fr))
-                        }}>
+                        rows.push(<Row style={{display: "grid", gridTemplateColumns: "1fr ".repeat(lenGroup)}}>
                             {list.map(staffer =>
                                 <div>
                                     <div key={staffer.id}
@@ -174,20 +159,14 @@ const PersonalitiesList = observer(params => {
                                          closeStaffer={changeChosenStaffer}/>)
                     }
                     return rows
-                })() :
-                <h2 className="list_is_empty">Сотрудников, преподающих на данных программах и направлениях, нет</h2>
+                })() : <h2 className="list_is_empty">Сотрудников, преподающих на данных программах и направлениях, нет</h2>
             }
         </div>
     );
 });
 
 
-const PersonalitiesFilterBar = observer(({
-                                             filteredDirections,
-                                             setFilteredDirections,
-                                             filteredPrograms,
-                                             setFilteredPrograms
-                                         }) => {
+const PersonalitiesFilterBar = observer(({filteredDirections, setFilteredDirections, filteredPrograms, setFilteredPrograms}) => {
     const {admission_store} = useContext(Context)
 
     return (
@@ -273,7 +252,7 @@ const Personalities = observer(() => {
 
         useEffect(() => {
             (async () => {
-                fetchStaff().then(data => {
+                fetchStaff(staff_store.page, staff_store.limit).then(data => {
                     staff_store.setStaff(data.rows)
                     staff_store.setTotalCount(data.count)
                 })
@@ -304,29 +283,26 @@ const Personalities = observer(() => {
         }, [filteredDirections, filteredPrograms])
 
         if (!staff_store.staff || (staff_store.staff && staff_store.staff.length === 0)) {
-            return (<Container className="mt-md-5" style={{display: "flex"}}>
+            return (<Container className="mt-md-4" style={{display: "flex"}}>
                 <DotLoader color="#497AD8" size={200} cssOverride={{margin: "15% 30%"}}/>
             </Container>)
         }
 
         return (
-
-            <Row className="personalities_root">
-                <Col lg={3} style={{display: "inline-block", right: 0}}>
-                    <PersonalitiesFilterBar filteredDirections={filteredDirections}
-                                            setFilteredDirections={setFilteredDirections}
-                                            filteredPrograms={filteredPrograms}
-                                            setFilteredPrograms={setFilteredPrograms}/>
-                </Col>
-                <Col lg={9}
-                    // className="mt-2 mt-lg-0"
-                     style={{display: "inline-block"}}>
-                    <PersonalitiesList chosenStaffer={chosenStaffer} setChosenStaffer={setChosenStaffer}
-                                       filteredStaff={filteredStaff} setFilteredStaff={setFilteredStaff}/>
-                </Col>
-            </Row>
-
-
+            <Container className="mt-md-4" style={{display: "flex"}}>
+                <Row>
+                    <Col lg={3} style={{display: "inline-block", right: 0}}>
+                        <PersonalitiesFilterBar filteredDirections={filteredDirections}
+                                                setFilteredDirections={setFilteredDirections}
+                                                filteredPrograms={filteredPrograms}
+                                                setFilteredPrograms={setFilteredPrograms}/>
+                    </Col>
+                    <Col lg={9} className="mt-2 mt-lg-0" style={{display: "inline-block", left: 0}}>
+                        <PersonalitiesList chosenStaffer={chosenStaffer} setChosenStaffer={setChosenStaffer}
+                                           filteredStaff={filteredStaff} setFilteredStaff={setFilteredStaff}/>
+                    </Col>
+                </Row>
+            </Container>
         );
     }
 );

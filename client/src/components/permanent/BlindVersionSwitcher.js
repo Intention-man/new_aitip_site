@@ -69,10 +69,10 @@ const BlindVersionSwitcher = () => {
             }
             onClick={toggleBlindVersion}
         >
-            Версия для слабовидящих
+            <span style={{width: "min-content"}}>Версия для слабовидящих</span>
             <img
                 src={EyeIcon}
-                style={{color: "white", paddingLeft: "0px", paddingTop: "8px"}}
+                style={{color: "white", paddingLeft: "10px", paddingTop: "12px"}}
             />
         </button>
     );

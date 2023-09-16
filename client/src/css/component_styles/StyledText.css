@@ -3,9 +3,9 @@
     /*gap: 0 20px;*/
     grid-auto-columns: minmax(0, 1fr);
     grid-auto-flow: column;
-    padding: calc(clamp(10px, calc(10px + 0.01vw), 50px) * 2) clamp(10px, calc(10px + 0.01vw), 50px) ;
+    /*padding: 0 clamp(10px, calc(10px + 0.01vw), 50px);*/
     width: calc(100% - 60px);
-    margin: auto;
+    /*margin: auto;*/
 }
 
 .Card-body > .StyledText-container {
@@ -28,9 +28,9 @@
     font-size: var(--default_font_size);
 }
 
-.StyledText-container:last-child {
-    padding-bottom: clamp(10px, 100vh / 20, 40px);
-}
+/*.StyledText-container:last-child {*/
+/*    padding-bottom: clamp(10px, 100vh / 20, 40px);*/
+/*}*/
 
 .StyledText-mdText h1  {
     font-size: var(--heading_font_size);

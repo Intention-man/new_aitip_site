@@ -65,13 +65,13 @@ h1, h3{
     justify-content: center;
     align-items: center;
     /*background: white;*/
-    padding-bottom: 20px;
+    /*padding-bottom: 20px;*/
 }
 
 .extended_description {
     -ms-hyphens: auto;
     display: flex;
-    margin: 30px clamp(20px, 100vw / 24, 80px);
+    /*margin: 30px clamp(20px, 100vw / 24, 80px);*/
     padding: 5px 20px;
     border-radius: 10px;
     background: var(--bgcolor);
@@ -83,7 +83,7 @@ h1, h3{
 
 .title_who_can_you_become{
     display: flex;
-    margin: 0 clamp(20px, 100vw / 24, 80px);
+    /*margin: 0 clamp(20px, 100vw / 24, 80px);*/
     justify-content: left;
     font-weight: 600;
     font-size: var(--default_font_size);
@@ -97,7 +97,7 @@ h1, h3{
     padding: 0 0 8px 30px;
     gap: 0 40px;
     background: white;
-    margin: 0 clamp(20px, 100vw / 24, 80px);
+    /*margin: 0 clamp(20px, 100vw / 24, 80px);*/
 }
 
 .specialty {
@@ -115,7 +115,7 @@ h1, h3{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    margin: 0 clamp(20px, 100vw / 24, 80px);
+    /*margin: 0 clamp(20px, 100vw / 24, 80px);*/
     padding: 5px;
     justify-content: center;
     gap: 10px;

@@ -10,7 +10,7 @@ import CommonPagesDisplay from "../components/display/CommonPagesDisplay";
 
 const PartnerCard = ({partner}) => {
     return (
-        <div style={{boxSizing: "border-box", padding: "20px 0"}}>
+        <div className="partner_card" style={{boxSizing: "border-box"}}>
             {partner.description && <p className="comment">{partner.description}</p>}
             {partner.jointProjectsPhotos.length > 0 && <Carusel photos={partner.jointProjectsPhotos} addressFileType="local" ratio={1} color="red"/>}
             {partner.jointProjectsDescription &&

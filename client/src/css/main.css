@@ -31,7 +31,9 @@ h2, h3 {
 
 p {
     white-space: pre-wrap;
-    text-wrap: balance;
+    /*text-wrap: balance;*/
+    justify-content: center;
+    align-items: center;
     /*text-indent: 30px;*/
 }
 
@@ -107,7 +109,7 @@ body {
     grid-template-columns: repeat(7, 1fr);
     grid-template-rows: auto auto;
     gap: calc(10px + 0.005%);
-    margin-top: 20px;
+    margin: 20px 0px;
     padding: 20px 0;
     background: #eeeeee;
     color: white;
@@ -181,10 +183,10 @@ li > span.list_element_header{
     width: auto
 }
 
-.Block > div > ul, .Block > div > p{
-    margin-left: clamp(20px, 100vw / 19.2, 100px);
-    margin-right: clamp(20px, 100vw / 19.2, 100px);
-}
+/*.Block > div > ul, .Block > div > p{*/
+/*    margin-left: clamp(20px, 100vw / 19.2, 100px);*/
+/*    margin-right: clamp(20px, 100vw / 19.2, 100px);*/
+/*}*/
 
 .know_more_about_block p{
     margin-bottom: 0;

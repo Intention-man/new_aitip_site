@@ -6,8 +6,8 @@
     background-color: white;
     border-radius: 10px;
     text-align: center;
-    width: calc(100% - 2 * var(--default_side_margin));
-    padding: 10px 20px;
+    width: calc(100% - 60px);
+    /*padding: 10px 20px;*/
     /*margin: 0 -20px;*/
 }
 

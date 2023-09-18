@@ -3,19 +3,26 @@
     color: white;
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     /*align-items: center;*/
     flex-direction: row;
-    padding: 30px 20px;
+    padding: 30px 20%;
     margin-top: 20px;
     flex-flow: row wrap;
     flex-wrap: wrap;
+    gap: 20px;
 }
 
+/*.aitip_footer > div {*/
+/*    width: calc(45% - 30px);*/
+/*    text-align: left;*/
+/*    margin-left: calc(5% + 30px);*/
+/*    !*margin-top: 30px;*!*/
+/*}*/
 .footer-link-block {
-    width: calc(45% - 30px);
+    width: calc(50% - 10px);
     text-align: left;
-    margin-left: calc(5% + 30px);
+    /*margin-left: calc(5% + 30px);*/
 }
 
 
@@ -24,13 +31,13 @@
 }
 
 .aitip_footer .feedback a {
-    /*color: var(--aitip_grey);*/
+    color: #FFF;
     text-decoration: none;
     margin: auto;
 }
 
 .aitip_footer .feedback {
-    margin-top: 15px;
+    margin-top: 35px;
     display: flex;
     width: 100%;
     align-items: center;
@@ -50,6 +57,18 @@
 .aitip_footer .feedback > a {
     padding: 12px 0;
     text-align: center;
+}
+
+@media (max-width: 1600px) {
+    .aitip_footer{
+        padding: 30px 18%;
+    }
+}
+
+@media (max-width: 1156px) {
+    .aitip_footer{
+        padding: 20px max(2%, 10px);
+    }
 }
 
 @media (max-width: 768px){

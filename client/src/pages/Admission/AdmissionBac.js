@@ -41,7 +41,7 @@ const AdmissionBacContent2 = observer(() => {
             <h1 className="local_title">
                 Выберите <span style={{color: "#076DB1"}}>направление</span>
             </h1>
-            <ButtonList buttonList={admission_store.directionsBachelor.map(e => e.name)} setChosenValue={setChosenDirectionName}/>
+            <ButtonList buttonList={admission_store.directionsBachelor.map(e => e.name)} setChosenValue={setChosenDirectionName} isStretchLastButton={true}/>
             {chosenDirection.hasOwnProperty("name") &&
                 <Card
                     width={12}

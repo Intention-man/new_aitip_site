@@ -10,6 +10,7 @@
     --document_icon_size: 40px;
     --default_border_radius: 10px;
     --default_border_width: 1px;
+    --default_side_margin: 1vw;
     font-family: "Open Sans", sans-serif;
 }
 
@@ -30,13 +31,15 @@ h2, h3 {
 
 p {
     white-space: pre-wrap;
+    /*text-wrap: balance;*/
+    justify-content: center;
+    align-items: center;
     /*text-indent: 30px;*/
 }
 
 body {
     background-color: var(--bgcolor);
 }
-
 
 .rootContainer {
     background-color: var(--bgcolor);
@@ -106,7 +109,10 @@ body {
     grid-template-columns: repeat(7, 1fr);
     grid-template-rows: auto auto;
     gap: calc(10px + 0.005%);
-    margin-bottom: 20px;
+    margin: 20px 0px;
+    padding: 20px 0;
+    background: #eeeeee;
+    color: white;
 }
 
 .know_more_about > * {
@@ -119,7 +125,10 @@ body {
 
     border-radius: var(--default_border_radius);
     background: #FFF;
+}
 
+.know_more_about > *  p{
+    margin: auto !important;
     color: #FFF;
     font-size: var(--default_font_size);
     font-weight: bold;
@@ -174,13 +183,17 @@ li > span.list_element_header{
     width: auto
 }
 
-.Block > div > ul, .Block > div > p{
-    margin-left: clamp(20px, 100vw / 19.2, 100px);
-    margin-right: clamp(20px, 100vw / 19.2, 100px);
-}
+/*.Block > div > ul, .Block > div > p{*/
+/*    margin-left: clamp(20px, 100vw / 19.2, 100px);*/
+/*    margin-right: clamp(20px, 100vw / 19.2, 100px);*/
+/*}*/
 
 .know_more_about_block p{
     margin-bottom: 0;
+}
+
+.know_more_about .active {
+    font-weight: bold;
 }
 
 .know_more_about_block .extended_description{
@@ -203,17 +216,38 @@ li > span.list_element_header{
     grid-row: span 2;
     grid-column: span 2;
     height: auto;
-    background-color: #9fb7e6;
 }
 
 .adm_bac{
     grid-column: span 2;
-    background-color: #497ad8;
 }
 
-.science{
+.adm_add, .postuplenie, .adm_bac{
+    background-color: #9fb7e6;
+}
+
+.adm_add.active, .postuplenie.active, .adm_bac.active{
+    background: #4081ff;
+}
+
+.science, .partners{
     background-color: #e6b09f;
 }
+
+.science.active, .partners.active{
+    background: #d86b49;
+}
+
+.history, .teachers{
+    color: #929396;
+}
+
+.history.active, .teachers.active{
+    background: darkgray;
+    color: white;
+}
+
+
 
 .news_container{
     display: flex;

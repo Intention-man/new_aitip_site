@@ -14,11 +14,11 @@ const Footer = () => {
                 <p style={{fontSize: "23px", fontWeight: "bold"}}>Где нас найти?</p>
                 <div>
                     <img src={location} width="30px" height="30px" style={{marginRight: "20px"}}/>
-                    город Барнаул, улица Сизова, дом 28а
+                    г. Барнаул, улица Сизова, дом 28а
                 </div>
                 <div>
                     <img src={location} width="30px" height="30px" style={{marginRight: "20px"}}/>
-                    проспект Ленина, дом 23, каб. 219.
+                    г. Барнаул, проспект Ленина, дом 23
                 </div>
                 <div>
                     <img src={internet} width="30px" height="30px" style={{marginRight: "20px"}}/>

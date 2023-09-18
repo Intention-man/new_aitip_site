@@ -83,13 +83,13 @@ const LearnMoreAboutUsBlock = observer(() => {
     return (
         <Block header="Узнать о нас больше">
             <div className="know_more_about">
-                <div onClick={() => setChosenArticle("Педагоги и научные работники")} style={{color: "#929396"}}>Педагоги и научные работники</div>
-                <div onClick={() => setChosenArticle("Партнеры")} style={{gridColumn: "2 / span 2", backgroundColor: "#e6b09f"}}>Партнёры</div>
-                <div onClick={() => setChosenArticle("Обучение на бакалавриате")} className="adm_bac">Обучение на бакалавриате</div>
-                <div onClick={() => setChosenArticle("Дополнительное профессиональное образование (ДПО)")} className="adm_add">Программы дополнительного профессионального образования</div>
-                <div onClick={() => setChosenArticle("Поступление")} style={{gridColumn: "1 / span 3", backgroundColor: "#9fb7e6"}}>Поступление</div>
-                <div onClick={() => setChosenArticle("История института")} className="history" style={{color: "#929396"}}>История института</div>
-                <div onClick={() => setChosenArticle("Наука")} className="science">Наука</div>
+                <div onClick={() => setChosenArticle("Педагоги и научные работники")} className={"teachers" + (chosenArticle === "Педагоги и научные работники" ? " active" : "")}>Педагоги и научные работники</div>
+                <div onClick={() => setChosenArticle("Партнеры")} style={{gridColumn: "2 / span 2"}} className={"partners" + (chosenArticle === "Партнеры" ? " active" : "")}>Партнёры</div>
+                <div onClick={() => setChosenArticle("Обучение на бакалавриате")} className={"adm_bac" + (chosenArticle === "Обучение на бакалавриате" ? " active" : "")}>Обучение на бакалавриате</div>
+                <div onClick={() => setChosenArticle("Дополнительное профессиональное образование (ДПО)")} className={"adm_add" + (chosenArticle === "Дополнительное профессиональное образование (ДПО)" ? " active" : "")}>Программы дополнительного профессионального образования</div>
+                <div onClick={() => setChosenArticle("Поступление")} style={{gridColumn: "1 / span 3"}} className={"postuplenie" + (chosenArticle === "Поступление" ? " active" : "")}>Поступление</div>
+                <div onClick={() => setChosenArticle("История института")} className={"history" + (chosenArticle === "История института" ? " active" : "")} >История института</div>
+                <div onClick={() => setChosenArticle("Наука")} className={"science" + (chosenArticle === "Наука" ? " active" : "")}>Наука</div>
             </div>
             {(() => {
                 switch(chosenArticle) {
@@ -101,7 +101,7 @@ const LearnMoreAboutUsBlock = observer(() => {
                             направлениям бакалавриата и следующим профилям:</p>
                         <div className="bachelor" style={{
                             background: "URL(" + book + ") left bottom no-repeat, URL(" + hat + ") right top no-repeat, white",
-                            backgroundSize: "45% 40%, 40% 65%"
+                            backgroundSize: "calc(20% + 7vw) 40%, 35% 65%"
                         }}>
                             <ul>
                                 <li><span className="list_element_header">38.03.02 Экономика</span><br/>Финансы и кредит;
@@ -154,7 +154,8 @@ const LearnMoreAboutUsBlock = observer(() => {
                         <ul style={{
                             paddingRight: "33%",
                             marginRight: "0",
-                            background: "url(" + chart + ") right no-repeat"
+                            background: "url(" + chart + ") right no-repeat",
+                            backgroundSize: "clamp(100px, 100vw * 0.30, 400px)"
                         }}
                             className="lines_margin_between_half">
                             <li><span
@@ -209,7 +210,7 @@ const LearnMoreAboutUsBlock = observer(() => {
                         </ul>
                     </Block>
                     case "Поступление" : return <Block header="Поступление">
-                        <div style={{background: "url(" + notes + ") no-repeat", backgroundPositionX: "110%"}}>
+                        <div style={{background: "url(" + notes + ") no-repeat", backgroundPositionX: "110%", backgroundSize: "clamp(100px, 100vw * 0.30, 400px)"}}>
                             <div className="admission_info_commission lines_margin_between">
                                 <div>
                                     <p>Приемная комиссия</p>
@@ -242,7 +243,7 @@ const LearnMoreAboutUsBlock = observer(() => {
                                 marginLeft: "clamp(20px, 100vw / 19.2, 100px)"
                             }} className="lines_margin_between">Вступительные испытания</p>
                             <div className="entrance_exams_points"
-                                 style={{background: "url(" + bank + ") right bottom no-repeat"}}>
+                                 style={{background: "url(" + bank + ") right bottom no-repeat", backgroundSize: "clamp(100px, 100vw * 0.30, 400px)"}}>
                                 <div>
                                     <p>На базе среднего общего образования (11 классов) – по результатам ЕГЭ</p>
                                     <br/>
@@ -324,7 +325,9 @@ const LearnMoreAboutUsBlock = observer(() => {
                         <div style={{
                             padding: "0 clamp(20px, 100vw / 19.2, 100px) clamp(12px, 100vh / 16, 60px)",
                             background: "url(" + person_card + ") right bottom no-repeat",
-                            backgroundPositionX: "90%"
+                            backgroundPositionX: "95%",
+                            backgroundPositionY: "95%",
+                            backgroundSize: "clamp(100px, 100vw * 0.30, 400px)"
                         }} className="lines_margin_between_half">
                             <p>В Алтайском институте труда и права работают ведущие
                                 ученые,
@@ -404,7 +407,7 @@ const LearnMoreAboutUsBlock = observer(() => {
                     case "Наука" : return <Block header="Наука">
                         <div style={{
                             background: "url(" + telescope + ") right no-repeat",
-                            backgroundPositionY: "120%",
+                            backgroundPositionY: "40%",
                             backgroundSize: "clamp(100px, 100vw * 0.30, 400px)"
                         }}>
                             <p className="extended_description lines_margin_between_half">Научная деятельность Алтайского
@@ -484,8 +487,8 @@ const LearnMoreAboutUsBlock = observer(() => {
                         <p className="lines_margin_between_half"
                            style={{
                                paddingRight: "clamp(80px, 100vw / 19.2 * 5, 400px)",
-                               background: "url(" + court + ") right no-repeat",
-                               backgroundPositionY: "125%"
+                               background: "url(" + court + ") right center no-repeat",
+                               backgroundSize: "clamp(100px, 100vw * 0.30, 400px)"
                            }}>Образовательное учреждение
                             профсоюзов
                             высшего образования «Академия труда и социальный отношений» — один из старейших вузов страны со

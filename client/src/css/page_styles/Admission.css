@@ -44,10 +44,10 @@
     background-color: var(--bgcolor);
 }
 
-.direction_inner_card .Card-body-right, .direction_inner_card .Card-body{
-    margin: 0;
-    padding: 0;
-}
+/*.direction_inner_card .Card-body-right, .direction_inner_card .Card-body{*/
+/*    margin: 0;*/
+/*    padding: 0;*/
+/*}*/
 
 .admission-bac-content2 .Card-body .direction_inner_card :is(h1, h3) {
     margin: 20px 0;
@@ -64,13 +64,14 @@ h1, h3{
 .direction_block {
     justify-content: center;
     align-items: center;
-    background: white;
+    /*background: white;*/
+    /*padding-bottom: 20px;*/
 }
 
 .extended_description {
     -ms-hyphens: auto;
     display: flex;
-    margin: 30px clamp(20px, 100vw / 24, 80px);
+    /*margin: 30px clamp(20px, 100vw / 24, 80px);*/
     padding: 5px 20px;
     border-radius: 10px;
     background: var(--bgcolor);
@@ -82,7 +83,7 @@ h1, h3{
 
 .title_who_can_you_become{
     display: flex;
-    margin: 0 clamp(20px, 100vw / 24, 80px);
+    /*margin: 0 clamp(20px, 100vw / 24, 80px);*/
     justify-content: left;
     font-weight: 600;
     font-size: var(--default_font_size);
@@ -96,7 +97,7 @@ h1, h3{
     padding: 0 0 8px 30px;
     gap: 0 40px;
     background: white;
-    margin: 0 clamp(20px, 100vw / 24, 80px);
+    /*margin: 0 clamp(20px, 100vw / 24, 80px);*/
 }
 
 .specialty {
@@ -114,18 +115,18 @@ h1, h3{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    margin: 0;
+    /*margin: 0 clamp(20px, 100vw / 24, 80px);*/
     padding: 5px;
     justify-content: center;
+    gap: 10px;
 }
 
 .passing_points {
     border: 3px solid;
     border-radius: 10px;
-    width: 45%;
+    width: calc(50% - 5px);
     min-width: 200px;
     max-width: 450px;
-    margin: 10px 2% 10px 0;
     padding: 5px 10px;
 }
 
@@ -161,10 +162,12 @@ h1, h3{
     justify-content: space-around;
     align-items: center;
     margin: 10px 0 20px 0;
+    font-size: calc(var(--default_font_size) * 1.2);
 }
 
 .cost_price {
     text-align: center;
+    font-weight: 600;
 }
 
 .Card-body .cost{
@@ -197,8 +200,8 @@ h1, h3{
 }
 
 .modules_container{
+    margin: 0 clamp(20px, 100vw / 24, 80px);
     margin-top: 30px;
-    margin-left: -1%;
 }
 
 .modules_container p{
@@ -212,6 +215,7 @@ h1, h3{
 .supervisor{
     display: flex;
     flex-wrap: nowrap;
+    margin-left: clamp(20px, 100vw / 24, 80px);
 }
 
 .supervisor > img{

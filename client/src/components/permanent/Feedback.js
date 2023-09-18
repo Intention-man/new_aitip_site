@@ -7,9 +7,9 @@ import '../../css/component_styles/SideBar.css'
 const Feedback = () => {
     return (
         <div className="feedback">  
-            <a href="" style={{color: "#999999"}}>ЭБС</a>
-            <a href="" style={{color: "#999999"}}>ЕОИС</a>
-            <a href="https://forms.yandex.ru/u/6454a54373cee729558eca46/" style={{color: "#999999"}}>Вопрос/Ответ</a>
+            <a href="">ЭБС</a>
+            <a href="">ЕОИС</a>
+            <a href="https://forms.yandex.ru/u/6454a54373cee729558eca46/">Вопрос/Ответ</a>
             <div className='social-block'>
                 <div className="social vk">
                     <a href="https://vk.com/aitip" target="_blank">

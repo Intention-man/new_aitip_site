@@ -1,25 +1,32 @@
 .Block {
+    display: flex;
+    flex-direction: column;
     background-color: var(--aitip_white);
     border-radius: var(--default_border_radius);
     box-sizing: border-box;
-    display: grid;
+    margin-bottom: 30px;
+    padding-top: 40px;
+    /*padding-bottom: 30px;*/
 }
 
 .Block-header {
     text-align: center;
-    margin: 0 clamp(20px, 100vw / 19.2, 100px);
-    padding-top: clamp(10px, 100vh / 18, 40px);
+    /*margin-top: clamp(100vh/18, 60px, 60px);*/
+    margin-bottom: 40px;
     font-size: var(--heading_font_size);
     font-weight: 700;
 }
 
-.Block > .StyledText-container {  /* Стили для дочерних линий текста в блоке  */
-    margin: clamp(10px, 100vh / 18, 40px) clamp(10px, 100vw / 19.2 - 10px, 80px) 0 clamp(10px, 100vw / 19.2 - 10px, 80px);
+.Block > * {
+    margin: 20px 30px;
+    /*margin-top: 20px;*/
+    /*margin-bottom: 20px;*/
 }
 
-.Block:not(:last-child) {
-    margin: 0 0 30px 0;
+.Block > *:last-child {
+    margin-bottom: 40px;
 }
+
 
 .BlockContainer {
     padding: 30px 20px 30px 20px;
@@ -34,22 +41,22 @@
     border-radius: var(--default_border_radius);
     justify-content: space-between;
     margin-top: clamp(10px, 100vh / 18, 40px);
-    column-gap: clamp(20px, 100vw / 30, 60px);
+    /*column-gap: clamp(20px, 100vw / 30, 60px);*/
 }
 
-.Card:last-child {
-    padding-bottom: clamp(15px, 100vh / 12, 60px);
-}
+/*.Card:last-child {*/
+/*    padding-bottom: clamp(15px, 100vh / 12, 60px);*/
+/*}*/
 
 
 .Card-left {
     flex-direction: row;
-    margin-right: clamp(20px, 100vw / 19.2, 100px);
+    /*margin-right: clamp(20px, 100vw / 19.2, 100px);*/
 }
 
 .Card-right {
     flex-direction: row-reverse;
-    margin-left: clamp(20px, 100vw / 19.2, 100px);
+    /*margin-left: clamp(20px, 100vw / 19.2, 100px);*/
 }
 
 .Card-image img {
@@ -57,7 +64,7 @@
     height: 100%;
     align-self: flex-end;
     border-radius: var(--default_border_radius);
-    object-fit: cover;
+    object-fit: contain;
 }
 
 .Card-image-left, .Card-image-right {
@@ -83,25 +90,38 @@
 
 /* Спец. стили для исчезающей картинки сверху и снизу для BigImg */
 .FadingImg-top-and-bottom {
-    /* Дефолтный случай (картинка - первая линия или между линиями). Тогда эффекты исчезновения только снизу */
-    -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,0), rgba(0,0,0,1) 30%);
-    mask-image: linear-gradient(to top, rgba(0,0,0,0), rgba(0,0,0,1) 30%);
+    /* Случай, когда картинка - между какими-то линиями в блоке. Тогда эффекты исчезновения и сверху, и снизу */
+    -webkit-mask:   linear-gradient(to top, transparent 25%, #fff 0% calc(100% - 25%), transparent 95%),
+    linear-gradient(to bottom, transparent 25%, #fff 0% calc(100% - 25%), transparent 95%);
+    mask:   linear-gradient(to top, transparent 25%, #fff 0% calc(100% - 25%), transparent 95%),
+    linear-gradient(to bottom, transparent 25%, #fff 0% calc(100% - 25%), transparent 95%);
+}
+
+.FadingImg-top-and-bottom:first-child {
+    /* Случай, когда картинка - первая линия. Тогда эффект исчезновения только снизу */
+    -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,0), rgba(0,0,0,1) 60%);
+    mask-image: linear-gradient(to top, rgba(0,0,0,0), rgba(0,0,0,1) 60%);
 }
 
 .FadingImg-top-and-bottom:last-child {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 0;
     /* Случай, когда картинка - последняя линия. Тогда эффект исчезновения только сверху */
-    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,1) 30%);
-    mask-image: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,1) 30%);
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,1) 60%);
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,1) 60%);
 }
 
 .FadingImg-right {
-    -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,1) 30%);
-    mask-image: linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,1) 30%);
+    /* Случай, когда картинка - первая линия. Тогда эффект исчезновения только снизу */
+    -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,1) 60%);
+    mask-image: linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,1) 60%);
 }
 
 .FadingImg-left {
-    -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,0), rgba(0,0,0,1) 30%);
-    mask-image: linear-gradient(to left, rgba(0,0,0,0), rgba(0,0,0,1) 30%);
+    -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,0), rgba(0,0,0,1) 60%);
+    mask-image: linear-gradient(to left, rgba(0,0,0,0), rgba(0,0,0,1) 60%);
 }
 
 .RoundedImg {
@@ -116,50 +136,62 @@
 }
 
 .Card-image > .RoundedImg > .RoundedImg-img {
-    height: 280px;
-    width: 280px;
+    /*height: 280px;*/
+    /*width: 280px;*/
+    width: 100%;
 }
 
-.Card-image-left > :not(.FadingImg-left, .FadingImg-right) {
-    margin-left: clamp(20px, 100vw / 19.2, 100px);
-}
+/*.Card-image-left > :not(.FadingImg-left, .FadingImg-right) {*/
+/*    max-width: 60%;*/
+/*}*/
 
-.Card-image-right > :not(.FadingImg-left, .FadingImg-right) {
-    margin-right: clamp(20px, 100vw / 19.2, 100px);
-    max-width: calc(100% - clamp(20px, 100vw / 19.2, 100px));
-}
+/*.Card-image-right > :not(.FadingImg-left, .FadingImg-right) {*/
+/*    margin-right: clamp(20px, 100vw / 19.2, 100px);*/
+/*    max-width: calc(100% - clamp(20px, 100vw / 19.2, 100px));*/
+/*}*/
 
 .Card-image-rounded > .RoundedImg {
-    height: 280px;
-    width: 280px;
+    /*height: 280px;*/
+    /*width: 280px;*/
+    width: 100%;
     padding: 0;
 }
 
 .Card-image-rounded.Card-image-left, .Card-image-rounded.Card-image-right {
-    width: clamp(300px, 100vw / 19.2 + 280px, 380px);
+    width: 60%;
+    align-items: center;
+    justify-content: center;
 }
 
 .BigImg {
     /*height: 100%;*/
-    width: calc(100% - 120px);
+    width: calc(100% - 60px);
     justify-self: center;
-    min-height: 50%;
-    min-width: 50%;
+    /*min-height: 50%;*/
+    /*min-width: 50%;*/
     object-fit: contain;
     border-radius: var(--default_border_radius);
+    margin-left: 30px;
+    margin-right: 30px;
 }
 
 .BigImg:not(.FadingImg-top-and-bottom, .slideshow-container){
-    margin: clamp(10px, 100vh / 18, 40px) clamp(20px, 100vw / 19.2, 100px) 0 clamp(20px, 100vw / 19.2, 100px);
-    width: calc(100% - clamp(20px, 100vw / 19.2, 100px) * 2);
+    /*margin: clamp(10px, 100vh / 18, 40px) clamp(20px, 100vw / 19.2, 100px) ;*/
+    /*width: calc(100% - clamp(20px, 100vw / 19.2, 100px) * 2);*/
     max-height: 90vh;
 }
 
-.BigImg:last-child:not(.FadingImg-top-and-bottom) {
-    padding-bottom: clamp(15px, 100vh / 12, 60px);
+/*.BigImg:last-child:not(.FadingImg-top-and-bottom) {*/
+/*    !*padding-bottom: clamp(15px, 100vh / 12, 60px);*!*/
+/*    width: 100%;*/
+/*    margin: auto 0;*/
+/*}*/
+.Block:last-child.FadingImg-top-and-bottom {
+    width: 100%;
+    margin: auto 0;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 800px) {
     .Card-left, .Card-right {
         flex-direction: column;
         margin: 0 clamp(20px, 100vw / 19.2, 100px);
@@ -181,19 +213,37 @@
 
     .BigImg {
         width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .Block > *:last-child:not(.BigImg) {
+        margin-bottom: 40px;
+    }
+
+    .Block > *:last-child.BigImg {
+        margin-bottom: 0;
     }
 
     .FadingImg-right {
         -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,0), rgba(0,0,0,1) 30%);
         mask-image: linear-gradient(to top, rgba(0,0,0,0), rgba(0,0,0,1) 30%);
     }
-    
+
     .FadingImg-left {
         -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,0), rgba(0,0,0,1) 30%);
         mask-image: linear-gradient(to top, rgba(0,0,0,0), rgba(0,0,0,1) 30%);
     }
-    
+
     .Card img {
         border-radius: var(--default_border_radius) !important;
+    }
+
+    .Card-image-rounded.Card-image-left, .Card-image-rounded.Card-image-right {
+        width: 100%;
+    }
+    .Card-image > .RoundedImg > .RoundedImg-img {
+        height: auto;
+        width: 100%;
     }
 }

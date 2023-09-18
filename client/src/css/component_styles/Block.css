@@ -41,6 +41,7 @@
     border-radius: var(--default_border_radius);
     justify-content: space-between;
     margin-top: clamp(10px, 100vh / 18, 40px);
+    gap: 50px;
     /*column-gap: clamp(20px, 100vw / 30, 60px);*/
 }
 
@@ -68,7 +69,7 @@
 }
 
 .Card-image-left, .Card-image-right {
-    max-width: 50%;
+    max-width: 40%;
     width: 100%;
     display: flex;
 }

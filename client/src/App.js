@@ -25,7 +25,7 @@ const App = observer(() => {
 
     useEffect(() => {
         const locationDataArr = window.location.href.split("/").slice(3);
-        const forbidList = ["article", "personalities", "news"];
+        const forbidList = ["article", "personalities", "news", "partners"];
         setLeftSidebarVisible(!forbidList.includes(locationDataArr[0]));
     }, [window.location.href]);
 

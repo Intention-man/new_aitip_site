@@ -6,6 +6,7 @@ import "../css/page_styles/Partners.css"
 import Carusel from "../components/lines/Carusel";
 import Block from "../components/display/Block";
 import CommonPagesDisplay from "../components/display/CommonPagesDisplay";
+import {Container} from "react-bootstrap";
 
 
 const PartnerCard = ({partner}) => {
@@ -42,7 +43,7 @@ const OurPartners = observer(() => {
     }, [chosenType]);
 
     return (
-        <Block className="main_block" header="Наши партнеры">
+        <Container className="mt-md-4">
             <ButtonList buttonList={singularForm} setChosenValue={setChosenType}/>
             <p className="comment">
                 Алтайский институт труда и права сотрудничает с компаниями в том числе и в научной сфере. Совместно ведутся разработки новейших экономических моделей, производится анализ рынка, а также регулярно публикуются научные статьи. Более того, на базе Алтайского института труда и права проходят научные конференции и форумы.</p>
@@ -55,7 +56,7 @@ const OurPartners = observer(() => {
                 )}
             </div>
             {chosenPartner.hasOwnProperty("kind") && chosenType !== undefined && chosenPartner.kind.substring(0, 3) === chosenType.substring(0, 3) && <PartnerCard partner={chosenPartner}/>}
-        </Block>
+        </Container>
     );
 });
 
@@ -69,4 +70,4 @@ const Partners = observer(() => {
     )
 })
 
-export default Partners;
+export default OurPartners;

@@ -29,7 +29,6 @@ const NewsPage = observer(() => {
                 } else {
                     return process.env.REACT_APP_API_URL + line.filesNames[0]
                 }
-
             }
         }
         return Default;

@@ -4,6 +4,7 @@ import {Context} from "../index";
 import Block from "../components/display/Block";
 import {observer} from "mobx-react-lite";
 import BlockContainer from "../components/display/BlockContainer";
+import {Container} from "react-bootstrap";
 
 const DefinedNews = observer(() => {
     const {block_store} = useContext(Context);
@@ -14,13 +15,12 @@ const DefinedNews = observer(() => {
 
 
     return (
-        <BlockContainer>
+        <Container className="mt-md-4">
             {/*<p style={{fontWeight: 700, color: "var(--aitip_blue)", cursor: "pointer"}}*/}
             {/*   onClick={() => navigate("/news")}>Ко всем новостям</p>*/}
             <p className="blue_page_title">{newsBlock.header}</p>
             <Block key={newsBlock.id} block={newsBlock} header={newsBlock.header}/>
-            {/*<div className="news_date">{Number(newsBlock.createdAt.substring(8, 10)) + " " + monthList[Number(newsBlock.createdAt.substring(5, 7))]}</div>*/}
-        </BlockContainer>
+        </Container>
 
     );
 });

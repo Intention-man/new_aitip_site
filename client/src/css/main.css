@@ -81,6 +81,8 @@ body {
 .news_container{
     display: grid;
     flex-wrap: wrap;
+    background-color: var(--aitip_white);
+    border-radius: var(--default_border_radius);
 }
 
 .news_container > *{

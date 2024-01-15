@@ -1,5 +1,3 @@
-// BrowserRouter - обертка для запуска всех страниц. На каждой странице будут меню (NavBar), а также компонент-страница (какую страницу запускать решает AppRouter)
-
 import {useContext, useEffect, useState} from "react";
 import {observer} from "mobx-react-lite";
 import {BrowserRouter} from "react-router-dom";
@@ -23,7 +21,13 @@ const App = observer(() => {
 
     const [loading, setLoading] = useState(true);
     const [currentContent, setCurrentContent] = useState([]);  // Стейт с текущими блоками страницы (нужны для LinksPanel)
+    const [leftSidebarVisible, setLeftSidebarVisible] = useState(true);
 
+    useEffect(() => {
+        const locationDataArr = window.location.href.split("/").slice(3);
+        const forbidList = ["article", "personalities", "news"];
+        setLeftSidebarVisible(!forbidList.includes(locationDataArr[0]));
+    }, [window.location.href]);
 
     useEffect(() => {
         refetchAllContent(block_store);
@@ -42,8 +46,7 @@ const App = observer(() => {
         return <DotLoader color="#497AD8" size={200} cssOverride={{marginTop: "20%", marginLeft: "40%"}}/>
     }
 
-    const updateContent = (newContent) => {  /* Это callback, который будет передан в ContentContext.Provider, 
-                                                чтобы внутренние компоненты могли передавать сюда блоки контента */
+    const updateContent = (newContent) => {  /* Это callback, который будет передан в ContentContext.Provider, чтобы внутренние компоненты могли передавать сюда блоки контента */
         // Изменяем currentContent только тогда, когда newContent отличается от него. Это нужно, чтобы избежать бесконечного ререндера.
         if (newContent.length !== currentContent.length) {
             setCurrentContent(newContent);
@@ -61,14 +64,16 @@ const App = observer(() => {
         <BrowserRouter>
             <Menu/>
             <div className='rootContainer' id="rootCont">
-                <SideBar
-                    alignment='left'
-                    isSticky={true}
-                >
-                    <LinksPanel
-                        links={currentContent.map(x => new Object({id: x.id, name: x.name, domNode: x.domNode}))}
-                    />
-                </SideBar>
+                {leftSidebarVisible &&
+                    <SideBar
+                        alignment='left'
+                        isSticky={true}
+                    >
+                        <LinksPanel
+                            links={currentContent.map(x => new Object({id: x.id, name: x.name, domNode: x.domNode}))}
+                        />
+                    </SideBar>
+                }
                 <ContentContext.Provider value={updateContent}>
                     <AppRouter/>
                 </ContentContext.Provider>

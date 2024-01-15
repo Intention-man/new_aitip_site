@@ -3,7 +3,6 @@ import {observer} from "mobx-react-lite";
 import "../../css/component_styles/FAQBlock.css"
 
 
-
 // принимает объект, где ключи вопросы, а значения ответы
 const FAQBlock = observer(({questions}) => {
     return (

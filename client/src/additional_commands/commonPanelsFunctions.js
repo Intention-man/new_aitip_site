@@ -61,15 +61,13 @@ export const refetchAllContent = (blockStore) => {
  * Метод добавляет в blockList все конструкторские блоки данной страницы
  */
 
-export const addConstructorBlocks = (myAddress, handMadeBlocksCount, block_store, blockList) => {
+export const addConstructorBlocksToBlockList = (myAddress, handMadeBlocksCount, block_store, blockList) => {
     let pageConstructorBlocks = Array.from(block_store.blocks.filter(block => block.pageLink === myAddress).sort((block1, block2) => block1.ordinal - block2.ordinal))
     const count = pageConstructorBlocks.length + handMadeBlocksCount
 
     for (let i = 1; (i <= count && pageConstructorBlocks.length > 0); i++) {
         if (!blockList.hasOwnProperty(i)) {
-            // shift() - удаляет 0-ой элемент из массива и возвращает его
-            blockList[i] = pageConstructorBlocks.shift();
+            blockList[i] = pageConstructorBlocks.shift();// shift() - удаляет 0-ой элемент из массива и возвращает его
         }
     }
-    return blockList
 }

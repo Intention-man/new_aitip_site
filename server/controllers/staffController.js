@@ -66,7 +66,7 @@ class StaffController {
     async getAll(req, res) {
         let {directions_bac, program_add, limit, page} = req.query
         page = page || 1
-        limit = limit || 10
+        limit = limit || 100000
         let offset = limit * (page - 1)
         let staff;
 

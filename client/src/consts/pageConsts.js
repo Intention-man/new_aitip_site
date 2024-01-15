@@ -1,6 +1,5 @@
 // Создание переменной, отвечающей за относительную ссылку на каждую страницу
 
-
 export const MAIN_ROUTE = "/"
 export const ADMISSION_BAC = "/admission_bac"
 export const ADMISSION_APE = "/admission_add"
@@ -18,9 +17,6 @@ export const SCIENCE = "/science"
 export const PHOTO_GALLERY = "/photo_gallery"
 export const LIBRARY = "/library"
 
-
-
-
 export const INFO_EDU_ORG = "/sveden"
 export const AVAILABLE_ENVIRONMENT = "/sveden/available_environment"
 export const CONTACTS = "/sveden/contacts"
@@ -36,8 +32,6 @@ export const WORKING_PROGRAMS = "/sveden/working_programs"
 export const SCHOLARSHIPS_AND_OTHER_SUPPORT =  "/sveden/scholarships_and_other_support"
 export const COMMON_INFO = "/sveden/common_info"
 export const STANDARDS_AND_REQUIREMENTS = "/sveden/standards_and_requirements"
-
-
 
 export const AUTH = "/athr"
 export const ADMIN = "/admin"

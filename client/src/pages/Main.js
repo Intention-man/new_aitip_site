@@ -60,23 +60,6 @@ const NewsBlock = observer(() => {
     )
 })
 
-const UpcomingEventsBlock = observer(() => {
-    return (<Block style={{background: "#FFF", paddingLeft: "3%", borderRadius: "5px", paddingBottom: "20px"}}
-                   header="Ближайшие события">
-        {[{date: "20 апр", text: "Начало приёма документов"}, {
-            date: "20 апр",
-            text: "Начало приёма документов"
-        }, {date: "20 апр", text: "Начало приёма документов"}].map((e, indx, arr) => <>
-            <div className="event_container">
-                <p className="event_date">{e.date}</p>
-                <p className="event_text">{e.text}</p>
-            </div>
-            {indx !== arr.length - 1 &&
-                <hr style={{width: "40%", marginLeft: "2%", border: "1px solid #000", opacity: "1"}}/>}
-        </>)
-        }
-    </Block>)
-})
 
 const LearnMoreAboutUsBlock = observer(() => {
     const [chosenArticle, setChosenArticle] = useState("Обучение на бакалавриате");
@@ -546,31 +529,11 @@ const LearnMoreAboutUsBlock = observer(() => {
 })
 
 const Main = observer(() => {
-    const {block_store} = useContext(Context);
-    const [withOutServer, setWithOutServer] = useState(true);
     let blockList = {
         2: <NewsBlock/>,
-        // 3: <UpcomingEventsBlock/>,
         4: <LearnMoreAboutUsBlock/>
     }
     const handMadeBlocksCount = 2
-
-    // useEffect(() => {
-    //     setTimeout(() => {
-    //         setWithOutServer(false)
-    //     }, 500)
-    // }, [block_store.news]);
-
-
-    // if (withOutServer){
-    //     return (
-    //         <BlockContainer>
-    //             <p className="blue_page_title">Главная</p>
-    //             <LearnMoreAboutUsBlock/>
-    //         </BlockContainer>
-    //     )
-    // }
-
 
     return (
         <CommonPagesDisplay blockList={blockList} handMadeBlocksCount={handMadeBlocksCount}/>

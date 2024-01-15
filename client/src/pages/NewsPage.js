@@ -1,11 +1,11 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {Context} from "../index";
-import Block from "../components/display/Block";
 import Default from "../local_assets/logo-in-round.svg";
 import {refetchAllContent} from "../additional_commands/commonPanelsFunctions";
 import {fetchBlocks} from "../http/blockAPI";
 import {useNavigate} from "react-router";
 import {observer} from 'mobx-react-lite';
+import {Container} from "react-bootstrap";
 
 
 const NewsPage = observer(() => {
@@ -36,16 +36,16 @@ const NewsPage = observer(() => {
     }
 
     return (
-        <Block header="Новости">
-            <div className="news_container">
-                {block_store.news && Array.from(block_store.news).sort((e1, e2) => e2.id - e1.id).map(e =>
+        <Container className="mt-md-4">
+            <div className="news_container" >
+                {block_store.news && Array.from(block_store.news).sort((e1, e2) => e2.createdAt - e1.createdAt).map(e =>
                     <a onClick={() => navigate("/article/" + e.id)}>
                         <img src={getCover(e)} alt=""/>
                         <p>{e.header}</p>
                     </a>
                 )}
             </div>
-        </Block>
+        </Container>
     );
 });
 

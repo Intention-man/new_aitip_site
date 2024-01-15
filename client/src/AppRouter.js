@@ -31,7 +31,6 @@ const AppRouter = observer(() => {
                 path="*"
                 element={<Navigate to="/" replace={true} />}
             />
-            {/*<Redirect path="*" element={<Main/>}/>*/}
         </Routes>
     );
 })

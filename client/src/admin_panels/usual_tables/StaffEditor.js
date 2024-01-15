@@ -18,7 +18,6 @@ const StaffEditor = observer(() => {
 
     useEffect(() => {
         setChosenStaffer(Array.from(staff_store.staff.filter(staffer => staffer.id === staff_store.selectedStaffer))[0])
-        // console.log(staff_store.staff.filter(staffer => staffer.id === staff_store.selectedStaffer))
     }, [staff_store.selectedStaffer]);
 
     useEffect(() => {

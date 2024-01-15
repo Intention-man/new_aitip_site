@@ -1,10 +1,11 @@
 import React, {useContext, useEffect} from 'react';
 import Block from "./Block";
-import {addConstructorBlocks} from "../../additional_commands/commonPanelsFunctions";
+import {addConstructorBlocksToBlockList} from "../../additional_commands/commonPanelsFunctions";
 import {Context} from "../../index";
 import {publicRoutes} from "../../routes";
 import {observer} from "mobx-react-lite";
 import BlockContainer from './BlockContainer';
+import FinishedBlock from "./FinishedBlock";
 
 /** Компонент используется всеми компонентами страниц, которые содержат конструкторские блоки. Содержит весь повторяющийся код
  *
@@ -14,33 +15,23 @@ import BlockContainer from './BlockContainer';
  * @returns {JSX.Element}
  * @constructor
  */
+
 const CommonPagesDisplay = observer(({blockList, handMadeBlocksCount}) => {
     const {block_store} = useContext(Context);
-    const locationDataArr = window.location.href.split("/")
-    let myAddress = "";
-
-    for (let i = 3; i < locationDataArr.length; i++) {
-        myAddress += "/" + locationDataArr[i]
-    }
-
-
-    blockList = addConstructorBlocks(myAddress, handMadeBlocksCount, block_store, blockList)
-
+    const locationDataArr = window.location.href.split("/").slice(3)
+    let myAddress = "/" + locationDataArr.join("/");
     const pageName = Array.from(publicRoutes.filter(route => route.path === myAddress))[0].name
-
-    useEffect(() => {
-        blockList = addConstructorBlocks(myAddress, handMadeBlocksCount, block_store, blockList)
-    }, [block_store.blocks, block_store.lines, handMadeBlocksCount, myAddress]);
+    addConstructorBlocksToBlockList(myAddress, handMadeBlocksCount, block_store, blockList)
 
     return (
         <BlockContainer>
             <p className="blue_page_title">{pageName}</p>
                 {
-                    Object.values(blockList).map((block, index) => {
-                        if (block.hasOwnProperty("id")) {
-                            return <Block key={index} block={block} header={block.header}/>
+                    Object.values(blockList).map((blockData, index) => {
+                        if (blockData.hasOwnProperty("id")) {
+                            return <FinishedBlock key={index} blockData={blockData}/>
                         } else {
-                            return <>{block}</>
+                            return <>{blockData}</>
                         }
                     })
                 }

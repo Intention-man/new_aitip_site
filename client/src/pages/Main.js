@@ -56,6 +56,8 @@ const NewsBlock = observer(() => {
                     </a>
                 )}
             </div>
+            <p style={{fontWeight: 700, color: "var(--aitip_blue)", cursor: "pointer"}}
+               onClick={() => navigate("/news")}>Ко всем новостям ➡️</p>
         </Block>
     )
 })

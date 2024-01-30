@@ -11,7 +11,8 @@ import {
     HISTORY,
     INFO_EDU_ORG,
     INTERNATIONAL_ACT,
-    LEGAL_CLINIC, LIBRARY,
+    LEGAL_CLINIC,
+    LIBRARY,
     PARTNERS,
     PERSONALITIES_PAGE,
     SCIENCE,
@@ -25,7 +26,7 @@ import BlindVersionSwitcher from './BlindVersionSwitcher';
 import {Context} from "../../index";
 
 
-function myFunction() {
+function changeMenuElementsPosition() {
 
     const x = document.getElementById("myTopnav");
     const y = document.getElementById("myMenu");
@@ -145,7 +146,7 @@ const Menu = () => {
                 </a>
                 <SearchOutputWindow/>
                 <BlindVersionSwitcher/>
-                <a className="icon" onClick={() => myFunction()}>
+                <a className="icon" onClick={() => changeMenuElementsPosition()}>
                     <i className="fa fa-bars"/>
                 </a>
             </div>

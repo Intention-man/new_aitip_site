@@ -240,7 +240,7 @@ const Personalities = observer(() => {
 
         useEffect(() => {
             (async () => {
-                fetchStaff(staff_store.page, staff_store.limit).then(data => {
+                fetchStaff().then(data => {
                     staff_store.setStaff(data.rows)
                     staff_store.setTotalCount(data.count)
                 })

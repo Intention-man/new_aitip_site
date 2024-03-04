@@ -20,11 +20,6 @@ const Footer = () => {
                     <img src={location} width="30px" height="30px" style={{marginRight: "20px"}}/>
                     г. Барнаул, проспект Ленина, дом 23
                 </div>
-                <div>
-                    <img src={internet} width="30px" height="30px" style={{marginRight: "20px"}}/>
-                    <a href={"http://www.aitip.ru/"} style={{color: "white", textDecoration: "none"}}>aitip.ru -
-                        старая версия сайта</a>
-                </div>
             </div>
             <div className="footer-link-block">
                     <p style={{fontSize: "23px", fontWeight: "bold"}}>Остались вопросы?</p>

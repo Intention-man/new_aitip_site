@@ -190,13 +190,9 @@ const CreateOrEditBlock = observer(({block, mode}) => {
         return false;
     }
 
-    useEffect(() => {
-        console.log(header);
-    }, [header])
-
     const isDataValid = () => {
         console.log(lines.length > 0, lines)
-        return (isNews !== null && pageLink && header && lines && pageLink.length > 0 && header.trim().length > 0 && lines.length > 0)
+        return (isNews !== null && header && lines && header.trim().length > 0 && lines.length > 0 && (isNews || (pageLink && pageLink.length > 0)))
     }
 
 

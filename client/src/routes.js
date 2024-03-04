@@ -124,7 +124,7 @@ export const publicRoutes = [
     {
         path: LIBRARY,
         Component: <UsualPage/>,
-        name: "Библиотека"
+        name: "Отдел информационных и библиотечных технологий"
     },
 
 

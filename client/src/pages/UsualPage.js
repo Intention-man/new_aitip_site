@@ -7,13 +7,9 @@ import CommonPagesDisplay from "../components/display/CommonPagesDisplay";
  */
 
 const UsualPage = observer(() => {
-    let blockList = {}
-
-    const handMadeBlocksCount = 0
-
     return (
         <>
-            <CommonPagesDisplay blockList={blockList} handMadeBlocksCount={handMadeBlocksCount}/>
+            <CommonPagesDisplay blockList={{}} handMadeBlocksCount={0}/>
         </>
     );
 });

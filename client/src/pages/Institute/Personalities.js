@@ -5,8 +5,7 @@ import {fetchOneStaffer, fetchStaff} from "../../http/staffAPI";
 import {observer} from "mobx-react-lite";
 import {fetchAdditionalPrograms, fetchDirectionsBachelor} from "../../http/admissionAPI";
 import RoundedImg from "../../components/lines/RoundedImg";
-// import "../../css/component_styles/PersonalitiesFilter.css"
-// import "../../css/page_styles/PersonalityList.css"
+import "../../css/page_styles/Personalities.css"
 import test from "../../local_assets/logo-noincome.png"
 import email from "../../local_assets/sms (1).png";
 import phone from "../../local_assets/Vector (2).png";
@@ -17,7 +16,7 @@ import {DotLoader} from "react-spinners";
 
 const SmallStafferItem = observer(({staffer}) => {
     return (
-        <div className="block_content" style={{minWidth: "250px"}}>
+        <div className="block_content" style={{minWidth: "200px"}}>
             <RoundedImg imgSrc={process.env.REACT_APP_API_URL + staffer.img || test}
                         style={{width: "90px", backgroundPosition: "center"}}
                         className="ava_img"/>
@@ -29,15 +28,21 @@ const SmallStafferItem = observer(({staffer}) => {
     );
 });
 
-
 const StafferItem = observer(({staffer, closeStaffer}) => {
-
     const textsNames = {}
 
-    if (staffer.bio_text.length > 0) {textsNames["Биография"] = staffer.bio_text}
-    if (staffer.disciplines_and_courses_text.length > 0) {textsNames["Дисциплины и курсы"] = staffer.disciplines_and_courses_text}
-    if (staffer.publications_text.length > 0) {textsNames["Публикации"] = staffer.publications_text}
-    if (staffer.projects_text.length > 0) {textsNames["Проекты"] = staffer.projects_text}
+    if (staffer.bio_text.length > 0) {
+        textsNames["Биография"] = staffer.bio_text
+    }
+    if (staffer.disciplines_and_courses_text.length > 0) {
+        textsNames["Дисциплины и курсы"] = staffer.disciplines_and_courses_text
+    }
+    if (staffer.publications_text.length > 0) {
+        textsNames["Публикации"] = staffer.publications_text
+    }
+    if (staffer.projects_text.length > 0) {
+        textsNames["Проекты"] = staffer.projects_text
+    }
 
     const [activeText, setActiveText] = useState(Object.keys(textsNames)[0]);
 
@@ -53,21 +58,17 @@ const StafferItem = observer(({staffer, closeStaffer}) => {
                 display: "flex",
                 flexWrap: "wrap"
             }}
-                // onClick={() => viewDiv(staffer.id)}
             >
-
-
                 <div className="description_block">
                     <img src={process.env.REACT_APP_API_URL + staffer.img}
                          className="big_avatar m-auto m-md-0"
-                         alt="картинка чет не загрузилась"/>
+                         alt=""/>
                     <div>
                         <div className="staffer_name"> {staffer.name} </div>
                         <button className="close-btn"
                                 onClick={() => closeStaffer(staffer.id)}>
                             Х
                         </button>
-
 
                         <div className="general_desc"> {staffer.post} </div>
                         <div className="general_desc"> {staffer.academic_degree} {staffer.title}</div>
@@ -85,8 +86,6 @@ const StafferItem = observer(({staffer, closeStaffer}) => {
                                 <div>{staffer.adress}</div>
                             </div>
                         </div>
-
-
                     </div>
 
                 </div>
@@ -100,7 +99,6 @@ const StafferItem = observer(({staffer, closeStaffer}) => {
         </div>
     )
 });
-
 
 const PersonalitiesList = observer(params => {
     const {staff_store} = useContext(Context)
@@ -139,7 +137,8 @@ const PersonalitiesList = observer(params => {
 
                         let list = staffers.filter(i => i !== undefined)
 
-                        rows.push(<Row style={{display: "grid", gridTemplateColumns: "1fr ".repeat(lenGroup)}}>
+                        rows.push(<div
+                            style={{display: "grid", gap: "10px", gridTemplateColumns: "1fr ".repeat(lenGroup)}}>
                             {list.map(staffer =>
                                 <div>
                                     <div key={staffer.id}
@@ -153,20 +152,26 @@ const PersonalitiesList = observer(params => {
                                     </div>
                                 </div>
                             )}
-                        </Row>)
+                        </div>)
                         rows.push(params.chosenStaffer && list.map(e => e.id).includes(params.chosenStaffer.id) &&
                             <StafferItem key={params.chosenStaffer.id} staffer={params.chosenStaffer}
                                          closeStaffer={changeChosenStaffer}/>)
                     }
                     return rows
-                })() : <h2 className="list_is_empty">Сотрудников, преподающих на данных программах и направлениях, нет</h2>
+                })() :
+                <h2 className="list_is_empty">Сотрудников, преподающих на данных программах и направлениях, нет</h2>
             }
         </div>
     );
 });
 
 
-const PersonalitiesFilterBar = observer(({filteredDirections, setFilteredDirections, filteredPrograms, setFilteredPrograms}) => {
+const PersonalitiesFilterBar = observer(({
+                                             filteredDirections,
+                                             setFilteredDirections,
+                                             filteredPrograms,
+                                             setFilteredPrograms
+                                         }) => {
     const {admission_store} = useContext(Context)
 
     return (
@@ -202,7 +207,6 @@ const PersonalitiesFilterBar = observer(({filteredDirections, setFilteredDirecti
                         <p className="filter_text_long">{program.name}</p>
                     </div>
                 )}
-
                 <button className="undo_filters" onClick={
                     () => {
                         setFilteredDirections([])
@@ -213,12 +217,10 @@ const PersonalitiesFilterBar = observer(({filteredDirections, setFilteredDirecti
                             checkboxes[i].checked = false;
                         }
                     }
-
                 }>
                     Сбросить фильтры
                 </button>
             </div>
-
         </div>
     );
 })
@@ -237,7 +239,7 @@ const Personalities = observer(() => {
 
 
         useEffect(() => {
-            fetchStaff(1, 100).then(data => {
+            fetchStaff().then(data => {
                     staff_store.setStaff(data.rows)
                     staff_store.setTotalCount(data.count)
                 }
@@ -252,7 +254,7 @@ const Personalities = observer(() => {
 
         useEffect(() => {
             (async () => {
-                fetchStaff(staff_store.page, staff_store.limit).then(data => {
+                fetchStaff().then(data => {
                     staff_store.setStaff(data.rows)
                     staff_store.setTotalCount(data.count)
                 })

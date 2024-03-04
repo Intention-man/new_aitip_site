@@ -8,11 +8,6 @@ import "../../css/component_styles/Editor.css"
 
 
 const ExtendedTextEditor = ({text, setText, changeLine, index}) => {
-
-    useEffect(() => {
-        console.log(text)
-    }, [text]);
-
     return (
         <MDEditor
             highlightEnable={false}

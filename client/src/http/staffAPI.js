@@ -16,7 +16,7 @@ export const removeStaffer = async (id) => {
     return data
 }
 
-export const fetchStaff = async (page=1, limit=100) => {
+export const fetchStaff = async (page=1, limit=100000) => {
     const {data} = await $host.get("api/staff", {params: {page, limit
         }})
     return data

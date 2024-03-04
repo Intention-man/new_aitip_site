@@ -85,7 +85,7 @@ const Menu = () => {
                     link: CONTACTS,
                 },
                 {
-                    name: "Библиотека",
+                    name: "Отдел информационных и библиотечных технологий",
                     link: LIBRARY,
                 },
             ]

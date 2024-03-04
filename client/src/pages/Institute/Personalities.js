@@ -31,10 +31,18 @@ const SmallStafferItem = observer(({staffer}) => {
 const StafferItem = observer(({staffer, closeStaffer}) => {
     const textsNames = {}
 
-    if (staffer.bio_text.length > 0) {textsNames["Биография"] = staffer.bio_text}
-    if (staffer.disciplines_and_courses_text.length > 0) {textsNames["Дисциплины и курсы"] = staffer.disciplines_and_courses_text}
-    if (staffer.publications_text.length > 0) {textsNames["Публикации"] = staffer.publications_text}
-    if (staffer.projects_text.length > 0) {textsNames["Проекты"] = staffer.projects_text}
+    if (staffer.bio_text.length > 0) {
+        textsNames["Биография"] = staffer.bio_text
+    }
+    if (staffer.disciplines_and_courses_text.length > 0) {
+        textsNames["Дисциплины и курсы"] = staffer.disciplines_and_courses_text
+    }
+    if (staffer.publications_text.length > 0) {
+        textsNames["Публикации"] = staffer.publications_text
+    }
+    if (staffer.projects_text.length > 0) {
+        textsNames["Проекты"] = staffer.projects_text
+    }
 
     const [activeText, setActiveText] = useState(Object.keys(textsNames)[0]);
 
@@ -54,14 +62,13 @@ const StafferItem = observer(({staffer, closeStaffer}) => {
                 <div className="description_block">
                     <img src={process.env.REACT_APP_API_URL + staffer.img}
                          className="big_avatar m-auto m-md-0"
-                         alt="картинка чет не загрузилась"/>
+                         alt=""/>
                     <div>
                         <div className="staffer_name"> {staffer.name} </div>
                         <button className="close-btn"
                                 onClick={() => closeStaffer(staffer.id)}>
                             Х
                         </button>
-
 
                         <div className="general_desc"> {staffer.post} </div>
                         <div className="general_desc"> {staffer.academic_degree} {staffer.title}</div>
@@ -130,14 +137,15 @@ const PersonalitiesList = observer(params => {
 
                         let list = staffers.filter(i => i !== undefined)
 
-                        rows.push(<div style={{display: "grid", gap: "10px",gridTemplateColumns: "1fr ".repeat(lenGroup)}}>
+                        rows.push(<div
+                            style={{display: "grid", gap: "10px", gridTemplateColumns: "1fr ".repeat(lenGroup)}}>
                             {list.map(staffer =>
                                 <div>
                                     <div key={staffer.id}
                                          className="person_block"
                                          onClick={() => {
                                              changeChosenStaffer(staffer.id)
-                                            }
+                                         }
                                          }>
 
                                         <SmallStafferItem staffer={staffer}/>
@@ -150,14 +158,20 @@ const PersonalitiesList = observer(params => {
                                          closeStaffer={changeChosenStaffer}/>)
                     }
                     return rows
-                })() : <h2 className="list_is_empty">Сотрудников, преподающих на данных программах и направлениях, нет</h2>
+                })() :
+                <h2 className="list_is_empty">Сотрудников, преподающих на данных программах и направлениях, нет</h2>
             }
         </div>
     );
 });
 
 
-const PersonalitiesFilterBar = observer(({filteredDirections, setFilteredDirections, filteredPrograms, setFilteredPrograms}) => {
+const PersonalitiesFilterBar = observer(({
+                                             filteredDirections,
+                                             setFilteredDirections,
+                                             filteredPrograms,
+                                             setFilteredPrograms
+                                         }) => {
     const {admission_store} = useContext(Context)
 
     return (

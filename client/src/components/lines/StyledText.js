@@ -12,7 +12,6 @@ import "../../css/component_styles/Block.css"
  */
 
 const StyledText = ({ line }) => {
-    // console.log(line.text)
     const getMarkdownClassname = () => {
         const className = ['StyledText-mdText'];
 

@@ -9,7 +9,7 @@ const Feedback = () => {
         <div className="feedback">  
             {/*<a href="">ЭБС</a>*/}
             <a href="http://eois.aitipms7.beget.tech/">ЕОИС</a>
-            <a href="https://forms.yandex.ru/u/6454a54373cee729558eca46/">Вопрос/Ответ</a>
+            <a href="https://forms.yandex.ru/u/65fa9b1373cee7493ba2d940/">Вопрос/Ответ</a>
             <div className='social-block'>
                 <div className="social vk">
                     <a href="https://vk.com/aitip" target="_blank">

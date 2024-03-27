@@ -11,18 +11,18 @@ const Auth = observer(() => {
     const navigate = useNavigate()
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    console.log(user_store.isAuth)
+    // console.log(user_store.isAuth)
 
     const letsAuth = async () => {
         try {
             await login(email, password).then(user => {
+                console.log(user)
                 user_store.setUser(user)
-                user_store.setIsAuth(true)
+                user_store.setIsAuth(user != null)
                 navigate(ADMIN)
             })
-
-
         } catch (e) {
+            console.log("Ошибка: " + e)
             alert("Ошибка: " + e)
         }
     }

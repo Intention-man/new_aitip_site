@@ -18,6 +18,7 @@ import telescope from "../local_assets/icons/svg background/telescope.svg";
 import Default from "../local_assets/logo-in-round.svg";
 import {useNavigate} from "react-router";
 import CommonPagesDisplay from "../components/display/CommonPagesDisplay";
+import BigImg from "../components/lines/BigImg";
 
 
 // hand components
@@ -50,7 +51,8 @@ const NewsBlock = observer(() => {
             <div className="news_container">
                 {Array.from(block_store.news).slice(0, 4).map(e =>
                     <a onClick={() => navigate("/article/" + e.id)}>
-                        <img src={getNewsCover(e)} alt=""/>
+                        {/*<img src={getNewsCover(e)} alt=""/>*/}
+                        <BigImg imgSrc={getNewsCover(e)} alt=""/>
                         <p>{e.header}</p>
                     </a>
                 )}

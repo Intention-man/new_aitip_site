@@ -262,6 +262,10 @@ li > span.list_element_header{
     text-decoration: none;
 }
 
+.news_container > a > .BigImg {
+    margin: 0;
+}
+
 .news_container > * > *{
     width: 100%;
     border-radius: var(--default_border_radius);
